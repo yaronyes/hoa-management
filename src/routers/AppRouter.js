@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Test from '../components/Test';
 import HeaderNavbar from '../components/navbar/HeaderNavbar';
 import { MDBContainer } from 'mdbreact';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { checkForConnectedUser } from '../actions/authActions';
 
-const AppRouter = () => {
+const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
+    const [isUserConnected, setIsUserConnected] = useState(false);
+
+    useEffect(() => {
+        console.log("checkForConnectedUser")
+        checkForConnectedUser();
+    }, [])
+
+    useEffect(() => {
+        console.log(auth.isAuthenticated)
+        setIsUserConnected(auth.isAuthenticated);
+    }, [auth]);
+
+    useEffect(() => {
+        console.log("Error:", errors);
+    }, [errors]);
+
 
     return (
         <BrowserRouter>
-            <HeaderNavbar/>
+            <HeaderNavbar userConnected={isUserConnected}/>
             <MDBContainer>
                 <Switch>
                     <Route exact path="/">
@@ -20,4 +39,15 @@ const AppRouter = () => {
     );
 }
 
-export default AppRouter;
+AppRouter.propTypes = {
+    checkForConnectedUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors,
+});
+
+export default connect(mapStateToProps, { checkForConnectedUser })(AppRouter);

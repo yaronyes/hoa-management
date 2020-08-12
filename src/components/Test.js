@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createUser } from '../actions/authActions';
+import { createUser, loginUser } from '../actions/authActions';
 import { addTenantUser, getTenantUsers } from '../actions/tenantActions';
 import UserModel from '../models/UserModel';
 
-const Test = ({ createUser, auth, errors, tenant, addTenantUser, getTenantUsers  }) => {
+const Test = ({ createUser, auth, errors, tenant, addTenantUser, getTenantUsers, loginUser  }) => {
     
     useEffect(() => {
         if(auth.isAuthenticated) {
@@ -58,6 +58,9 @@ const Test = ({ createUser, auth, errors, tenant, addTenantUser, getTenantUsers 
                 <button onClick={addUser}>Add User</button>    
             </div>
             <div>
+                <button onClick={() => {loginUser({ email: "doron4@test.com", password: "Test1234$" })}}>User Login</button>    
+            </div>            
+            <div>
                 <button onClick={addTenant}>Add Tenant</button>
             </div>
             <div>
@@ -69,6 +72,7 @@ const Test = ({ createUser, auth, errors, tenant, addTenantUser, getTenantUsers 
 
 Test.propTypes = {
     createUser: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     tenant: PropTypes.array.isRequired,
@@ -82,5 +86,5 @@ const mapStateToProps = state => ({
     tenant: state.tenant
 });
   
-  export default connect(mapStateToProps, { createUser, addTenantUser, getTenantUsers })(Test);
+export default connect(mapStateToProps, { createUser, loginUser, addTenantUser, getTenantUsers })(Test);
   

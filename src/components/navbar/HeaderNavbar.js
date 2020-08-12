@@ -3,8 +3,12 @@ import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
     } from "mdbreact";
+import './HeaderNavbar.css';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
 
-const HeaderNavbar = () => {
+const HeaderNavbar = ({ userConnected, logoutUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   
     return (
@@ -49,7 +53,7 @@ const HeaderNavbar = () => {
               </MDBDropdown>
             </MDBNavItem> */}
           </MDBNavbarNav>
-          <MDBNavbarNav right>
+          <MDBNavbarNav right className={userConnected ? "hide-nav" : ""}>
             {/* <MDBNavItem>
               <MDBFormInline waves>
                 <div className="md-form my-0">
@@ -63,10 +67,15 @@ const HeaderNavbar = () => {
               </MDBFormInline>
             </MDBNavItem> */}
             <MDBNavItem>
-              <MDBNavLink to="#!">Features</MDBNavLink>
+              <MDBNavLink to="#!">Login</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Pricing</MDBNavLink>
+              <MDBNavLink to="#!">Sign Up</MDBNavLink>
+            </MDBNavItem>
+          </MDBNavbarNav>
+          <MDBNavbarNav right className={!userConnected ? "hide-nav" : ""}>
+            <MDBNavItem>
+              <MDBNavLink to="#!" onClick={() => logoutUser()}>Logout</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
@@ -75,4 +84,20 @@ const HeaderNavbar = () => {
   );
 };
 
-export default HeaderNavbar;
+HeaderNavbar.propTypes = {
+    logoutUser: PropTypes.func.isRequired
+    // loginUser: PropTypes.func.isRequired,
+    // auth: PropTypes.object.isRequired,
+    // errors: PropTypes.object.isRequired,
+    // tenant: PropTypes.array.isRequired,
+    // addTenantUser: PropTypes.func.isRequired,
+    // getTenantUsers: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    // auth: state.auth,
+    // errors: state.errors,
+    // tenant: state.tenant
+});
+  
+export default connect(mapStateToProps, { logoutUser })(HeaderNavbar);

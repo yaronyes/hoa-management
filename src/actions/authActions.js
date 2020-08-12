@@ -14,7 +14,7 @@ export const createUser = (user, image) => async dispatch => {
     try{
         const response = await axios.post('/users/committee', user);
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userID', response.data.user._id);
+        localStorage.setItem('user', response.data.user);
         // if (image) {
         //     try {
         //         await uploadAvatar(image);
@@ -36,8 +36,8 @@ export const loginUser = (userData) => async dispatch => {
     try{
         const response = await axios.post('/users/login', userData)
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userID', response.data.user._id);
-        dispatch(new UserModel(response.data.user));
+        localStorage.setItem('user', response.data.user);
+        dispatch(setCurrentUser(new UserModel(response.data.user)));
         
     } catch (e) {
         console.log(e);
@@ -50,9 +50,9 @@ export const loginUser = (userData) => async dispatch => {
 
 export const logoutUser = () => async dispatch => {
     try{        
+        await axios.post('/users/logout', {}, getOptions());        
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        await axios.post('/users/logout', {}, getOptions());        
         dispatch(setCurrentUser({}));
     } catch (e) {
         console.log(e);
@@ -63,5 +63,26 @@ export const logoutUser = () => async dispatch => {
     }
 }
 
+export const checkForConnectedUser = () => async dispatch => {
+    try{
+        const user = localStorage.getItem('user');
+        if(localStorage.getItem('token') && user) {
+            console.log('connected')
+            dispatch(setCurrentUser(new UserModel(user)));
+        } else {
+            console.log('not connected')
+            //localStorage.removeItem('token');
+            //localStorage.removeItem('user');            
+        
+            dispatch(setCurrentUser({}));
+        }                
+    } catch (e) {
+        console.log(e);
+        dispatch({
+            type: GET_ERRORS,
+            payload: e
+        })
+    }
+}
 
 
