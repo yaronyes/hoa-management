@@ -13,13 +13,13 @@ const HeaderNavbar = ({ userConnected, logoutUser }) => {
   
     return (
     <div className="header-navbar">
-      <MDBNavbar color="indigo" dark expand="md">
+      <MDBNavbar color="#f50057 pink accent-3" dark expand="md">
         <MDBNavbarBrand>
           <strong className="white-text">HOA Systems</strong>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={() => {setIsOpen(!isOpen)}} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
-          <MDBNavbarNav left>
+          <MDBNavbarNav left className={!userConnected ? "hide-nav" : ""}>
             <MDBNavItem>
               <MDBNavLink to="#!">Dashboard</MDBNavLink>
             </MDBNavItem>

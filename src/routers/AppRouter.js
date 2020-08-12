@@ -6,6 +6,7 @@ import { MDBContainer } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkForConnectedUser } from '../actions/authActions';
+import HomePage from '../components/pages/homepage/HomePage';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -28,13 +29,14 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
     return (
         <BrowserRouter>
             <HeaderNavbar userConnected={isUserConnected}/>
-            <MDBContainer>
+            {/* <MDBContainer> */}
                 <Switch>
-                    <Route exact path="/">
-                        <Test/>
+                    <Route exact path="/">                        
+                        <HomePage/>       
+                        <Test/>                 
                     </Route>
                 </Switch>
-            </MDBContainer>          
+            {/* </MDBContainer>           */}
         </BrowserRouter>
     );
 }
