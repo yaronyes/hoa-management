@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
@@ -7,10 +7,18 @@ import './HeaderNavbar.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import { useHistory } from "react-router-dom";
 
 const HeaderNavbar = ({ userConnected, logoutUser }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+    const history = useHistory();
+    
+    useEffect(() => {
+      if(!userConnected) {
+        history.push('/')
+      }
+    });    
+
     return (
     <div className="header-navbar">
       <MDBNavbar color="#f50057 pink accent-3" dark expand="md">
@@ -75,7 +83,7 @@ const HeaderNavbar = ({ userConnected, logoutUser }) => {
           </MDBNavbarNav>
           <MDBNavbarNav right className={!userConnected ? "hide-nav" : ""}>
             <MDBNavItem>
-              <MDBNavLink to="#!" onClick={() => logoutUser()}>Logout</MDBNavLink>
+              <MDBNavLink to="/logout" onClick={() => logoutUser()}>Logout</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
@@ -85,7 +93,7 @@ const HeaderNavbar = ({ userConnected, logoutUser }) => {
 };
 
 HeaderNavbar.propTypes = {
-    logoutUser: PropTypes.func.isRequired
+    logoutUser: PropTypes.func.isRequired,
     // loginUser: PropTypes.func.isRequired,
     // auth: PropTypes.object.isRequired,
     // errors: PropTypes.object.isRequired,
@@ -95,7 +103,7 @@ HeaderNavbar.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    // auth: state.auth,
+    auth: state.auth,
     // errors: state.errors,
     // tenant: state.tenant
 });

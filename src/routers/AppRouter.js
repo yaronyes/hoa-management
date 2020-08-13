@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkForConnectedUser } from '../actions/authActions';
 import HomePage from '../components/pages/homepage/HomePage';
+import CMDashboardPage from '../components/pages/dashboard/CMDashboardPage';
+import TenantDashboardPage from '../components/pages/dashboard/TenantDashboardPage';
+import PrivateRoute from './PrivateRoute';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -31,10 +34,20 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
             <HeaderNavbar userConnected={isUserConnected}/>
             {/* <MDBContainer> */}
                 <Switch>
-                    <Route exact path="/">                        
+                    {/* <Route exact path="/">                        
                         <HomePage/>       
                         <Test/>                 
+                    </Route> */}
+                    <PrivateRoute exact path="/" component={HomePage} >                        
+                        {/* <HomePage/>        */}
+                        {/* <Test/>                  */}
+                    </PrivateRoute>
+                    <Route exact path="/dashboard">
+                        <CMDashboardPage/>
                     </Route>
+                    <Route exact path="/dashboard/:id">
+                        <TenantDashboardPage/>
+                    </Route>                                   
                 </Switch>
             {/* </MDBContainer>           */}
         </BrowserRouter>

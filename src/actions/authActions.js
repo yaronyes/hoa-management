@@ -14,7 +14,7 @@ export const createUser = (user, image) => async dispatch => {
     try{
         const response = await axios.post('/users/committee', user);
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', response.data.user);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         // if (image) {
         //     try {
         //         await uploadAvatar(image);
@@ -36,7 +36,7 @@ export const loginUser = (userData) => async dispatch => {
     try{
         const response = await axios.post('/users/login', userData)
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', response.data.user);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         dispatch(setCurrentUser(new UserModel(response.data.user)));
         
     } catch (e) {
@@ -67,8 +67,8 @@ export const checkForConnectedUser = () => async dispatch => {
     try{
         const user = localStorage.getItem('user');
         if(localStorage.getItem('token') && user) {
-            console.log('connected')
-            dispatch(setCurrentUser(new UserModel(user)));
+            console.log('connected', JSON.parse(user))
+            dispatch(setCurrentUser(new UserModel(JSON.parse(user))));
         } else {
             console.log('not connected')
             //localStorage.removeItem('token');
