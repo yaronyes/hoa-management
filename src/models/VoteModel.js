@@ -1,5 +1,6 @@
 export default class VoteModel {
-    constructor({ votedBy, committee, vote, createdAt, updatedAt }) {
+    constructor({ _id, votedBy, committee, vote, createdAt, updatedAt }) {
+        this._id = _id;
         this.votedBy = votedBy;
         this.committee = committee;
         this.vote = vote;

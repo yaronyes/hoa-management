@@ -6,7 +6,8 @@ export const priority = {
 };
 
 export default class MessageModel {
-    constructor({ createdBy, committee, title, details, priority, comments = [], seenBy = [], createdAt, updatedAt }) {
+    constructor({ _id, createdBy, committee, title, details, priority, comments = [], seenBy = [], createdAt, updatedAt }) {
+        this._id = _id;
         this.createdBy = createdBy;
         this.committee = committee;
         this.title = title;

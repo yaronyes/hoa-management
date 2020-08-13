@@ -1,10 +1,13 @@
 import React from 'react';
+import { MDBContainer } from 'mdbreact';
 
 const TenantDashboardPage = () => {
 
     return (
         <div>
-            TenantDashboardPage
+            <MDBContainer>
+                TenantDashboardPage
+            </MDBContainer>            
         </div>
     );
 }

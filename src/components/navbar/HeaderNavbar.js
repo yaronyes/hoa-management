@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 
-const HeaderNavbar = ({ userConnected, logoutUser }) => {
+const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
   const [isOpen, setIsOpen] = useState(false);
     const history = useHistory();
     
@@ -17,6 +17,8 @@ const HeaderNavbar = ({ userConnected, logoutUser }) => {
       if(!userConnected) {
         history.push('/')
       }
+
+      console.log(auth.user);
     });    
 
     return (
@@ -29,10 +31,10 @@ const HeaderNavbar = ({ userConnected, logoutUser }) => {
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
           <MDBNavbarNav left className={!userConnected ? "hide-nav" : ""}>
             <MDBNavItem>
-              <MDBNavLink to="#!">Dashboard</MDBNavLink>
+              <MDBNavLink to="/dashboard">Dashboard</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Tenants</MDBNavLink>
+              <MDBNavLink to={`/dashboard/${auth.user._id}`}>Tenants</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink to="#!">Messages</MDBNavLink>
@@ -83,7 +85,7 @@ const HeaderNavbar = ({ userConnected, logoutUser }) => {
           </MDBNavbarNav>
           <MDBNavbarNav right className={!userConnected ? "hide-nav" : ""}>
             <MDBNavItem>
-              <MDBNavLink to="/logout" onClick={() => logoutUser()}>Logout</MDBNavLink>
+              <MDBNavLink to="/" onClick={() => logoutUser()}>Logout</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
@@ -95,7 +97,7 @@ const HeaderNavbar = ({ userConnected, logoutUser }) => {
 HeaderNavbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     // loginUser: PropTypes.func.isRequired,
-    // auth: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
     // errors: PropTypes.object.isRequired,
     // tenant: PropTypes.array.isRequired,
     // addTenantUser: PropTypes.func.isRequired,

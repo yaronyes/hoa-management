@@ -12,7 +12,8 @@ export const status = {
 }
 
 export default class IssueModel {
-    constructor({ createdBy, committee, title, details, priority, status, comments = [] , createdAt, updatedAt }) {
+    constructor({ _id, createdBy, committee, title, details, priority, status, comments = [] , createdAt, updatedAt }) {
+        this._id = _id;
         this.createdBy = createdBy;
         this.committee = committee;
         this.title = title;
