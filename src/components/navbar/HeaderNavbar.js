@@ -14,8 +14,6 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
       if(!userConnected) {
         history.push('/')
       }
-
-      console.log(auth.user);
     });    
 
     return (

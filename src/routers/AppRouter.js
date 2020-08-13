@@ -13,7 +13,6 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
     const [isUserConnected, setIsUserConnected] = useState(false);
 
     useEffect(() => {
-        console.log("checkForConnectedUser")
         checkForConnectedUser();
     }, [])
 

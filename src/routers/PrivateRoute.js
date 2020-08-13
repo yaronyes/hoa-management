@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const PrivateRoute = ({ auth, component: Component, ...rest }) => {
-    useEffect(() => {
-        console.log("PrivateRoute", auth.isAuthenticated);
-        console.log("PrivateRoute", auth.user.isCommitteeMember);
-     }, [auth])
+    // useEffect(() => {
+
+    //  }, [auth])
     
     return (
         <Route {...rest} render={(props) => (            
