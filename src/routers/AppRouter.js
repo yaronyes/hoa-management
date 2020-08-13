@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkForConnectedUser } from '../actions/authActions';
 import HomePage from '../components/pages/homepage/HomePage';
-import CMDashboardPage from '../components/pages/dashboard/CMDashboardPage';
-import TenantDashboardPage from '../components/pages/dashboard/TenantDashboardPage';
+import DashboardPage from '../components/pages/dashboard/DashboardPage';
 import PrivateRoute from './PrivateRoute';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
@@ -32,11 +31,11 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                 <Switch>
                     <PrivateRoute exact path="/" component={HomePage} />                        
                     <Route exact path="/dashboard">
-                        <CMDashboardPage/>
+                        <DashboardPage/>
                     </Route>
-                    <Route exact path="/dashboard/:id">
+                    {/* <Route exact path="/dashboard/:id">
                         <TenantDashboardPage/>
-                    </Route>                                   
+                    </Route>                                    */}
                 </Switch>
         </BrowserRouter>
     );

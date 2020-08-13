@@ -12,9 +12,7 @@ const PrivateRoute = ({ auth, component: Component, ...rest }) => {
         <Route {...rest} render={(props) => (            
             (!auth.isAuthenticated)
             ? <Component {...props} />            
-            : auth.user.isCommitteeMember
-            ? <Redirect to='/dashboard' />
-            : <Redirect to={`/dashboard/${auth.user._id}`} />
+            : <Redirect to='/dashboard' />            
         )} />
       )
 } 
