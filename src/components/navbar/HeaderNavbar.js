@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
-    MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
-    } from "mdbreact";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 import './HeaderNavbar.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -45,37 +42,8 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
             <MDBNavItem>
               <MDBNavLink to="#!">Voting</MDBNavLink>
             </MDBNavItem>
-            {/* <MDBNavItem>
-              <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <span className="mr-2">Dropdown</span>
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">
-                    Something else here
-                  </MDBDropdownItem>
-                  <MDBDropdownItem href="#!">
-                    Something else here
-                  </MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
-            </MDBNavItem> */}
           </MDBNavbarNav>
           <MDBNavbarNav right className={userConnected ? "hide-nav" : ""}>
-            {/* <MDBNavItem>
-              <MDBFormInline waves>
-                <div className="md-form my-0">
-                  <input
-                    className="form-control mr-sm-2"
-                    type="text"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                </div>
-              </MDBFormInline>
-            </MDBNavItem> */}
             <MDBNavItem>
               <MDBNavLink to="#!">Login</MDBNavLink>
             </MDBNavItem>
