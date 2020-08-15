@@ -1,0 +1,24 @@
+.tenant-card .img-col {
+    min-width: auto;
+    max-width: fit-content;
+}
+
+.tenant-card .text-col {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.tenant-card .data-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tenant-card .btn-group-tenant {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tenant-card .btn-group-tenant > .btn-rounded {
+    border-radius: 10em;
+}
