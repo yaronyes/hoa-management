@@ -15,12 +15,10 @@ export default (state = initialState, action) => {
             ];
         case REMOVE_TENANT:
             return state.filter(({ _id }) => _id !== action._id);
-        case EDIT_TENANT:
+        case EDIT_TENANT:            
             return state.map(tenant => {
-                if(tenant._id === action._id) {
-                    return {
-                        ...action.tenant
-                    }; 
+                if(tenant._id === action.tenant._id) {                     
+                    return action.tenant;
                 } else {
                     return tenant;       
                 }

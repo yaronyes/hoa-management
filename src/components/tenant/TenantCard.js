@@ -73,7 +73,7 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            <AddUpdateTenant modal={modal} toggle={toggle}/>
+            <AddUpdateTenant modal={modal} toggle={toggle} selectedTenant={tenant}/>
         </div>
     );
 
