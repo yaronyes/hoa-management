@@ -7,6 +7,10 @@ import { checkForConnectedUser } from '../actions/authActions';
 import HomePage from '../components/pages/homepage/HomePage';
 import DashboardPage from '../components/pages/dashboard/DashboardPage';
 import PrivateRoute from './PrivateRoute';
+import MessagesPage from '../components/pages/messages/MessagesPage';
+import TenantsPage from '../components/pages/tenants/TenantsPage';
+import VotingPage from '../components/pages/voting/VotingPage';
+import IssuesPage from '../components/pages/Issues/IssuesPage';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -32,6 +36,18 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     <PrivateRoute exact path="/" component={HomePage} />                        
                     <Route exact path="/dashboard">
                         <DashboardPage/>
+                    </Route>
+                    <Route exact path='/messages'>
+                        <MessagesPage/>
+                    </Route>
+                    <Route exact path='/tenants'>
+                        <TenantsPage/>
+                    </Route>
+                    <Route exact path='/voting'>
+                        <VotingPage/>
+                    </Route>
+                    <Route exact path='/issues'>
+                        <IssuesPage/>
                     </Route>
                     {/* <Route exact path="/dashboard/:id">
                         <TenantDashboardPage/>

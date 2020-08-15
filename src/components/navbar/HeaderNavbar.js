@@ -29,16 +29,16 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
               <MDBNavLink to="/dashboard">Dashboard</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to={`/dashboard/${auth.user._id}`}>Tenants</MDBNavLink>
+              <MDBNavLink to="/tenants">Tenants</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Messages</MDBNavLink>
+              <MDBNavLink to="/messages">Messages</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Issues</MDBNavLink>
+              <MDBNavLink to="/issues">Issues</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Voting</MDBNavLink>
+              <MDBNavLink to="/voting">Voting</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right className={userConnected ? "hide-nav" : ""}>

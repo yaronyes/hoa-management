@@ -1,5 +1,5 @@
-import React from './node_modules/react';
-import { MDBContainer } from './node_modules/mdbreact';
+import React from 'react';
+import { MDBContainer } from 'mdbreact';
 
 const MessagesPage = () => {
     return (
