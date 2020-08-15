@@ -4,14 +4,14 @@ import HeaderNavbar from '../components/navbar/HeaderNavbar';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkForConnectedUser } from '../actions/authActions';
-import HomePage from '../components/pages/homepage/HomePage';
-import DashboardPage from '../components/pages/dashboard/DashboardPage';
+import HomePage from '../pages/homepage/HomePage';
+import DashboardPage from '../pages/dashboard/DashboardPage';
 import PrivateRoute from './PrivateRoute';
-import MessagesPage from '../components/pages/messages/MessagesPage';
-import TenantsPage from '../components/pages/tenants/TenantsPage';
-import VotingPage from '../components/pages/voting/VotingPage';
-import IssuesPage from '../components/pages/issues/IssuesPage';
-import SignUpPage from '../components/pages/signup/SignUpPage';
+import MessagesPage from '../pages/messages/MessagesPage';
+import TenantsPage from '../pages/tenants/TenantsPage';
+import VotingPage from '../pages/voting/VotingPage';
+import IssuesPage from '../pages/issues/IssuesPage';
+import SignUpPage from '../pages/signup/SignUpPage';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);

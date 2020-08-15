@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBView, MDBMask } from 'mdbreact';
-import Test from '../../Test';
+import Test from '../../components/Test';
 
 const HomePage = () => {
 

@@ -3,8 +3,8 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import "./SignUpPage.css";
-import UserModel from '../../../models/UserModel';
-import { createUser } from '../../../actions/authActions';
+import UserModel from '../../models/UserModel';
+import { createUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 
 const SignUoPage = ({ createUser, auth }) => {
