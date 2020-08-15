@@ -7,7 +7,7 @@ import { logoutUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 
 const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const history = useHistory();
     
     useEffect(() => {
