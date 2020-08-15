@@ -15,10 +15,8 @@ export default (state = initialState, action) => {
             ];
         case EDIT_VOTING:
             return state.map(voting => {
-                if(voting._id === action._id) {
-                    return {
-                        ...action.voting
-                    }; 
+                if(voting._id === action.voting._id) {
+                    return action.voting;
                 } else {
                     return voting;       
                 }

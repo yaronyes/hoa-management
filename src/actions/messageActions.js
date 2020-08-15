@@ -69,10 +69,8 @@ export const updateMessage = (updates, id) => async dispatch =>  {
         let response;
         if(Object.keys(updates).length != 0) {
             response = await axios.patch(`/messages/${id}`, updates, getOptions());
-
-            if(response)
-                dispatch(editTenant(new MessageModel(response.data)))
-        }       
+            dispatch(editMessage(new MessageModel(response.data)))
+        }
     } catch (e) {
         console.log(e);
         dispatch({

@@ -50,9 +50,7 @@ export const updateIssue = (updates, id) => async dispatch =>  {
         let response;
         if(Object.keys(updates).length !== 0) {
             response = await axios.patch(`/issues/${id}`, updates, getOptions());
-
-            if(response)
-                dispatch(editIssue(new IssueModel(response.data)))
+            dispatch(editIssue(new IssueModel(response.data)))                            
         }       
     } catch (e) {
         console.log(e);

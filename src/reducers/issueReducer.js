@@ -15,10 +15,8 @@ export default (state = initialState, action) => {
             ];
         case EDIT_ISSUE:
             return state.map(issue => {
-                if(issue._id === action._id) {
-                    return {
-                        ...action.issue
-                    }; 
+                if(issue._id === action.issue._id) {
+                    return action.issue;
                 } else {
                     return issue;       
                 }
