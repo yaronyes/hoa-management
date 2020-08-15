@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {    
     MDBCol,
     MDBCollapse,
@@ -8,14 +8,18 @@ import {
     MDBRow,
     MDBView,
     MDBBtn,
-    MDBIcon,
-    Fragment
+    MDBIcon
 } from 'mdbreact';
 import './TenantCard.css';
-
+import AddUpdateTenant  from './AddUpdateTenant';
 
 const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
     const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
+    const [modal, setModel] = useState(false);
+
+  const toggle = () => {
+    setModel(!modal);
+  }
 
     return (
         <div className="tenant-card">
@@ -55,7 +59,7 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
                             <MDBRow>
                                 <MDBCol  md="6" className="offset-md-6">
                                     <div className="btn-group-tenant">      
-                                        <MDBBtn rounded color="info" className="btn-rounded">
+                                        <MDBBtn rounded color="info" className="btn-rounded" onClick={toggle}>
                                             <MDBIcon icon="user-edit" /> Update
                                         </MDBBtn>
                                         <MDBBtn rounded color="danger" className="btn-rounded">
@@ -69,6 +73,7 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
+            <AddUpdateTenant modal={modal} toggle={toggle}/>
         </div>
     );
 

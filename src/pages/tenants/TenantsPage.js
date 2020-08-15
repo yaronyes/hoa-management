@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { MDBContainer, MDBRow, MDBInput, MDBCol } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';                  
-import TenantCard from '../../components/tenantcard/TenantCard';
+import TenantCard from '../../components/tenant/TenantCard';
 import  { addTenantUser, getTenantUsers } from '../../actions/tenantActions';
 import './TenantsPage.css';
 import FilterBox from '../../components/filter/FilterBox';
@@ -10,10 +10,6 @@ import FilterBox from '../../components/filter/FilterBox';
 const TenantsPage = ({ addTenantUser, getTenantUsers, tenant }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
-
-    // useEffect(() => {
-    //   getTenantUsers();
-    // }, []);
 
     useEffect(() => {
       if(tenant.length === 0) {
@@ -44,7 +40,6 @@ const TenantsPage = ({ addTenantUser, getTenantUsers, tenant }) => {
         </div>
     );
 }
-
 
 TenantsPage.propTypes = {
   errors: PropTypes.object.isRequired,
