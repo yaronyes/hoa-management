@@ -10,7 +10,8 @@ import PrivateRoute from './PrivateRoute';
 import MessagesPage from '../components/pages/messages/MessagesPage';
 import TenantsPage from '../components/pages/tenants/TenantsPage';
 import VotingPage from '../components/pages/voting/VotingPage';
-import IssuesPage from '../components/pages/Issues/IssuesPage';
+import IssuesPage from '../components/pages/issues/IssuesPage';
+import SignUpPage from '../components/pages/signup/SignUpPage';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -20,7 +21,6 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
     }, [])
 
     useEffect(() => {
-        console.log(auth.isAuthenticated)
         setIsUserConnected(auth.isAuthenticated);
     }, [auth]);
 
@@ -48,6 +48,9 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     </Route>
                     <Route exact path='/issues'>
                         <IssuesPage/>
+                    </Route>
+                    <Route exact path='/singin'>
+                        <SignUpPage/>
                     </Route>
                     {/* <Route exact path="/dashboard/:id">
                         <TenantDashboardPage/>
