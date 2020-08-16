@@ -18,9 +18,9 @@ export const editMessage = (message) => ({
     message
 });
 
-export const removeMessage = (message) => ({
+export const removeMessage = ({ id }) => ({
     type: REMOVE_MESSAGE,
-    message
+    id
 });
 
 

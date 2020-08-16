@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
                 action.message
             ];
         case REMOVE_MESSAGE:
-            return state.filter(({ _id }) => _id !== action._id);
+            return state.filter(({ _id }) => _id !== action.id);
         case EDIT_MESSAGE:
             return state.map(message => {
                 if(message._id === action.message._id) {
