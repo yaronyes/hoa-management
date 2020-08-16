@@ -1,0 +1,8 @@
+.login {
+    text-align: left;
+    margin-top: 40px;
+}
+
+.login .row {
+    justify-content: center;
+}

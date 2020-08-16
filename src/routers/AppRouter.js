@@ -12,6 +12,7 @@ import TenantsPage from '../pages/tenants/TenantsPage';
 import VotingPage from '../pages/voting/VotingPage';
 import IssuesPage from '../pages/issues/IssuesPage';
 import SignUpPage from '../pages/signup/SignUpPage';
+import LoginPage from  '../pages/login/LoginPage';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -51,6 +52,9 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     </Route>
                     <Route exact path='/signup'>
                         <SignUpPage/>
+                    </Route>
+                    <Route exact path='/login'>
+                        <LoginPage/>
                     </Route>
                     {/* <Route exact path="/dashboard/:id">
                         <TenantDashboardPage/>

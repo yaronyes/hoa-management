@@ -43,7 +43,7 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
           </MDBNavbarNav>
           <MDBNavbarNav right className={userConnected ? "hide-nav" : ""}>
             <MDBNavItem>
-              <MDBNavLink to="#!">Login</MDBNavLink>
+              <MDBNavLink to="/login">Login</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink to="/signup">Sign Up</MDBNavLink>
