@@ -1,0 +1,18 @@
+.issue-card .text-col {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.issue-card .data-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.issue-card .card-header:hover {
+    cursor: pointer;
+}
+
+.issue-card .card-header {
+    text-align: left;
+}
