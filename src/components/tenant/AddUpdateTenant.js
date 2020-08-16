@@ -5,26 +5,26 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addTenantUser, updateTenantUser } from "../../actions/tenantActions";
 import UserModel from '../../models/UserModel';
+import RoundedBtn from '../rounded-button/RoundedBtn';
 
+const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateTenantUser, tenant }) => {
 
-const AddUpdateTenant = ({ modal, selectedTenant, toggle, addTenantUser, updateTenantUser, tenant }) => {
-
-    console.log(tenant)
-    const [name, setName] = useState(selectedTenant ? selectedTenant.name : "");
-    const [email, setEmail] = useState(selectedTenant ? selectedTenant.email : "");
+    const [name, setName] = useState(tenantToUpdate ? tenantToUpdate.name : "");
+    const [email, setEmail] = useState(tenantToUpdate ? tenantToUpdate.email : "");
     const [password, setPassword] = useState("");
-    const [apartment, setApartment] = useState(selectedTenant ? selectedTenant.apartment : "");
+    const [apartment, setApartment] = useState(tenantToUpdate ? tenantToUpdate.apartment : "");
 
     // useEffect(() => {
     //     toggle();
     // }, [tenant]);
 
    const addUpdate = () => {
-    if(selectedTenant) {
+    if(tenantToUpdate) {
         updateTenant();
     } else {
         addTenant();
     }
+    toggle();
   };
 
   const addTenant = () => {
@@ -53,15 +53,12 @@ const updateTenant = () => {
 
         const keys = Object.keys(updatedUser);
         keys.forEach(key => {        
-            if (selectedTenant[key] === updatedUser[key] || updatedUser[key] === undefined || updatedUser[key] === '') {
+            if (tenantToUpdate[key] === updatedUser[key] || updatedUser[key] === undefined || updatedUser[key] === '') {
             delete updatedUser[key];            
             }
         })
                 
-        //const user = new UserModel(updatedUser);
-        //console.log(user);
-        updateTenantUser(updatedUser, selectedTenant._id);      
-        toggle()                          ;
+        updateTenantUser(updatedUser, tenantToUpdate._id);              
     } catch (e) {
         console.log(e)
         alert(e.message)
@@ -126,10 +123,12 @@ const updateTenant = () => {
                     </MDBRow>
                 </MDBModalBody>
                 <MDBModalFooter>
-                <MDBBtn color="secondary" onClick={toggle}>
+                {/* <MDBBtn color="secondary" onClick={toggle}>
                     Close
-                </MDBBtn>
-                <MDBBtn color="primary" onClick={addUpdate}>Save changes</MDBBtn>
+                </MDBBtn> */}
+                {/* <MDBBtn color="primary" onClick={addUpdate}>Save changes</MDBBtn> */}
+                <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
+                <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption="Save changes"/>
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>

@@ -6,8 +6,9 @@ import "./SignUpPage.css";
 import UserModel from '../../models/UserModel';
 import { createUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
+import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 
-const SignUoPage = ({ createUser, auth }) => {
+const SignUpPage = ({ createUser, auth }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,7 +18,9 @@ const SignUoPage = ({ createUser, auth }) => {
     const history = useHistory();
   
     useEffect(() => {
-        history.push('/')
+        if(auth.isAuthenticated) {
+            history.push('/')
+        }                
     }, [auth])
 
     const addUser = () => {
@@ -113,7 +116,8 @@ const SignUoPage = ({ createUser, auth }) => {
                     />
                 </div>
                 <div className="text-center">
-                    <MDBBtn color="primary" onClick={addUser}>Register</MDBBtn>
+                    {/* <MDBBtn color="primary" onClick={addUser}>Register</MDBBtn> */}
+                    <RoundedBtn color="primary" onClick={addUser} icon="user-plus" caption="Register"/>
                 </div>
                 </form>
             </MDBCol>
@@ -124,7 +128,7 @@ const SignUoPage = ({ createUser, auth }) => {
 };
 
 
-SignUoPage.propTypes = {
+SignUpPage.propTypes = {
     createUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
@@ -135,5 +139,5 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
   
-export default connect(mapStateToProps, { createUser })(SignUoPage);
+export default connect(mapStateToProps, { createUser })(SignUpPage);
 

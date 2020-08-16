@@ -49,7 +49,7 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     <Route exact path='/issues'>
                         <IssuesPage/>
                     </Route>
-                    <Route exact path='/singin'>
+                    <Route exact path='/signup'>
                         <SignUpPage/>
                     </Route>
                     {/* <Route exact path="/dashboard/:id">

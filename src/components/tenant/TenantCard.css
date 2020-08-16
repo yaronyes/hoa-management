@@ -19,6 +19,10 @@
     justify-content: flex-end;
 }
 
-.tenant-card .btn-group-tenant > .btn-rounded {
+/* .tenant-card .btn-group-tenant > .btn-rounded {
     border-radius: 10em;
+} */
+
+.tenant-card .card-header:hover {
+    cursor: pointer;
 }

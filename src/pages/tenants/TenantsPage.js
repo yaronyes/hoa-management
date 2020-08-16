@@ -6,10 +6,12 @@ import TenantCard from '../../components/tenant/TenantCard';
 import  { addTenantUser, getTenantUsers } from '../../actions/tenantActions';
 import './TenantsPage.css';
 import FilterBox from '../../components/filter/FilterBox';
+import AddUpdateTenant  from '../../components/tenant/AddUpdateTenant';
 
 const TenantsPage = ({ addTenantUser, getTenantUsers, tenant }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
+    const [modal, setModel] = useState(false);
 
     useEffect(() => {
       if(tenant.length === 0) {
@@ -17,6 +19,10 @@ const TenantsPage = ({ addTenantUser, getTenantUsers, tenant }) => {
       }
       console.log("tenant:", tenant);
     }, [tenant]);
+
+    const toggle = () => {
+      setModel(!modal);
+  }
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '')
 
@@ -37,6 +43,7 @@ const TenantsPage = ({ addTenantUser, getTenantUsers, tenant }) => {
                   </MDBContainer>
                 </MDBRow>        
             </MDBContainer>           
+            <AddUpdateTenant modal={modal} toggle={toggle} selectedTenant={tenant}/>
         </div>
     );
 }

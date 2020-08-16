@@ -12,14 +12,15 @@ import {
 } from 'mdbreact';
 import './TenantCard.css';
 import AddUpdateTenant  from './AddUpdateTenant';
+import RoundedBtn from '../rounded-button/RoundedBtn';
 
 const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
     const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
     const [modal, setModel] = useState(false);
 
-  const toggle = () => {
-    setModel(!modal);
-  }
+    const toggle = () => {
+        setModel(!modal);
+    }
 
     return (
         <div className="tenant-card">
@@ -59,12 +60,14 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
                             <MDBRow>
                                 <MDBCol  md="6" className="offset-md-6">
                                     <div className="btn-group-tenant">      
-                                        <MDBBtn rounded color="info" className="btn-rounded" onClick={toggle}>
+                                        {/* <MDBBtn rounded color="info" className="btn-rounded" onClick={toggle}>
                                             <MDBIcon icon="user-edit" /> Update
                                         </MDBBtn>
                                         <MDBBtn rounded color="danger" className="btn-rounded">
                                             <MDBIcon icon="trash" /> Delete
-                                        </MDBBtn>
+                                        </MDBBtn> */}
+                                        <RoundedBtn color="info" onClick={toggle} icon="user-edit" caption="Update"/>
+                                        <RoundedBtn color="danger" /*onClick={}*/ icon="trash" caption="Delete"/>
                                     </div>    
                                 </MDBCol>
                             </MDBRow>

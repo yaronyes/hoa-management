@@ -58,7 +58,7 @@ const Test = ({ createUser, auth, errors, tenant, addTenantUser, getTenantUsers,
                 <button onClick={addUser}>Add User</button>    
             </div>
             <div>
-                <button onClick={() => {loginUser({ email: "doron4@test.com", password: "Test1234$" })}}>User Login</button>    
+                <button onClick={() => {loginUser({ email: "user2@hotmail.com", password: "Test1234$" })}}>User Login</button>    
             </div>            
             <div>
                 <button onClick={addTenant}>Add Tenant</button>
