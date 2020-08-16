@@ -14,13 +14,13 @@ import './TenantCard.css';
 import AddUpdateTenant  from './AddUpdateTenant';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 
-const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
+const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant }) => {
     const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
-    const [modal, setModel] = useState(false);
+    //const [modal, setModel] = useState(false);
 
-    const toggle = () => {
-        setModel(!modal);
-    }
+    // const toggle = () => {
+    //     setModel(!modal);
+    // }
 
     return (
         <div className="tenant-card">
@@ -66,7 +66,7 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
                                         <MDBBtn rounded color="danger" className="btn-rounded">
                                             <MDBIcon icon="trash" /> Delete
                                         </MDBBtn> */}
-                                        <RoundedBtn color="info" onClick={toggle} icon="user-edit" caption="Update"/>
+                                        <RoundedBtn color="info" onClick={() => onUpdateTenant(tenant)} icon="user-edit" caption="Update"/>
                                         <RoundedBtn color="danger" /*onClick={}*/ icon="trash" caption="Delete"/>
                                     </div>    
                                 </MDBCol>
@@ -76,7 +76,7 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen }) => {
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            <AddUpdateTenant modal={modal} toggle={toggle} selectedTenant={tenant}/>
+            {/* <AddUpdateTenant modal={modal} toggle={toggle} selectedTenant={tenant}/> */}
         </div>
     );
 

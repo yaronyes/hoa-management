@@ -1,3 +1,5 @@
-.add-upd-tenant {
+.add-upd-tenant .row {
     text-align: left;
+    justify-content: center;
 }
+

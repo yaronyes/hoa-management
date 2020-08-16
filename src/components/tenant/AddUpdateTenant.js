@@ -9,14 +9,21 @@ import RoundedBtn from '../rounded-button/RoundedBtn';
 
 const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateTenantUser, tenant }) => {
 
-    const [name, setName] = useState(tenantToUpdate ? tenantToUpdate.name : "");
-    const [email, setEmail] = useState(tenantToUpdate ? tenantToUpdate.email : "");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [apartment, setApartment] = useState(tenantToUpdate ? tenantToUpdate.apartment : "");
+    const [apartment, setApartment] = useState("");
 
     // useEffect(() => {
     //     toggle();
     // }, [tenant]);
+    console.log(tenantToUpdate)
+        
+    useEffect(() => {
+        setName(tenantToUpdate ? tenantToUpdate.name : "");
+        setEmail(tenantToUpdate ? tenantToUpdate.email : "");
+        setApartment(tenantToUpdate ? tenantToUpdate.apartment : "");
+    }, [tenantToUpdate]);
 
    const addUpdate = () => {
     if(tenantToUpdate) {
@@ -30,10 +37,10 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
   const addTenant = () => {
     try{         
         const user = new UserModel( {
-            name: "tenant tenant",
-            email: "tenant1@test.com",
-            password: "Test1234$",
-            apartment: 3
+            name,
+            email,
+            password,
+            apartment
          } );
          addTenantUser(user);                        
     } catch (e) {
@@ -69,10 +76,10 @@ const updateTenant = () => {
       <div className="add-upd-tenant">
         <MDBContainer>      
             <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>MDBModal title</MDBModalHeader>
+                <MDBModalHeader toggle={toggle}>{tenantToUpdate ? "Update Tenant" : "Create Tenant"}</MDBModalHeader>
                 <MDBModalBody>
                 <MDBRow>
-                    <MDBCol md="6">
+                    <MDBCol md="9">
                         <form>
                         <div className="grey-text">
                             <MDBInput
@@ -128,7 +135,7 @@ const updateTenant = () => {
                 </MDBBtn> */}
                 {/* <MDBBtn color="primary" onClick={addUpdate}>Save changes</MDBBtn> */}
                 <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
-                <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption="Save changes"/>
+                <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={tenantToUpdate ? "Save changes" : "Create Tenant"}/>
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>
