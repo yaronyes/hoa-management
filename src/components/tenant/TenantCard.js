@@ -13,8 +13,11 @@ import {
 import './TenantCard.css';
 import AddUpdateTenant  from './AddUpdateTenant';
 import RoundedBtn from '../rounded-button/RoundedBtn';
+import { removeTenantUser } from "../../actions/tenantActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant }) => {
+const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant, removeTenantUser }) => {
     const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
@@ -67,7 +70,7 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant }) => {
                                             <MDBIcon icon="trash" /> Delete
                                         </MDBBtn> */}
                                         <RoundedBtn color="info" onClick={() => onUpdateTenant(tenant)} icon="user-edit" caption="Update"/>
-                                        <RoundedBtn color="danger" /*onClick={}*/ icon="trash" caption="Delete"/>
+                                        <RoundedBtn color="danger" onClick={() => removeTenantUser(tenant)} icon="trash" caption="Delete"/>
                                     </div>    
                                 </MDBCol>
                             </MDBRow>
@@ -82,4 +85,16 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant }) => {
 
 };
 
-export default TenantCard;
+TenantCard.propTypes = {
+    errors: PropTypes.object.isRequired,
+    tenant: PropTypes.array.isRequired,
+    removeTenantUser: PropTypes.func.isRequired,
+};
+  
+const mapStateToProps = (state) => ({
+    errors: state.errors,
+    //tenant: state.tenant,
+});
+  
+export default connect(mapStateToProps, { removeTenantUser })(TenantCard);
+
