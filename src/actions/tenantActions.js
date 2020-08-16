@@ -52,8 +52,10 @@ export const removeTenantUser = ({ _id }) => async dispatch => {
 export const getTenantUsers = () => async dispatch => {
     try{
         const response = await axios.get('/users/tenants', getOptions());
-        const tenants = response.data.map(user => new UserModel(user));
-        dispatch(setTenants(tenants));
+        if(response.data.length !== 0) {
+            const tenants = response.data.map(user => new UserModel(user));
+            dispatch(setTenants(tenants));
+        }
     } catch (e) {
         console.log(e);
         dispatch({

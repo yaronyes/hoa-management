@@ -34,8 +34,10 @@ export const createVoting = (voting) => async dispatch => {
 export const getVoting = () => async dispatch => {
     try{
         const response = await axios.get('/voting', getOptions());
-        const voting = response.data.map(item => new VotingModel(item));
-        dispatch(setVoting(voting));
+        if(response.data.length !== 0) {
+            const voting = response.data.map(item => new VotingModel(item));
+            dispatch(setVoting(voting));
+        }        
     } catch (e) {
         console.log(e);
         dispatch({

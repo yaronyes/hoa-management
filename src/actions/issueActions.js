@@ -34,8 +34,10 @@ export const createIssue = (issue) => async dispatch => {
 export const getIssues = () => async dispatch => {
     try{
         const response = await axios.get('/issues', getOptions());
-        const issues = response.data.map(issue => new IssueModel(issue));
-        dispatch(setIssues(issues));
+        if(response.data.length !== 0) {
+            const issues = response.data.map(issue => new IssueModel(issue));
+            dispatch(setIssues(issues));
+        }        
     } catch (e) {
         console.log(e);
         dispatch({

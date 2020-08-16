@@ -53,8 +53,10 @@ export const deleteMessage = ({ _id }) => async dispatch => {
 export const getMessages = () => async dispatch => {
     try{
         const response = await axios.get('/messages', getOptions());
-        const messages = response.data.map(message => new MessageModel(message));
-        dispatch(setMessages(messages));
+        if(response.data.length !== 0) {
+            const messages = response.data.map(message => new MessageModel(message));
+            dispatch(setMessages(messages));
+        }        
     } catch (e) {
         console.log(e);
         dispatch({
