@@ -17,7 +17,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
     // useEffect(() => {
     //     toggle();
     // }, [tenant]);
-    console.log(tenantToUpdate)
+    //console.log(tenantToUpdate)
         
     useEffect(() => {
         setName(tenantToUpdate ? tenantToUpdate.name : "");

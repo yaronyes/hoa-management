@@ -14,9 +14,10 @@ import './TenantCard.css';
 // import AddUpdateTenant  from './AddUpdateTenant';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import './IssueCard.css';
+import CardHeader from '../card-header/CardHeader';
 
-const IssueCard = ({ toggleCollapse, issue, isOpen, onUpdateIssue }) => {
-    //const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
+const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue }) => {
+    const img = `https://yyes-hoa-management-server.herokuapp.com/users/${theIssue._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {
@@ -26,7 +27,7 @@ const IssueCard = ({ toggleCollapse, issue, isOpen, onUpdateIssue }) => {
     return (
         <div className="issue-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>
-                <div 
+                {/* <div 
                 onClick={() => toggleCollapse(issue._id)}
                 className='card-header text-uppercase blue lighten-3 z-depth-1'
                 role="tab"
@@ -34,17 +35,18 @@ const IssueCard = ({ toggleCollapse, issue, isOpen, onUpdateIssue }) => {
                     <span className='white-text font-weight-bold'>
                        {issue.title}
                     </span>
-                </div >
-                <MDBCollapse id={issue._id} isOpen={isOpen}>
+                </div> */}
+                <CardHeader id={theIssue._id} toggleCollapse={toggleCollapse} headerText={theIssue.name}/>
+                <MDBCollapse id={theIssue._id} isOpen={isOpen}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
                         <MDBCol md='3' className='img-col'>
                             <MDBView className='z-depth-1'>
-                            {/* <MDBCardImage
+                            <MDBCardImage
                                 className='img-fluid z-depth-1'
-                                src={avatar}
+                                src={img}
                                 alt=''                                
-                            /> */}
+                            />
                             </MDBView>
                         </MDBCol>
                         <MDBCol md='9' className="data-col">
@@ -53,9 +55,9 @@ const IssueCard = ({ toggleCollapse, issue, isOpen, onUpdateIssue }) => {
                             </h2> */}
                             <MDBRow>
                                 <MDBCol className="text-col">
-                                    <p><span className="l-title">Details: </span>{issue.details}</p>
-                                    <p><span className="l-title">Priority: </span>{issue.priority}</p>
-                                    <p><span className="l-title">Status: </span>#{issue.status}</p>    
+                                    <p><span className="l-title">Details: </span>{theIssue.details}</p>
+                                    <p><span className="l-title">Priority: </span>{theIssue.priority}</p>
+                                    <p><span className="l-title">Status: </span>{theIssue.status}</p>    
                                     {/* comments */}
                                 </MDBCol>                             
                             </MDBRow>

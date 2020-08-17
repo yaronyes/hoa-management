@@ -39,7 +39,7 @@ const TenantsPage = ({ getTenantUsers, tenant }) => {
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
     const filter = tenant.filter(item => item.name.toLowerCase().includes(filterText.toLowerCase().trim()));
-    const displayTenants = filter.map(item => <TenantCard toggleCollapse={toggleCollapse} tenant={item} isOpen={collapseID} onUpdateTenant={openAddUpdateModal}/>);
+    const displayTenants = filter.map(item => <TenantCard key={item._id} toggleCollapse={toggleCollapse} theTenant={item} isOpen={collapseID} onUpdateTenant={openAddUpdateModal}/>);
 
     return (
         <div className="tenants-page">
