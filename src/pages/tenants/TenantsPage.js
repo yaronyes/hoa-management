@@ -8,12 +8,13 @@ import './TenantsPage.css';
 import FilterBox from '../../components/filter/FilterBox';
 import AddUpdateTenant  from '../../components/tenant/AddUpdateTenant';
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
+import useStateWithCallback from 'use-state-with-callback';
 
 const TenantsPage = ({ getTenantUsers, tenant }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
-    const [selectedTenant, setSelectedTenant] = useState();
+    const [selectedTenant, setSelectedTenant] = useStateWithCallback(undefined, () => toggle());
 
     useEffect(() => {
       if(tenant.length === 0) {
@@ -33,7 +34,7 @@ const TenantsPage = ({ getTenantUsers, tenant }) => {
 
     const openAddUpdateModal = (theTenant) => {
       setSelectedTenant(theTenant);      
-      toggle();
+      //toggle();
     }
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');

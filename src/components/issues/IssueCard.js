@@ -7,17 +7,14 @@ import {
     MDBCardImage,
     MDBRow,
     MDBView,
-    MDBBtn,
     MDBIcon
 } from 'mdbreact';
 import './TenantCard.css';
-// import AddUpdateTenant  from './AddUpdateTenant';
-import RoundedBtn from '../rounded-button/RoundedBtn';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
 
 const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue }) => {
-    const img = `https://yyes-hoa-management-server.herokuapp.com/users/${theIssue._id}/avatar?${new Date().getTime()}`;
+    const img = `https://yyes-hoa-management-server.herokuapp.com/issues/${theIssue._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {
