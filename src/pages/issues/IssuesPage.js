@@ -6,22 +6,34 @@ import { connect } from 'react-redux';
 import { getIssues } from '../../actions/issueActions';
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import IssueCard from '../../components/issues/IssueCard';
+import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
 
 const IssuesPage = ({ getIssues, issue }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
+    const [modal, setModel] = useState(false);
+    const [selectedIssue, setSelectedIssue] = useState();
 
     useEffect(() => {
       if(issue.length === 0) {
         getIssues();
-      }
+      }      
     }, [issue]);
+   
+    const toggle = () => {
+      setModel(!modal);
+    }
+
+    const openAddUpdateModal = (theIssue) => {
+      setSelectedIssue(theIssue);      
+      toggle();
+    }
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const filter = issue.filter(item => item.name.toLowerCase().includes(filterText.toLowerCase().trim()));
-    const displayIssues= filter.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} theTenant={item} isOpen={collapseID} /*onUpdateTenant={openAddUpdateModal}*//>);
-
+    const filter = issue.filter(item => item.title.toLowerCase().includes(filterText.toLowerCase().trim()));
+    const displayIssues= filter.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} theIssue={item} isOpen={collapseID} onUpdateIssue={openAddUpdateModal}/>);
+  
 
     return (
         <div className="issues-page">
@@ -33,7 +45,7 @@ const IssuesPage = ({ getIssues, issue }) => {
                 </MDBRow>   
                 <MDBRow>
                   <MDBCol className="add-issue offset-md-9" md="3">
-                    <RoundedBtn color="primary" /*onClick={() => openAddUpdateModal(undefined)}*/ icon="user-plus" caption="Create New Tenant"/>
+                    <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New Issue"/>
                   </MDBCol>                  
                 </MDBRow>     
                 <MDBRow>
@@ -41,7 +53,8 @@ const IssuesPage = ({ getIssues, issue }) => {
                     {displayIssues}                 
                   </MDBContainer>
                 </MDBRow>             
-            </MDBContainer>           
+            </MDBContainer>
+            <AddUpdateIssue modal={modal} toggle={toggle} issueToUpdate={selectedIssue}/>                       
         </div>
     );
 }

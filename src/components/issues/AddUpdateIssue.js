@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
-import './AddUpdateTenant.css';
+import { MDBContainer, MDBIcon, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
+import './AddUpdateIssue.css';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createIssue, updateIssue } from "../../actions/issueActions";
 import IssueModel from '../../models/IssueModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
+import DropDownSelect from '../select/DropDownSelect';
+import { Grid, TextField } from '@material-ui/core';
+//import AccountCircle from '@material-ui/icons/AccountCircle';
 
-const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue }) => {
-
+const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue }) => {    
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
-    const [password, setPassword] = useState("");
-    const [apartment, setApartment] = useState("");
+    const [priority, setPriority] = useState("");
 
     // useEffect(() => {
     //     toggle();
@@ -20,9 +21,9 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
     //console.log(issueToUpdate)
         
     useEffect(() => {
-        setTitle(issueToUpdate ? issueToUpdate.name : "");
-        setDetails(issueToUpdate ? issueToUpdate.email : "");
-        setApartment(issueToUpdate ? issueToUpdate.apartment : "");
+        setTitle(issueToUpdate ? issueToUpdate.title : "");
+        setDetails(issueToUpdate ? issueToUpdate.details : "");
+        setPriority(issueToUpdate ? issueToUpdate.priority : "");
     }, [issueToUpdate]);
 
    const addUpdate = () => {
@@ -39,8 +40,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
         const newIssue = new IssueModel( {
             title,
             details,
-            password,
-            apartment
+            priority            
          } );
          createIssue(newIssue);                        
     } catch (e) {
@@ -54,8 +54,7 @@ const updIssue = () => {
         const updatedIssue = {
             title,
             details,
-            password,
-            apartment
+            priority            
         };
 
         const keys = Object.keys(updatedIssue);
@@ -76,7 +75,7 @@ const updIssue = () => {
       <div className="add-upd-tenant">
         <MDBContainer>      
             <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>{issueToUpdate ? "Update Tenant" : "Create Tenant"}</MDBModalHeader>
+                <MDBModalHeader toggle={toggle}>{issueToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
                 <MDBModalBody>
                 <MDBRow>
                     <MDBCol md="9">
@@ -104,26 +103,18 @@ const updIssue = () => {
                             value={details}
                             onChange={e => setDetails(e.target.value)}
                             />
-                            <MDBInput
-                            label="Password"
-                            icon="lock"
-                            group
-                            type="password"
-                            validate
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            />                    
-                            <MDBInput
-                            label="Apartment"
-                            icon="building"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"
-                            value={apartment}
-                            onChange={e => setApartment(e.target.value)}
-                            />
+                            <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority"/>                                                                                   
+                            {/* <OutlinedInput type="file"/> */}
+                            <div >
+        <Grid container spacing={1} alignItems="flex-end">
+          <Grid item>
+            {/* <AccountCircle /> */}
+          </Grid>
+          <Grid item>
+            <TextField id="input-with-icon-grid" label="With a grid" type="file"/>
+          </Grid>
+        </Grid>
+      </div>
                         </div>                
                         </form>
                     </MDBCol>
@@ -135,7 +126,7 @@ const updIssue = () => {
                 </MDBBtn> */}
                 {/* <MDBBtn color="primary" onClick={addUpdate}>Save changes</MDBBtn> */}
                 <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
-                <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={issueToUpdate ? "Save changes" : "Create Tenant"}/>
+                <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={issueToUpdate ? "Save changes" : "Create Issue"}/>
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>

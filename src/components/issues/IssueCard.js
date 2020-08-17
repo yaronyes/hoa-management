@@ -11,8 +11,12 @@ import {
 } from 'mdbreact';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
+import {deleteIssue} from '../../actions/issueActions';
+import RoundedBtn from '../rounded-button/RoundedBtn';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';     
 
-const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue }) => {
+const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue, deleteIssue }) => {
     const img = `https://yyes-hoa-management-server.herokuapp.com/issues/${theIssue._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
@@ -23,7 +27,7 @@ const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue }) => {
     return (
         <div className="issue-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
-                <CardHeader id={theIssue._id} toggleCollapse={toggleCollapse} headerText={theIssue.name}/>
+                <CardHeader id={theIssue._id} toggleCollapse={toggleCollapse} headerText={theIssue.title}/>
                 <MDBCollapse id={theIssue._id} isOpen={isOpen}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
@@ -49,12 +53,12 @@ const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue }) => {
                                 </MDBCol>                             
                             </MDBRow>
                             <MDBRow>
-                                {/* <MDBCol  md="6" className="offset-md-6">
+                                <MDBCol  md="6" className="offset-md-6">
                                     <div className="btn-group-tenant">                                              
-                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)} icon="user-edit" caption="Update"/>
-                                        <RoundedBtn color="danger" onClick={} icon="trash" caption="Delete"/>
+                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(theIssue)} icon="user-edit" caption="Update"/>
+                                        <RoundedBtn color="danger" onClick={() => deleteIssue(theIssue)} icon="trash" caption="Delete"/>
                                     </div>    
-                                </MDBCol> */}
+                                </MDBCol>
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
@@ -67,4 +71,16 @@ const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue }) => {
 
 };
 
-export default IssueCard;
+
+IssueCard.propTypes = {
+    errors: PropTypes.object.isRequired,
+    issue: PropTypes.array.isRequired,
+    deleteIssue: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    errors: state.errors,
+    issue: state.issue
+});
+
+export default connect(mapStateToProps, { deleteIssue })(IssueCard);
