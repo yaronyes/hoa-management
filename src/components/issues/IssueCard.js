@@ -9,7 +9,6 @@ import {
     MDBView,
     MDBIcon
 } from 'mdbreact';
-import './TenantCard.css';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
 
@@ -23,16 +22,7 @@ const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue }) => {
 
     return (
         <div className="issue-card">
-            <MDBCard style={{ backgroundColor: 'transparent' }}>
-                {/* <div 
-                onClick={() => toggleCollapse(issue._id)}
-                className='card-header text-uppercase blue lighten-3 z-depth-1'
-                role="tab"
-                >
-                    <span className='white-text font-weight-bold'>
-                       {issue.title}
-                    </span>
-                </div> */}
+            <MDBCard style={{ backgroundColor: 'transparent' }}>                
                 <CardHeader id={theIssue._id} toggleCollapse={toggleCollapse} headerText={theIssue.name}/>
                 <MDBCollapse id={theIssue._id} isOpen={isOpen}>
                 <MDBCardBody>
