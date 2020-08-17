@@ -14,4 +14,5 @@ export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 export const ADD_ISSUE = 'ADD_ISSUE';
 export const SET_ISSUES = 'SET_ISSUES';
 export const EDIT_ISSUE = 'EDIT_ISSUE';
+export const DELETE_ISSUE = 'DELETE_ISSUE'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';

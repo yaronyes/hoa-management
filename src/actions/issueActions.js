@@ -1,4 +1,4 @@
-import { ADD_ISSUE, SET_ISSUES, EDIT_ISSUE, GET_ERRORS } from './types';
+import { ADD_ISSUE, SET_ISSUES, EDIT_ISSUE, DELETE_ISSUE, GET_ERRORS } from './types';
 import IssueModel from '../models/IssueModel';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
@@ -16,6 +16,11 @@ export const addIssue = (issue) => ({
 export const editIssue = (issue) => ({
     type: EDIT_ISSUE,
     issue
+});
+
+export const removeIssue = ({ id }) => ({
+    type: DELETE_ISSUE,
+    id
 });
 
 export const createIssue = (issue) => async dispatch => {
@@ -54,6 +59,20 @@ export const updateIssue = (updates, id) => async dispatch =>  {
             response = await axios.patch(`/issues/${id}`, updates, getOptions());
             dispatch(editIssue(new IssueModel(response.data)))                            
         }       
+    } catch (e) {
+        console.log(e);
+        dispatch({
+            type: GET_ERRORS,
+            payload: e
+        })
+    }
+};
+
+
+export const deleteIssue = ({ _id }) => async dispatch => {
+    try{
+        const response = await axios.delete(`/issues/${_id}`, getOptions());
+        dispatch(removeIssue({ id: response.data._id }));
     } catch (e) {
         console.log(e);
         dispatch({
