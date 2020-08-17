@@ -12,7 +12,7 @@ export const status = {
 }
 
 export default class IssueModel {
-    constructor({ _id, createdBy, committee, title, details, priority, status, comments = [] , createdAt, updatedAt }) {
+    constructor({ _id, createdBy, committee, title, details, priority, status, haveImage, comments = [] , createdAt, updatedAt }) {
         this._id = _id;
         this.createdBy = createdBy;
         this.committee = committee;
@@ -20,6 +20,7 @@ export default class IssueModel {
         this.details = details;
         this.priority = priority;
         this.status = status;
+        this.haveImage = haveImage;
         this.comments = comments.map(comment => new CommentModel({ ...comment }));
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

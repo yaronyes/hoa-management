@@ -14,7 +14,8 @@ const TenantsPage = ({ getTenantUsers, tenant }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
-    const [selectedTenant, setSelectedTenant] = useStateWithCallback(undefined, () => toggle());
+    //const [selectedTenant, setSelectedTenant] = useStateWithCallback(undefined, () => toggle());
+    const [selectedTenant, setSelectedTenant] = useState();
 
     useEffect(() => {
       if(tenant.length === 0) {
@@ -34,7 +35,7 @@ const TenantsPage = ({ getTenantUsers, tenant }) => {
 
     const openAddUpdateModal = (theTenant) => {
       setSelectedTenant(theTenant);      
-      //toggle();
+      toggle();
     }
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
