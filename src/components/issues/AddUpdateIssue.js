@@ -7,7 +7,8 @@ import { createIssue, updateIssue } from "../../actions/issueActions";
 import IssueModel from '../../models/IssueModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
-import { Grid, TextField } from '@material-ui/core';
+import LoadImage from '../load-image/LoadImage';
+//import { Grid, TextField, OutlinedInput } from '@material-ui/core';
 //import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue }) => {    
@@ -103,18 +104,19 @@ const updIssue = () => {
                             value={details}
                             onChange={e => setDetails(e.target.value)}
                             />
-                            <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority"/>                                                                                   
+                            <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority"/>  
+                            <LoadImage/>                                                                                 
                             {/* <OutlinedInput type="file"/> */}
-                            <div >
+                            {/* <div >
         <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            {/* <AccountCircle /> */}
+          <Grid item>         
+            <MDBIcon icon="file-upload" className="drop-down-select-ico"/>
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="With a grid" type="file"/>
+            <TextField id="input-with-icon-grid" label="Load Image" type="file"/>
           </Grid>
         </Grid>
-      </div>
+      </div> */}
                         </div>                
                         </form>
                     </MDBCol>
@@ -145,7 +147,7 @@ AddUpdateIssue.propTypes = {
   
   const mapStateToProps = (state) => ({
     errors: state.errors,
-    tenant: state.tenant,
+    issue: state.tenant,
   });
   
   export default connect(mapStateToProps, { createIssue, updateIssue })(AddUpdateIssue);

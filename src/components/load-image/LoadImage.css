@@ -1,0 +1,35 @@
+/* .load-image .load-image-ico {
+    font-size: 1.75rem;
+    width: 28px;
+    height: 29px;
+    margin: 20px auto 0 auto;
+} */
+
+.load-image #file-input {
+    display: none;
+ }
+
+ .load-image .col {
+    display: flex;
+    padding: 0;
+ }
+
+ .load-image {    
+    text-align: left;
+ }
+
+ 
+ .load-image label {
+    cursor: pointer;
+ }
+
+ .load-image .upload-icon {
+     text-align: center;
+     margin-top: 30px;
+     margin-right: 10px;
+ }
+
+ .load-image .load-badge {
+     padding: 10px;
+     margin-left: 15px;
+ }

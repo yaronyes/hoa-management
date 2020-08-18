@@ -45,7 +45,7 @@ const DropDownSelect = ({onChange, label, icon}) => {
                 <option value="normal">normal</option>
                 </Select>
             </FormControl>
-            </div>
+        </div>
     );
 };
 
