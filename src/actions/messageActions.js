@@ -67,12 +67,24 @@ export const getMessages = () => async dispatch => {
 };
 
 export const updateMessage = (updates, id) => async dispatch =>  {
-    try{
-        let response;
-        if(Object.keys(updates).length != 0) {
-            response = await axios.patch(`/messages/${id}`, updates, getOptions());
+    try{        
+        if(Object.keys(updates).length !== 0) {
+            const response = await axios.patch(`/messages/${id}`, updates, getOptions());
             dispatch(editMessage(new MessageModel(response.data)))
         }
+    } catch (e) {
+        console.log(e);
+        dispatch({
+            type: GET_ERRORS,
+            payload: e
+        })
+    }
+};
+
+export const addCommentForMessage = (comment, id) => async dispatch =>  {
+    try{
+        const response = await axios.post(`/comment/message/${id}`, comment, getOptions());
+        dispatch(editMessage(new MessageModel(response.data)))                         
     } catch (e) {
         console.log(e);
         dispatch({
