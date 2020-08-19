@@ -3,7 +3,7 @@ import './CardHeader.css';
 import { MDBIcon } from 'mdbreact';
 
 
-const CardHeader = ({ id, toggleCollapse, color, headerText, icon }) => {
+const CardHeader = ({ id, toggleCollapse, color, headerText, icon, iconColor }) => {
     const colorId = color ? color : 'blue lighten-3';
 
     return (
@@ -15,7 +15,7 @@ const CardHeader = ({ id, toggleCollapse, color, headerText, icon }) => {
             <span className='white-text font-weight-bold'>
                 {headerText}
             </span>
-            <MDBIcon icon={icon}/>
+            <MDBIcon icon={icon} className={iconColor}/>
         </div>
     );
 }
