@@ -7,6 +7,7 @@ import { getIssues } from '../../actions/issueActions';
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import IssueCard from '../../components/issues/IssueCard';
 import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
+import './IssuesPage.css';
 
 const IssuesPage = ({ getIssues, issues }) => {
     const [collapseID, setCollapseID] = useState(0);    
