@@ -40,8 +40,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
         } else {
             addCommentForIssue(new CommentModel({ text: comment }), issue._id);
             setComment("");
-        }
-        
+        }        
     }
 
     const displayComments = issue.comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)

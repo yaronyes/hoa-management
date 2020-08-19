@@ -23,8 +23,6 @@
 .issue-card .btn-group-issue {
     display: flex;
     justify-content: center; 
-    /* align-items: flex-end; */
-    /* align-content: flex-end; */
 }
 
 .issue-card .comments-col {

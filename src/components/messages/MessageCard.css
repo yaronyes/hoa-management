@@ -1,12 +1,29 @@
+.message-card {    
+    text-align: left;    
+}
+
+.message-card .text-col { 
+    margin-top: 10px;
+}
+
 .message-card .btn-col {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    padding: 0;
 }
 
 .message-card .btn-group-message {
     display: flex;
-    justify-content: center; 
-    /* align-items: flex-end; */
-    /* align-content: flex-end; */
+    justify-content: center;  
+}
+
+.message-card .comments-col {
+    padding: 0;
+}
+
+.message-card .main-comments-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
