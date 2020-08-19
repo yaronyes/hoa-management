@@ -1,35 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { MDBContainer, MDBIcon, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
-import './AddUpdateIssue.css';
+import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
+import './AddUpdateMessage.css';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createIssue, updateIssue } from "../../actions/issueActions";
-import IssueModel from '../../models/IssueModel';
+import { createMessage, updateMessage } from "../../actions/messageActions";
+import MessageModel from '../../models/MessageModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
 import LoadImage from '../load-image/LoadImage';
-//import { Grid, TextField, OutlinedInput } from '@material-ui/core';
-//import AccountCircle from '@material-ui/icons/AccountCircle';
 
-const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue }) => {    
+const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updateMessage }) => {    
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [priority, setPriority] = useState("");
     const [image, setImage] = useState();
-
-    // useEffect(() => {
-    //     toggle();
-    // }, [tenant]);
-    //console.log(issueToUpdate)
-        
+    
     useEffect(() => {
-        setTitle(issueToUpdate ? issueToUpdate.title : "");
-        setDetails(issueToUpdate ? issueToUpdate.details : "");
-        setPriority(issueToUpdate ? issueToUpdate.priority : "");
-    }, [issueToUpdate]);
+        setTitle(messageToUpdate ? messageToUpdate.title : "");
+        setDetails(messageToUpdate ? messageToUpdate.details : "");
+        setPriority(messageToUpdate ? messageToUpdate.priority : "");
+    }, [messageToUpdate]);
 
    const addUpdate = () => {
-    if(issueToUpdate) {
+    if(messageToUpdate) {
         updIssue();
     } else {
         addIssue();
@@ -39,12 +32,12 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
 
     const addIssue = () => {
         try{         
-            const newIssue = new IssueModel( {
+            const newMessage = new MessageModel( {
                 title,
                 details,
                 priority            
             } );
-            createIssue(newIssue, image);                        
+            createMessage(newMessage, image);                        
         } catch (e) {
             console.log(e)
             alert(e.message)
@@ -53,20 +46,20 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
 
     const updIssue = () => {
         try{         
-            const updatedIssue = {
+            const updatedMessage = {
                 title,
                 details,
                 priority            
             };
 
-            const keys = Object.keys(updatedIssue);
+            const keys = Object.keys(updatedMessage);
             keys.forEach(key => {        
-                if (issueToUpdate[key] === updatedIssue[key] || updatedIssue[key] === undefined || updatedIssue[key] === '') {
-                delete updatedIssue[key];            
+                if (messageToUpdate[key] === updatedMessage[key] || updatedMessage[key] === undefined || updatedMessage[key] === '') {
+                delete updatedMessage[key];            
                 }
             })
                     
-            updateIssue(updatedIssue, issueToUpdate._id);              
+            updateMessage(updatedMessage, messageToUpdate._id);              
         } catch (e) {
             console.log(e)
             alert(e.message)
@@ -80,7 +73,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
       <div className="add-upd-tenant">
         <MDBContainer>      
             <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>{issueToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
+                <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
                 <MDBModalBody>
                 <MDBRow>
                     <MDBCol md="9">
@@ -106,45 +99,26 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
                             value={details}
                             onChange={e => setDetails(e.target.value)}
                             />                            
-                            <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority" 
+                            <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority"
                             dropDownItems={[
-                                {
-                                    value: "urgent",
-                                    name: "urgent"
-                                },
                                 {
                                     value: "important",
                                     name: "important"
                                 },
                                 {
-                                    value: "normal",
-                                    name: "normal"
+                                    value: "info",
+                                    name: "info"
                                 }
                             ]}/>  
-                            <LoadImage fileCallback={fileCallback}/>                                                                                 
-                            {/* <OutlinedInput type="file"/> */}
-                            {/* <div >
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>         
-            <MDBIcon icon="file-upload" className="drop-down-select-ico"/>
-          </Grid>
-          <Grid item>
-            <TextField id="input-with-icon-grid" label="Load Image" type="file"/>
-          </Grid>
-        </Grid>
-      </div> */}
+                            <LoadImage fileCallback={fileCallback}/>                                                                                                            
                         </div>                
                         </form>
                     </MDBCol>
                     </MDBRow>
                 </MDBModalBody>
                 <MDBModalFooter>
-                {/* <MDBBtn color="secondary" onClick={toggle}>
-                    Close
-                </MDBBtn> */}
-                {/* <MDBBtn color="primary" onClick={addUpdate}>Save changes</MDBBtn> */}
-                <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
-                <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={issueToUpdate ? "Save changes" : "Create Issue"}/>
+                    <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
+                    <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={messageToUpdate ? "Save changes" : "Create Issue"}/>
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>
@@ -154,16 +128,16 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
 };
 
 
-AddUpdateIssue.propTypes = {
+AddUpdateMessage.propTypes = {
     errors: PropTypes.object.isRequired,
-    issue: PropTypes.array.isRequired,
-    createIssue: PropTypes.func.isRequired,
-    updateIssue: PropTypes.func.isRequired,
+    messages: PropTypes.array.isRequired,
+    createMessage: PropTypes.func.isRequired,
+    updateMessage: PropTypes.func.isRequired,
   };
   
   const mapStateToProps = (state) => ({
     errors: state.errors,
-    issues: state.issue
+    messages: state.message,
   });
   
-  export default connect(mapStateToProps, { createIssue, updateIssue })(AddUpdateIssue);
+  export default connect(mapStateToProps, { createMessage, updateMessage })(AddUpdateMessage);
