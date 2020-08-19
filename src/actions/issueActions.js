@@ -62,9 +62,8 @@ export const getIssues = () => async dispatch => {
 
 export const updateIssue = (updates, id) => async dispatch =>  {
     try{
-        let response;
         if(Object.keys(updates).length !== 0) {
-            response = await axios.patch(`/issues/${id}`, updates, getOptions());
+            const response = await axios.patch(`/issues/${id}`, updates, getOptions());
             dispatch(editIssue(new IssueModel(response.data)))                            
         }       
     } catch (e) {
@@ -81,6 +80,19 @@ export const deleteIssue = ({ _id }) => async dispatch => {
     try{
         const response = await axios.delete(`/issues/${_id}`, getOptions());
         dispatch(removeIssue({ id: response.data._id }));
+    } catch (e) {
+        console.log(e);
+        dispatch({
+            type: GET_ERRORS,
+            payload: e
+        })
+    }
+};
+
+export const addCommentForIssue = (comment, id) => async dispatch =>  {
+    try{
+        const response = await axios.patch(`/comment/issues/${id}`, comment, getOptions());
+        dispatch(editIssue(new IssueModel(response.data)))                         
     } catch (e) {
         console.log(e);
         dispatch({
