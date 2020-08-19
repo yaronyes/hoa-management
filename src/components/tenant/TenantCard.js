@@ -17,9 +17,10 @@ import { removeTenantUser } from "../../actions/tenantActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import CardHeader from '../card-header/CardHeader';
+import config from '../../config/config.json';
 
 const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTenantUser }) => {
-    const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
+    const avatar = `${config.server_url}/users/${tenant._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {

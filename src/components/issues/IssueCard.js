@@ -14,10 +14,11 @@ import CardHeader from '../card-header/CardHeader';
 import {deleteIssue} from '../../actions/issueActions';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';     
+import { connect } from 'react-redux';  
+import config from '../../config/config.json';   
 
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }) => {
-    const img = `https://yyes-hoa-management-server.herokuapp.com/issues/${issue._id}/avatar?${new Date().getTime()}`;
+    const img = `${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {
