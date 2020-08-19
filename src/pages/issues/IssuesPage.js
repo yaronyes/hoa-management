@@ -32,7 +32,7 @@ const IssuesPage = ({ getIssues, issues }) => {
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
     const filter = issues.filter(item => item.title.toLowerCase().includes(filterText.toLowerCase().trim()));
-    const displayIssues= filter.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} issue={item} isOpen={collapseID} onUpdateIssue={openAddUpdateModal}/>);
+    const displayIssues= filter.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} issue={item} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>);
   
 
     return (

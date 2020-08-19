@@ -16,21 +16,19 @@ import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
 
-const IssueCard = ({ toggleCollapse, issue, isOpen, onUpdateIssue, deleteIssue }) => {
+const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }) => {
     const img = `https://yyes-hoa-management-server.herokuapp.com/issues/${issue._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {
     //     setModel(!modal);
-    // }
-    console.log(isOpen)
-    
+    // }    
 
     return (
         <div className="issue-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
                 <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title}/>
-                <MDBCollapse id={issue._id} isOpen={isOpen}>
+                <MDBCollapse id={issue._id} isOpen={openID === issue._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
                         <MDBCol md='3' className='img-col'>

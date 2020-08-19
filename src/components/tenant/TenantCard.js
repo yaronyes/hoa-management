@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import CardHeader from '../card-header/CardHeader';
 
-const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant, removeTenantUser }) => {
+const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTenantUser }) => {
     const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
@@ -42,7 +42,7 @@ const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant, removeTena
                     </span>
                 </div> */}
                 <CardHeader id={tenant._id} toggleCollapse={toggleCollapse} headerText={tenant.name}/>
-                <MDBCollapse id={tenant._id} isOpen={isOpen}>
+                <MDBCollapse id={tenant._id} isOpen={openID === tenant._id ? true : false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
                         <MDBCol md='3' className='img-col'>
