@@ -2,6 +2,7 @@ import { SET_CURRENT_USER, GET_ERRORS } from './types';
 import { getOptions } from '../utils/getAuthToken';
 import axios from 'axios';
 import UserModel from '../models/UserModel';
+import { uploadImage } from '../utils/utils';
 
 export const setCurrentUser = user => {
     return {

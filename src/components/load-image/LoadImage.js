@@ -3,8 +3,8 @@ import { MDBIcon, MDBBadge, MDBCol, MDBInput, MDBAlert, MDBRow } from 'mdbreact'
 import { Grid, TextField } from '@material-ui/core';
 import './LoadImage.css';
 
-const LoadImage = (fileCallback) => {
-    const [value, setValue] = useState("");
+const LoadImage = ({ fileCallback }) => {
+    //const [value, setValue] = useState("");
     const [showError, setShowError] = useState(false);
     const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
@@ -14,13 +14,15 @@ const LoadImage = (fileCallback) => {
         console.log(e.target.files[0], "$$$")       
         const file = e.target.files[0]
         
-        setValue(file.name);
+        //setValue(file.name);
 
         if (file != null && file.size > 1000000) {
             return setShowError(true);           
         }else {
             setShowError(false);
         }
+
+        fileCallback(file);
         
         let reader = new FileReader();
         
@@ -28,9 +30,7 @@ const LoadImage = (fileCallback) => {
             setImagePreviewUrl(reader.result);
         }
     
-        reader.readAsDataURL(file);        
-
-        //fileCallback(file);
+        reader.readAsDataURL(file);                
     }
 
     

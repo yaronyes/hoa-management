@@ -2,6 +2,7 @@ import { ADD_ISSUE, SET_ISSUES, EDIT_ISSUE, DELETE_ISSUE, GET_ERRORS } from './t
 import IssueModel from '../models/IssueModel';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
+import { uploadImage } from '../utils/utils';
 
 export const setIssues = (issues) => ({
     type: SET_ISSUES,
@@ -23,10 +24,17 @@ export const removeIssue = ({ id }) => ({
     id
 });
 
-export const createIssue = (issue) => async dispatch => {
+export const createIssue = (issue, image) => async dispatch => {
     try{
         const response = await axios.post('/issues', issue, getOptions());
         dispatch(addIssue(new IssueModel(response.data)));
+        if (image) {
+            try {
+                await uploadImage(`/issues/${response.data._id}/image`, image, 'image');
+            } catch (e) {
+                console.log(e);
+            }
+        }
     } catch (e) {
         console.log(e);
         dispatch({

@@ -15,6 +15,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [priority, setPriority] = useState("");
+    const [image, setImage] = useState();
 
     // useEffect(() => {
     //     toggle();
@@ -36,41 +37,44 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
     toggle();
   };
 
-  const addIssue = () => {
-    try{         
-        const newIssue = new IssueModel( {
-            title,
-            details,
-            priority            
-         } );
-         createIssue(newIssue);                        
-    } catch (e) {
-        console.log(e)
-        alert(e.message)
-    }      
- };
+    const addIssue = () => {
+        try{         
+            const newIssue = new IssueModel( {
+                title,
+                details,
+                priority            
+            } );
+            createIssue(newIssue, image);                        
+        } catch (e) {
+            console.log(e)
+            alert(e.message)
+        }      
+    };
 
-const updIssue = () => {
-    try{         
-        const updatedIssue = {
-            title,
-            details,
-            priority            
-        };
+    const updIssue = () => {
+        try{         
+            const updatedIssue = {
+                title,
+                details,
+                priority            
+            };
 
-        const keys = Object.keys(updatedIssue);
-        keys.forEach(key => {        
-            if (issueToUpdate[key] === updatedIssue[key] || updatedIssue[key] === undefined || updatedIssue[key] === '') {
-            delete updatedIssue[key];            
-            }
-        })
-                
-        updateIssue(updatedIssue, issueToUpdate._id);              
-    } catch (e) {
-        console.log(e)
-        alert(e.message)
-    }      
- };
+            const keys = Object.keys(updatedIssue);
+            keys.forEach(key => {        
+                if (issueToUpdate[key] === updatedIssue[key] || updatedIssue[key] === undefined || updatedIssue[key] === '') {
+                delete updatedIssue[key];            
+                }
+            })
+                    
+            updateIssue(updatedIssue, issueToUpdate._id);              
+        } catch (e) {
+            console.log(e)
+            alert(e.message)
+        }      
+    };
+
+    const fileCallback = img => setImage(img);
+            
 
   return (
       <div className="add-upd-tenant">
@@ -105,7 +109,7 @@ const updIssue = () => {
                             onChange={e => setDetails(e.target.value)}
                             />
                             <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority"/>  
-                            <LoadImage/>                                                                                 
+                            <LoadImage fileCallback={fileCallback}/>                                                                                 
                             {/* <OutlinedInput type="file"/> */}
                             {/* <div >
         <Grid container spacing={1} alignItems="flex-end">

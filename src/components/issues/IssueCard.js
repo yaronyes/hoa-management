@@ -23,7 +23,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
 
     // const toggle = () => {
     //     setModel(!modal);
-    // }    
+    // }   
 
     return (
         <div className="issue-card">
