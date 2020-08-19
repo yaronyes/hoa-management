@@ -13,6 +13,7 @@ import VotingPage from '../pages/voting/VotingPage';
 import IssuesPage from '../pages/issues/IssuesPage';
 import SignUpPage from '../pages/signup/SignUpPage';
 import LoginPage from  '../pages/login/LoginPage';
+import RouteIfLoggedIn from './RouteIfLoggedIn';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -34,22 +35,30 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
         <BrowserRouter>
             <HeaderNavbar userConnected={isUserConnected}/>
                 <Switch>
-                    <PrivateRoute exact path="/" component={HomePage} />                        
-                    <Route exact path="/dashboard">
+                    <PrivateRoute exact path="/" redirectTo="/dashboard" component={HomePage} />  
+                    {/* <Route exact path="/">
+                        <HomePage/>
+                    </Route> */}
+                    <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" component={DashboardPage} />                        
+                    {/* <Route exact path="/dashboard">
                         <DashboardPage/>
-                    </Route>
-                    <Route exact path='/messages'>
+                    </Route> */}
+                    <RouteIfLoggedIn exact path="/messages" redirectTo="/" component={MessagesPage} />                        
+                    {/* <Route exact path='/messages'>
                         <MessagesPage/>
-                    </Route>
-                    <Route exact path='/tenants'>
+                    </Route> */}
+                    <RouteIfLoggedIn exact path="/tenants" redirectTo="/" component={TenantsPage} /> 
+                    {/* <Route exact path='/tenants'>
                         <TenantsPage/>
-                    </Route>
-                    <Route exact path='/voting'>
+                    </Route> */}
+                    <RouteIfLoggedIn exact path="/voting" redirectTo="/" component={VotingPage} /> 
+                    {/* <Route exact path='/voting'>
                         <VotingPage/>
-                    </Route>
-                    <Route exact path='/issues'>
+                    </Route> */}
+                    <RouteIfLoggedIn exact path="/issues" redirectTo="/" component={IssuesPage} /> 
+                    {/* <Route exact path='/issues'>
                         <IssuesPage/>
-                    </Route>
+                    </Route> */}
                     <Route exact path='/signup'>
                         <SignUpPage/>
                     </Route>

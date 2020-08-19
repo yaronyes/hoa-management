@@ -7,14 +7,24 @@ import { logoutUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 
 const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
+    const [isUserConnected, setIsUserConnected] = useState(false);  
     const [isOpen, setIsOpen] = useState(false);
     const history = useHistory();
     
-    useEffect(() => {
-      if(!userConnected) {
-        history.push('/')
+    // useEffect(() => {
+    //   if(!userConnected) {
+    //     history.push('/')
+    //   }
+    // });    
+
+    useEffect(() => {      
+      if(!auth.isAuthenticated) {
+         history.push('/')
       }
-    });    
+      
+        setIsUserConnected(auth.isAuthenticated);
+  }, [auth]);
+
 
     return (
     <div className="header-navbar">
@@ -24,7 +34,7 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={() => {setIsOpen(!isOpen)}} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
-          <MDBNavbarNav left className={!userConnected ? "hide-nav" : ""}>
+          <MDBNavbarNav left className={!isUserConnected ? "hide-nav" : ""}>
             <MDBNavItem>
               <MDBNavLink to="/dashboard">Dashboard</MDBNavLink>
             </MDBNavItem>
@@ -41,7 +51,7 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
               <MDBNavLink to="/voting">Voting</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
-          <MDBNavbarNav right className={userConnected ? "hide-nav" : ""}>
+          <MDBNavbarNav right className={isUserConnected ? "hide-nav" : ""}>
             <MDBNavItem>
               <MDBNavLink to="/login">Login</MDBNavLink>
             </MDBNavItem>
@@ -49,7 +59,7 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
               <MDBNavLink to="/signup">Sign Up</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
-          <MDBNavbarNav right className={!userConnected ? "hide-nav" : ""}>
+          <MDBNavbarNav right className={!isUserConnected ? "hide-nav" : ""}>
             <MDBNavItem>
               <MDBNavLink to="/" onClick={() => logoutUser()}>Logout</MDBNavLink>
             </MDBNavItem>
