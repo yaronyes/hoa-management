@@ -23,14 +23,14 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
 
    const addUpdate = () => {
     if(messageToUpdate) {
-        updIssue();
+        updMessage();
     } else {
-        addIssue();
+        addMessage();
     }
     toggle();
   };
 
-    const addIssue = () => {
+    const addMessage = () => {
         try{         
             const newMessage = new MessageModel( {
                 title,
@@ -44,7 +44,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
         }      
     };
 
-    const updIssue = () => {
+    const updMessage = () => {
         try{         
             const updatedMessage = {
                 title,
@@ -73,7 +73,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
       <div className="add-upd-tenant">
         <MDBContainer>      
             <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
+                <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Message" : "Create Message"}</MDBModalHeader>
                 <MDBModalBody>
                 <MDBRow>
                     <MDBCol md="9">
@@ -118,7 +118,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
                 </MDBModalBody>
                 <MDBModalFooter>
                     <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
-                    <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={messageToUpdate ? "Save changes" : "Create Issue"}/>
+                    <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={messageToUpdate ? "Save changes" : "Create Message"}/>
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>

@@ -156,7 +156,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
 
 AddUpdateIssue.propTypes = {
     errors: PropTypes.object.isRequired,
-    issue: PropTypes.array.isRequired,
+    issues: PropTypes.array.isRequired,
     createIssue: PropTypes.func.isRequired,
     updateIssue: PropTypes.func.isRequired,
   };

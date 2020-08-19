@@ -83,7 +83,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
-                        <MDBCol md='4' className="btn-col">
+                        <MDBCol md='3' className="btn-col">
                             <MDBRow className="btn-row">
                                 <MDBCol>
                                     <div className="btn-group-message">                                              

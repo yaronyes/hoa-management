@@ -24,7 +24,7 @@ const DropDownSelect = ({onChange, dropDownItems, label, icon}) => {
         setValue(event.target.value);
     };
 
-    const dropDownItemsList = dropDownItems.map((item, i) => <option value={item.value}>{item.name}</option>);
+    const dropDownItemsList = dropDownItems.map((item, i) => <option key={i} value={item.value}>{item.name}</option>);
 
     return (
         <div className="drop-down-select">
