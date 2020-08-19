@@ -18,8 +18,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import CardHeader from '../card-header/CardHeader';
 
-const TenantCard = ({ toggleCollapse, theTenant, isOpen, onUpdateTenant, removeTenantUser }) => {
-    const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${theTenant._id}/avatar?${new Date().getTime()}`;
+const TenantCard = ({ toggleCollapse, tenant, isOpen, onUpdateTenant, removeTenantUser }) => {
+    const avatar = `https://yyes-hoa-management-server.herokuapp.com/users/${tenant._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {
@@ -41,8 +41,8 @@ const TenantCard = ({ toggleCollapse, theTenant, isOpen, onUpdateTenant, removeT
                         {tenant.name}
                     </span>
                 </div> */}
-                <CardHeader id={theTenant._id} toggleCollapse={toggleCollapse} headerText={theTenant.name}/>
-                <MDBCollapse id={theTenant._id} isOpen={isOpen}>
+                <CardHeader id={tenant._id} toggleCollapse={toggleCollapse} headerText={tenant.name}/>
+                <MDBCollapse id={tenant._id} isOpen={isOpen}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
                         <MDBCol md='3' className='img-col'>
@@ -60,9 +60,9 @@ const TenantCard = ({ toggleCollapse, theTenant, isOpen, onUpdateTenant, removeT
                             </h2> */}
                             <MDBRow>
                                 <MDBCol className="text-col">
-                                    <p><span className="l-title">Name: </span>{theTenant.name}</p>
-                                    <p><span className="l-title">Email: </span>{theTenant.email}</p>
-                                    <p><span className="l-title">Apt: </span>#{theTenant.apartment}</p>    
+                                    <p><span className="l-title">Name: </span>{tenant.name}</p>
+                                    <p><span className="l-title">Email: </span>{tenant.email}</p>
+                                    <p><span className="l-title">Apt: </span>#{tenant.apartment}</p>    
                                 </MDBCol>                             
                             </MDBRow>
                             <MDBRow>
@@ -74,8 +74,8 @@ const TenantCard = ({ toggleCollapse, theTenant, isOpen, onUpdateTenant, removeT
                                         <MDBBtn rounded color="danger" className="btn-rounded">
                                             <MDBIcon icon="trash" /> Delete
                                         </MDBBtn> */}
-                                        <RoundedBtn color="info" onClick={() => onUpdateTenant(theTenant)} icon="user-edit" caption="Update"/>
-                                        <RoundedBtn color="danger" onClick={() => removeTenantUser(theTenant)} icon="trash" caption="Delete"/>
+                                        <RoundedBtn color="info" onClick={() => onUpdateTenant(tenant)} icon="user-edit" caption="Update"/>
+                                        <RoundedBtn color="danger" onClick={() => removeTenantUser(tenant)} icon="trash" caption="Delete"/>
                                     </div>    
                                 </MDBCol>
                             </MDBRow>

@@ -9,17 +9,17 @@ import FilterBox from '../../components/filter/FilterBox';
 import AddUpdateTenant  from '../../components/tenant/AddUpdateTenant';
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 
-const TenantsPage = ({ getTenantUsers, tenant }) => {
+const TenantsPage = ({ getTenantUsers, tenants }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState();
 
     useEffect(() => {
-      if(tenant.length === 0) {
+      if(tenants.length === 0) {
         getTenantUsers();
       }
-    }, [tenant]);
+    }, [tenants]);
 
     // useEffect(() => {
     //   if(selectedTenant) {
@@ -31,15 +31,15 @@ const TenantsPage = ({ getTenantUsers, tenant }) => {
       setModel(!modal);
     }
 
-    const openAddUpdateModal = (theTenant) => {
-      setSelectedTenant(theTenant);      
+    const openAddUpdateModal = (tenant) => {
+      setSelectedTenant(tenant);      
       toggle();
     }
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const filter = tenant.filter(item => item.name.toLowerCase().includes(filterText.toLowerCase().trim()));
-    const displayTenants = filter.map(item => <TenantCard key={item._id} toggleCollapse={toggleCollapse} theTenant={item} isOpen={collapseID} onUpdateTenant={openAddUpdateModal}/>);
+    const filter = tenants.filter(item => item.name.toLowerCase().includes(filterText.toLowerCase().trim()));
+    const displayTenants = filter.map(item => <TenantCard key={item._id} toggleCollapse={toggleCollapse} tenant={item} isOpen={collapseID} onUpdateTenant={openAddUpdateModal}/>);
 
     return (
         <div className="tenants-page">
@@ -67,13 +67,13 @@ const TenantsPage = ({ getTenantUsers, tenant }) => {
 
 TenantsPage.propTypes = {
   errors: PropTypes.object.isRequired,
-  tenant: PropTypes.array.isRequired,
+  tenants: PropTypes.array.isRequired,
   getTenantUsers: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  tenant: state.tenant
+  tenants: state.tenant
 });
 
 export default connect(mapStateToProps, { getTenantUsers })(TenantsPage);

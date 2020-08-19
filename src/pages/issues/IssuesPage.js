@@ -8,31 +8,31 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import IssueCard from '../../components/issues/IssueCard';
 import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
 
-const IssuesPage = ({ getIssues, issue }) => {
+const IssuesPage = ({ getIssues, issues }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState();
 
     useEffect(() => {
-      if(issue.length === 0) {
+      if(issues.length === 0) {
         getIssues();
       }      
-    }, [issue]);
+    }, [issues]);
    
     const toggle = () => {
       setModel(!modal);
     }
 
-    const openAddUpdateModal = (theIssue) => {
-      setSelectedIssue(theIssue);      
+    const openAddUpdateModal = (issue) => {
+      setSelectedIssue(issue);      
       toggle();
     }
-
+    
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const filter = issue.filter(item => item.title.toLowerCase().includes(filterText.toLowerCase().trim()));
-    const displayIssues= filter.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} theIssue={item} isOpen={collapseID} onUpdateIssue={openAddUpdateModal}/>);
+    const filter = issues.filter(item => item.title.toLowerCase().includes(filterText.toLowerCase().trim()));
+    const displayIssues= filter.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} issue={item} isOpen={collapseID} onUpdateIssue={openAddUpdateModal}/>);
   
 
     return (
@@ -61,13 +61,13 @@ const IssuesPage = ({ getIssues, issue }) => {
 
 IssuesPage.propTypes = {
     errors: PropTypes.object.isRequired,
-    issue: PropTypes.array.isRequired,
-    getTenantUsers: PropTypes.func.isRequired
+    issues: PropTypes.array.isRequired,
+    getIssues: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     errors: state.errors,
-    issue: state.issue
+    issues: state.issue
 });
 
 export default connect(mapStateToProps, { getIssues })(IssuesPage);

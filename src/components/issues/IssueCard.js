@@ -16,19 +16,21 @@ import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
 
-const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue, deleteIssue }) => {
-    const img = `https://yyes-hoa-management-server.herokuapp.com/issues/${theIssue._id}/avatar?${new Date().getTime()}`;
+const IssueCard = ({ toggleCollapse, issue, isOpen, onUpdateIssue, deleteIssue }) => {
+    const img = `https://yyes-hoa-management-server.herokuapp.com/issues/${issue._id}/avatar?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {
     //     setModel(!modal);
     // }
+    console.log(isOpen)
+    
 
     return (
         <div className="issue-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
-                <CardHeader id={theIssue._id} toggleCollapse={toggleCollapse} headerText={theIssue.title}/>
-                <MDBCollapse id={theIssue._id} isOpen={isOpen}>
+                <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title}/>
+                <MDBCollapse id={issue._id} isOpen={isOpen}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
                         <MDBCol md='3' className='img-col'>
@@ -46,17 +48,17 @@ const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue, deleteIssu
                             </h2> */}
                             <MDBRow>
                                 <MDBCol className="text-col">
-                                    <p><span className="l-title">Details: </span>{theIssue.details}</p>
-                                    <p><span className="l-title">Priority: </span>{theIssue.priority}</p>
-                                    <p><span className="l-title">Status: </span>{theIssue.status}</p>    
+                                    <p><span className="l-title">Details: </span>{issue.details}</p>
+                                    <p><span className="l-title">Priority: </span>{issue.priority}</p>
+                                    <p><span className="l-title">Status: </span>{issue.status}</p>    
                                     {/* comments */}
                                 </MDBCol>                             
                             </MDBRow>
                             <MDBRow>
                                 <MDBCol  md="6" className="offset-md-6">
                                     <div className="btn-group-tenant">                                              
-                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(theIssue)} icon="user-edit" caption="Update"/>
-                                        <RoundedBtn color="danger" onClick={() => deleteIssue(theIssue)} icon="trash" caption="Delete"/>
+                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)} icon="user-edit" caption="Update"/>
+                                        <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete"/>
                                     </div>    
                                 </MDBCol>
                             </MDBRow>
@@ -74,13 +76,13 @@ const IssueCard = ({ toggleCollapse, theIssue, isOpen, onUpdateIssue, deleteIssu
 
 IssueCard.propTypes = {
     errors: PropTypes.object.isRequired,
-    issue: PropTypes.array.isRequired,
+    issues: PropTypes.array.isRequired,
     deleteIssue: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     errors: state.errors,
-    issue: state.issue
+    issues: state.issue
 });
 
 export default connect(mapStateToProps, { deleteIssue })(IssueCard);
