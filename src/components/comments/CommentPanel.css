@@ -1,0 +1,18 @@
+.comment-panel {
+    text-align: left;
+}
+
+.comment-panel .card-body {
+    display: flex;
+    padding: 5px;
+}
+
+.comment-panel .text-col {
+    margin: 0;
+    padding: 0 0 0 15px;
+}
+
+
+.comment-panel .icon-col {
+    padding: 0;
+}

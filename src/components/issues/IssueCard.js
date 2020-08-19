@@ -7,28 +7,49 @@ import {
     MDBCardImage,
     MDBRow,
     MDBView,
-    MDBIcon
+    MDBInput
 } from 'mdbreact';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
-import { deleteIssue } from '../../actions/issueActions';
+import { deleteIssue, addCommentForIssue } from '../../actions/issueActions';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
 import config from '../../config/config.json';   
+import CommentPanel from '../comments/CommentPanel';
+import CommentModel from '../../models/CommentModel';
 
-const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }) => {
+const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue }) => {
+    const [comment, setComment] = useState("");
     const img = `${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
 
     // const toggle = () => {
     //     setModel(!modal);
     // }   
+    // const addComment = (event) => {
+    //     if(event.keyCode === 13 && (comment && comment.trim() !== "")) {
+    //         addCommentForIssue(new CommentModel({ text: comment }), issue._id);
+    //         setComment("");            
+    //     }        
+    // }
+
+    const updateIssue = () => {
+        if(!comment) {
+            onUpdateIssue(issue)
+        } else {
+            addCommentForIssue(new CommentModel({ text: comment }), issue._id);
+            setComment("");
+        }
+        
+    }
+
+    const displayComments = issue.comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
 
     return (
         <div className="issue-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
-                <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title}/>
+                <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} icon='none'/>
                 <MDBCollapse id={issue._id} isOpen={openID === issue._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
@@ -41,7 +62,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
                             />
                             </MDBView>
                         </MDBCol>
-                        <MDBCol md='4' className="data-col">
+                        <MDBCol md='3' className="data-col">
                             {/* <h2 className='font-weight-bold mb-3 black-text'>
                             Hi! I am the first one.
                             </h2> */}
@@ -62,15 +83,24 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
                                 </MDBCol>
                             </MDBRow> */}
                         </MDBCol>
-                        <MDBCol md='3' className="main-comments-col">
+                        <MDBCol md='4' className="main-comments-col">
                             <MDBRow>
                                 <MDBCol className="comments-col">
-                                    comments    
+                                    {/* <CommentPanel text="this is my comment this is my comment"/> */}
+                                    {displayComments}
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
                                 <MDBCol>
-                                    add comments
+                                    <MDBInput
+                                    type="textarea"
+                                    label="Add Comment"
+                                    rows="2"
+                                    icon="pencil-alt"
+                                    value={comment}
+                                    onChange={e => setComment(e.target.value)}
+                                    // onKeyUp={addComment}                                    
+                                    />               
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
@@ -78,7 +108,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
                             <MDBRow className="btn-row">
                                 <MDBCol>
                                     <div className="btn-group-issue">                                              
-                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)} icon="pen" caption="Update" size="sm"/>
+                                        <RoundedBtn color="info" onClick={updateIssue} icon="pen" caption="Update" size="sm"/>
                                         <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>
                                     </div>    
                                 </MDBCol>
@@ -98,7 +128,8 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
 IssueCard.propTypes = {
     errors: PropTypes.object.isRequired,
     issues: PropTypes.array.isRequired,
-    deleteIssue: PropTypes.func.isRequired
+    deleteIssue: PropTypes.func.isRequired,
+    addCommentForIssue: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -106,4 +137,4 @@ const mapStateToProps = state => ({
     issues: state.issue
 });
 
-export default connect(mapStateToProps, { deleteIssue })(IssueCard);
+export default connect(mapStateToProps, { deleteIssue, addCommentForIssue })(IssueCard);
