@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const DropDownSelect = ({onChange, label, icon}) => {
+const DropDownSelect = ({onChange, dropDownItems, label, icon}) => {
     const [value, setValue] = useState("");
     const classes = useStyles();
     
@@ -23,6 +23,8 @@ const DropDownSelect = ({onChange, label, icon}) => {
 
         setValue(event.target.value);
     };
+
+    const dropDownItemsList = dropDownItems.map((item, i) => <option value={item.value}>{item.name}</option>);
 
     return (
         <div className="drop-down-select">
@@ -40,9 +42,10 @@ const DropDownSelect = ({onChange, label, icon}) => {
                 }}
                 >
                 <option aria-label="None" value="" />
-                <option value="urgent">urgent</option>
+                {dropDownItemsList}
+                {/* <option value="urgent">urgent</option>
                 <option value="important">important</option>
-                <option value="normal">normal</option>
+                <option value="normal">normal</option> */}
                 </Select>
             </FormControl>
         </div>
