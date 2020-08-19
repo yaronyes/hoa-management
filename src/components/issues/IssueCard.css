@@ -8,11 +8,3 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
-.issue-card .card-header:hover {
-    cursor: pointer;
-}
-
-.issue-card .card-header {
-    text-align: left;
-}
