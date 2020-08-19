@@ -88,7 +88,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
                         <div className="grey-text">
                             <MDBInput
                             label="Title"
-                            icon="envelope-open-text"
+                            icon="text-height"
                             group
                             type="text"
                             validate
@@ -98,16 +98,14 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
                             onChange={e => setTitle(e.target.value)}
                             />
                             <MDBInput
+                            type="textarea"
                             label="Details"
-                            icon="envelope"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"
+                            rows="4"
+                            icon="pencil-alt"
+                            // group
                             value={details}
                             onChange={e => setDetails(e.target.value)}
-                            />
+                            />                            
                             <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority"/>  
                             <LoadImage fileCallback={fileCallback}/>                                                                                 
                             {/* <OutlinedInput type="file"/> */}

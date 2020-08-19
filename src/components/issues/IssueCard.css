@@ -3,8 +3,22 @@
     margin-top: 10px;
 }
 
-.issue-card .data-col {
+/* .issue-card .data-col {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+} */
+
+
+.issue-card .btn-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.issue-card .btn-group-issue {
+    display: flex;
+    justify-content: center; 
+    /* align-items: flex-end; */
+    /* align-content: flex-end; */
 }

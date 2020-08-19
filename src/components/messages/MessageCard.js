@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {    
     MDBCol,
     MDBCollapse,
@@ -9,30 +9,27 @@ import {
     MDBView,
     MDBIcon
 } from 'mdbreact';
-import './IssueCard.css';
+import './MessageCard.css';
 import CardHeader from '../card-header/CardHeader';
-import { deleteIssue } from '../../actions/issueActions';
+import { deleteMessage } from '../../actions/messageActions';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
 import config from '../../config/config.json';   
 
-const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }) => {
-    const img = `${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`;
-    //const [modal, setModel] = useState(false);
-
-    // const toggle = () => {
-    //     setModel(!modal);
-    // }   
+const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteMessage }) => {
+    const img = `${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`;
 
     return (
-        <div className="issue-card">
+        <div className="message-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
-                <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title}/>
-                <MDBCollapse id={issue._id} isOpen={openID === issue._id ? true :  false}>
+                <CardHeader id={message._id} toggleCollapse={toggleCollapse} headerText={message.title} 
+                icon={message.priority === "info" ? 'info-circle' : 'exclamation-circle'}
+                iconColor={message.priority === "info" ? 'blue-text' : 'red-text'}/>
+                <MDBCollapse id={message._id} isOpen={openID === message._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
-                        <MDBCol md='2' className='img-col'>
+                        <MDBCol md='3' className='img-col'>
                             <MDBView className='z-depth-1'>
                             <MDBCardImage
                                 className='img-fluid z-depth-1'
@@ -47,20 +44,12 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
                             </h2> */}
                             <MDBRow>
                                 <MDBCol className="text-col">
-                                    <p><span className="l-title">Details: </span>{issue.details}</p>
-                                    <p><span className="l-title">Priority: </span>{issue.priority}</p>
-                                    <p><span className="l-title">Status: </span>{issue.status}</p>    
+                                    <p><span className="l-title">Details: </span>{message.details}</p>
+                                    <p><span className="l-title">Priority: </span>{message.priority}</p>
+                                    <p><span className="l-title">Status: </span>{message.status}</p>                                    
                                     {/* comments */}
                                 </MDBCol>                             
-                            </MDBRow>
-                            {/* <MDBRow>
-                                <MDBCol  md="6" className="offset-md-6">
-                                    <div className="btn-group-issue">                                              
-                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)} icon="user-edit" caption="Update"/>
-                                        <RoundedBtn color="danger" onClick={() => onUpdateIssue(issue)} icon="trash" caption="Delete"/>
-                                    </div>    
-                                </MDBCol>
-                            </MDBRow> */}
+                            </MDBRow>                            
                         </MDBCol>
                         <MDBCol md='3' className="main-comments-col">
                             <MDBRow>
@@ -77,9 +66,9 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
                         <MDBCol md='3' className="btn-col">
                             <MDBRow className="btn-row">
                                 <MDBCol>
-                                    <div className="btn-group-issue">                                              
-                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)} icon="pen" caption="Update" size="sm"/>
-                                        <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>
+                                    <div className="btn-group-message">                                              
+                                        <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
+                                        <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
                                     </div>    
                                 </MDBCol>
                             </MDBRow>
@@ -88,22 +77,19 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue }
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            {/* <AddUpdateTenant modal={modal} toggle={toggle} selectedTenant={tenant}/> */}
         </div>
     );
-
 };
 
-
-IssueCard.propTypes = {
+MessageCard.propTypes = {
     errors: PropTypes.object.isRequired,
-    issues: PropTypes.array.isRequired,
-    deleteIssue: PropTypes.func.isRequired
+    messages: PropTypes.array.isRequired,
+    deleteMessage: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     errors: state.errors,
-    issues: state.issue
+    messages: state.message
 });
 
-export default connect(mapStateToProps, { deleteIssue })(IssueCard);
+export default connect(mapStateToProps, { deleteMessage })(MessageCard);

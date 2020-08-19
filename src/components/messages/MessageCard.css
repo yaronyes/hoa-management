@@ -1,0 +1,12 @@
+.message-card .btn-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.message-card .btn-group-message {
+    display: flex;
+    justify-content: center; 
+    /* align-items: flex-end; */
+    /* align-content: flex-end; */
+}
