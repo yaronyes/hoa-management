@@ -13,7 +13,8 @@ import './MessageCard.css';
 import CardHeader from '../card-header/CardHeader';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';  
+import { connect } from 'react-redux';
+import PieChart from '../charts/PieChart';
 //import moment from 'moment'
 
 const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {    
@@ -47,15 +48,15 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
-                        <MDBCol md="4">
-                            Results
-                        </MDBCol>
                         {!activeVoting
                         ? <MDBCol md="4">
-                            Voting Percentage
+                            Results                            
                          </MDBCol> 
-                        : null
-                        }
+                        : null}
+                        <MDBCol md="4">
+                            Voting Percentage
+                            {/* <PieChart data={[30, 70]}/> */}
+                        </MDBCol>                        
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>
