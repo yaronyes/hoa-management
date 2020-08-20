@@ -45,7 +45,7 @@ const IssuesPage = ({ getIssues, issues }) => {
                   </MDBCol>                  
                 </MDBRow>   
                 <MDBRow>
-                  <MDBCol className="add-issue offset-md-9" md="3">
+                  <MDBCol className="add-issue ml-auto" md="6" lg="4">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New Issue"/>
                   </MDBCol>                  
                 </MDBRow>     

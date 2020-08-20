@@ -77,7 +77,7 @@ const MessagesPage = ({ getMessages, messages }) => {
               </MDBCol>
             </MDBRow>   
             <MDBRow>
-              <MDBCol className="add-message">
+              <MDBCol className="add-message ml-auto" md="6" lg="4">
                 <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New message"/>
               </MDBCol>                  
             </MDBRow>     

@@ -50,7 +50,7 @@ const TenantsPage = ({ getTenantUsers, tenants }) => {
                   </MDBCol>                  
                 </MDBRow>   
                 <MDBRow>
-                  <MDBCol className="add-tenant offset-md-9" md="3">
+                  <MDBCol className="add-tenant ml-auto" md="6" lg="4">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New Tenant"/>
                   </MDBCol>                  
                 </MDBRow>     
