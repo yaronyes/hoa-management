@@ -51,7 +51,7 @@ export const updateVoting = (updates, id) => async dispatch =>  {
     try{
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/voting/${id}`, updates, getOptions());
-            dispatch(editVoting(new VotingModel(response.data)))                            
+            dispatch(editVoting(new VotingModel(response.data)));                            
         }       
     } catch (e) {
         console.log(e);

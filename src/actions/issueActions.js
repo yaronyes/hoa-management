@@ -92,7 +92,7 @@ export const deleteIssue = ({ _id }) => async dispatch => {
 export const addCommentForIssue = (comment, id) => async dispatch =>  {
     try{
         const response = await axios.post(`/comment/issue/${id}`, comment, getOptions());
-        dispatch(editIssue(new IssueModel(response.data)))                         
+        dispatch(editIssue(new IssueModel(response.data)));                         
     } catch (e) {
         console.log(e);
         dispatch({

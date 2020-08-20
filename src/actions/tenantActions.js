@@ -70,7 +70,7 @@ export const updateTenantUser = (updates, id) => async dispatch =>  {
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/users/tenant/${id}`, updates, getOptions());           
             console.log(response)
-            dispatch(editTenant(new UserModel(response.data)))
+            dispatch(editTenant(new UserModel(response.data)));
         }       
     } catch (e) {
         console.log(e);
