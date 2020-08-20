@@ -7,3 +7,6 @@
     margin: 20px auto 0 auto;
 }
 
+.drop-down-select {
+    min-width: 210px;
+}
