@@ -15,7 +15,7 @@ export default function RadioButtonsGroup({ label, radioBtnInfo, defaultSelect, 
     setValue(event.target.value);
   };
 
-  const displayBtns = radioBtnInfo.map(btn => <FormControlLabel value={btn.value} control={<Radio />} label={btn.label} />)
+  const displayBtns = radioBtnInfo.map((btn, i) => <FormControlLabel key={i} value={btn.value} control={<Radio />} label={btn.label} />)
 
   return (
     <div className="radio-group-btn">
