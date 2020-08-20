@@ -11,13 +11,13 @@ import './MessagesPage.css';
 import DropDownSelect from '../../components/select/DropDownSelect';
 import RadioButtonsGroup from '../../components/radio-buttons/RadioButtonsGroup';
 
-const MessagesPage = ({ getMessages, messages }) => {
+const MessagesPage = ({ getMessages, messages, auth }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
     const [selectedMessage, setSelectedMessage] = useState();
     const [priority, setPriority] = useState("");
-    const [sortBy, setSortBy] = useState("date");
+    const [sortBy, setSortBy] = useState("createdAt");
 
     useEffect(() => {
         if(messages.length === 0) {
@@ -36,8 +36,20 @@ const MessagesPage = ({ getMessages, messages }) => {
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const filter = messages.filter(item => item.title.toLowerCase().includes(filterText.toLowerCase().trim()) && priority ? (item.priority === priority) : true);
-    const displayMessages= filter.map(item => <MessageCard key={item._id} toggleCollapse={toggleCollapse} message={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);
+    const compare = (a, b) => {
+      if (a < b) {
+        return -1;
+      }
+      if (a > b) {
+        return 1;
+      }
+      
+      return 0;
+    }
+
+    const filter = messages.filter(item => (item.title.toLowerCase().includes(filterText.toLowerCase().trim())) && (priority ? (item.priority === priority) : true));    
+    filter.sort((a, b) => compare(a[sortBy], b[sortBy]));
+    const displayMessages = filter.map(item => <MessageCard key={item._id} toggleCollapse={toggleCollapse} message={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);
 
     return (
         <div className="message-page">
@@ -63,7 +75,7 @@ const MessagesPage = ({ getMessages, messages }) => {
                   <RadioButtonsGroup 
                   label="Sort by:" radioBtnInfo={[
                     {
-                      value: "date",
+                      value: "createdAt",
                       label: "Date"
                     },
                     {
@@ -77,9 +89,14 @@ const MessagesPage = ({ getMessages, messages }) => {
               </MDBCol>
             </MDBRow>   
             <MDBRow>
-              <MDBCol className="add-message ml-auto" md="6" lg="4">
+              { auth.user.isCommitteeMember
+                ? <MDBCol className="add-message ml-auto" md="6" lg="4">
                 <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New message"/>
-              </MDBCol>                  
+                </MDBCol>
+                : <MDBCol className="add-message mr-auto" md="6" lg="4">
+                  You have unread messages
+                  </MDBCol>
+              }
             </MDBRow>     
             <MDBRow>
               <MDBContainer className='accordion md-accordion accordion-1'>
@@ -93,14 +110,16 @@ const MessagesPage = ({ getMessages, messages }) => {
 }
 
 MessagesPage.propTypes = {
-    errors: PropTypes.object.isRequired,
-    messages: PropTypes.array.isRequired,
-    getMessages: PropTypes.func.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  messages: PropTypes.array.isRequired,
+  getMessages: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-    errors: state.errors,
-    messages: state.message
+  auth: state.auth,   
+  errors: state.errors,
+  messages: state.message
 });
 
 export default connect(mapStateToProps, { getMessages })(MessagesPage);

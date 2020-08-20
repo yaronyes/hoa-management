@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {    
     MDBCol,
     MDBCollapse,
@@ -11,7 +11,7 @@ import {
 } from 'mdbreact';
 import './MessageCard.css';
 import CardHeader from '../card-header/CardHeader';
-import { deleteMessage, addCommentForMessage } from '../../actions/messageActions';
+import { deleteMessage, addCommentForMessage, setSeenBy } from '../../actions/messageActions';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
@@ -19,9 +19,17 @@ import config from '../../config/config.json';
 import CommentPanel from '../comments/CommentPanel';
 import CommentModel from '../../models/CommentModel'
 
-const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteMessage, addCommentForMessage }) => {
+const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
     const [comment, setComment] = useState("");
+    const [open, setOpen] = useState(false);
     const img = `${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`;
+
+    useEffect(() => {
+        if(open && !message.seenBy.includes(auth.user._id)) {
+            setSeenBy(message._id);
+        }
+        
+    }, [open]);
 
     const updateMessage = () => {
         if(!comment) {
@@ -32,14 +40,34 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
         }        
     }
 
+    const introIconClicked = (id) => {
+        setSeenBy(id);
+    }
+
+    const onToggleCollapse = (id) => {
+        toggleCollapse(id);
+        if(!message.seenBy.includes(auth.user._id)) {
+            setOpen(true);
+        }      
+    }
+
     const displayComments = message.comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
+
+    let introIcon = "none";    
+    if(!auth.user.isCommitteeMember) {
+        introIcon = message.seenBy.includes(auth.user._id) ? "check-square" : "square";
+    }  
 
     return (
         <div className="message-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
-                <CardHeader id={message._id} toggleCollapse={toggleCollapse} headerText={message.title} 
+                <CardHeader id={message._id} toggleCollapse={onToggleCollapse} headerText={message.title} 
                 icon={message.priority === "info" ? 'info-circle' : 'exclamation-circle'}
-                iconColor={message.priority === "info" ? 'blue-text' : 'red-text'}/>
+                iconColor={message.priority === "info" ? 'blue-text' : 'red-text'}
+                introIcon={introIcon}
+                // introIconColor={introIconColor}
+                onIntroIconClicked={introIconClicked}
+                />
                 <MDBCollapse id={message._id} isOpen={openID === message._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
@@ -87,8 +115,11 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
                             <MDBRow className="btn-row">
                                 <MDBCol>
                                     <div className="btn-group-message">                                              
-                                        <RoundedBtn color="info" onClick={updateMessage} icon="pen" caption="Update" size="sm"/>
-                                        <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
+                                        <RoundedBtn color="info" onClick={updateMessage} icon="pen" caption={auth.user.isCommitteeMember ? "Update" : "Comment"} size="sm"/>
+                                        { auth.user.isCommitteeMember
+                                         ? <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
+                                         : null
+                                        }
                                     </div>    
                                 </MDBCol>
                             </MDBRow>
@@ -102,15 +133,18 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
 };
 
 MessageCard.propTypes = {
+    auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     messages: PropTypes.array.isRequired,
     deleteMessage: PropTypes.func.isRequired,
-    addCommentForMessage: PropTypes.func.isRequired
+    addCommentForMessage: PropTypes.func.isRequired,
+    setSeenBy: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     errors: state.errors,
     messages: state.message
 });
 
-export default connect(mapStateToProps, { deleteMessage, addCommentForMessage })(MessageCard);
+export default connect(mapStateToProps, { deleteMessage, addCommentForMessage, setSeenBy })(MessageCard);

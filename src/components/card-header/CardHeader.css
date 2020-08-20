@@ -7,3 +7,7 @@
     display: flex;
     justify-content: space-between;
 }
+
+.card-header .intro-icon {
+    margin-right: 1rem;
+}
