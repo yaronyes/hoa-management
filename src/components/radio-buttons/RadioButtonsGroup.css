@@ -1,0 +1,10 @@
+.radio-group-btn {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.2rem;
+}
+
+.radio-group-btn .group-label {
+    padding-top: 0.8rem;
+    padding-right: 1.5rem;
+}
