@@ -28,7 +28,7 @@ const CardHeader = ({ id, toggleCollapse, color, headerText, icon, iconColor, in
                     {headerText}
                 </span>            
             </div>             
-            <MDBIcon icon={icon} className={iconColor}/>
+            <MDBIcon icon={icon} className={iconColor} size="2x"/>
         </div>
     );
 }
