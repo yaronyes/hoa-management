@@ -3,7 +3,7 @@ import './CardHeader.css';
 import { MDBIcon } from 'mdbreact';
 
 
-const CardHeader = ({ id, toggleCollapse, color, headerText, icon, iconColor, introIcon="none", introIconColor, onIntroIconClicked, secondText=""}) => {
+const CardHeader = ({ id, toggleCollapse, color, headerText, icon="none", iconColor, introIcon="none", introIconColor, onIntroIconClicked, secondText=""}) => {
     const colorId = color ? color : 'blue lighten-3';
 
     const clicked = event => {        
