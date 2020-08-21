@@ -1,0 +1,7 @@
+.options {
+    text-align: left;
+}
+
+.options .add-option > i:hover {
+    cursor: pointer;
+}
