@@ -27,7 +27,7 @@ const Options = ({ onOptionsChanged }) => {
             }
         });
 
-        onOptionsChanged(newOptions);
+        onOptionsChanged(newOptions.map(option => option.value));
 
         setOptions(newOptions);
     };
