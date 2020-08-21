@@ -9,7 +9,7 @@ import {
     MDBView,
     MDBInput
 } from 'mdbreact';
-import './MessageCard.css';
+import './VotingCard.css';
 import CardHeader from '../card-header/CardHeader';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
@@ -31,7 +31,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
         <div className="voting-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
                 <CardHeader id={voting._id} toggleCollapse={toggleCollapse} headerText={voting.title}
-                secondText={!activeVoting ? voting.getVotingResult()[0].option : ""} />                
+                /*secondText={!activeVoting ? voting.getVotingResult()[0].voteOptions : ""}*/ />                
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow>

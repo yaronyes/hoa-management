@@ -21,8 +21,8 @@ const DateTimePicker = ({ label, onDateTimeChanged, value }) => {
     const classes = useStyles();
     const [dateTime, setDateTime] = useState(value ? value : dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM")) 
 
-    const dateTimeChanged = (event) => {
-      onDateTimeChanged(event.target.valueAsDate);
+    const dateTimeChanged = (event) => {                    
+      onDateTimeChanged(event.target.value);
       
       setDateTime(event.target.value);
     }

@@ -55,7 +55,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
             const keys = Object.keys(updatedMessage);
             keys.forEach(key => {        
                 if (messageToUpdate[key] === updatedMessage[key] || updatedMessage[key] === undefined || updatedMessage[key] === '') {
-                delete updatedMessage[key];            
+                    delete updatedMessage[key];            
                 }
             })
                     
