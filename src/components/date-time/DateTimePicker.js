@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MDBIcon } from 'mdbreact';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -16,12 +16,16 @@ const useStyles = makeStyles((theme) => ({
       width: 220,
     },
   }));
-
-const DateTimePicker = () => {
+  
+const DateTimePicker = ({ label, onDateTimeChanged }) => {
     const classes = useStyles();
+    const [dateTime, setDateTime] = useState(dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM")) 
 
-    const now = new Date();
-    //alert(dateFormat(now, "yyyy-mm-ddTh:MM"))
+    const dateTimeChanged = (event) => {
+      onDateTimeChanged(event.target.valueAsDate);
+      
+      setDateTime(event.target.value);
+    }
 
     return (
         <div className="date-time-picker">
@@ -29,13 +33,14 @@ const DateTimePicker = () => {
             <form className={classes.container} noValidate>
                 <TextField
                     id="datetime-local"
-                    label="Next appointment"
+                    label={label ? label : "End Date"}
                     type="datetime-local"
-                    defaultValue={dateFormat(now, "yyyy-mm-dd'T'HH:MM")}
+                    value={dateTime}
                     className={classes.textField}
                     InputLabelProps={{
                     shrink: true,
                     }}
+                    onChange={dateTimeChanged}
                 />
             </form>
         </div>
