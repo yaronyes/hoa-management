@@ -1,0 +1,9 @@
+.date-time-picker {
+    text-align: left;
+    display: flex;
+    min-width: 250px;
+}
+
+.date-time-picker .date-time-picker-ico {
+    margin-top: 10px
+}
