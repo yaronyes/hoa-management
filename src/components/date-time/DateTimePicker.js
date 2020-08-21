@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-const DateTimePicker = ({ label, onDateTimeChanged }) => {
+const DateTimePicker = ({ label, onDateTimeChanged, value }) => {
     const classes = useStyles();
-    const [dateTime, setDateTime] = useState(dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM")) 
+    const [dateTime, setDateTime] = useState(value ? value : dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM")) 
 
     const dateTimeChanged = (event) => {
       onDateTimeChanged(event.target.valueAsDate);
@@ -29,8 +29,7 @@ const DateTimePicker = ({ label, onDateTimeChanged }) => {
 
     return (
         <div className="date-time-picker">
-            <MDBIcon icon="calendar-alt" className="date-time-picker-ico" size="2x"/>
-            <form className={classes.container} noValidate>
+            <MDBIcon icon="calendar-alt" className="date-time-picker-ico" size="2x"/>            
                 <TextField
                     id="datetime-local"
                     label={label ? label : "End Date"}
@@ -42,7 +41,6 @@ const DateTimePicker = ({ label, onDateTimeChanged }) => {
                     }}
                     onChange={dateTimeChanged}
                 />
-            </form>
         </div>
     );
 };

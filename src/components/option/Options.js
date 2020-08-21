@@ -5,7 +5,7 @@ import './Options.css';
 const Options = ({ onOptionsChanged, value }) => {
     const [options, setOptions] = useState(value ? value.map((val, i) =>  ({
         name: `option${i}`,
-        value: ""
+        value: val
     })) : [
         {
             name: "option1",
