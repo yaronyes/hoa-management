@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MDBInput, MDBIcon } from 'mdbreact';
 import './Options.css';
 
-const Options = () => {
+const Options = ({ onOptionsChanged }) => {
     const [options, setOptions] = useState([
         {
             name: "option1",
@@ -16,7 +16,7 @@ const Options = () => {
     const [iconColor, setIconColor] = useState("");
 
     const optionChanged = (event) => {
-        setOptions(options.map(option => {
+        const newOptions = options.map(option => {
             if(option.name === event.target.name) {
                 return {
                     ...option,
@@ -25,7 +25,11 @@ const Options = () => {
             } else {
                 return option;
             }
-        }));
+        });
+
+        onOptionsChanged(newOptions);
+
+        setOptions(newOptions);
     };
 
     const addOption = () => {
