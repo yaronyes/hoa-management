@@ -7,10 +7,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getVoting } from '../../actions/votingActions';
 import ActiveVotes from '../../components/voting/ActiveVotes';
+import FilterBox from '../../components/filter/FilterBox';
+import './VotingPage.css';
 
 const VotingPage = ({ getVoting, votes }) => {
     const [modal, setModel] = useState(false);
-    const [collapseID, setCollapseID] = useState(0);    
+    const [collapseID, setCollapseID] = useState(0);
+    const [filterText, setFilter] = useState("");   
     const [selectedVoting, setSelectedVoting] = useState();
 
     useEffect(() => {
@@ -34,7 +37,8 @@ const VotingPage = ({ getVoting, votes }) => {
     //const displayActiveVotes = activeVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
 
     const doneVotes = votes.filter(voting => !voting.isActiveVoting());
-    const displayDoneVotes = doneVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
+    const filter = doneVotes.filter(item => (item.title.toLowerCase().includes(filterText.toLowerCase().trim())) || (item.details.toLowerCase().includes(filterText.toLowerCase().trim())));
+    const displayDoneVotes = filter.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
       
     return (
         <div className="voting-page">
@@ -60,20 +64,19 @@ const VotingPage = ({ getVoting, votes }) => {
                         <ActiveVotes activeVotes={activeVotes}/>
                     </MDBCol>
                     <MDBCol lg="6">
-                        <MDBRow>
-                            <MDBCol>
-                            Filter
+                        <MDBRow className="row-voting-results">
+                            <MDBCol style={{ textAlign: "left" }}>
+                                <h1>Voting Results</h1>
                             </MDBCol>                            
                         </MDBRow>
                         <MDBRow>
                             <MDBCol>
-                                Voting Results
-                                {displayDoneVotes}
+                                <FilterBox onFilterChanged={(text) => setFilter(text)} label="Filter by text in Title and Details"/>
                             </MDBCol>                            
                         </MDBRow>                        
                         <MDBRow>
-                            <MDBCol>
-                            Voting    
+                            <MDBCol>                                
+                                {displayDoneVotes}
                             </MDBCol>                                                                                    
                         </MDBRow>
                     </MDBCol>

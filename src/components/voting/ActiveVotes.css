@@ -1,0 +1,7 @@
+.active-votes .row:not(:first-child) {
+    margin-top: 16px;
+}
+
+.active-votes .active-votes-header {
+    margin-top: 25px;
+}

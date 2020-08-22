@@ -5,6 +5,7 @@ import VotingCard from '../../components/voting/VotingCard';
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import './ActiveVotes.css';
 // import { getVoting } from '../../actions/votingActions';
 
 const ActiveVotes = ({ activeVotes }) => {
@@ -38,22 +39,21 @@ const ActiveVotes = ({ activeVotes }) => {
     return (
         <div className="active-votes">
             {/* <MDBCol> */}
+                <MDBRow className="active-votes-header">
+                    <MDBCol style={{ textAlign: "left" }}>
+                        <h1>Active Votes</h1>
+                    </MDBCol>                            
+                </MDBRow>
                 <MDBRow>
-                    <MDBCol>
-                        <RoundedBtn color="primary" onClick={() => toggle()} icon="user-plus" caption="Create New Voting"/>
+                    <MDBCol className="ml-auto" md="5">
+                        <RoundedBtn color="primary" onClick={() => toggle()} icon="user-plus" caption="New Voting"/>
                     </MDBCol>                            
                 </MDBRow>
                 <MDBRow>                            
-                    <MDBCol>
-                        Active Votes
+                    <MDBCol>                        
                         {displayActiveVotes}
                     </MDBCol>                            
-                </MDBRow>
-                <MDBRow>
-                    <MDBCol>
-                        Voting
-                    </MDBCol>                            
-                </MDBRow>
+                </MDBRow>                
             {/* </MDBCol>        */}
             <AddUpdateVoting modal={modal} toggle={toggle} />   
         </div>
