@@ -27,6 +27,10 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
             // vote
         }
     }
+
+    const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting & !auth.user.isCommitteeMember) ? "8" : (activeVoting & !auth.user.isCommitteeMember) ? "12" : "4";
+
+    //const votingForDisplayInChart = voting.get
         
     return (
         <div className="voting-card">
@@ -36,7 +40,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow>
-                        <MDBCol md={activeVoting ? "8" : "4"} className="data-col">
+                        <MDBCol md={detailsColumnSize} className="data-col">
                             <MDBRow>
                                 <MDBCol>
                                     <p className="p-details"><span className="l-title">Details: </span>{voting.details}</p>
@@ -52,8 +56,8 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
-                        {!activeVoting
-                        ? <MDBCol md="4" className="voting-result">
+                        { !activeVoting
+                          ? <MDBCol md="4" className="voting-result">
                             {/* Results                             */}
                             <ToolTipPieChart data={[
                             { title: 'One', value: 10, color: '#E38627' },
@@ -61,8 +65,9 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                             { title: 'Three', value: 20, color: '#6A2135' },
                         ]} header="Results" isPercentage={false}/>
                          </MDBCol> 
-                        : null}
-                        <MDBCol md="4" className="voting-percentage">
+                         : null}
+                        { auth.user.isCommitteeMember
+                          ? <MDBCol md="4" className="voting-percentage">
                             {/* Voting Percentage */}
                             <ToolTipPieChart data={[
                             { title: 'One', value: 10, color: '#E38627' },
@@ -70,6 +75,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                             { title: 'Three', value: 20, color: '#6A2135' },
                         ]} header="Voting Percentage" isPercentage={true}/>                            
                         </MDBCol>                        
+                        : null}
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>
