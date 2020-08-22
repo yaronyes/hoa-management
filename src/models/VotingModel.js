@@ -1,4 +1,5 @@
 import VoteModel from './VoteModel';
+import { generateRandomColor } from '../utils/utils';
 
 export default class VotingModel {
     constructor({ _id, createdBy, committee, title, details, voteOptions = [], dueDate, completed, votes = [], createdAt, updatedAt }) {
@@ -13,11 +14,15 @@ export default class VotingModel {
         this.votes = votes.map(vote => new VoteModel(vote));
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.votesForDisplay = voteOptions.map(option => ({
+             title: option,
+             value: this.votes ? this.votes.filter(vote => vote.vote === option).length : 0,
+             color: generateRandomColor() }));
     }
 
     getVotingResult = () => {
         const results = [];
-        if(!this.isActiveVoting) {
+        if(!this.isActiveVoting && this.votes) {
             this.voteOptions.forEach(option => {
                 const numberOfVotes = this.votes.filter(vote => vote.vote === option).length;
                 results.push({ 

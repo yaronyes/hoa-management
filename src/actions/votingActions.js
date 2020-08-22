@@ -61,3 +61,16 @@ export const updateVoting = (updates, id) => async dispatch =>  {
         })
     }
 };
+
+export const addVote = (vote, id) => async dispatch => {
+    try{
+        const response = await axios.post(`/vote/${id}`, vote, getOptions());
+        dispatch(editVoting(new VotingModel(response.data)));
+    } catch (e) {
+        console.log(e);
+        dispatch({
+            type: GET_ERRORS,
+            payload: e
+        })
+    }
+};

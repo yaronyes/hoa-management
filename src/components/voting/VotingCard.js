@@ -17,19 +17,20 @@ import { connect } from 'react-redux';
 import ToolTipPieChart from '../charts/ToolTipPieChart';
 import dateFormat from 'dateformat';
 import DropDownSelect from '../select/DropDownSelect';
+import { addVote } from '../../actions/votingActions';
+import VoteModel from '../../models/VoteModel';
 //import moment from 'moment'
 
-const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {    
-    const [userVote, setUserVote] = useState("");
+const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVote }) => {    
+    const [vote, setVote] = useState("");
 
-    const updateOrVote = () => {
-        if(auth.user.isCommitteeMember) {
-            // update end date
-        } else {
-            // vote
-        }
-    }
+    const voteFor = () => {
+        addVote(new VoteModel({ vote }), voting._id);
+    };
 
+    const update = () => {
+
+    };
 
     //const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting & !auth.user.isCommitteeMember) ? "8" : "4";
 
@@ -54,7 +55,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                                 <MDBCol className="date-col">
                                     <p className="p-date"><span className="l-title-date">End Date: </span>{dateFormat(voting.dueDate, "dd/mm HH:MM")}</p>
                                     { activeVoting
-                                    ? <RoundedBtn color="info" onClick={updateOrVote} icon="pen" caption="Update End Date" size="sm"/>
+                                    ? <RoundedBtn color="info" onClick={update} icon="pen" caption="Update End Date" size="sm"/>
                                     : null }                                    
                                 </MDBCol>
                             </MDBRow>
@@ -84,11 +85,11 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                     { activeVoting && !auth.user.isCommitteeMember
                     ?<MDBRow>
                         <MDBCol className="vote-col">
-                            <DropDownSelect onChange={(userVote) => setUserVote(userVote)} label="Your vote:" icon="person-booth" dropDownItems={voting.voteOptions.map(option => ({ 
+                            <DropDownSelect onChange={(userVote) => setVote(userVote)} label="Your vote:" icon="person-booth" dropDownItems={voting.voteOptions.map(option => ({ 
                                 name: option,
                                 value: option
                             }))} />
-                            <RoundedBtn color="info" onClick={updateOrVote} icon="vote-yea" caption="Vote" size="sm"/>
+                            <RoundedBtn color="info" onClick={voteFor} icon="vote-yea" caption="Vote" size="sm"/>
                         </MDBCol>                        
                     </MDBRow>
                     : null} 
@@ -103,7 +104,7 @@ VotingCard.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
-    //deleteMessage: PropTypes.func.isRequired
+    addVote: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -112,4 +113,4 @@ const mapStateToProps = state => ({
     votes: state.voting
 });
 
-export default connect(mapStateToProps, { })(VotingCard);
+export default connect(mapStateToProps, { addVote })(VotingCard);
