@@ -30,3 +30,9 @@
 .voting-card .data-col {
     padding-right: 0;
 }
+
+.voting-card .vote-col {
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: flex-end;   
+}

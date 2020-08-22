@@ -28,7 +28,7 @@ const DropDownSelect = ({onChange, dropDownItems, label, icon}) => {
 
     return (
         <div className="drop-down-select">
-            <MDBIcon icon={icon} className="drop-down-select-ico"/>
+            <MDBIcon icon={icon} className="drop-down-select-ico" size="2x"/>
             <FormControl className={classes.formControl}>                                
                 
                 <InputLabel htmlFor="dd-select">{label}</InputLabel>
