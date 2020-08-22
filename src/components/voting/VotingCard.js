@@ -39,18 +39,21 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                         <MDBCol md={activeVoting ? "8" : "4"} className="data-col">
                             <MDBRow>
                                 <MDBCol>
-                                    <p><span className="l-title">Details: </span>{voting.details}</p>
+                                    <p className="p-details"><span className="l-title">Details: </span>{voting.details}</p>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
                                 <MDBCol className="date-col">
                                     <p className="p-date"><span className="l-title-date">End Date: </span>{dateFormat(voting.dueDate, "dd/mm HH:MM")}</p>
-                                    <RoundedBtn color="info" onClick={updateOrVote} icon="pen" caption={auth.user.isCommitteeMember ? "Update End Date" : "Vote"} size="sm"/>
+                                    { activeVoting
+                                    ? <RoundedBtn color="info" onClick={updateOrVote} icon="pen" caption={auth.user.isCommitteeMember ? "Update End Date" : "Vote"} size="sm"/>
+                                    : null
+                                    }
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
                         {!activeVoting
-                        ? <MDBCol md="4">
+                        ? <MDBCol md="4" className="voting-result">
                             {/* Results                             */}
                             <ToolTipPieChart data={[
                             { title: 'One', value: 10, color: '#E38627' },
@@ -59,7 +62,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                         ]} header="Results" isPercentage={false}/>
                          </MDBCol> 
                         : null}
-                        <MDBCol md="4">                                                                                
+                        <MDBCol md="4" className="voting-percentage">
                             {/* Voting Percentage */}
                             <ToolTipPieChart data={[
                             { title: 'One', value: 10, color: '#E38627' },

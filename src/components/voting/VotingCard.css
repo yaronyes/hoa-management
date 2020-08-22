@@ -13,3 +13,20 @@
 .voting-card .p-date {
     margin-bottom: 0;
 }
+
+.voting-card p {
+    text-align: left;
+}
+
+.voting-card span {
+    font-weight: bold;
+}
+
+.voting-card .voting-result, .voting-card .voting-percentage {
+    padding: 0 10px;
+    margin-top: auto;    
+}
+
+.voting-card .data-col {
+    padding-right: 0;
+}
