@@ -14,7 +14,8 @@ import CardHeader from '../card-header/CardHeader';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import PieChart from '../charts/PieChart';
+import ToolTipPieChart from '../charts/ToolTipPieChart';
+import dateFormat from 'dateformat';
 //import moment from 'moment'
 
 const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {    
@@ -26,7 +27,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
             // vote
         }
     }
-    
+        
     return (
         <div className="voting-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
@@ -35,32 +36,41 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth }) => {
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow>
-                        <MDBCol md={activeVoting ? "8" : "4"}>
+                        <MDBCol md={activeVoting ? "8" : "4"} className="data-col">
                             <MDBRow>
                                 <MDBCol>
                                     <p><span className="l-title">Details: </span>{voting.details}</p>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
-                                <MDBCol>
-                                    <p><span className="l-title">End Date: </span>{voting.dueDate}</p>
+                                <MDBCol className="date-col">
+                                    <p className="p-date"><span className="l-title-date">End Date: </span>{dateFormat(voting.dueDate, "dd/mm HH:MM")}</p>
                                     <RoundedBtn color="info" onClick={updateOrVote} icon="pen" caption={auth.user.isCommitteeMember ? "Update End Date" : "Vote"} size="sm"/>
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
                         {!activeVoting
                         ? <MDBCol md="4">
-                            Results                            
+                            {/* Results                             */}
+                            <ToolTipPieChart data={[
+                            { title: 'One', value: 10, color: '#E38627' },
+                            { title: 'Two', value: 15, color: '#C13C37' },
+                            { title: 'Three', value: 20, color: '#6A2135' },
+                        ]} header="Results" isPercentage={false}/>
                          </MDBCol> 
                         : null}
-                        <MDBCol md="4">
-                            Voting Percentage
-                            {/* <PieChart data={[30, 70]}/> */}
+                        <MDBCol md="4">                                                                                
+                            {/* Voting Percentage */}
+                            <ToolTipPieChart data={[
+                            { title: 'One', value: 10, color: '#E38627' },
+                            { title: 'Two', value: 15, color: '#C13C37' },
+                            { title: 'Three', value: 20, color: '#6A2135' },
+                        ]} header="Voting Percentage" isPercentage={true}/>                            
                         </MDBCol>                        
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>
-            </MDBCard>   
+            </MDBCard>               
         </div>
     );
 };

@@ -1,0 +1,15 @@
+.voting-card .data-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.voting-card .date-col {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;   
+}
+
+.voting-card .p-date {
+    margin-bottom: 0;
+}

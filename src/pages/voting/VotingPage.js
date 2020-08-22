@@ -28,14 +28,18 @@ const VotingPage = ({ getVoting, votes }) => {
       }
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
+    
+    const activeVotes = votes.filter(voting => voting.isActiveVoting());
+    const displayActiveVotes = activeVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
 
-    const displayVotes = votes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);
+    const doneVotes = votes.filter(voting => !voting.isActiveVoting());
+    const displayDoneVotes = doneVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
       
     return (
         <div className="voting-page">
             <MDBContainer>
                 <MDBRow>
-                    <MDBCol>
+                    <MDBCol lg="6">
                         <MDBRow>
                             <MDBCol>
                                 <RoundedBtn color="primary" onClick={() => toggle()} icon="user-plus" caption="Create New Voting"/>
@@ -44,7 +48,7 @@ const VotingPage = ({ getVoting, votes }) => {
                         <MDBRow>                            
                             <MDBCol>
                                 Active Votes
-                                {displayVotes}
+                                {displayActiveVotes}
                             </MDBCol>                            
                         </MDBRow>
                         <MDBRow>
@@ -53,7 +57,7 @@ const VotingPage = ({ getVoting, votes }) => {
                             </MDBCol>                            
                         </MDBRow>
                     </MDBCol>
-                    <MDBCol>
+                    <MDBCol lg="6">
                         <MDBRow>
                             <MDBCol>
                             Filter
@@ -62,7 +66,7 @@ const VotingPage = ({ getVoting, votes }) => {
                         <MDBRow>
                             <MDBCol>
                                 Voting Results
-                                {displayVotes}
+                                {displayDoneVotes}
                             </MDBCol>                            
                         </MDBRow>                        
                         <MDBRow>

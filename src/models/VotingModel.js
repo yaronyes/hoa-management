@@ -8,7 +8,7 @@ export default class VotingModel {
         this.title = title;
         this.details = details;
         this.voteOptions = voteOptions;
-        this.dueDate = dueDate;
+        this.dueDate =  new Date(dueDate);
         this.completed = completed;
         this.votes = votes.map(vote => new VoteModel(vote));
         this.createdAt = createdAt;
@@ -32,8 +32,8 @@ export default class VotingModel {
         return results;
     }
 
-    isActiveVoting = () => {
-        const now = new Date();
+    isActiveVoting = () => {        
+        const now = new Date();    
         return now < this.dueDate;
     }
 }
