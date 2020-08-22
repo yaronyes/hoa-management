@@ -46,7 +46,7 @@ const ActiveVotes = ({ activeVotes }) => {
                 </MDBRow>
                 <MDBRow>
                     <MDBCol className="ml-auto" md="5">
-                        <RoundedBtn color="primary" onClick={() => toggle()} icon="user-plus" caption="New Voting"/>
+                        <RoundedBtn color="primary" onClick={() => toggle()} icon="person-booth" caption="New Voting"/>
                     </MDBCol>                            
                 </MDBRow>
                 <MDBRow>                            
