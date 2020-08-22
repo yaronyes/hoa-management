@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import Test from '../../components/Test';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 
 const CMDashboard = () => { 
   const [collapseID, setCollapseID] = useState(0);
 
   const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
-
 
   return (
       <div>
@@ -25,7 +23,6 @@ const CMDashboard = () => {
                 </MDBCol>                  
               </MDBRow>     
           </MDBContainer>
-          <Test/>          
       </div>
   );
 }

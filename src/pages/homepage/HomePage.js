@@ -1,6 +1,5 @@
 import React from 'react';
 import { MDBView, MDBMask } from 'mdbreact';
-import Test from '../../components/Test';
 
 const HomePage = () => {
 
@@ -22,7 +21,6 @@ const HomePage = () => {
                 <p>Full page intro with background image will be always displayed in full screen mode, regardless of device </p>
                 </MDBMask>
           </MDBView>
-          <Test/>
         </div>
     );    
 }
