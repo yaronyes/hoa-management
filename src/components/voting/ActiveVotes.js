@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import './ActiveVotes.css';
 // import { getVoting } from '../../actions/votingActions';
 
-const ActiveVotes = ({ activeVotes }) => {
+const ActiveVotes = ({ activeVotes, auth }) => {
     const [modal, setModel] = useState(false);
     const [collapseID, setCollapseID] = useState(0);    
     const [selectedVoting, setSelectedVoting] = useState();
@@ -44,12 +44,12 @@ const ActiveVotes = ({ activeVotes }) => {
                         <h1>Active Votes</h1>
                     </MDBCol>                            
                 </MDBRow>
-                <MDBRow>
-                    <MDBCol className="ml-auto" md="5">
-                        <RoundedBtn color="primary" onClick={() => toggle()} icon="person-booth" caption="New Voting"/>
+                <MDBRow className="new-voting-row">
+                    <MDBCol className={!auth.user.isCommitteeMember ? "new-voting-btn-hide" : "ml-auto"} md="5">
+                        <RoundedBtn color="primary" onClick={() => toggle()} icon="person-booth" caption="New Voting" />
                     </MDBCol>                            
                 </MDBRow>
-                <MDBRow>                            
+                <MDBRow className="voting-row">                            
                     <MDBCol>                        
                         {displayActiveVotes}
                     </MDBCol>                            

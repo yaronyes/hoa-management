@@ -21,7 +21,7 @@ import { addVote } from '../../actions/votingActions';
 import VoteModel from '../../models/VoteModel';
 //import moment from 'moment'
 
-const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVote }) => {    
+const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVote, tenantMode=false }) => {    
     const [vote, setVote] = useState("");
 
     const voteFor = () => {
@@ -32,6 +32,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVot
 
     };
 
+    const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember)  ? "8" : (activeVoting & !tenantMode) ? "12" : "4";
     //const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting & !auth.user.isCommitteeMember) ? "8" : "4";
 
     //const votingForDisplayInChart = voting.votesForDisplay
@@ -42,22 +43,22 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVot
                 <CardHeader id={voting._id} toggleCollapse={toggleCollapse} headerText={voting.title}
                 /*secondText={!activeVoting ? voting.getVotingResult()[0].voteOptions : ""}*/ />                
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
-                <MDBCardBody>
-                    <MDBRow>
-                        {  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting)
-                         ? <MDBCol md={activeVoting ? "8" : "4"} className="data-col">
+                <MDBCardBody className="voting-card-body">
+                    <MDBRow className="main-row">
+                        {  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting) || (!tenantMode)
+                         ? <MDBCol md={detailsColumnSize} className="data-col">
                             <MDBRow>
                                 <MDBCol>
                                     <p className="p-details"><span className="l-title">Details: </span>{voting.details}</p>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
-                                <MDBCol className="date-col">
-                                    <p className="p-date"><span className="l-title-date">End Date: </span>{dateFormat(voting.dueDate, "dd/mm HH:MM")}</p>
-                                    { activeVoting
-                                    ? <RoundedBtn color="info" onClick={update} icon="pen" caption="Update End Date" size="sm"/>
-                                    : null }                                    
+                            { activeVoting && auth.user.isCommitteeMember
+                               ? <MDBCol className="date-col">
+                                    <p className="p-date"><span className="l-title-date">End Date: </span>{dateFormat(voting.dueDate, "dd/mm HH:MM")}</p>                                    
+                                     <RoundedBtn color="info" onClick={update} icon="pen" caption="Update End Date" size="sm"/>                            
                                 </MDBCol>
+                               : null }                                        
                             </MDBRow>
                         </MDBCol>
                         : null }

@@ -24,15 +24,27 @@
 
 .voting-card .voting-result, .voting-card .voting-percentage {
     padding: 0 10px;
-    margin-top: auto;    
+    /* margin-top: auto;     */
+    margin-bottom: 10px;
 }
 
-.voting-card .data-col {
+/* .voting-card .data-col {
     padding-right: 0;
-}
+} */
 
 .voting-card .vote-col {
     display: flex;
     /* justify-content: space-around; */
     align-items: flex-end;   
+}
+
+.voting-card .voting-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.voting-card .main-row {
+    align-content: flex-start;
+    /* align-items: flex-start; */
 }
