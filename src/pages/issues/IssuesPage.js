@@ -13,7 +13,7 @@ const IssuesPage = ({ getIssues, issues }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
-    const [selectedIssue, setSelectedIssue] = useState();
+    const [selectedIssue, setSelectedIssue] = useState(null);
 
     useEffect(() => {
       if(issues.length === 0) {
@@ -46,7 +46,7 @@ const IssuesPage = ({ getIssues, issues }) => {
                 </MDBRow>   
                 <MDBRow>
                   <MDBCol className="add-issue ml-auto" md="6" lg="4">
-                    <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New Issue"/>
+                    <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New Issue"/>
                   </MDBCol>                  
                 </MDBRow>     
                 <MDBRow>

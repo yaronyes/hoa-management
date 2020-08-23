@@ -15,7 +15,7 @@ const MessagesPage = ({ getMessages, messages, auth }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
-    const [selectedMessage, setSelectedMessage] = useState();
+    const [selectedMessage, setSelectedMessage] = useState(null);
     const [priority, setPriority] = useState("");
     const [sortBy, setSortBy] = useState("createdAt");
 
@@ -91,7 +91,7 @@ const MessagesPage = ({ getMessages, messages, auth }) => {
             <MDBRow>
               { auth.user.isCommitteeMember
                 ? <MDBCol className="add-message ml-auto" md="6" lg="4">
-                <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New message"/>
+                <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New message"/>
                 </MDBCol>
                 : <MDBCol className="add-message mr-auto" md="6" lg="4">
                   You have unread messages
