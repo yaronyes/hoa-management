@@ -23,8 +23,8 @@ const ActiveVotes = ({ activeVotes, auth }) => {
         setModel(!modal);
     }
 
-    const openAddUpdateModal = message => {
-        setSelectedVoting(message);      
+    const openAddUpdateModal = voting => {
+        setSelectedVoting(voting);      
         toggle();
       }
 
@@ -46,7 +46,7 @@ const ActiveVotes = ({ activeVotes, auth }) => {
                 </MDBRow>
                 <MDBRow className="new-voting-row">
                     <MDBCol className={!auth.user.isCommitteeMember ? "new-voting-btn-hide" : "ml-auto"} md="5">
-                        <RoundedBtn color="primary" onClick={() => toggle()} icon="person-booth" caption="New Voting" />
+                        <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="person-booth" caption="New Voting" />
                     </MDBCol>                            
                 </MDBRow>
                 <MDBRow className="voting-row">                            
