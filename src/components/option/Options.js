@@ -3,7 +3,7 @@ import { MDBInput, MDBIcon } from 'mdbreact';
 import './Options.css';
 
 const Options = ({ onOptionsChanged, value }) => {
-    const [options, setOptions] = useState(value ? value.map((val, i) =>  ({
+    const [options, setOptions] = useState(value && value.length !==0  ? value.map((val, i) =>  ({
         name: `option${i}`,
         value: val
     })) : [
