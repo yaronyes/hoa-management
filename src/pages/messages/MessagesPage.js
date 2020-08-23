@@ -49,7 +49,7 @@ const MessagesPage = ({ getMessages, messages, auth }) => {
 
     const filter = messages.filter(item => (item.title.toLowerCase().includes(filterText.toLowerCase().trim())) && (priority ? (item.priority === priority) : true));    
     filter.sort((a, b) => compare(a[sortBy], b[sortBy]));
-    const displayMessages = filter.map(item => <MessageCard key={item._id} toggleCollapse={toggleCollapse} message={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);
+    const displayMessages = filter.map(item => <MessageCard key={item._id} toggleCollapse={toggleCollapse} message={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
 
     return (
         <div className="message-page">
@@ -94,7 +94,7 @@ const MessagesPage = ({ getMessages, messages, auth }) => {
                 <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New message"/>
                 </MDBCol>
                 : <MDBCol className="add-message mr-auto" md="6" lg="4">
-                  You have unread messages
+                  You have {messages.filter(message => !message.seenBy.includes(auth.user._id)).length} unread messages
                   </MDBCol>
               }
             </MDBRow>     
