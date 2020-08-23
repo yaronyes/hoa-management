@@ -19,7 +19,6 @@ import dateFormat from 'dateformat';
 import DropDownSelect from '../select/DropDownSelect';
 import { addVote } from '../../actions/votingActions';
 import VoteModel from '../../models/VoteModel';
-//import moment from 'moment'
 
 const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addVote, tenantMode=false, onUpdateVoting }) => {    
     const [vote, setVote] = useState("");
@@ -27,10 +26,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addV
     const voteFor = () => {
         addVote(new VoteModel({ vote }), voting._id);
     };
-
-    const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember)  ? "8" : (isActiveVoting & !tenantMode) ? "12" : "4";
-    //const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember) || (!isActiveVoting & !auth.user.isCommitteeMember) ? "8" : "4";
-
+    
     const votingPercentageForDisplay = [...voting.votesForDisplay, { 
         title: "None Voted",
         value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - voting.votes.length : 1,
@@ -42,7 +38,12 @@ const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addV
             title: "None Voted",
             value: 1,
             color: 'red'});                    
-    }    
+    }
+    
+    const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember)  ? "8" : (isActiveVoting & !tenantMode) ? "12" : "4";
+    const showDataCol = (isActiveVoting & auth.user.isCommitteeMember) || (!isActiveVoting) || (!tenantMode);
+    const showDateCol = isActiveVoting && auth.user.isCommitteeMember;
+    const showVoteCol = isActiveVoting && !auth.user.isCommitteeMember;
         
     return (
         <div className="voting-card">
@@ -52,7 +53,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addV
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
                 <MDBCardBody className="voting-card-body">
                     <MDBRow className="main-row">
-                        {  (isActiveVoting & auth.user.isCommitteeMember) || (!isActiveVoting) || (!tenantMode)
+                        { showDataCol
                          ? <MDBCol md={detailsColumnSize} className="data-col">
                             <MDBRow>
                                 <MDBCol>
@@ -60,7 +61,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addV
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
-                            { isActiveVoting && auth.user.isCommitteeMember
+                            { showDateCol
                                ? <MDBCol className="date-col">
                                     <p className="p-date"><span className="l-title-date">End Date: </span>{dateFormat(voting.dueDate, "dd/mm HH:MM")}</p>                                    
                                      <RoundedBtn color="info" onClick={() => onUpdateVoting(voting)} icon="pen" caption="Update End Date" size="sm"/>                            
@@ -72,25 +73,17 @@ const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addV
                         { !isActiveVoting
                           ? <MDBCol md="4" className="voting-result">
                             {/* Results     */}
-                            <ToolTipPieChart data={/*[
-                            { title: 'One', value: 10, color: '#E38627' },
-                            { title: 'Two', value: 15, color: '#C13C37' },
-                            { title: 'Three', value: 20, color: '#6A2135' },
-                        ]*/votingResultForDisplay} header="Results" isPercentage={false}/>
+                            <ToolTipPieChart data={votingResultForDisplay} header="Results" isPercentage={false}/>
                          </MDBCol> 
                          : null}
                         { auth.user.isCommitteeMember || !isActiveVoting
                           ? <MDBCol md="4" className="voting-percentage">
                             {/* Voting Percentage */}
-                            <ToolTipPieChart data={/*[
-                            { title: 'One', value: 10, color: '#E38627' },
-                            { title: 'Two', value: 15, color: '#C13C37' },
-                            { title: 'Three', value: 20, color: '#6A2135' },
-                        ]*/votingPercentageForDisplay} header="Voting Percentage" isPercentage={true}/>                            
+                            <ToolTipPieChart data={votingPercentageForDisplay} header="Voting Percentage" isPercentage={true}/>                            
                         </MDBCol>                        
                         : null } 
                     </MDBRow>
-                    { isActiveVoting && !auth.user.isCommitteeMember
+                    { showVoteCol
                     ?<MDBRow>
                         <MDBCol className="vote-col">
                             <DropDownSelect onChange={(userVote) => setVote(userVote)} label="Your vote:" icon="person-booth" dropDownItems={voting.voteOptions.map(option => ({ 
