@@ -21,42 +21,38 @@ import { addVote } from '../../actions/votingActions';
 import VoteModel from '../../models/VoteModel';
 //import moment from 'moment'
 
-const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVote, tenantMode=false }) => {    
+const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addVote, tenantMode=false, onUpdateVoting }) => {    
     const [vote, setVote] = useState("");
 
     const voteFor = () => {
         addVote(new VoteModel({ vote }), voting._id);
     };
 
-    const update = () => {
-
-    };
-
-    const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember)  ? "8" : (activeVoting & !tenantMode) ? "12" : "4";
-    //const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting & !auth.user.isCommitteeMember) ? "8" : "4";
+    const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember)  ? "8" : (isActiveVoting & !tenantMode) ? "12" : "4";
+    //const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember) || (!isActiveVoting & !auth.user.isCommitteeMember) ? "8" : "4";
 
     const votingPercentageForDisplay = [...voting.votesForDisplay, { 
         title: "None Voted",
-        value: auth.user.tenants.length - voting.votes.length,
+        value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - voting.votes.length : 1,
         color: 'red'}].filter(item => item.value !== 0);
     
     let votingResultForDisplay = [...voting.votesForDisplay].filter(item => item.value !== 0);    
-    if(votingResultForDisplay.length === 0) {        
+    if(votingResultForDisplay.length === 0) {             
         votingResultForDisplay.push({ 
             title: "None Voted",
             value: 1,
-            color: 'red'});
+            color: 'red'});                    
     }    
         
     return (
         <div className="voting-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
                 <CardHeader id={voting._id} toggleCollapse={toggleCollapse} headerText={voting.title}
-                secondText={!activeVoting && voting.votes.length !== 0 ? voting.getVotingResult()[0].voteOptions : ""} />                
+                secondText={!isActiveVoting && voting.votes.length !== 0 ? voting.getVotingResult()[0].voteOptions : ""} />                
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
                 <MDBCardBody className="voting-card-body">
                     <MDBRow className="main-row">
-                        {  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting) || (!tenantMode)
+                        {  (isActiveVoting & auth.user.isCommitteeMember) || (!isActiveVoting) || (!tenantMode)
                          ? <MDBCol md={detailsColumnSize} className="data-col">
                             <MDBRow>
                                 <MDBCol>
@@ -64,16 +60,16 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVot
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
-                            { activeVoting && auth.user.isCommitteeMember
+                            { isActiveVoting && auth.user.isCommitteeMember
                                ? <MDBCol className="date-col">
                                     <p className="p-date"><span className="l-title-date">End Date: </span>{dateFormat(voting.dueDate, "dd/mm HH:MM")}</p>                                    
-                                     <RoundedBtn color="info" onClick={update} icon="pen" caption="Update End Date" size="sm"/>                            
+                                     <RoundedBtn color="info" onClick={() => onUpdateVoting(voting)} icon="pen" caption="Update End Date" size="sm"/>                            
                                 </MDBCol>
                                : null }                                        
                             </MDBRow>
                         </MDBCol>
                         : null }
-                        { !activeVoting
+                        { !isActiveVoting
                           ? <MDBCol md="4" className="voting-result">
                             {/* Results     */}
                             <ToolTipPieChart data={/*[
@@ -83,7 +79,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVot
                         ]*/votingResultForDisplay} header="Results" isPercentage={false}/>
                          </MDBCol> 
                          : null}
-                        { auth.user.isCommitteeMember || !activeVoting
+                        { auth.user.isCommitteeMember || !isActiveVoting
                           ? <MDBCol md="4" className="voting-percentage">
                             {/* Voting Percentage */}
                             <ToolTipPieChart data={/*[
@@ -94,7 +90,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVot
                         </MDBCol>                        
                         : null } 
                     </MDBRow>
-                    { activeVoting && !auth.user.isCommitteeMember
+                    { isActiveVoting && !auth.user.isCommitteeMember
                     ?<MDBRow>
                         <MDBCol className="vote-col">
                             <DropDownSelect onChange={(userVote) => setVote(userVote)} label="Your vote:" icon="person-booth" dropDownItems={voting.voteOptions.map(option => ({ 

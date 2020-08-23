@@ -19,7 +19,7 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
     useEffect(() => {
         setTitle(votingToUpdate ? votingToUpdate.title : "");
         setDetails(votingToUpdate ? votingToUpdate.details : "");
-        setVoteOptions(votingToUpdate ? votingToUpdate.options : []);
+        setVoteOptions(votingToUpdate ? votingToUpdate.voteOptions : []);
         setDueDate(votingToUpdate ? votingToUpdate.dueDate : dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM"));
     }, [votingToUpdate]);
 
@@ -70,6 +70,11 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
             }      
         };
 
+        const endVoting = () => {
+            setDueDate(dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM"));
+            updVoting();
+        }
+
     return (
         <div className="add-voting">
            <MDBContainer>      
@@ -80,27 +85,36 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
                         <MDBCol md="11">
                             <form>
                             <div className="grey-text">
-                                <MDBInput
-                                label="Title"
-                                icon="text-height"
-                                group
-                                type="text"
-                                validate
-                                error="wrong"
-                                success="right"                  
-                                value={title}
-                                onChange={e => setTitle(e.target.value)}
-                                />
-                                <MDBInput
-                                type="textarea"
-                                label="Details"
-                                rows="4"
-                                icon="pencil-alt"
-                                value={details}
-                                onChange={e => setDetails(e.target.value)}
-                                />                            
-                                <Options onOptionsChanged={(options) => {setVoteOptions(options)}}/>    
-                                <DateTimePicker onDateTimeChanged={(dateTime) => setDueDate(dateTime)} />                                                                                                     
+                                { !votingToUpdate
+                                ? <div>
+                                    <MDBInput
+                                    label="Title"
+                                    icon="text-height"
+                                    group
+                                    type="text"
+                                    validate
+                                    error="wrong"
+                                    success="right"                  
+                                    value={title}
+                                    onChange={e => setTitle(e.target.value)}
+                                    />
+                                    <MDBInput
+                                    type="textarea"
+                                    label="Details"
+                                    rows="4"
+                                    icon="pencil-alt"
+                                    value={details}
+                                    onChange={e => setDetails(e.target.value)}
+                                    />                            
+                                    <Options onOptionsChanged={(options) => {setVoteOptions(options)}} value={voteOptions} />    
+                                </div> 
+                                : null}
+                                <div className="date-time">
+                                    <DateTimePicker onDateTimeChanged={(dateTime) => setDueDate(dateTime)} />
+                                    { votingToUpdate 
+                                    ? <RoundedBtn color="danger" onClick={endVoting} icon="calendar-check" caption="End Voting" size="sm"/>
+                                    : null}
+                                </div>
                             </div>                
                             </form>
                         </MDBCol>
@@ -108,7 +122,7 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
                     </MDBModalBody>
                     <MDBModalFooter>
                         <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
-                        <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={votingToUpdate ? "Save changes" : "Create Voting"}/>
+                        {<RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={votingToUpdate ? "Save changes" : "Create Voting"}/>}
                     </MDBModalFooter>
                 </MDBModal>
             </MDBContainer> 

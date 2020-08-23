@@ -11,7 +11,7 @@ import './ActiveVotes.css';
 const ActiveVotes = ({ activeVotes, auth }) => {
     const [modal, setModel] = useState(false);
     const [collapseID, setCollapseID] = useState(0);    
-    const [selectedVoting, setSelectedVoting] = useState();
+    const [selectedVoting, setSelectedVoting] = useState(null);
 
     // useEffect(() => {
     //     if(votes.length === 0) {
@@ -31,7 +31,7 @@ const ActiveVotes = ({ activeVotes, auth }) => {
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
     
     // const activeVotes = votes.filter(voting => voting.isActiveVoting());
-    const displayActiveVotes = activeVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
+    const displayActiveVotes = activeVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateVoting={openAddUpdateModal} isActiveVoting={item.isActiveVoting()}/>);
 
     // const doneVotes = votes.filter(voting => !voting.isActiveVoting());
     // const displayDoneVotes = doneVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
@@ -55,7 +55,7 @@ const ActiveVotes = ({ activeVotes, auth }) => {
                     </MDBCol>                            
                 </MDBRow>                
             {/* </MDBCol>        */}
-            <AddUpdateVoting modal={modal} toggle={toggle} />   
+            <AddUpdateVoting modal={modal} toggle={toggle} votingToUpdate={selectedVoting}/>   
         </div>
     );
 }

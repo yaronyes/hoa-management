@@ -38,7 +38,7 @@ const VotingPage = ({ getVoting, votes }) => {
 
     const doneVotes = votes.filter(voting => !voting.isActiveVoting());
     const filter = doneVotes.filter(item => (item.title.toLowerCase().includes(filterText.toLowerCase().trim())) || (item.details.toLowerCase().includes(filterText.toLowerCase().trim())));
-    const displayDoneVotes = filter.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
+    const displayDoneVotes = filter.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} isActiveVoting={item.isActiveVoting()}/>);
       
     return (
         <div className="voting-page">
