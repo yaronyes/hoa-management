@@ -62,7 +62,7 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
                         delete updatedVoting[key];            
                     }
                 })
-                        
+                
                 updateVoting(updatedVoting, votingToUpdate._id);              
             } catch (e) {
                 console.log(e)
@@ -71,8 +71,13 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
         };
 
         const endVoting = () => {
-            setDueDate(dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM"));
-            updVoting();
+            try{                                
+                updateVoting({ dueDate: dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM") }, votingToUpdate._id); 
+                toggle();
+            } catch (e) {
+                console.log(e)
+                alert(e.message)
+            }      
         }
 
     return (
