@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const DropDownSelect = ({onChange, dropDownItems, label, icon}) => {
-    const [value, setValue] = useState("");
+const DropDownSelect = ({ onChange, dropDownItems, label, icon, defaultValue="" }) => {
+    const [value, setValue] = useState(defaultValue);
     const classes = useStyles();
     
     const valueChanged = event => {

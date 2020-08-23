@@ -109,7 +109,8 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
                                     value: "info",
                                     name: "info"
                                 }
-                            ]}/>  
+                            ]}
+                            defaultValue={priority}/>  
                             <LoadImage fileCallback={fileCallback}/>                                                                                                            
                         </div>                
                         </form>
