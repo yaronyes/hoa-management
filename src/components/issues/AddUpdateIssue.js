@@ -120,7 +120,8 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
                                     value: "normal",
                                     name: "normal"
                                 }
-                            ]}/>  
+                            ]}
+                            defaultValue={priority}/>  
                             <LoadImage fileCallback={fileCallback}/>                                                                                 
                             {/* <OutlinedInput type="file"/> */}
                             {/* <div >
