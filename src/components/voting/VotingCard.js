@@ -35,13 +35,24 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVot
     const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember)  ? "8" : (activeVoting & !tenantMode) ? "12" : "4";
     //const detailsColumnSize =  (activeVoting & auth.user.isCommitteeMember) || (!activeVoting & !auth.user.isCommitteeMember) ? "8" : "4";
 
-    //const votingForDisplayInChart = voting.votesForDisplay
+    const votingPercentageForDisplay = [...voting.votesForDisplay, { 
+        title: "None Voted",
+        value: auth.user.tenants.length - voting.votes.length,
+        color: 'red'}].filter(item => item.value !== 0);
+    
+    let votingResultForDisplay = [...voting.votesForDisplay].filter(item => item.value !== 0);    
+    if(votingResultForDisplay.length === 0) {        
+        votingResultForDisplay.push({ 
+            title: "None Voted",
+            value: 1,
+            color: 'red'});
+    }    
         
     return (
         <div className="voting-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
                 <CardHeader id={voting._id} toggleCollapse={toggleCollapse} headerText={voting.title}
-                /*secondText={!activeVoting ? voting.getVotingResult()[0].voteOptions : ""}*/ />                
+                secondText={!activeVoting && voting.votes.length !== 0 ? voting.getVotingResult()[0].voteOptions : ""} />                
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
                 <MDBCardBody className="voting-card-body">
                     <MDBRow className="main-row">
@@ -65,21 +76,21 @@ const VotingCard = ({ toggleCollapse, voting, openID, activeVoting, auth, addVot
                         { !activeVoting
                           ? <MDBCol md="4" className="voting-result">
                             {/* Results     */}
-                            <ToolTipPieChart data={[
+                            <ToolTipPieChart data={/*[
                             { title: 'One', value: 10, color: '#E38627' },
                             { title: 'Two', value: 15, color: '#C13C37' },
                             { title: 'Three', value: 20, color: '#6A2135' },
-                        ]} header="Results" isPercentage={false}/>
+                        ]*/votingResultForDisplay} header="Results" isPercentage={false}/>
                          </MDBCol> 
                          : null}
                         { auth.user.isCommitteeMember || !activeVoting
                           ? <MDBCol md="4" className="voting-percentage">
                             {/* Voting Percentage */}
-                            <ToolTipPieChart data={[
+                            <ToolTipPieChart data={/*[
                             { title: 'One', value: 10, color: '#E38627' },
                             { title: 'Two', value: 15, color: '#C13C37' },
                             { title: 'Three', value: 20, color: '#6A2135' },
-                        ]} header="Voting Percentage" isPercentage={true}/>                            
+                        ]*/votingPercentageForDisplay} header="Voting Percentage" isPercentage={true}/>                            
                         </MDBCol>                        
                         : null } 
                     </MDBRow>
