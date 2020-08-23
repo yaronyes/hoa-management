@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   
 const DateTimePicker = ({ label, onDateTimeChanged, value }) => {
     const classes = useStyles();
-    const [dateTime, setDateTime] = useState(value ? value : dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM")) 
+    const [dateTime, setDateTime] = useState(value ? dateFormat(value, "yyyy-mm-dd'T'HH:MM") : dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM")) 
 
     const dateTimeChanged = (event) => {                    
       onDateTimeChanged(event.target.value);

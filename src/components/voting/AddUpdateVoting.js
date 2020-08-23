@@ -110,7 +110,7 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
                                 </div> 
                                 : null}
                                 <div className="date-time">
-                                    <DateTimePicker onDateTimeChanged={(dateTime) => setDueDate(dateTime)} />
+                                    <DateTimePicker onDateTimeChanged={(dateTime) => setDueDate(dateTime)} value={dueDate}/>
                                     { votingToUpdate 
                                     ? <RoundedBtn color="danger" onClick={endVoting} icon="calendar-check" caption="End Voting" size="sm"/>
                                     : null}
