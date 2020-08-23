@@ -9,7 +9,7 @@ import IssueCard from '../../components/issues/IssueCard';
 import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
 import './IssuesPage.css';
 
-const IssuesPage = ({ getIssues, issues }) => {
+const IssuesPage = ({ getIssues, issues, auth }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
@@ -45,7 +45,7 @@ const IssuesPage = ({ getIssues, issues }) => {
                   </MDBCol>                  
                 </MDBRow>   
                 <MDBRow>
-                  <MDBCol className="add-issue ml-auto" md="6" lg="4">
+                  <MDBCol className={auth.user.isCommitteeMember ? "add-issue-hide" : "ml-auto"} md="6" lg="4">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New Issue"/>
                   </MDBCol>                  
                 </MDBRow>     
@@ -63,10 +63,12 @@ const IssuesPage = ({ getIssues, issues }) => {
 IssuesPage.propTypes = {
     errors: PropTypes.object.isRequired,
     issues: PropTypes.array.isRequired,
-    getIssues: PropTypes.func.isRequired
+    getIssues: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     errors: state.errors,
     issues: state.issue
 });

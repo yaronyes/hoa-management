@@ -30,14 +30,12 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
         }
         
     }, [open]);
-
-    const updateMessage = () => {
-        if(!comment) {
-            onUpdateMessage(message)
-        } else {
+    
+    const addComment = () => {
+        if(comment) {
             addCommentForMessage(new CommentModel({ text: comment }), message._id);
             setComment("");
-        }        
+        }
     }
 
     const introIconClicked = (id) => {
@@ -115,11 +113,11 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
                             <MDBRow className="btn-row">
                                 <MDBCol>
                                     <div className="btn-group-message">                                              
-                                        <RoundedBtn color="info" onClick={updateMessage} icon="pen" caption={auth.user.isCommitteeMember ? "Update" : "Comment"} size="sm"/>
+                                        <RoundedBtn color="info" onClick={auth.user.isCommitteeMember ? () => onUpdateMessage(message) : addComment}
+                                         icon="pen" caption={auth.user.isCommitteeMember ? "Update" : "Comment"} size="sm"/>
                                         { auth.user.isCommitteeMember
                                          ? <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
-                                         : null
-                                        }
+                                         : null}
                                     </div>    
                                 </MDBCol>
                             </MDBRow>

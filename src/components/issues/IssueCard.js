@@ -19,7 +19,7 @@ import config from '../../config/config.json';
 import CommentPanel from '../comments/CommentPanel';
 import CommentModel from '../../models/CommentModel';
 
-const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue }) => {
+const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth }) => {
     const [comment, setComment] = useState("");
     const img = `${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`;
     //const [modal, setModel] = useState(false);
@@ -33,14 +33,12 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
     //         setComment("");            
     //     }        
     // }
-
-    const updateIssue = () => {
-        if(!comment) {
-            onUpdateIssue(issue)
-        } else {
+    
+    const addComment = () => {
+        if(comment) {
             addCommentForIssue(new CommentModel({ text: comment }), issue._id);
             setComment("");
-        }        
+        }
     }
 
     const displayComments = issue.comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
@@ -107,8 +105,11 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                             <MDBRow className="btn-row">
                                 <MDBCol>
                                     <div className="btn-group-issue">                                              
-                                        <RoundedBtn color="info" onClick={updateIssue} icon="pen" caption="Update" size="sm"/>
-                                        <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>
+                                        <RoundedBtn color="info" onClick={!auth.user.isCommitteeMember ? () => onUpdateIssue(issue) : addComment}
+                                         icon="pen" caption={!auth.user.isCommitteeMember ? "Update" : "Comment"} size="sm"/>
+                                        { !auth.user.isCommitteeMember
+                                        ? <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>
+                                        : null}
                                     </div>    
                                 </MDBCol>
                             </MDBRow>
@@ -125,6 +126,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
 
 
 IssueCard.propTypes = {
+    auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     issues: PropTypes.array.isRequired,
     deleteIssue: PropTypes.func.isRequired,
@@ -132,6 +134,7 @@ IssueCard.propTypes = {
 }
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     errors: state.errors,
     issues: state.issue
 });
