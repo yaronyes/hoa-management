@@ -1,6 +1,6 @@
 import React from 'react';
-import CMDashboard from './CMDashboard';
-import TenantDashboard from './TenantDashboard';
+import CMDashboard from '../../components/dashboard/CMDashboard';
+import TenantDashboard from '../../components/dashboard/TenantDashboard';
 import { MDBContainer } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
