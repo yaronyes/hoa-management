@@ -32,13 +32,13 @@ const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addV
         value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - voting.votes.length : 1,
         color: 'red'}].filter(item => item.value !== 0);
     
-    let votingResultForDisplay = [...voting.votesForDisplay].filter(item => item.value !== 0);    
-    if(votingResultForDisplay.length === 0) {             
-        votingResultForDisplay.push({ 
-            title: "None Voted",
-            value: 1,
-            color: 'red'});                    
-    }
+    const votingResultForDisplay = [...voting.votesForDisplay].filter(item => item.value !== 0);    
+    // if(votingResultForDisplay.length === 0) {             
+    //     votingResultForDisplay.push({ 
+    //         title: "None Voted",
+    //         value: 1,
+    //         color: 'red'});                    
+    // }
     
     const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember)  ? "8" : (isActiveVoting & !tenantMode) ? "12" : "4";
     const showDataCol = (isActiveVoting & auth.user.isCommitteeMember) || (!isActiveVoting) || (!tenantMode);

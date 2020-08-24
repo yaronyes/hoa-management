@@ -15,6 +15,12 @@ const ToolTipPieChart = ({ data, isPercentage=false, header }) => {
     return `${entry.title}`;
   };
 
+  if(data.length === 0) {
+    return <div>
+              <img src="dont_know.png" alt=""/>
+          </div>
+  }
+
   return (
     <div data-tip="" data-for="chart">
       <h6>{header}</h6>
