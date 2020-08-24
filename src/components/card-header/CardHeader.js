@@ -3,13 +3,16 @@ import './CardHeader.css';
 import { MDBIcon } from 'mdbreact';
 
 
-const CardHeader = ({ id, toggleCollapse, color, headerText, icon="none", iconColor, introIcon="none", introIconColor, onIntroIconClicked, secondText=""}) => {
+const CardHeader = ({ id, toggleCollapse, color, headerText, icon="none", iconColor, introIcon="none", introIconColor, onIntroIconClicked, secondText="", onMainIconClicked}) => {
     const colorId = color ? color : 'rgba(96, 125, 139, 0.3) rgba-blue-grey-light';
 
     const clicked = event => {        
-        if((event.target.className.includes("intro-icon"))) {
+        if(event.target.className.includes("intro-icon") && onIntroIconClicked) {
             event.stopPropagation();
             onIntroIconClicked(id);
+        } else if(event.target.className.includes("main-icon") && onMainIconClicked) {
+            event.stopPropagation();
+            onMainIconClicked(id);
         } else {
             toggleCollapse(id)
         }
@@ -28,13 +31,18 @@ const CardHeader = ({ id, toggleCollapse, color, headerText, icon="none", iconCo
                     {headerText}
                 </span>            
             </div>            
+            <div className="right-side">
             { secondText
-             ? <span className='white-text font-weight-bold'>
+             ? <span className={'white-text font-weight-bold' + (icon !== 'none' ? ' mr-2' : '')}>
                     {secondText}
             </span>
-            : <div>
-            <MDBIcon icon={icon} className={iconColor} size="2x"/>                   
-            </div>}
+            : null }
+            { icon !== 'none'
+              ? <div>
+                <MDBIcon icon={icon} className={"main-icon " + iconColor} onClick={clicked} size="2x" />                   
+                </div>
+             : null }
+            </div> 
         </div>
     );
 }

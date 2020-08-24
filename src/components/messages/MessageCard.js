@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
 import config from '../../config/config.json';   
 import CommentModel from '../../models/CommentModel'
-import AddAnShowComment from '../comments/AddAnShowComment';
+import AddAndShowComment from '../comments/AddAndShowComment';
 
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
     const [open, setOpen] = useState(false);
@@ -83,7 +83,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
                             </MDBRow>                            
                         </MDBCol>
                         <MDBCol md='4' className="main-comments-col">
-                            <AddAnShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
+                            <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
                         </MDBCol>
                         <MDBCol md='3' className="btn-col">
                             <MDBRow className="btn-row">

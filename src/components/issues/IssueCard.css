@@ -6,16 +6,6 @@
     margin-top: 10px;
 }
 
-.issue-card .comment-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.issue-card .comment-col .md-form {
-    margin-bottom: 0;
-}
-
 .issue-card .btn-col {
     display: flex;
     flex-direction: column;
@@ -26,10 +16,6 @@
 .issue-card .btn-group-issue {
     display: flex;
     justify-content: center; 
-}
-
-.issue-card .comments-col {
-    padding: 0;
 }
 
 .issue-card .main-comments-col {

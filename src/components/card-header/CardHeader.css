@@ -11,3 +11,7 @@
 .card-header .intro-icon {
     margin-right: 1rem;
 }
+
+.card-header .right-side {
+    display: flex;
+}
