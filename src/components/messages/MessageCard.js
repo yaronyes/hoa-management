@@ -97,7 +97,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
-                                <MDBCol>
+                                <MDBCol className="comment-col">
                                     <MDBInput
                                     type="textarea"
                                     label="Add Comment"
@@ -105,20 +105,21 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
                                     icon="pencil-alt"
                                     value={comment}
                                     onChange={e => setComment(e.target.value)}
-                                    /> 
+                                    />
+                                     <RoundedBtn color="info" onClick={addComment}
+                                         icon="pen" caption="Comment" size="sm"/>
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol md='3' className="btn-col">
                             <MDBRow className="btn-row">
                                 <MDBCol>
-                                    <div className="btn-group-message">                                              
-                                        <RoundedBtn color="info" onClick={auth.user.isCommitteeMember ? () => onUpdateMessage(message) : addComment}
-                                         icon="pen" caption={auth.user.isCommitteeMember ? "Update" : "Comment"} size="sm"/>
-                                        { auth.user.isCommitteeMember
-                                         ? <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
-                                         : null}
-                                    </div>    
+                                { auth.user.isCommitteeMember
+                                 ? <div className="btn-group-message">                                               
+                                        <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
+                                        <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
+                                    </div> 
+                                 : null}   
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>

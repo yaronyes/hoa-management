@@ -27,3 +27,13 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.message-card .comment-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.message-card .comment-col .md-form {
+    margin-bottom: 0;
+}

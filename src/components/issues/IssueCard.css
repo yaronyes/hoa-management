@@ -6,12 +6,15 @@
     margin-top: 10px;
 }
 
-/* .issue-card .data-col {
+.issue-card .comment-col {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-} */
+    justify-content: flex-end;
+}
 
+.issue-card .comment-col .md-form {
+    margin-bottom: 0;
+}
 
 .issue-card .btn-col {
     display: flex;
