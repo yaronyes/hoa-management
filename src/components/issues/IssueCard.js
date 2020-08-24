@@ -7,7 +7,6 @@ import {
     MDBCardImage,
     MDBRow,
     MDBView,
-    MDBInput
 } from 'mdbreact';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
@@ -16,33 +15,18 @@ import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
 import config from '../../config/config.json';   
-import CommentPanel from '../comments/CommentPanel';
 import CommentModel from '../../models/CommentModel';
+import AddAnShowComment from '../comments/AddAnShowComment';
 
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth }) => {
-    const [comment, setComment] = useState("");
     const img = `${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`;
-    //const [modal, setModel] = useState(false);
-
-    // const toggle = () => {
-    //     setModel(!modal);
-    // }   
-    // const addComment = (event) => {
-    //     if(event.keyCode === 13 && (comment && comment.trim() !== "")) {
-    //         addCommentForIssue(new CommentModel({ text: comment }), issue._id);
-    //         setComment("");            
-    //     }        
-    // }
     
-    const addComment = () => {
-        if(comment) {
-            addCommentForIssue(new CommentModel({ text: comment }), issue._id);
-            setComment("");
+    const addComment = (text) => {
+        if(text) {
+            addCommentForIssue(new CommentModel({ text }), issue._id);            
         }
     }
-
-    const displayComments = issue.comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
-
+    
     return (
         <div className="issue-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
@@ -59,50 +43,17 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                             />
                             </MDBView>
                         </MDBCol>
-                        <MDBCol md='3' className="data-col">
-                            {/* <h2 className='font-weight-bold mb-3 black-text'>
-                            Hi! I am the first one.
-                            </h2> */}
+                        <MDBCol md='3' className="data-col">                           
                             <MDBRow>
                                 <MDBCol className="text-col">
                                     <p><span className="l-title">Details: </span>{issue.details}</p>
                                     <p><span className="l-title">Priority: </span>{issue.priority}</p>
-                                    <p><span className="l-title">Status: </span>{issue.status}</p>    
-                                    {/* comments */}
+                                    <p><span className="l-title">Status: </span>{issue.status}</p>                                        
                                 </MDBCol>                             
-                            </MDBRow>
-                            {/* <MDBRow>
-                                <MDBCol  md="6" className="offset-md-6">
-                                    <div className="btn-group-issue">                                              
-                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)} icon="user-edit" caption="Update"/>
-                                        <RoundedBtn color="danger" onClick={() => onUpdateIssue(issue)} icon="trash" caption="Delete"/>
-                                    </div>    
-                                </MDBCol>
-                            </MDBRow> */}
+                            </MDBRow>                            
                         </MDBCol>
                         <MDBCol md='4' className="main-comments-col">
-                            <MDBRow>
-                                <MDBCol className="comments-col">
-                                    {/* <CommentPanel text="this is my comment this is my comment"/> */}
-                                    {displayComments}
-                                </MDBCol>
-                            </MDBRow>
-                            { auth.user.isCommitteeMember
-                              ?  <MDBRow>
-                                <MDBCol className="comment-col">
-                                    <MDBInput
-                                    type="textarea"
-                                    label="Add Comment"
-                                    rows="2"
-                                    icon="pencil-alt"
-                                    value={comment}
-                                    onChange={e => setComment(e.target.value)}                                   
-                                    // onKeyUp={addComment}                                    
-                                    />
-                                    <RoundedBtn color="info" onClick={addComment} icon="pen" caption="Comment" size="sm"/>               
-                                </MDBCol>
-                            </MDBRow>
-                            : null}
+                            <AddAnShowComment addComment={addComment} showAddComment={auth.user.isCommitteeMember} comments={issue.comments} />                            
                         </MDBCol>
                         <MDBCol md='3' className="btn-col">
                             <MDBRow className="btn-row">
@@ -120,8 +71,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>
-            </MDBCard>
-            {/* <AddUpdateTenant modal={modal} toggle={toggle} selectedTenant={tenant}/> */}
+            </MDBCard>            
         </div>
     );
 
