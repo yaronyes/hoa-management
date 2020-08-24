@@ -1,0 +1,13 @@
+.add-comment .add-comment-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.add-comment .add-comment-col .md-form {
+    margin-bottom: 0;
+}
+
+.add-comment .comments-col {
+    padding: 0;
+}

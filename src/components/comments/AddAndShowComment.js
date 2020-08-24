@@ -11,9 +11,9 @@ import {
 } from 'mdbreact';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import CommentPanel from './CommentPanel';
-import './AddAnShowComment.css';
+import './AddAndShowComment.css';
 
-const AddAnShowComment = ({ addComment, comments, showAddComment }) => {
+const AddAndShowComment = ({ addComment, comments, showAddComment }) => {
     const [comment, setComment] = useState("");
 
     const addCommentClicked = () => {
@@ -52,4 +52,4 @@ const AddAnShowComment = ({ addComment, comments, showAddComment }) => {
     );
 };
 
-export default AddAnShowComment;
+export default AddAndShowComment;

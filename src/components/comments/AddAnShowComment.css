@@ -1,9 +1,0 @@
-.issue-card .add-comment-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.issue-card .add-comment-col .md-form {
-    margin-bottom: 0;
-}
