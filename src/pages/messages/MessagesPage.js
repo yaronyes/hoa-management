@@ -10,6 +10,7 @@ import AddUpdateMessage from '../../components/messages/AddUpdateMessage';
 import './MessagesPage.css';
 import DropDownSelect from '../../components/select/DropDownSelect';
 import RadioButtonsGroup from '../../components/radio-buttons/RadioButtonsGroup';
+import { compareByDate, compareByPriority } from '../../utils/utils';
 
 const MessagesPage = ({ getMessages, messages, auth }) => {
     const [collapseID, setCollapseID] = useState(0);    
@@ -36,19 +37,13 @@ const MessagesPage = ({ getMessages, messages, auth }) => {
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const compare = (a, b) => {
-      if (a < b) {
-        return -1;
-      }
-      if (a > b) {
-        return 1;
-      }
-      
-      return 0;
+    const priorities = {
+      important: 1,
+      info: 2
     }
 
-    const filter = messages.filter(item => (item.title.toLowerCase().includes(filterText.toLowerCase().trim())) && (priority ? (item.priority === priority) : true));    
-    filter.sort((a, b) => compare(a[sortBy], b[sortBy]));
+    const filter = messages.filter(item => (item.title.toLowerCase().includes(filterText.toLowerCase().trim())) && (priority ? (item.priority === priority) : true));        
+    filter.sort((a, b) => sortBy === 'createdAt' ? compareByDate(a[sortBy], b[sortBy]) : compareByPriority(a[sortBy], b[sortBy], priorities));
     const displayMessages = filter.map(item => <MessageCard key={item._id} toggleCollapse={toggleCollapse} message={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
 
     return (

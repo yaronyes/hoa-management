@@ -15,3 +15,7 @@ export const uploadImage = async (url, file, name) => {
 }
 
 export const generateRandomColor = () => "#"+(((1+Math.random())*(1<<24)|0).toString(16)).substr(-6);
+
+export const compareByDate = (a, b) => new Date(a) - new Date(b);
+
+export const compareByPriority = (a, b, priorities) => priorities[a] - priorities[b];

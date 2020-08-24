@@ -8,12 +8,15 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import IssueCard from '../../components/issues/IssueCard';
 import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
 import './IssuesPage.css';
+import RadioButtonsGroup from '../../components/radio-buttons/RadioButtonsGroup';
+import { compareByDate, compareByPriority } from '../../utils/utils';
 
 const IssuesPage = ({ getIssues, issues, auth }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState(null);
+    const [sortBy, setSortBy] = useState("createdAt");
 
     useEffect(() => {
       if(issues.length === 0) {
@@ -32,7 +35,14 @@ const IssuesPage = ({ getIssues, issues, auth }) => {
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
+    const priorities = {
+      urgent: 1,
+      important: 2,
+      normal: 3
+    }
+
     const filter = issues.filter(item => item.title.toLowerCase().includes(filterText.toLowerCase().trim()));
+    filter.sort((a, b) => sortBy === 'createdAt' ? compareByDate(a[sortBy], b[sortBy]) : compareByPriority(a[sortBy], b[sortBy], priorities));
     const displayIssues= filter.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} issue={item} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>);
   
 
@@ -42,7 +52,25 @@ const IssuesPage = ({ getIssues, issues, auth }) => {
                 <MDBRow>
                   <MDBCol className="filter-issue">
                     <FilterBox onFilterChanged={(text) => setFilter(text)} />
-                  </MDBCol>                  
+                  </MDBCol>
+                  { auth.user.isCommitteeMember
+                   ? <MDBCol md="4">
+                    <RadioButtonsGroup
+                    label="Sort by:" radioBtnInfo={[
+                      {
+                        value: "createdAt",
+                        label: "Date"
+                      },
+                      {
+                        value: "priority",
+                        label: "Priority"
+                      }
+                    ]} 
+                    defaultSelect={sortBy}
+                    onChange={(selected) => setSortBy(selected)}
+                    />                 
+              </MDBCol>         
+              : null }
                 </MDBRow>   
                 <MDBRow>
                   <MDBCol className={auth.user.isCommitteeMember ? "add-issue-hide" : "ml-auto"} md="6" lg="4">
