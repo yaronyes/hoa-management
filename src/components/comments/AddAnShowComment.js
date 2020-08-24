@@ -10,11 +10,18 @@ import {
     MDBInput
 } from 'mdbreact';
 import RoundedBtn from '../rounded-button/RoundedBtn';
-import CommentPanel from '../comments/CommentPanel';
-import './AddComment.css';
+import CommentPanel from './CommentPanel';
+import './AddAnShowComment.css';
 
-const AddComment = ({ addComment, comments }) => {
+const AddAnShowComment = ({ addComment, comments, showAddComment }) => {
     const [comment, setComment] = useState("");
+
+    const addCommentClicked = () => {
+        if(comment) {
+            addComment(comment);
+            setComment("");
+        }
+    }
 
     const displayComments = comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
 
@@ -25,7 +32,8 @@ const AddComment = ({ addComment, comments }) => {
                     {displayComments}    
                 </MDBCol>
             </MDBRow>
-            <MDBRow>
+            { showAddComment
+              ?  <MDBRow>
                 <MDBCol className="add-comment-col">
                     <MDBInput
                     type="textarea"
@@ -35,12 +43,13 @@ const AddComment = ({ addComment, comments }) => {
                     value={comment}
                     onChange={e => setComment(e.target.value)}
                     />
-                        <RoundedBtn color="info" onClick={addComment}
+                        <RoundedBtn color="info" onClick={addCommentClicked}
                             icon="pen" caption="Comment" size="sm"/>
                 </MDBCol>
             </MDBRow>
+            : null}
         </div>
     );
 };
 
-export default AddComment;
+export default AddAnShowComment;
