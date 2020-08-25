@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import IssueView from "../issues/IssueView";
+
 
 const CMDashboard = () => {
   const [collapseID, setCollapseID] = useState(0);
@@ -11,20 +13,10 @@ const CMDashboard = () => {
       <MDBContainer>
         <MDBRow>
           <MDBCol>
-            <MDBRow>
-              <MDBCol>New Reported Issues</MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol></MDBCol>
-            </MDBRow>
+            <IssueView isNewIssues={true}/>          
           </MDBCol>
           <MDBCol>
-            <MDBRow>
-              <MDBCol>Overdue Issues</MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol></MDBCol>
-            </MDBRow>
+            <IssueView isNewIssues={false}/>
           </MDBCol>
         </MDBRow>
         <MDBRow>

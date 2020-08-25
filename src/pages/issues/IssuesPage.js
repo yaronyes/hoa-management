@@ -32,7 +32,7 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const displayIssues = filteredIssue.map(item => <IssueCard key={item._id} toggleCollapse={toggleCollapse} issue={item} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>);    
+    const displayIssues = filteredIssue.map(issue => <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>);    
      
     return (
         <div className="issues-page">

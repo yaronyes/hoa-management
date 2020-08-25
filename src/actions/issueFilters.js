@@ -1,4 +1,4 @@
-import { SET_TEXT_FILTER_ISSUE, SORT_BY_DATE_ISSUE, SORT_BY_PRIORITY_ISSUE } from './types';
+import { SET_TEXT_FILTER_ISSUE, SORT_BY_DATE_ISSUE, SORT_BY_PRIORITY_ISSUE/*, SET_STATUS_FILTER_ISSUE*/ } from './types';
 
 // SET_TEXT_FILTER
 export const setTextFilter = (text = '') => ({
@@ -16,3 +16,9 @@ export const setTextFilter = (text = '') => ({
   export const sortByPriority = () => ({
     type: SORT_BY_PRIORITY_ISSUE
   });
+
+//   // SET_STATUS_FILTER_ISSUE
+// export const setStatusFilter = (status = '') => ({
+//   type: SET_STATUS_FILTER_ISSUE,
+//   status
+// });
