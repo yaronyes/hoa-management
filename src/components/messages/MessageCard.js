@@ -18,7 +18,7 @@ import config from '../../config/config.json';
 import CommentModel from '../../models/CommentModel'
 import AddAndShowComment from '../comments/AddAndShowComment';
 
-const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
+const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
     const [open, setOpen] = useState(false);
     const img = `${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`;
 
@@ -41,7 +41,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, deleteM
 
     const onToggleCollapse = (id) => {
         toggleCollapse(id);
-        if(!message.seenBy.includes(auth.user._id)) {
+        if(!message.seenBy.includes(auth.user._id) && !viewOnlyMode) {
             setOpen(true);
         }      
     }
