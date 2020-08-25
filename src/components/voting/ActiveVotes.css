@@ -9,3 +9,7 @@
 .active-votes .new-voting-btn-hide {
     visibility: hidden;
 }
+
+.active-votes .new-voting-row-hide {
+    display: none;
+}
