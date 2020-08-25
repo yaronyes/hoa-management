@@ -11,14 +11,13 @@ import './MessagesPage.css';
 import DropDownSelect from '../../components/select/DropDownSelect';
 import RadioButtonsGroup from '../../components/radio-buttons/RadioButtonsGroup';
 import { compareByDate, compareByPriority } from '../../utils/utils';
+import MessageFilters from '../../components/messages/MessageFilters';
+import selectMessages from '../../selectors/messageSelector';
 
-const MessagesPage = ({ getMessages, messages, auth }) => {
-    const [collapseID, setCollapseID] = useState(0);    
-    const [filterText, setFilter] = useState("");
+const MessagesPage = ({ getMessages, messages, auth, filteredMessages }) => {
+    const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedMessage, setSelectedMessage] = useState(null);
-    const [priority, setPriority] = useState("");
-    const [sortBy, setSortBy] = useState("createdAt");
 
     useEffect(() => {
         if(messages.length === 0) {
@@ -36,52 +35,14 @@ const MessagesPage = ({ getMessages, messages, auth }) => {
     }
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
-
-    const priorities = {
-      important: 1,
-      info: 2
-    }
-
-    const filter = messages.filter(item => (item.title.toLowerCase().includes(filterText.toLowerCase().trim())) && (priority ? (item.priority === priority) : true));        
-    filter.sort((a, b) => sortBy === 'createdAt' ? compareByDate(a[sortBy], b[sortBy]) : compareByPriority(a[sortBy], b[sortBy], priorities));
-    const displayMessages = filter.map(item => <MessageCard key={item._id} toggleCollapse={toggleCollapse} message={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
+   
+    const displayMessages = filteredMessages.map(item => <MessageCard key={item._id} toggleCollapse={toggleCollapse} message={item} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
 
     return (
         <div className="message-page">
         <MDBContainer>
-            <MDBRow>
-              <MDBCol className="filter-message" md="5">
-                <FilterBox onFilterChanged={(text) => setFilter(text)} />
-              </MDBCol>                 
-              <MDBCol md="3">
-              <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="Filter by Priority"
-                            dropDownItems={[
-                                {
-                                    value: "important",
-                                    name: "important"
-                                },
-                                {
-                                    value: "info",
-                                    name: "info"
-                                }
-                            ]}/>  
-              </MDBCol>
-              <MDBCol md="4">
-                  <RadioButtonsGroup 
-                  label="Sort by:" radioBtnInfo={[
-                    {
-                      value: "createdAt",
-                      label: "Date"
-                    },
-                    {
-                      value: "priority",
-                      label: "Priority"
-                    }
-                  ]} 
-                  defaultSelect={sortBy}
-                  onChange={(selected) => setSortBy(selected)}
-                  />                 
-              </MDBCol>
+            <MDBRow>              
+              <MessageFilters />
             </MDBRow>   
             <MDBRow>
               { auth.user.isCommitteeMember
@@ -108,13 +69,15 @@ MessagesPage.propTypes = {
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
-  getMessages: PropTypes.func.isRequired
+  getMessages: PropTypes.func.isRequired,
+  filteredMessages: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
   auth: state.auth,   
   errors: state.errors,
-  messages: state.message
+  messages: state.message,
+  filteredMessages: selectMessages(state.message, state.messageFilters)
 });
 
 export default connect(mapStateToProps, { getMessages })(MessagesPage);

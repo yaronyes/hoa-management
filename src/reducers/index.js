@@ -6,6 +6,7 @@ import votingReducer from './votingReducer';
 import messageReducer from './messageReducer';
 import issueReducer from './issueReducer';
 import issueFilters from './issueFilters';
+import messageFilters from './messageFilters';
 
 export default combineReducers({
     auth: authReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     voting: votingReducer,
     message: messageReducer,
     issue: issueReducer,
-    issueFilters: issueFilters
+    issueFilters,
+    messageFilters
   });
