@@ -66,7 +66,7 @@ TenantsPage.propTypes = {
   errors: PropTypes.object.isRequired,
   tenants: PropTypes.array.isRequired,
   getTenantUsers: PropTypes.func.isRequired,
-  filteredTenants: PropTypes.object.isRequired
+  filteredTenants: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({

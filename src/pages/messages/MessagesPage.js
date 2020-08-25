@@ -70,7 +70,7 @@ MessagesPage.propTypes = {
   errors: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
   getMessages: PropTypes.func.isRequired,
-  filteredMessages: PropTypes.object.isRequired
+  filteredMessages: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({

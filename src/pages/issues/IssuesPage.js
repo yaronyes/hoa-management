@@ -61,7 +61,7 @@ IssuesPage.propTypes = {
     issues: PropTypes.array.isRequired,
     getIssues: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    filteredIssue: PropTypes.object.isRequired
+    filteredIssue: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
