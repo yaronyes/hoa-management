@@ -16,3 +16,9 @@ export const SET_ISSUES = 'SET_ISSUES';
 export const EDIT_ISSUE = 'EDIT_ISSUE';
 export const DELETE_ISSUE = 'DELETE_ISSUE'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+
+// filters
+export const SET_TEXT_FILTER = 'SET_TEXT_FILTER';
+export const SORT_BY_DATE = 'SORT_BY_DATE';
+export const SORT_BY_PRIORITY = 'SORT_BY_PRIORITY';

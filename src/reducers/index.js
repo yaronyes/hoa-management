@@ -5,6 +5,7 @@ import tenantReducer from './tenantReducer';
 import votingReducer from './votingReducer';
 import messageReducer from './messageReducer';
 import issueReducer from './issueReducer';
+import issueFilters from './issueFilters';
 
 export default combineReducers({
     auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     tenant: tenantReducer,
     voting: votingReducer,
     message: messageReducer,
-    issue: issueReducer
+    issue: issueReducer,
+    issueFilters: issueFilters
   });
