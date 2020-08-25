@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MDBCol } from 'mdbreact';
 import FilterBox from '../filter/FilterBox';
-import RadioButtonsGroup from '../radio-buttons/RadioButtonsGroup';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
 import { setTextFilter } from '../../actions/tenantFilters';
 import './TenantFilters.css';
 
-const TenantFilters = ({ setTextFilter, auth, filters }) => {
+const TenantFilters = ({ setTextFilter }) => {
     
+    useEffect(() => {
+        setTextFilter('');
+    }, []);
+
     return (
         <div className="filter-tenant">
             <MDBCol>
@@ -19,14 +22,11 @@ const TenantFilters = ({ setTextFilter, auth, filters }) => {
 };
 
 TenantFilters.propTypes = {    
-    filters: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
     setTextFilter: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    auth: state.auth,
-    filters: state.tenantFilters
+    
 });
   
 const mapDispatchToProps = (dispatch) => ({

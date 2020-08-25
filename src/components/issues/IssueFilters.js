@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MDBCol } from 'mdbreact';
 import FilterBox from '../filter/FilterBox';
 import RadioButtonsGroup from '../radio-buttons/RadioButtonsGroup';
@@ -8,6 +8,12 @@ import { setTextFilter, sortByDate, sortByPriority } from '../../actions/issueFi
 import './IssueFilters.css';
 
 const IssueFilters = ({ setTextFilter, sortByDate, sortByPriority, auth, filters }) => {
+    
+    useState(() => {
+        sortByDate();
+        setTextFilter('');
+    }, []);
+    
     const setSortBy = selected => selected === 'createdAt' ? sortByDate() : sortByPriority();
     
     return (

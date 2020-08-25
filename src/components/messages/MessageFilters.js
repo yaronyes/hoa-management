@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { MDBCol } from 'mdbreact';
 import FilterBox from '../filter/FilterBox';
 import RadioButtonsGroup from '../radio-buttons/RadioButtonsGroup';
@@ -9,6 +9,13 @@ import './MessageFilters.css';
 import DropDownSelect from '../select/DropDownSelect';
 
 const MessageFilters = ({ setTextFilter, sortByDate, sortByPriority, setPriorityFilter, auth, filters }) => {
+    
+    useEffect(() => {
+        setTextFilter('');
+        setPriorityFilter('');
+        sortByDate();
+    }, []);
+
     const setSortBy = selected => selected === 'createdAt' ? sortByDate() : sortByPriority();
     
     return (
