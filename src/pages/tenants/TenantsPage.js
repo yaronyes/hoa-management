@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import TenantCard from '../../components/tenant/TenantCard';
 import  { getTenantUsers } from '../../actions/tenantActions';
 import './TenantsPage.css';
-import FilterBox from '../../components/filter/FilterBox';
 import AddUpdateTenant  from '../../components/tenant/AddUpdateTenant';
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
+import TenantFilters from '../../components/tenant/TenantFilters';
+import selectTenants from '../../selectors/tenantSelector';
 
-const TenantsPage = ({ getTenantUsers, tenants }) => {
-    const [collapseID, setCollapseID] = useState(0);    
-    const [filterText, setFilter] = useState("");
+const TenantsPage = ({ getTenantUsers, tenants, filteredTenants }) => {
+    const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState();
 
@@ -38,16 +38,13 @@ const TenantsPage = ({ getTenantUsers, tenants }) => {
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const filter = tenants.filter(item => item.name.toLowerCase().includes(filterText.toLowerCase().trim()));
-    const displayTenants = filter.map(item => <TenantCard key={item._id} toggleCollapse={toggleCollapse} tenant={item} openID={collapseID} onUpdateTenant={openAddUpdateModal}/>);
+    const displayTenants = filteredTenants.map(item => <TenantCard key={item._id} toggleCollapse={toggleCollapse} tenant={item} openID={collapseID} onUpdateTenant={openAddUpdateModal}/>);
 
     return (
         <div className="tenants-page">
             <MDBContainer>
                 <MDBRow>
-                  <MDBCol className="filter-tenant">
-                    <FilterBox onFilterChanged={(text) => setFilter(text)} />
-                  </MDBCol>                  
+                  <TenantFilters />
                 </MDBRow>   
                 <MDBRow>
                   <MDBCol className="add-tenant ml-auto" md="6" lg="4">
@@ -68,12 +65,14 @@ const TenantsPage = ({ getTenantUsers, tenants }) => {
 TenantsPage.propTypes = {
   errors: PropTypes.object.isRequired,
   tenants: PropTypes.array.isRequired,
-  getTenantUsers: PropTypes.func.isRequired
+  getTenantUsers: PropTypes.func.isRequired,
+  filteredTenants: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  tenants: state.tenant
+  tenants: state.tenant,
+  filteredTenants: selectTenants(state.tenant, state.tenantFilters)
 });
 
 export default connect(mapStateToProps, { getTenantUsers })(TenantsPage);

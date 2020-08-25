@@ -7,6 +7,7 @@ import messageReducer from './messageReducer';
 import issueReducer from './issueReducer';
 import issueFilters from './issueFilters';
 import messageFilters from './messageFilters';
+import tenantFilters from './tenantFilters';
 
 export default combineReducers({
     auth: authReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     message: messageReducer,
     issue: issueReducer,
     issueFilters,
-    messageFilters
+    messageFilters,
+    tenantFilters
   });

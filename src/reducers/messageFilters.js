@@ -2,13 +2,13 @@ import { SET_TEXT_FILTER_MESSAGE, SORT_BY_DATE_MESSAGE, SORT_BY_PRIORITY_MESSAGE
 
 // Message Filters Reducer
 
-const MessageFiltersDefaultState = {
+const messageFiltersDefaultState = {
     text: '',
     priority: '',
     sortBy: 'createdAt',
   };
   
-  export default (state = MessageFiltersDefaultState, action) => {
+  export default (state = messageFiltersDefaultState, action) => {
     switch (action.type) {
       case SET_TEXT_FILTER_MESSAGE:
         return {

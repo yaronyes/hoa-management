@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import FilterBox from '../../components/filter/FilterBox';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
@@ -8,23 +7,13 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import IssueCard from '../../components/issues/IssueCard';
 import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
 import './IssuesPage.css';
-import RadioButtonsGroup from '../../components/radio-buttons/RadioButtonsGroup';
 import selectIssues from '../../selectors/issueSelector';
 import IssueFilters from '../../components/issues/IssueFilters';
-//import { compareByDate, compareByPriority } from '../../utils/utils';
-
-// const priorities = {
-//   urgent: 1,
-//   important: 2,
-//   normal: 3
-// }
 
 const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
     const [collapseID, setCollapseID] = useState(0);    
-    //const [filterText, setFilter] = useState("");
     const [modal, setModel] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState(null);
-    //const [sortBy, setSortBy] = useState("createdAt");
 
     useEffect(() => {
       if(issues.length === 0) {
