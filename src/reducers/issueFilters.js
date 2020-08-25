@@ -1,4 +1,4 @@
-import { SET_TEXT_FILTER_ISSUE, SORT_BY_DATE_ISSUE, SORT_BY_PRIORITY__ISSUE } from '../actions/types';
+import { SET_TEXT_FILTER_ISSUE, SORT_BY_DATE_ISSUE, SORT_BY_PRIORITY_ISSUE } from '../actions/types';
 
 // Issue Filters Reducer
 
@@ -14,7 +14,7 @@ export default (state = issueFiltersDefaultState, action) => {
         ...state,
         text: action.text
       };
-    case SORT_BY_PRIORITY__ISSUE:
+    case SORT_BY_PRIORITY_ISSUE:
       return {
         ...state,
         sortBy: 'priority'
