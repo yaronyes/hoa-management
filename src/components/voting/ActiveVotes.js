@@ -6,9 +6,9 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ActiveVotes.css';
-// import { getVoting } from '../../actions/votingActions';
+import selectVoting from '../../selectors/votingSelector';
 
-const ActiveVotes = ({ activeVotes, auth }) => {
+const ActiveVotes = ({ auth, filteredVoting }) => {
     const [modal, setModel] = useState(false);
     const [collapseID, setCollapseID] = useState(0);    
     const [selectedVoting, setSelectedVoting] = useState(null);
@@ -31,7 +31,8 @@ const ActiveVotes = ({ activeVotes, auth }) => {
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
     
     // const activeVotes = votes.filter(voting => voting.isActiveVoting());
-    const displayActiveVotes = activeVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateVoting={openAddUpdateModal} isActiveVoting={item.isActiveVoting()}/>);
+    const displayActiveVotes = filteredVoting.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateVoting={openAddUpdateModal} isActiveVoting={item.isActiveVoting()}/>);
+    //const displayActiveVotes =null;
 
     // const doneVotes = votes.filter(voting => !voting.isActiveVoting());
     // const displayDoneVotes = doneVotes.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateMessage={openAddUpdateModal} activeVoting={item.isActiveVoting()}/>);
@@ -64,13 +65,14 @@ ActiveVotes.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
-    //getVoting: PropTypes.func.isRequired
+    filteredVoting: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors,
-    votes: state.voting
+    votes: state.voting,
+    filteredVoting: selectVoting(state.voting, state.votingFilters, true)
 });
 
 export default connect(mapStateToProps, { })(ActiveVotes);

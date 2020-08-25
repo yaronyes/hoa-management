@@ -20,8 +20,9 @@ import DropDownSelect from '../select/DropDownSelect';
 import { addVote } from '../../actions/votingActions';
 import VoteModel from '../../models/VoteModel';
 
-const VotingCard = ({ toggleCollapse, voting, openID, isActiveVoting, auth, addVote, tenantMode=false, onUpdateVoting }) => {    
+const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdateVoting, auth, addVote }) => {    
     const [vote, setVote] = useState("");
+    const isActiveVoting = voting.isActiveVoting()
 
     const voteFor = () => {
         addVote(new VoteModel({ vote }), voting._id);
