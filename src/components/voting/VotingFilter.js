@@ -9,6 +9,8 @@ import './VotingFilter.css';
 const VotingFilter = ({ setTextFilter }) => {    
     useEffect(() => {
         setTextFilter("");
+
+        return () => setTextFilter('');
     }, []);
 
     return (

@@ -12,6 +12,11 @@ const IssueFilters = ({ setTextFilter, sortByDate, sortByPriority, auth, filters
     useState(() => {
         sortByDate();
         setTextFilter('');
+
+        return () => {
+            sortByDate();
+            setTextFilter('');
+        }
     }, []);
     
     const setSortBy = selected => selected === 'createdAt' ? sortByDate() : sortByPriority();

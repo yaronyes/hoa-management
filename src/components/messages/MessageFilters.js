@@ -14,6 +14,12 @@ const MessageFilters = ({ setTextFilter, sortByDate, sortByPriority, setPriority
         setTextFilter('');
         setPriorityFilter('');
         sortByDate();
+
+        return () => {
+            setTextFilter('');
+            setPriorityFilter('');
+            sortByDate();
+        }
     }, []);
 
     const setSortBy = selected => selected === 'createdAt' ? sortByDate() : sortByPriority();

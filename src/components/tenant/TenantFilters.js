@@ -10,6 +10,8 @@ const TenantFilters = ({ setTextFilter }) => {
     
     useEffect(() => {
         setTextFilter('');
+
+        return () => setTextFilter('');
     }, []);
 
     return (
