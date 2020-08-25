@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, GET_ERRORS } from './types';
+import { SET_CURRENT_USER, GET_ERRORS, CLEAR_ERRORS } from './types';
 import { getOptions } from '../utils/getAuthToken';
 import axios from 'axios';
 import UserModel from '../models/UserModel';
@@ -44,7 +44,7 @@ export const loginUser = (userData) => async dispatch => {
         console.log(e);
         dispatch({
             type: GET_ERRORS,
-            payload: e
+            payload: e.response
         })
     }
 };
@@ -86,4 +86,5 @@ export const checkForConnectedUser = () => async dispatch => {
     }
 }
 
+export const clearErrors = () => dispatch => dispatch({ type: CLEAR_ERRORS });
 
