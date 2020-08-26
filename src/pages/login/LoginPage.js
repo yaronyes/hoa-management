@@ -26,6 +26,12 @@ const LoginPage = ({loginUser, auth, errors, clearErrors}) => {
         }        
     }, [errors]);
 
+    const keyUp = event => {
+        if(event.keyCode === 13) {
+            loginUser({ email, password })
+        }
+    }
+
     const alertDialog = showError ? <MDBAlert color="danger">Invalid Credentials! Incorrect email or password</MDBAlert > : null;
 
     return (
@@ -38,7 +44,9 @@ const LoginPage = ({loginUser, auth, errors, clearErrors}) => {
                     <div className="grey-text">
                     <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong"
                         success="right" value={email} onChange={e => {setEmail(e.target.value); setShowError(false)}}/>
-                    <MDBInput label="Type your password" icon="lock" group type="password" validate value={password} onChange={e => {setPassword(e.target.value); setShowError(false)}}/>
+                    <MDBInput label="Type your password" icon="lock" group type="password" validate value={password}
+                     onChange={e => {setPassword(e.target.value); setShowError(false)}}
+                     onKeyUp={keyUp}/>
                     </div>
                     <div>
                         {alertDialog}
