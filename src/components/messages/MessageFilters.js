@@ -63,7 +63,7 @@ const MessageFilters = ({ setTextFilter, sortByDate, sortByPriority, setPriority
 };
 
 MessageFilters.propTypes = {    
-    filters: PropTypes.func.isRequired,
+    filters: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     setTextFilter: PropTypes.func.isRequired,
     sortByDate: PropTypes.func.isRequired,
