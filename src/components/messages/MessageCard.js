@@ -66,39 +66,37 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                 <MDBCollapse id={message._id} isOpen={openID === message._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
-                        <MDBCol md='2' className='img-col'>
-                            <MDBView className='z-depth-1'>
-                            <MDBCardImage
-                                className='img-fluid z-depth-1'
-                                src={img}
-                                alt=''                                
-                            />
-                            </MDBView>
-                        </MDBCol>
-                        <MDBCol md='3' className="data-col">                            
+                        <MDBCol lg="6">
                             <MDBRow>
-                                <MDBCol className="text-col">
+                                <MDBCol md='4' className='img-col'>
+                                <MDBView className='z-depth-1'>
+                                <MDBCardImage
+                                    className='img-fluid z-depth-1'
+                                    src={img}
+                                    alt=''                                
+                                />
+                                </MDBView>
+                                </MDBCol>
+                                <MDBCol /*md='3'*/ className="data-col">                            
                                     <p><span className="l-title">Details: </span>{message.details}</p>
                                     <p><span className="l-title">Priority: </span>{message.priority}</p>
-                                    <p><span className="l-title">Status: </span>{message.status}</p>                                                                        
-                                </MDBCol>                             
-                            </MDBRow>                            
-                        </MDBCol>
-                        <MDBCol md='4' className="main-comments-col">
-                            <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
-                        </MDBCol>
-                        <MDBCol md='3' className="btn-col">
-                            <MDBRow className="btn-row">
-                                <MDBCol>
-                                { auth.user.isCommitteeMember
-                                 ? <div className="btn-group-message">                                               
-                                        <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
-                                        <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
-                                    </div> 
-                                 : null}   
+                                    <p><span className="l-title">Status: </span>{message.status}</p>                            
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
+                        <MDBCol lg="6">
+                            <MDBRow className="h-100">
+                                <MDBCol /*lg='6'*/ className="main-comments-col">
+                                    <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
+                                </MDBCol>
+                                { auth.user.isCommitteeMember
+                                ? <MDBCol lg='6' className="btn-col h-100">
+                                    <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
+                                    <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
+                                </MDBCol>                                
+                                : null}
+                            </MDBRow>
+                        </MDBCol> 
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>

@@ -8,9 +8,10 @@
 
 .message-card .btn-col {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: flex-end;
+    /* padding: 0; */
 }
 
 .message-card .btn-group-message {
