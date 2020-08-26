@@ -8,15 +8,16 @@
 
 .issue-card .btn-col {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: flex-end;
+    /* padding: 0; */
 }
 
-.issue-card .btn-group-issue {
+/* .issue-card .btn-group-issue {
     display: flex;
-    justify-content: center; 
-}
+    justify-content: center;     
+} */
 
 .issue-card .main-comments-col {
     display: flex;
