@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CommentPanel from './CommentPanel';
-//import { Scrollbars } from 'react-custom-scrollbars';
-import './CommentsContainer.css'
-//import ScrollableFeed from 'react-scrollable-feed'
 import { css } from 'glamor';
 import ScrollToBottom from 'react-scroll-to-bottom'
 
