@@ -55,37 +55,19 @@ const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTena
                             />
                             </MDBView>
                         </MDBCol>
-                        <MDBCol md='9' className="data-col">
-                            {/* <h2 className='font-weight-bold mb-3 black-text'>
-                            Hi! I am the first one.
-                            </h2> */}
-                            <MDBRow>
-                                <MDBCol className="text-col">
-                                    <p><span className="l-title">Name: </span>{tenant.name}</p>
-                                    <p><span className="l-title">Email: </span>{tenant.email}</p>
-                                    <p><span className="l-title">Apt: </span>#{tenant.apartment}</p>    
-                                </MDBCol>                             
-                            </MDBRow>
-                            <MDBRow>
-                                <MDBCol  md="6" className="offset-md-6">
-                                    <div className="btn-group-tenant">      
-                                        {/* <MDBBtn rounded color="info" className="btn-rounded" onClick={toggle}>
-                                            <MDBIcon icon="user-edit" /> Update
-                                        </MDBBtn>
-                                        <MDBBtn rounded color="danger" className="btn-rounded">
-                                            <MDBIcon icon="trash" /> Delete
-                                        </MDBBtn> */}
-                                        <RoundedBtn color="info" onClick={() => onUpdateTenant(tenant)} icon="user-edit" caption="Update"/>
-                                        <RoundedBtn color="danger" onClick={() => removeTenantUser(tenant)} icon="trash" caption="Delete"/>
-                                    </div>    
-                                </MDBCol>
-                            </MDBRow>
-                        </MDBCol>
+                        <MDBCol md='5' className="data-col">
+                            <p><span className="l-title">Name: </span>{tenant.name}</p>
+                            <p><span className="l-title">Email: </span>{tenant.email}</p>
+                            <p><span className="l-title">Apt: </span>#{tenant.apartment}</p>    
+                        </MDBCol>                             
+                        <MDBCol  md="4" className="btn-col h-100 mt-auto">                            
+                                <RoundedBtn color="info" onClick={() => onUpdateTenant(tenant)} icon="user-edit" caption="Update" size="sm"/>
+                                <RoundedBtn color="danger" onClick={() => removeTenantUser(tenant)} icon="trash" caption="Delete" size="sm"/>
+                        </MDBCol>                                                                                    
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            {/* <AddUpdateTenant modal={modal} toggle={toggle} selectedTenant={tenant}/> */}
         </div>
     );
 

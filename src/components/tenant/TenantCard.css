@@ -3,19 +3,15 @@
     max-width: fit-content;
 }
 
-.tenant-card .text-col {
-    text-align: left;
-    margin-top: 10px;
-}
-
 .tenant-card .data-col {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    text-align: left;
 }
 
-.tenant-card .btn-group-tenant {
+
+.tenant-card .btn-col {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: flex-end;
 }
-
