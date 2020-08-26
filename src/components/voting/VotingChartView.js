@@ -4,7 +4,7 @@ import { connect, useStore } from 'react-redux';
 import selectVoting from '../../selectors/votingSelector';
 import { getVoting } from '../../actions/votingActions';
 import ToolTipPieChart from '../charts/ToolTipPieChart';
-import { MDBRow, MDBCol } from 'mdbreact';
+import { MDBRow, MDBCol, MDBCardBody, MDBCardTitle, MDBCard } from 'mdbreact';
 
 const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting, headerText }) => {
     const [currentVoting, setCurrentVoting] = useState(voting);
@@ -12,11 +12,9 @@ const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filtere
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();
-        }
-        
-        if(!currentVoting) {
+        } else if(!currentVoting) {
             setCurrentVoting(isActiveVoting ? filteredActiveVoting[0] : filteredDoneVoting[0]);
-        }
+        }                
     }, [votes]);
 
 
@@ -28,13 +26,15 @@ const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filtere
 
     const getVotingToDisplay = () => {
         let votingForDisplay = [];
-        if(isActiveVoting) {
-            votingForDisplay =  [...currentVoting.votesForDisplay, { 
-                title: "None Voted",
-                value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - currentVoting.votes.length : 1,
-                color: 'red'}].filter(item => item.value !== 0);
-        } else {
-            [...currentVoting.votesForDisplay].filter(item => item.value !== 0);
+        if(currentVoting) {
+            if(isActiveVoting) {
+                votingForDisplay =  [...currentVoting.votesForDisplay, { 
+                    title: "None Voted",
+                    value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - currentVoting.votes.length : 1,
+                    color: 'red'}].filter(item => item.value !== 0);
+            } else {
+                [...currentVoting.votesForDisplay].filter(item => item.value !== 0);
+            }
         }
 
         return votingForDisplay;
@@ -42,12 +42,25 @@ const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filtere
   
     return (
         <div>
-            <MDBRow className="active-votes-header">
-                <MDBCol style={{ textAlign: "left" }}>
-                    <h1>{headerText}</h1>
-                </MDBCol>                            
-            </MDBRow>
-            <ToolTipPieChart data={getVotingToDisplay()} header={currentVoting.title} isPercentage={false}/>
+            {/* <MDBRow className="active-votes-header">
+                        <MDBCol style={{ textAlign: "left" }}>
+                            <h1>{headerText}</h1>
+                        </MDBCol>                            
+                    </MDBRow>
+            <ToolTipPieChart data={getVotingToDisplay()} header={currentVoting.title} isPercentage={false}/> */}
+
+            {/* <MDBCard className="card-body" style={{ width: "22rem", marginTop: "1rem" }}> */}
+            <MDBCard>
+                <MDBCardTitle>{headerText}</MDBCardTitle>
+                <MDBCardBody>
+                    {/* <MDBRow className="active-votes-header">
+                        <MDBCol style={{ textAlign: "left" }}>
+                            <h1>{headerText}</h1>
+                        </MDBCol> 
+                    </MDBRow> */} 
+                      <ToolTipPieChart data={getVotingToDisplay()} header={currentVoting.title} isPercentage={false}/>                 
+                </MDBCardBody>    
+            </MDBCard>
         </div>
     );
 };

@@ -16,8 +16,8 @@ const ToolTipPieChart = ({ data, isPercentage=false, header }) => {
   };
 
   if(data.length === 0) {
-    return <div>
-              <img src="dont_know.png" alt=""/>
+    return <div style={{width: '100%'}}>
+              <img src="dont_know.png" className="img-fluid" alt=""/>
           </div>
   }
 
