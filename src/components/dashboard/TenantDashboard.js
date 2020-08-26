@@ -3,7 +3,7 @@ import MessageView from '../messages/MessageView';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import ActiveVotes from '../voting/ActiveVotes';
 import IssueView from '../issues/IssueView';
-import ToolTipPieChart from '../charts/ToolTipPieChart';
+import VotingChartView from '../voting/VotingChartView';
 
 const TenantDashboard = () => {
 
@@ -20,7 +20,7 @@ const TenantDashboard = () => {
               </MDBRow>
               <MDBRow>
                 <MDBCol md="2">
-                  {/* <ToolTipPieChart data={votingResultForDisplay} header="Results" isPercentage={false}/> */}
+                  <VotingChartView isActiveVoting={false} headerText="Voting Results"/>
                 </MDBCol>
                 <MDBCol md="5">
                   <IssueView isNewIssues={true}/> 
