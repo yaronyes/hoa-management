@@ -12,6 +12,7 @@ import {
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import CommentPanel from './CommentPanel';
 import './AddAndShowComment.css';
+import CommentsContainer from './CommentsContainer';
 
 const AddAndShowComment = ({ addComment, comments, showAddComment }) => {
     const [comment, setComment] = useState("");
@@ -23,14 +24,15 @@ const AddAndShowComment = ({ addComment, comments, showAddComment }) => {
         }
     }
 
-    const displayComments = comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
+    //const displayComments = comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
 
     return (
         <div className="add-comment">
             <MDBRow>
-                <MDBCol className="comments-col">
+                {/* <MDBCol className="comments-col">
                     {displayComments}    
-                </MDBCol>
+                </MDBCol> */}
+                <CommentsContainer comments={comments}/>
             </MDBRow>
             { showAddComment
               ?  <MDBRow>

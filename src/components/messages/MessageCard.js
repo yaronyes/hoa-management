@@ -21,13 +21,19 @@ import AddAndShowComment from '../comments/AddAndShowComment';
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
     const [open, setOpen] = useState(false);
     const [introIcon, setIntroIcon] = useState("none");
-    const img = `${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`;
+    const [img, setImg] = useState("message.png");    
+
+    useEffect(() => {
+        if(message.haveImage) {
+            setImg(`${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`);
+        }
+    }, [message]);
 
     useEffect(() => {
         if(!auth.user.isCommitteeMember) {
             setIntroIcon(message.seenBy.includes(auth.user._id) ? "check-square" : "square");
         }  
-    }, [auth.user.isCommitteeMember]);
+    });
 
     useEffect(() => {
         if(open && !message.seenBy.includes(auth.user._id)) {
@@ -69,13 +75,13 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                         <MDBCol lg="6">
                             <MDBRow>
                                 <MDBCol md='4' className='img-col'>
-                                <MDBView className='z-depth-1'>
+                                {/* <MDBView className='z-depth-1'> */}
                                 <MDBCardImage
                                     className='img-fluid z-depth-1'
                                     src={img}
                                     alt=''                                
                                 />
-                                </MDBView>
+                                {/* </MDBView> */}
                                 </MDBCol>
                                 <MDBCol /*md='3'*/ className="data-col">                            
                                     <p><span className="l-title">Details: </span>{message.details}</p>
