@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {    
     MDBCol,
     MDBCollapse,
@@ -19,8 +19,14 @@ import CommentModel from '../../models/CommentModel';
 import AddAndShowComment from '../comments/AddAndShowComment';
 
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue }) => {
-    const img = `${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`;
+    const [img, setImg] = useState("issue.png");  
     
+    useEffect(() => {
+        if(issue.haveImage) {
+            setImg(`${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`);
+        }
+    }, [issue]);
+
     const addComment = (text) => {
         if(text) {
             addCommentForIssue(new CommentModel({ text }), issue._id);            
@@ -63,13 +69,13 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                         <MDBCol lg="6">
                             <MDBRow>
                                 <MDBCol md='4' className='img-col'>
-                                    <MDBView className='z-depth-1'>
+                                    {/* <MDBView className='z-depth-1'> */}
                                         <MDBCardImage
                                         className='img-fluid z-depth-1'
                                         src={img}
                                         alt=''                                
                                     />
-                                    </MDBView>
+                                    {/* </MDBView> */}
                                 </MDBCol>
                                 <MDBCol /*md='3'*/ className="data-col">                           
                                     <p><span className="l-title">Details: </span>{issue.details}</p>
@@ -80,9 +86,11 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                         </MDBCol>
                         <MDBCol lg="6">
                             <MDBRow className="h-100">
-                                <MDBCol className="main-comments-col" /*lg="6"*/>
+                                { issue.status === 'open'
+                                ? <MDBCol className="main-comments-col" /*lg="6"*/>
                                     <AddAndShowComment addComment={addComment} showAddComment={auth.user.isCommitteeMember} comments={issue.comments} />                            
                                 </MDBCol>
+                                : null}
                                 { !auth.user.isCommitteeMember && issue.createdBy === auth.user._id
                                 ? <MDBCol className="btn-col h-100" lg="6">                                
                                         <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)}
