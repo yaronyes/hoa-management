@@ -20,7 +20,14 @@ import AddAndShowComment from '../comments/AddAndShowComment';
 
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
     const [open, setOpen] = useState(false);
+    const [introIcon, setIntroIcon] = useState("none");
     const img = `${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`;
+
+    useEffect(() => {
+        if(!auth.user.isCommitteeMember) {
+            setIntroIcon(message.seenBy.includes(auth.user._id) ? "check-square" : "square");
+        }  
+    }, [auth.user.isCommitteeMember]);
 
     useEffect(() => {
         if(open && !message.seenBy.includes(auth.user._id)) {
@@ -45,12 +52,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
             setOpen(true);
         }      
     }
-
-    let introIcon = "none";    
-    if(!auth.user.isCommitteeMember) {
-        introIcon = message.seenBy.includes(auth.user._id) ? "check-square" : "square";
-    }  
-
+    
     return (
         <div className="message-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>                
