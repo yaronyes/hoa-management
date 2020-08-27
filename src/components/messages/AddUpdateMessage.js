@@ -8,71 +8,83 @@ import MessageModel from '../../models/MessageModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
 import LoadImage from '../load-image/LoadImage';
+import ValidationError from "../validation-errors/VelidetionError";
 
 const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updateMessage }) => {    
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [priority, setPriority] = useState("");
     const [image, setImage] = useState();
+    const [validationErrors, setValidationErrors] = useState({}); 
     const formRef = useRef(null);
     
     useEffect(() => {
-        setTitle(messageToUpdate ? messageToUpdate.title : "");
-        setDetails(messageToUpdate ? messageToUpdate.details : "");
-        setPriority(messageToUpdate ? messageToUpdate.priority : "");
-    }, [messageToUpdate]);
-
+        if(modal) {
+            setValidationErrors({
+                title: false,
+                details: false,
+                priority: false,
+            });
+            
+            setTitle(messageToUpdate ? messageToUpdate.title : "");
+            setDetails(messageToUpdate ? messageToUpdate.details : "");
+            setPriority(messageToUpdate ? messageToUpdate.priority : "");
+        }        
+    }, [modal]);
+    
    const addUpdate = () => {
-        if(formRef.current.className === "was-validated") {
-            formRef.current.className = "needs-validation" ;
+        if(!formRef.current.className.includes("was-validated")) { 
+            formRef.current.className += " was-validated";
         }
+        
+        const errors = validateInput();
+        const numberOfErrors = Object.keys(errors).filter(key => validationErrors[key] === false);
+            
+        if(numberOfErrors.length === 0) {
+            if(messageToUpdate) {
+                updMessage();
+            } else {
+                addMessage();
+            }    
 
-        if(!title || !details || !priority) {
-            return formRef.current.className += " was-validated";
-        }    
-
-        if(messageToUpdate) {
-            updMessage();
-        } else {
-            addMessage();
-        }
             toggle();
+        } else {
+            setValidationErrors(errors);  
+        }                                     
     };
 
+    const validateInput = () => {
+        return {
+            title: title === "",
+            details: details === "",
+            priority: priority === ""
+        }
+    }
+
     const addMessage = () => {
-        try{         
-            const newMessage = new MessageModel( {
-                title,
-                details,
-                priority            
-            } );
-            createMessage(newMessage, image);                        
-        } catch (e) {
-            console.log(e)
-            alert(e.message)
-        }      
+        const newMessage = new MessageModel( {
+            title,
+            details,
+            priority            
+        } );
+        createMessage(newMessage, image);    
     };
 
     const updMessage = () => {
-        try{         
-            const updatedMessage = {
-                title,
-                details,
-                priority            
-            };
+        const updatedMessage = {
+            title,
+            details,
+            priority            
+        };
 
-            const keys = Object.keys(updatedMessage);
-            keys.forEach(key => {        
-                if (messageToUpdate[key] === updatedMessage[key] || updatedMessage[key] === undefined || updatedMessage[key] === '') {
-                    delete updatedMessage[key];            
-                }
-            })
-                    
-            updateMessage(updatedMessage, messageToUpdate._id);              
-        } catch (e) {
-            console.log(e)
-            alert(e.message)
-        }      
+        const keys = Object.keys(updatedMessage);
+        keys.forEach(key => {        
+            if (messageToUpdate[key] === updatedMessage[key] || updatedMessage[key] === undefined || updatedMessage[key] === '') {
+                delete updatedMessage[key];            
+            }
+        })
+                
+        updateMessage(updatedMessage, messageToUpdate._id); 
     };
 
     const fileCallback = img => setImage(img);
@@ -84,7 +96,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
                     <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Message" : "Create Message"}</MDBModalHeader>
                     <MDBModalBody>
                     <MDBRow>                                                
-                        <MDBCol md="9">
+                        <MDBCol md="10">
                             <form ref={formRef}
                             className="needs-validation"                       
                             >   
@@ -99,9 +111,9 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
                                         value={title}
                                         onChange={e => setTitle(e.target.value)}
                                         />
-                                        <div className="invalid-feedback">
-                                            Please provide a valid Title.
-                                        </div>                                    
+                                        { validationErrors.title
+                                        ? <ValidationError errorText="Please provide a valid Title."/>
+                                        : null}                                                                           
                                         </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -115,9 +127,9 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
                                         onChange={e => setDetails(e.target.value)}
                                         required
                                         />
-                                         <div className="invalid-feedback">
-                                            Please provide a valid Details.
-                                        </div>                                   
+                                        { validationErrors.details
+                                        ? <ValidationError errorText="Please provide a valid Details."/>
+                                        : null}                                                                           
                                         </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -136,9 +148,9 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
                                         defaultValue={priority}
                                         required
                                         />
-                                        <div className="invalid-feedback">
-                                            Please provide a valid Priority.
-                                        </div>                                      
+                                         { validationErrors.title
+                                        ? <ValidationError errorText="Please provide a valid Priority."/>
+                                        : null}                                                                             
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
