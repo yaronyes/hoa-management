@@ -3,3 +3,18 @@
     justify-content: center;
 }
 
+/* .add-upd-tenant .was-validated .invalid-feedback-show {
+    display: block;
+} */
+
+.add-upd-tenant .was-validated .invalid-error {
+    /* display: none; */
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.add-upd-tenant .md-form {
+    margin: 0;
+}

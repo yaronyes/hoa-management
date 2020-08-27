@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
 import './AddUpdateTenant.css';
 import PropTypes from "prop-types";
@@ -13,44 +13,65 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [apartment, setApartment] = useState("");
+    const [validationErrors, setValidationErrors] = useState({});    
+    const formRef = useRef(null);
 
-    // useEffect(() => {
-    //     toggle();
-    // }, [tenant]);
-    //console.log(tenantToUpdate)
-        
+    useEffect(() => {
+        setValidationErrors({
+            name: false,
+            email: false,
+            password: false,
+            apartment: false
+        });
+    }, [modal]);
+    
     useEffect(() => {
         setName(tenantToUpdate ? tenantToUpdate.name : "");
         setEmail(tenantToUpdate ? tenantToUpdate.email : "");
         setApartment(tenantToUpdate ? tenantToUpdate.apartment : "");
     }, [tenantToUpdate]);
 
-   const addUpdate = () => {
-    if(tenantToUpdate) {
-        updateTenant();
-    } else {
-        addTenant();
-    }
-    toggle();
-  };
+    const addUpdate = () => {                       
+        if(!validateInput()) {            
+            if(!formRef.current.className.includes("was-validated")) { 
+                formRef.current.className += " was-validated";
+            }
+            return;
+        }
+       
+    // if(tenantToUpdate) {
+    //     updateTenant();
+    // } else {
+    //     addTenant();
+    // }
+    // toggle();
+    };
 
-  const addTenant = () => {
-    try{         
+    const validateInput = () => {
+        const emailPattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;        
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,12}$/g
+
+        setValidationErrors({
+            name: name === "",
+            email: !emailPattern.test(email),
+            password: !passwordPattern.test(password),
+            apartment: apartment === ""
+        })
+
+        return (name !== "" && apartment !== "" && emailPattern.test(email) && passwordPattern.test(password)); 
+    }
+
+    const addTenant = () => {
         const user = new UserModel( {
             name,
             email,
             password,
             apartment
-         } );
-         addTenantUser(user);                        
-    } catch (e) {
-        console.log(e)
-        alert(e.message)
-    }      
- };
+        } );
+        addTenantUser(user);    
+    };
 
-const updateTenant = () => {
-    try{         
+    const updateTenant = () => {
         const updatedUser = {
             name,
             email,
@@ -65,83 +86,104 @@ const updateTenant = () => {
             }
         })
                 
-        updateTenantUser(updatedUser, tenantToUpdate._id);              
-    } catch (e) {
-        console.log(e)
-        alert(e.message)
-    }      
- };
+        updateTenantUser(updatedUser, tenantToUpdate._id);    
+    };
 
-  return (
+    return (
       <div className="add-upd-tenant">
         <MDBContainer>      
             <MDBModal isOpen={modal} toggle={toggle}>
                 <MDBModalHeader toggle={toggle}>{tenantToUpdate ? "Update Tenant" : "Create Tenant"}</MDBModalHeader>
                 <MDBModalBody>
                 <MDBRow>
-                    <MDBCol md="9">
-                        <form>
-                        <div className="grey-text">
-                            <MDBInput
-                            label="Name"
-                            icon="user"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"                  
-                            value={name}
-                            onChange={e => setName(e.target.value)}
-                            />
-                            <MDBInput
-                            label="Email"
-                            icon="envelope"
-                            group
-                            type="email"
-                            validate
-                            error="wrong"
-                            success="right"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            />
-                            <MDBInput
-                            label="Password"
-                            icon="lock"
-                            group
-                            type="password"
-                            validate
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            />                    
-                            <MDBInput
-                            label="Apartment"
-                            icon="building"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"
-                            value={apartment}
-                            onChange={e => setApartment(e.target.value)}
-                            />
-                        </div>                
+                    <MDBCol md="10">
+                        <form ref={formRef}
+                            className="needs-validation"                       
+                            > 
+                            <div className="grey-text">
+                                <MDBRow>
+                                    <MDBCol>
+                                        <MDBInput
+                                        label="Name"
+                                        icon="user"                                
+                                        type="text"
+                                        required                  
+                                        value={name}
+                                        onChange={e => setName(e.target.value)}
+                                        className="test"
+                                        />                                        
+                                        { validationErrors.name
+                                        ? <div className={"invalid-error"}>
+                                            Please provide a valid Name.
+                                        </div>
+                                        : null}
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow>
+                                    <MDBCol>
+                                        <MDBInput
+                                        label="Email"
+                                        icon="envelope"
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                        />
+                                        { validationErrors.email
+                                        ? <div className="invalid-error">
+                                            Please provide a valid Email.
+                                        </div>
+                                        : null}
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow>
+                                    <MDBCol>
+                                        <MDBInput
+                                        label="Password"
+                                        icon="lock"
+                                        required
+                                        type="password"                                
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
+                                        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,12}$"
+                                        />
+                                        { validationErrors.password
+                                        ? <div className="invalid-error">
+                                            Password must be between eight to twelve characters, at least one uppercase letter, one lowercase letter and one number.
+                                        </div>
+                                        : null }
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow>
+                                    <MDBCol>
+                                        <MDBInput
+                                        label="Apartment"
+                                        icon="building"
+                                        required
+                                        type="number"                                
+                                        value={apartment}
+                                        onChange={e => setApartment(e.target.value)}
+                                        />
+                                        { validationErrors.apartment
+                                          ?<div className="invalid-error">
+                                            Please provide a valid Apartment number.
+                                        </div>
+                                        : null}
+                                    </MDBCol>
+                                </MDBRow>                                                                                                                                                     
+                            </div>                
                         </form>
                     </MDBCol>
                     </MDBRow>
                 </MDBModalBody>
-                <MDBModalFooter>
-                {/* <MDBBtn color="secondary" onClick={toggle}>
-                    Close
-                </MDBBtn> */}
-                {/* <MDBBtn color="primary" onClick={addUpdate}>Save changes</MDBBtn> */}
+                <MDBModalFooter>               
                 <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
                 <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={tenantToUpdate ? "Save changes" : "Create Tenant"}/>
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>
-      </div>
-    
-  );
+      </div>    
+    );
 };
 
 
