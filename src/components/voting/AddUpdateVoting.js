@@ -9,7 +9,7 @@ import VotingModel from '../../models/VotingModel';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import dateFormat from 'dateformat';
-import ValidationError from '../validation-errors/VelidetionError';
+import ValidationError from '../validation-errors/ValidationError';
 
 const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVoting }) => {
     const [title, setTitle] = useState("");

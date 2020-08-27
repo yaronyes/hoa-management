@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { addTenantUser, updateTenantUser } from "../../actions/tenantActions";
 import UserModel from '../../models/UserModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
-import ValidationError from "../validation-errors/VelidetionError";
+import ValidationError from "../validation-errors/ValidationError";
 
 const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateTenantUser, tenant }) => {
 

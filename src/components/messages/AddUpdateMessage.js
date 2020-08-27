@@ -8,7 +8,7 @@ import MessageModel from '../../models/MessageModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
 import LoadImage from '../load-image/LoadImage';
-import ValidationError from "../validation-errors/VelidetionError";
+import ValidationError from "../validation-errors/ValidationError";
 
 const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updateMessage }) => {    
     const [title, setTitle] = useState("");

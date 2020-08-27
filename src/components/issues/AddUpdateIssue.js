@@ -8,7 +8,7 @@ import IssueModel from '../../models/IssueModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
 import LoadImage from '../load-image/LoadImage';
-import ValidationError from "../validation-errors/VelidetionError";
+import ValidationError from "../validation-errors/ValidationError";
 
 const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue }) => {    
     const [title, setTitle] = useState("");
@@ -182,8 +182,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>
-      </div>
-    
+      </div>    
   );
 };
 
