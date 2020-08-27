@@ -77,16 +77,10 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
 
     const fileCallback = img => setImage(img);
 
-    const submitHandler = event => {
-        alert()
-        event.preventDefault();
-        event.target.className += " was-validated";
-    }
-            
     return (
         <div className="add-upd-message">
             <MDBContainer>      
-                <MDBModal isOpen={modal} toggle={toggle}>
+                <MDBModal isOpen={modal} toggle={toggle} size="md">
                     <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Message" : "Create Message"}</MDBModalHeader>
                     <MDBModalBody>
                     <MDBRow>                                                

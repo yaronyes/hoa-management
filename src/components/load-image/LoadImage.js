@@ -34,21 +34,13 @@ const LoadImage = ({ fileCallback }) => {
     }
 
     
-        const imagePreview = imagePreviewUrl ? <img src={imagePreviewUrl} width="250" height="250" alt=""/> : <div className="previewText">Please select an Image for Preview</div>
+        const imagePreview = imagePreviewUrl ? <img src={imagePreviewUrl} width="100" /*height="100"*/ alt=""/> :  <img src="message.png" width="100" /*height="100"*/ alt=""/>
+        //<div className="previewText">Please select an Image for Preview</div>
 
         const alertDialog = showError ? <MDBAlert color="danger">Image size is too large. Please use smaller image</MDBAlert > : null;
         
 
-    return (
-        // <div className="load-image">
-        //     <MDBRow>
-        //         <MDBCol nd="4">
-        //             <MDBIcon icon="file-upload" className="load-image-ico"/>
-        //             <TextField id="load-image-with-icon-grid" label="Load Image" type="file"/>
-        //         </MDBCol>
-
-        //     </MDBRow>
-        // </div>
+    return (       
         <div className="load-image">        
             <MDBRow>
                 <MDBCol>
@@ -58,19 +50,15 @@ const LoadImage = ({ fileCallback }) => {
                             <h5><MDBBadge color="grey lighten-1" className="load-badge"><MDBIcon icon="file-upload" className="mr-3"/>LOAD IMAGE</MDBBadge></h5>
                         </div>                                                
                     </label>
-                    <input id="file-input" type="file" accept="image/*" onChange={handleFile} />
-                    {/* <MDBInput
-                            label="Choose File"
-                            // icon="file-upload"                           
-                            type="text"
-                            value={value}                                                                                  
-                            />             */}
+                    <input id="file-input" type="file" accept="image/*" onChange={handleFile} />                   
+                </MDBCol>
+                <MDBCol>
+                    <div className="imgPreview">
+                        {imagePreview}
+                    </div>
                 </MDBCol>   
             </MDBRow>
-            <MDBRow>
-                <div className="imgPreview">
-                    {imagePreview}
-                </div>
+            <MDBRow>                
                 <div>
                     {alertDialog}
                 </div>                      
