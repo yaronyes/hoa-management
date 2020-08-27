@@ -18,15 +18,11 @@ const TenantsPage = ({ getTenantUsers, tenants, filteredTenants }) => {
     useEffect(() => {
       if(tenants.length === 0) {
         getTenantUsers();
+      } else {
+        setCollapseID(filteredTenants[0]._id);
       }
     }, [tenants]);
-
-    // useEffect(() => {
-    //   if(selectedTenant) {
-    //     setModel(!modal);
-    //   }      
-    // }, [selectedTenant]);
-
+    
     const toggle = () => {
       setModel(!modal);
     }

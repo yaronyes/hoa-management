@@ -7,12 +7,14 @@ import MessageCard from './MessageCard';
 import { getMessages } from '../../actions/messageActions';
 
 const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
-    const [collapseID, setCollapseID] = useState(0);    
-
+    const [collapseID, setCollapseID] = useState(0);  
+    
     useEffect(() => {
         if(messages.length === 0) {
             getMessages();
-        }      
+        } else {            
+            setCollapseID(filteredMessages.filter(message => !message.seenBy.includes(auth.user._id))[0]._id);
+        }     
     }, [messages]);
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');

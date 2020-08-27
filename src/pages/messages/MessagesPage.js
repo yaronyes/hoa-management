@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import FilterBox from '../../components/filter/FilterBox';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
@@ -8,9 +7,6 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import MessageCard from '../../components/messages/MessageCard';
 import AddUpdateMessage from '../../components/messages/AddUpdateMessage';
 import './MessagesPage.css';
-import DropDownSelect from '../../components/select/DropDownSelect';
-import RadioButtonsGroup from '../../components/radio-buttons/RadioButtonsGroup';
-import { compareByDate, compareByPriority } from '../../utils/utils';
 import MessageFilters from '../../components/messages/MessageFilters';
 import selectMessages from '../../selectors/messageSelector';
 
@@ -22,7 +18,9 @@ const MessagesPage = ({ getMessages, messages, auth, filteredMessages }) => {
     useEffect(() => {
         if(messages.length === 0) {
             getMessages();
-        }      
+        } else {
+          setCollapseID(filteredMessages[0]._id);
+        }     
       }, [messages]);
      
     const toggle = () => {

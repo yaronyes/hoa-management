@@ -17,7 +17,9 @@ const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=fals
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();
-        }      
+        } else {
+            setCollapseID(filteredVoting[0]._id);
+        }
       }, [votes]);
     
     const toggle = () => {

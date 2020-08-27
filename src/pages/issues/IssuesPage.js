@@ -18,7 +18,9 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
     useEffect(() => {
       if(issues.length === 0) {
         getIssues();
-      }      
+      } else {
+        setCollapseID(filteredIssue[0]._id);
+      }     
     }, [issues]);
    
     const toggle = () => {

@@ -7,17 +7,25 @@ import IssueCard from './IssueCard';
 import { getIssues } from '../../actions/issueActions';
 
 const IssueView = ({ issues, getIssues, newReportedIssues, overdueIssues, isNewIssues }) => {
-    const [collapseID, setCollapseID] = useState(0);    
+    const [collapseID, setCollapseID] = useState(0);
+    const [filter, setFilter] = useState([]);
+
+    useEffect(() => {        
+        if(filter.length !== 0) {
+            setCollapseID(filter[0]._id);
+        }        
+    }, [filter]);
 
     useEffect(() => {
         if(issues.length === 0) {
           getIssues();
-        }      
-      }, [issues]);
-
+        } else {
+            setFilter(isNewIssues ? newReportedIssues : overdueIssues);            
+        }     
+    }, [issues]);
+    
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const filter = isNewIssues ? newReportedIssues : overdueIssues;
     const displayIssues =  filter.map(issue => <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} />);    
     
     return (
