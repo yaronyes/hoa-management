@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import Options from '../option/Options';
@@ -9,76 +9,95 @@ import VotingModel from '../../models/VotingModel';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import dateFormat from 'dateformat';
+import ValidationError from '../validation-errors/VelidetionError';
 
 const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVoting }) => {
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [voteOptions, setVoteOptions] = useState([]);
     const [dueDate, setDueDate] = useState(dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM"));
+    const [validationErrors, setValidationErrors] = useState({});    
+    const formRef = useRef(null);
 
     useEffect(() => {
-        setTitle(votingToUpdate ? votingToUpdate.title : "");
-        setDetails(votingToUpdate ? votingToUpdate.details : "");
-        setVoteOptions(votingToUpdate ? votingToUpdate.voteOptions : []);
-        setDueDate(votingToUpdate ? votingToUpdate.dueDate : dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM"));
-    }, [votingToUpdate]);
+        if(modal) {
+            setValidationErrors({
+                title: false,
+                details: false,
+                voteOptions: false,
+                dueDate: false
+            });
+            
+            setTitle(votingToUpdate ? votingToUpdate.title : "");
+            setDetails(votingToUpdate ? votingToUpdate.details : "");
+            setVoteOptions(votingToUpdate ? votingToUpdate.voteOptions : []);
+            setDueDate(votingToUpdate ? votingToUpdate.dueDate : dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM"));
+        }        
+    }, [modal]);
 
-    const addUpdate = () => {
-        if(votingToUpdate) {
-            updVoting();
+    const addUpdate = () => {                       
+        if(!formRef.current.className.includes("was-validated")) { 
+            formRef.current.className += " was-validated";
+        }
+        
+        const errors = validateInput();
+        console.log(errors)
+        const numberOfErrors = Object.keys(errors).filter(key => validationErrors[key] === false);
+              
+        if(numberOfErrors.length === 0) {
+            if(votingToUpdate) {
+                updVoting();
+            } else {
+                addVoting();
+            }
+            
+            toggle();
         } else {
-            addVoting();
+            setValidationErrors(errors);  
+        }        
+    };
+    
+    const validateInput = () => {       
+        return {
+            title: title === "",
+            details: details === "",
+            voteOptions: (voteOptions.filter(option => option.value === "").length > 0) || voteOptions.length === 0,
+            dueDate: new Date() >= new Date(dueDate)
         }
-        toggle();
-      };
-    
-        const addVoting = () => {
-            try{         
-                const newVoting = new VotingModel( {
-                    title,
-                    details,
-                    voteOptions,
-                    dueDate  
-                } );                
-                createVoting(newVoting);                        
-            } catch (e) {
-                console.log(e)
-                alert(e.message)
-            }      
-        };
-    
-        const updVoting = () => {
-            try{         
-                const updatedVoting = {
-                    title,
-                    details,
-                    voteOptions,
-                    dueDate             
-                };
-    
-                const keys = Object.keys(updatedVoting);
-                keys.forEach(key => {        
-                    if (votingToUpdate[key] === updatedVoting[key] || updatedVoting[key] === undefined || updatedVoting[key] === '') {
-                        delete updatedVoting[key];            
-                    }
-                })
-                
-                updateVoting(updatedVoting, votingToUpdate._id);              
-            } catch (e) {
-                console.log(e)
-                alert(e.message)
-            }      
+    }
+            
+    const addVoting = () => {
+        const newVoting = new VotingModel( {
+            title,
+            details,
+            voteOptions,
+            dueDate  
+        } );                
+        createVoting(newVoting);      
+    };
+
+    const updVoting = () => {
+        const updatedVoting = {
+            title,
+            details,
+            voteOptions,
+            dueDate             
         };
 
-        const endVoting = () => {
-            try{                                
-                updateVoting({ dueDate: dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM") }, votingToUpdate._id); 
-                toggle();
-            } catch (e) {
-                console.log(e)
-                alert(e.message)
-            }      
-        }
+        const keys = Object.keys(updatedVoting);
+        keys.forEach(key => {        
+            if (votingToUpdate[key] === updatedVoting[key] || updatedVoting[key] === undefined || updatedVoting[key] === '') {
+                delete updatedVoting[key];            
+            }
+        })
+        
+        updateVoting(updatedVoting, votingToUpdate._id);      
+    };
+
+    const endVoting = () => {
+        updateVoting({ dueDate: dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM") }, votingToUpdate._id); 
+        toggle();    
+    }
 
     return (
         <div className="add-voting">
@@ -88,39 +107,70 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
                     <MDBModalBody>
                     <MDBRow>
                         <MDBCol md="11">
-                            <form>
-                            <div className="grey-text">
-                                { !votingToUpdate
-                                ? <div>
-                                    <MDBInput
-                                    label="Title"
-                                    icon="text-height"
-                                    group
-                                    type="text"
-                                    validate
-                                    error="wrong"
-                                    success="right"                  
-                                    value={title}
-                                    onChange={e => setTitle(e.target.value)}
-                                    />
-                                    <MDBInput
-                                    type="textarea"
-                                    label="Details"
-                                    rows="4"
-                                    icon="pencil-alt"
-                                    value={details}
-                                    onChange={e => setDetails(e.target.value)}
-                                    />                            
-                                    <Options onOptionsChanged={(options) => {setVoteOptions(options)}} value={voteOptions} />    
-                                </div> 
-                                : null}
-                                <div className="date-time">
-                                    <DateTimePicker onDateTimeChanged={(dateTime) => setDueDate(dateTime)} value={dueDate}/>
-                                    { votingToUpdate 
-                                    ? <RoundedBtn color="danger" onClick={endVoting} icon="calendar-check" caption="End Voting" size="sm"/>
+                            <form ref={formRef}
+                                className="needs-validation"                       
+                                > 
+                                <div className="grey-text">
+                                    { !votingToUpdate
+                                    ? <div>
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <MDBInput
+                                                label="Title"
+                                                icon="text-height"                                                
+                                                type="text"
+                                                required
+                                                error="wrong"
+                                                success="right"                  
+                                                value={title}
+                                                onChange={e => setTitle(e.target.value)}
+                                                />
+                                                { validationErrors.title
+                                                ? <ValidationError errorText="Please provide a valid Title."/>                                        
+                                                : null}
+                                            </MDBCol>
+                                        </MDBRow> 
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <MDBInput
+                                                type="textarea"
+                                                label="Details"
+                                                rows="2"
+                                                icon="pencil-alt"
+                                                value={details}
+                                                onChange={e => setDetails(e.target.value)}
+                                                required
+                                                />
+                                                { validationErrors.details
+                                                ? <ValidationError errorText="Please provide a valid Details."/>                                        
+                                                : null}
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <Options onOptionsChanged={(options) => {setVoteOptions(options)}} value={voteOptions} required/>
+                                                { validationErrors.voteOptions
+                                                ? <ValidationError errorText="Please provide a valid Vote Options."/>                                        
+                                                : null}    
+                                            </MDBCol>
+                                        </MDBRow>                                                                                                            
+                                    </div> 
                                     : null}
-                                </div>
-                            </div>                
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <div className="date-time">
+                                                    <DateTimePicker onDateTimeChanged={(dateTime) => setDueDate(dateTime)} value={dueDate} required/>
+                                                    
+                                                    { votingToUpdate 
+                                                    ? <RoundedBtn color="danger" onClick={endVoting} icon="calendar-check" caption="End Voting" size="sm"/>
+                                                    : null}
+                                                </div>
+                                                { validationErrors.dueDate
+                                                    ? <ValidationError errorText="Please provide a valid Due Date."/>                                        
+                                                    : null}
+                                            </MDBCol>
+                                        </MDBRow>                                   
+                                </div>                
                             </form>
                         </MDBCol>
                         </MDBRow>

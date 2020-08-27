@@ -8,11 +8,11 @@ const Options = ({ onOptionsChanged, value }) => {
         value: val
     })) : [
         {
-            name: "option1",
+            name: "option0",
             value: ""
         },
         {
-            name: "option2",
+            name: "option1",
             value: ""
         }
     ])
@@ -46,7 +46,7 @@ const Options = ({ onOptionsChanged, value }) => {
         ]);
     };
 
-    const displayOptions = options.map((option, i) => <MDBInput key={i} type="text" icon="pencil-alt" value={option.value} onChange={optionChanged} name={option.name} />);
+    const displayOptions = options.map((option, i) => <MDBInput key={i} type="text" icon="pencil-alt" value={option.value} onChange={optionChanged} name={option.name} required />);
 
     return (
         <div className="options">

@@ -6,3 +6,11 @@
     display: flex;
     justify-content: space-between;
 }
+
+.add-voting .md-form {
+    margin: 0;
+}
+
+.add-voting .col {
+    margin-bottom: 20px;
+}

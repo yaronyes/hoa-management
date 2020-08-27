@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
+import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
 import './AddUpdateTenant.css';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
