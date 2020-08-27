@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
+import React, { useState, useEffect, useRef } from "react";
+import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol, MDBBtn  } from "mdbreact";
 import './AddUpdateMessage.css';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -14,6 +14,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
     const [details, setDetails] = useState("");
     const [priority, setPriority] = useState("");
     const [image, setImage] = useState();
+    const formRef = useRef(null);
     
     useEffect(() => {
         setTitle(messageToUpdate ? messageToUpdate.title : "");
@@ -22,13 +23,21 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
     }, [messageToUpdate]);
 
    const addUpdate = () => {
-    if(messageToUpdate) {
-        updMessage();
-    } else {
-        addMessage();
-    }
-    toggle();
-  };
+        if(formRef.current.className === "was-validated") {
+            formRef.current.className = "needs-validation" ;
+        }
+
+        if(!title || !details || !priority) {
+            return formRef.current.className += " was-validated";
+        }    
+
+        if(messageToUpdate) {
+            updMessage();
+        } else {
+            addMessage();
+        }
+            toggle();
+    };
 
     const addMessage = () => {
         try{         
@@ -67,65 +76,95 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
     };
 
     const fileCallback = img => setImage(img);
-            
 
-  return (
-      <div className="add-upd-tenant">
-        <MDBContainer>      
-            <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Message" : "Create Message"}</MDBModalHeader>
-                <MDBModalBody>
-                <MDBRow>
-                    <MDBCol md="9">
-                        <form>
-                        <div className="grey-text">
-                            <MDBInput
-                            label="Title"
-                            icon="text-height"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"                  
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                            />
-                            <MDBInput
-                            type="textarea"
-                            label="Details"
-                            rows="4"
-                            icon="pencil-alt"
-                            // group
-                            value={details}
-                            onChange={e => setDetails(e.target.value)}
-                            />                            
-                            <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="priority"
-                            dropDownItems={[
-                                {
-                                    value: "important",
-                                    name: "important"
-                                },
-                                {
-                                    value: "info",
-                                    name: "info"
-                                }
-                            ]}
-                            defaultValue={priority}/>  
-                            <LoadImage fileCallback={fileCallback}/>                                                                                                            
-                        </div>                
-                        </form>
-                    </MDBCol>
-                    </MDBRow>
-                </MDBModalBody>
-                <MDBModalFooter>
-                    <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
-                    <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={messageToUpdate ? "Save changes" : "Create Message"}/>
-                </MDBModalFooter>
-            </MDBModal>
-        </MDBContainer>
-      </div>
-    
-  );
+    const submitHandler = event => {
+        alert()
+        event.preventDefault();
+        event.target.className += " was-validated";
+    }
+            
+    return (
+        <div className="add-upd-message">
+            <MDBContainer>      
+                <MDBModal isOpen={modal} toggle={toggle}>
+                    <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Message" : "Create Message"}</MDBModalHeader>
+                    <MDBModalBody>
+                    <MDBRow>                                                
+                        <MDBCol md="9">
+                            <form ref={formRef}
+                            className="needs-validation"                       
+                            >   
+                                <div className="grey-text">                         
+                                <MDBRow>
+                                    <MDBCol>
+                                        <MDBInput
+                                        label="Title"
+                                        icon="text-height"
+                                        type="text"                                
+                                        required
+                                        value={title}
+                                        onChange={e => setTitle(e.target.value)}
+                                        />
+                                        <div className="invalid-feedback">
+                                            Please provide a valid Title.
+                                        </div>                                    
+                                        </MDBCol>
+                                </MDBRow>
+                                <MDBRow>
+                                    <MDBCol>
+                                        <MDBInput
+                                        type="textarea"
+                                        label="Details"
+                                        rows="2"
+                                        icon="pencil-alt"                                
+                                        value={details}
+                                        onChange={e => setDetails(e.target.value)}
+                                        required
+                                        />
+                                         <div className="invalid-feedback">
+                                            Please provide a valid Details.
+                                        </div>                                   
+                                        </MDBCol>
+                                </MDBRow>
+                                <MDBRow>
+                                    <MDBCol>
+                                        <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="Priority"
+                                        dropDownItems={[
+                                            {
+                                                value: "important",
+                                                name: "important"
+                                            },
+                                            {
+                                                value: "info",
+                                                name: "info"
+                                            }
+                                        ]}
+                                        defaultValue={priority}
+                                        required
+                                        />
+                                        <div className="invalid-feedback">
+                                            Please provide a valid Priority.
+                                        </div>                                      
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow>
+                                    <MDBCol>
+                                        <LoadImage fileCallback={fileCallback}/>                                     
+                                    </MDBCol>
+                                </MDBRow>                                                                                                                                                                                                                                        
+                                </div> 
+                            </form>
+                        </MDBCol>
+                        </MDBRow>
+                    </MDBModalBody>
+                    <MDBModalFooter>
+                        <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
+                        <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={messageToUpdate ? "Save changes" : "Create Message"}/>
+                    </MDBModalFooter>
+                </MDBModal>
+            </MDBContainer>
+        </div>        
+    );
 };
 
 
