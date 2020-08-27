@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { addTenantUser, updateTenantUser } from "../../actions/tenantActions";
 import UserModel from '../../models/UserModel';
 import RoundedBtn from '../rounded-button/RoundedBtn';
+import ValidationError from "../validation-errors/VelidetionError";
 
 const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateTenantUser, tenant }) => {
 
@@ -17,48 +18,51 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
     const formRef = useRef(null);
 
     useEffect(() => {
-        setValidationErrors({
-            name: false,
-            email: false,
-            password: false,
-            apartment: false
-        });
+        if(modal) {
+            setValidationErrors({
+                name: false,
+                email: false,
+                password: false,
+                apartment: false
+            });
+            
+            setName(tenantToUpdate ? tenantToUpdate.name : "");
+            setEmail(tenantToUpdate ? tenantToUpdate.email : "");
+            setApartment(tenantToUpdate ? tenantToUpdate.apartment : "");
+        }        
     }, [modal]);
-    
-    useEffect(() => {
-        setName(tenantToUpdate ? tenantToUpdate.name : "");
-        setEmail(tenantToUpdate ? tenantToUpdate.email : "");
-        setApartment(tenantToUpdate ? tenantToUpdate.apartment : "");
-    }, [tenantToUpdate]);
-
-    const addUpdate = () => {                       
-        if(!validateInput()) {            
-            if(!formRef.current.className.includes("was-validated")) { 
-                formRef.current.className += " was-validated";
-            }
-            return;
-        }
        
-    // if(tenantToUpdate) {
-    //     updateTenant();
-    // } else {
-    //     addTenant();
-    // }
-    // toggle();
+    const addUpdate = () => {                       
+        if(!formRef.current.className.includes("was-validated")) { 
+            formRef.current.className += " was-validated";
+        }
+        
+        const errors = validateInput();
+        const numberOfErrors = Object.keys(errors).filter(key => validationErrors[key] === false);
+              
+        if(numberOfErrors.length === 0) {
+            if(tenantToUpdate) {
+                updateTenant();
+            } else {
+                addTenant();
+            }
+
+            toggle();
+        } else {
+            setValidationErrors(errors);  
+        }        
     };
 
     const validateInput = () => {
         const emailPattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;        
         const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,12}$/g
-
-        setValidationErrors({
+   
+        return {
             name: name === "",
             email: !emailPattern.test(email),
             password: !passwordPattern.test(password),
             apartment: apartment === ""
-        })
-
-        return (name !== "" && apartment !== "" && emailPattern.test(email) && passwordPattern.test(password)); 
+        }
     }
 
     const addTenant = () => {
@@ -113,9 +117,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
                                         className="test"
                                         />                                        
                                         { validationErrors.name
-                                        ? <div className={"invalid-error"}>
-                                            Please provide a valid Name.
-                                        </div>
+                                        ? <ValidationError errorText="Please provide a valid Name."/>                                        
                                         : null}
                                     </MDBCol>
                                 </MDBRow>
@@ -130,9 +132,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
                                         onChange={e => setEmail(e.target.value)}
                                         />
                                         { validationErrors.email
-                                        ? <div className="invalid-error">
-                                            Please provide a valid Email.
-                                        </div>
+                                        ? <ValidationError errorText="Please provide a valid Email."/>                                        
                                         : null}
                                     </MDBCol>
                                 </MDBRow>
@@ -148,9 +148,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,12}$"
                                         />
                                         { validationErrors.password
-                                        ? <div className="invalid-error">
-                                            Password must be between eight to twelve characters, at least one uppercase letter, one lowercase letter and one number.
-                                        </div>
+                                        ? <ValidationError errorText="Password must be between eight to twelve characters, at least one uppercase letter, one lowercase letter and one number."/>                                        
                                         : null }
                                     </MDBCol>
                                 </MDBRow>
@@ -165,9 +163,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
                                         onChange={e => setApartment(e.target.value)}
                                         />
                                         { validationErrors.apartment
-                                          ?<div className="invalid-error">
-                                            Please provide a valid Apartment number.
-                                        </div>
+                                        ? <ValidationError errorText="Please provide a valid Apartment number."/>                                          
                                         : null}
                                     </MDBCol>
                                 </MDBRow>                                                                                                                                                     
