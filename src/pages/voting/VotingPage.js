@@ -11,8 +11,7 @@ import VotingFilter from '../../components/voting/VotingFilter';
 
 const VotingPage = ({ getVoting, votes, filteredVoting }) => {
     const [collapseID, setCollapseID] = useState(0);
-    console.log(votes)
-
+    
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();

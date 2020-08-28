@@ -22,11 +22,11 @@ export default class VotingModel {
 
     getVotingResult = () => {
         const results = [];
-        if(!this.isActiveVoting && this.votes) {
+        if(!this.isActiveVoting() && this.votes.length > 0) {
             this.voteOptions.forEach(option => {
                 const numberOfVotes = this.votes.filter(vote => vote.vote === option).length;
                 results.push({ 
-                    option,
+                    voteOptions: option,
                     numberOfVotes
                  });
             });
