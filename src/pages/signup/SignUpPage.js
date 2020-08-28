@@ -76,6 +76,12 @@ const SignUpPage = ({ createUser, auth }) => {
         }
     }
 
+    const keyUp = event => {
+        if(event.keyCode === 13) {
+            addUser();
+        }
+    }
+
     return (
         <div className="sign-up">
         <MDBContainer>
@@ -84,124 +90,103 @@ const SignUpPage = ({ createUser, auth }) => {
                 <form ref={formRef}
                 className="needs-validation"                       
                 >
-                    <MDBRow>
-                        <MDBCol>
-                            <MDBInput
-                            label="Name"
-                            icon="user"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"                  
-                            value={name}
-                            onChange={e => setName(e.target.value)}
-                            />
-                            { validationErrors.name
-                            ? <ValidationError errorText="Please provide a valid Name."/>                                        
-                            : null}
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol>
-                            <MDBInput
-                            label="Email"
-                            icon="envelope"
-                            group
-                            type="email"
-                            validate
-                            error="wrong"
-                            success="right"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            />                            
-                            { validationErrors.email
-                            ? <ValidationError errorText="Please provide a valid Email."/>                                        
-                            : null}
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol>
-                            <MDBInput
-                            label="Password"
-                            icon="lock"
-                            group
-                            type="password"
-                            validate
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            />
-                            { validationErrors.password
-                            ? <ValidationError errorText="Password must be between eight to twelve characters, at least one uppercase letter, one lowercase letter and one number."/>                                        
-                            : null }
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol>
-                            <MDBInput
-                            label="Building/Condominium Community Name"
-                            icon="home"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"
-                            value={buildingCommunityName}
-                            onChange={e => setBuildingCommunityName(e.target.value)}
-                            />
-                            { validationErrors.buildingCommunityName
-                            ? <ValidationError errorText="Please provide a valid Building/Condominium Community Name."/>                                          
-                            : null} 
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol>
-                        <MDBInput
-                            label="Address"
-                            icon="location-arrow"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"
-                            value={address}
-                            onChange={e => setAddress(e.target.value)}
-                            />
-                            { validationErrors.address
-                            ? <ValidationError errorText="Please provide a valid Address."/>                                          
-                            : null}
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol>
-                            <MDBInput
-                            label="City"
-                            icon="city"
-                            group
-                            type="text"
-                            validate
-                            error="wrong"
-                            success="right"
-                            value={city}
-                            onChange={e => setCity(e.target.value)}
-                            />
-                            { validationErrors.city
-                            ? <ValidationError errorText="Please provide a valid City."/>                                          
-                            : null}
+                    <div className="grey-text">
+                        <MDBRow>
+                            <MDBCol>
+                                <MDBInput
+                                label="Name"
+                                icon="user"
+                                type="text"
+                                required                  
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                                />
+                                { validationErrors.name
+                                ? <ValidationError errorText="Please provide a valid Name."/>                                        
+                                : null}
                             </MDBCol>
-                    </MDBRow>
-                <p className="h5 text-center mb-4">Sign up</p>
-                <div className="grey-text">
-                    
-                   
-                    
-                    
-                    
-                   
-                </div>
-                <div className="text-center">
-                    {/* <MDBBtn color="primary" onClick={addUser}>Register</MDBBtn> */}
-                    <RoundedBtn color="primary" onClick={addUser} icon="user-plus" caption="Register"/>
+                        </MDBRow>
+                        <MDBRow>
+                            <MDBCol>
+                                <MDBInput
+                                label="Email"
+                                icon="envelope"                            
+                                type="email"
+                                required
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                />                            
+                                { validationErrors.email
+                                ? <ValidationError errorText="Please provide a valid Email."/>                                        
+                                : null}
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow>
+                            <MDBCol>
+                                <MDBInput
+                                label="Password"
+                                icon="lock"
+                                type="password"
+                                required
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                />
+                                { validationErrors.password
+                                ? <ValidationError errorText="Password must be between eight to twelve characters, at least one uppercase letter, one lowercase letter and one number."/>                                        
+                                : null }
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow>
+                            <MDBCol>
+                                <MDBInput
+                                label="Building/Condominium Community Name"
+                                icon="home"
+                                type="text"
+                                required
+                                value={buildingCommunityName}
+                                onChange={e => setBuildingCommunityName(e.target.value)}
+                                />
+                                { validationErrors.buildingCommunityName
+                                ? <ValidationError errorText="Please provide a valid Building/Condominium Community Name."/>                                          
+                                : null} 
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow>
+                            <MDBCol>
+                            <MDBInput
+                                label="Address"
+                                icon="location-arrow"
+                                required
+                                type="text"
+                                value={address}
+                                onChange={e => setAddress(e.target.value)}
+                                />
+                                { validationErrors.address
+                                ? <ValidationError errorText="Please provide a valid Address."/>                                          
+                                : null}
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow>
+                            <MDBCol>
+                                <MDBInput
+                                label="City"
+                                icon="city"
+                                required
+                                type="text"                            
+                                value={city}
+                                onChange={e => setCity(e.target.value)}
+                                onKeyUp={keyUp}
+                                />
+                                { validationErrors.city
+                                ? <ValidationError errorText="Please provide a valid City."/>                                          
+                                : null}
+                                </MDBCol>
+                        </MDBRow>
+                    <p className="h5 text-center mb-4">Sign up</p>               
+                    <div className="text-center">
+                        {/* <MDBBtn color="primary" onClick={addUser}>Register</MDBBtn> */}
+                        <RoundedBtn color="primary" onClick={addUser} icon="user-plus" caption="Register"/>
+                    </div>
                 </div>
                 </form>
             </MDBCol>
