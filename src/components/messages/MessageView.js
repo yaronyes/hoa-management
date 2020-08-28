@@ -25,11 +25,11 @@ const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
     
     return (
         <div className="message-view">
-            <MDBRow className="message-view-header">
+            {/* <MDBRow className="message-view-header">
                 <MDBCol style={{ textAlign: "left" }}>
                     <h2>New Messages</h2>
                 </MDBCol>                            
-            </MDBRow>
+            </MDBRow> */}
             <MDBRow className="message-row">                            
                 <MDBCol>                        
                     {displayMessages}

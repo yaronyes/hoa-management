@@ -1,22 +1,45 @@
 import React, { useState } from "react";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBCard } from "mdbreact";
 import IssueView from "../issues/IssueView";
-
+import AccordionContainer from "../container/AccordionContainer";
 
 const CMDashboard = () => {
   const [collapseID, setCollapseID] = useState(0);
 
   const toggleCollapse = (newCollapseID) => setCollapseID(collapseID !== newCollapseID ? newCollapseID : "");
     
+
   return (
     <div>
       <MDBContainer>
         <MDBRow>
           <MDBCol>
-            <IssueView isNewIssues={true}/>          
-          </MDBCol>
+            <MDBRow className="issue-view-header">
+              <MDBCol className="text-left">
+                <h2>New Reported Issues</h2>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol>                
+                <AccordionContainer>
+                  <IssueView isNewIssues={true} />
+                </AccordionContainer>
+              </MDBCol>
+            </MDBRow>
+          </MDBCol>          
           <MDBCol>
-            <IssueView isNewIssues={false}/>
+          <MDBRow className="issue-view-header">
+              <MDBCol className="text-left">
+                <h2>Overdue Issues</h2>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol>
+                <AccordionContainer>
+                  <IssueView isNewIssues={false} />
+                </AccordionContainer>                
+              </MDBCol>
+            </MDBRow>           
           </MDBCol>
         </MDBRow>
         <MDBRow>

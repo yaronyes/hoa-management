@@ -1,10 +1,10 @@
-.active-votes .new-voting-row, .active-votes .voting-row {
+.active-votes .new-voting-row/*, .active-votes .voting-row*/ {
     margin-top: 16px;
 }
 
-.active-votes .active-votes-header {
+/* .active-votes .active-votes-header {
     margin-top: 25px;
-}
+} */
 
 .active-votes .new-voting-btn-hide {
     visibility: hidden;

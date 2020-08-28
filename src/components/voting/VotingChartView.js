@@ -6,7 +6,7 @@ import { getVoting } from '../../actions/votingActions';
 import ToolTipPieChart from '../charts/ToolTipPieChart';
 import { MDBRow, MDBCol, MDBCardBody, MDBCardTitle, MDBCard } from 'mdbreact';
 
-const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting, headerText }) => {
+const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting/*, headerText*/ }) => {
     const [currentVoting, setCurrentVoting] = useState(voting);
 
     useEffect(() => {
@@ -42,11 +42,11 @@ const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filtere
   
     return (
         <div>            
-            <MDBRow className="voting-results-header">
+            {/* <MDBRow className="voting-results-header">
                         <MDBCol style={{ textAlign: "left" }}>
                             <h2>{headerText}</h2>
                         </MDBCol>                            
-                    </MDBRow>
+                    </MDBRow> */}
             <MDBCard>
                 <MDBCardBody>
                       <ToolTipPieChart data={getVotingToDisplay()} header={currentVoting.title} isPercentage={false}/>                 

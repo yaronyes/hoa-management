@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 const DashboardPage = ({ auth }) => {
     return (
         <div>
-            <MDBContainer>
+            <MDBContainer fluid>
                 { auth.user.isCommitteeMember
                 ? <CMDashboard/>
                 : <TenantDashboard/> }

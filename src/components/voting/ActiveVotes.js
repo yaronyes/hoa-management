@@ -37,11 +37,11 @@ const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=fals
       
     return (
         <div className="active-votes">         
-            <MDBRow className="active-votes-header">
+            {/* <MDBRow className="active-votes-header">
                 <MDBCol style={{ textAlign: "left" }}>
                     {(!viewOnlyMode) ?  <h2>Active Votes</h2> : <h2>Pending Votes</h2>}
                 </MDBCol>                            
-            </MDBRow>
+            </MDBRow> */}
             <MDBRow className={!viewOnlyMode ? "new-voting-row" : " new-voting-row-hide"}>
                 <MDBCol className={!auth.user.isCommitteeMember ? "new-voting-btn-hide" : "ml-auto"} md="5">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="person-booth" caption="New Voting" />

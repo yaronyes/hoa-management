@@ -30,11 +30,11 @@ const IssueView = ({ issues, getIssues, newReportedIssues, overdueIssues, isNewI
     
     return (
         <div className="issue-view">
-            <MDBRow className="issue-view-header">
+            {/* <MDBRow className="issue-view-header">
                 <MDBCol style={{ textAlign: "left" }}>
                     {isNewIssues ? <h2>New Reported Issues</h2> : <h2>Overdue Issues</h2>}
                 </MDBCol>                            
-            </MDBRow>
+            </MDBRow> */}
             <MDBRow className="issues-row">                            
                 <MDBCol>                        
                     {displayIssues}
