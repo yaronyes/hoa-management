@@ -5,6 +5,7 @@ import selectMessages from '../../selectors/messageSelector';
 import { MDBRow, MDBCol } from 'mdbreact';
 import MessageCard from './MessageCard';
 import { getMessages } from '../../actions/messageActions';
+import './MessageView.css';
 
 const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
     const [collapseID, setCollapseID] = useState(0);  
@@ -26,7 +27,7 @@ const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
         <div className="message-view">
             <MDBRow className="message-view-header">
                 <MDBCol style={{ textAlign: "left" }}>
-                    <h1>New Messages</h1>
+                    <h2>New Messages</h2>
                 </MDBCol>                            
             </MDBRow>
             <MDBRow className="message-row">                            

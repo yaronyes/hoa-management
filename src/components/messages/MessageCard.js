@@ -86,7 +86,6 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                                 <MDBCol /*md='3'*/ className="data-col">                            
                                     <p><span className="l-title">Details: </span>{message.details}</p>
                                     <p><span className="l-title">Priority: </span>{message.priority}</p>
-                                    <p><span className="l-title">Status: </span>{message.status}</p>                            
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>

@@ -86,13 +86,13 @@ const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdate
                     </MDBRow>
                     { showVoteCol
                     ?<MDBRow>
-                        <MDBCol className="vote-col">                            
+                        <MDBCol className="vote-select-col">                            
                             <DropDownSelect onChange={(userVote) => setVote(userVote)} label="Your vote:" icon="person-booth" dropDownItems={voting.voteOptions.map(option => ({ 
                                 name: option,
                                 value: option
                             }))} />                            
                         </MDBCol>                        
-                        <MDBCol className="mt-auto" style={{textAlign: "left"}}>
+                        <MDBCol className="vote-btn-col mt-auto" style={{textAlign: "left"}}>
                             <RoundedBtn color="info" onClick={voteFor} icon="vote-yea" caption="Vote" size="sm"/>
                         </MDBCol>
                     </MDBRow>

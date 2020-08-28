@@ -39,7 +39,7 @@ const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=fals
         <div className="active-votes">         
             <MDBRow className="active-votes-header">
                 <MDBCol style={{ textAlign: "left" }}>
-                    {(!viewOnlyMode) ?  <h1>Active Votes</h1> : <h1>Pending Votes</h1>}
+                    {(!viewOnlyMode) ?  <h2>Active Votes</h2> : <h2>Pending Votes</h2>}
                 </MDBCol>                            
             </MDBRow>
             <MDBRow className={!viewOnlyMode ? "new-voting-row" : " new-voting-row-hide"}>

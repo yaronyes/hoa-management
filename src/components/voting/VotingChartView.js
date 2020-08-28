@@ -41,23 +41,14 @@ const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filtere
     }
   
     return (
-        <div>
-            {/* <MDBRow className="active-votes-header">
+        <div>            
+            <MDBRow className="voting-results-header">
                         <MDBCol style={{ textAlign: "left" }}>
-                            <h1>{headerText}</h1>
+                            <h2>{headerText}</h2>
                         </MDBCol>                            
                     </MDBRow>
-            <ToolTipPieChart data={getVotingToDisplay()} header={currentVoting.title} isPercentage={false}/> */}
-
-            {/* <MDBCard className="card-body" style={{ width: "22rem", marginTop: "1rem" }}> */}
             <MDBCard>
-                <MDBCardTitle>{headerText}</MDBCardTitle>
                 <MDBCardBody>
-                    {/* <MDBRow className="active-votes-header">
-                        <MDBCol style={{ textAlign: "left" }}>
-                            <h1>{headerText}</h1>
-                        </MDBCol> 
-                    </MDBRow> */} 
                       <ToolTipPieChart data={getVotingToDisplay()} header={currentVoting.title} isPercentage={false}/>                 
                 </MDBCardBody>    
             </MDBCard>

@@ -19,10 +19,10 @@ const TenantDashboard = () => {
                 </MDBCol>
               </MDBRow>
               <MDBRow>
-                <MDBCol md="2">
+                <MDBCol md="3">
                   <VotingChartView isActiveVoting={false} headerText="Voting Results"/>
                 </MDBCol>
-                <MDBCol md="5">
+                <MDBCol md="4">
                   <IssueView isNewIssues={true}/> 
                 </MDBCol>
                 <MDBCol md="5">
