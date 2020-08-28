@@ -91,17 +91,33 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                     <AddAndShowComment addComment={addComment} showAddComment={auth.user.isCommitteeMember} comments={issue.comments} />                            
                                 </MDBCol>
                                 : null}
-                                { !auth.user.isCommitteeMember && issue.createdBy === auth.user._id
-                                ? <MDBCol className="btn-col h-100" /*lg="6"*/>                                
+                                {/* { !auth.user.isCommitteeMember && issue.createdBy === auth.user._id
+                                ? <MDBCol className="btn-col">                                
                                         { issue.status === 'open'
                                         ? <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)}
                                          icon="pen" caption="Update" size="sm"/>
                                         : null}
                                          <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>                                        
                                 </MDBCol>
-                             : null}    
+                             : null}     */}
                             </MDBRow>
                         </MDBCol>                                              
+                    </MDBRow>
+                    <MDBRow>
+                        <MDBCol>
+                        { !auth.user.isCommitteeMember && issue.createdBy === auth.user._id
+                                ? <MDBCol className="btn-col">                                                                
+                                    <div className="ml-auto">
+                                        { issue.status === 'open'
+                                         
+                                        ?<RoundedBtn color="info" onClick={() => onUpdateIssue(issue)}
+                                         icon="pen" caption="Update" size="sm"/>                                         
+                                        : null}
+                                         <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>                                        
+                                    </div>
+                                </MDBCol>
+                             : null}    
+                        </MDBCol>
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>

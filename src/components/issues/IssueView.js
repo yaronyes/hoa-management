@@ -11,7 +11,7 @@ const IssueView = ({ issues, getIssues, newReportedIssues, overdueIssues, isNewI
     const [filter, setFilter] = useState([]);
 
     useEffect(() => {        
-        if(filter.length !== 0) {
+        if(filter.length !== 0 && collapseID === 0) {
             setCollapseID(filter[0]._id);
         }        
     }, [filter]);
@@ -19,7 +19,7 @@ const IssueView = ({ issues, getIssues, newReportedIssues, overdueIssues, isNewI
     useEffect(() => {
         if(issues.length === 0) {
           getIssues();
-        } else {
+        } else {            
             setFilter(isNewIssues ? newReportedIssues : overdueIssues);            
         }     
     }, [issues]);

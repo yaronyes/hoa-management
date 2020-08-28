@@ -16,9 +16,9 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
     const [selectedIssue, setSelectedIssue] = useState(null);
 
     useEffect(() => {
-      if(issues.length === 0) {
+      if(issues.length === 0 && collapseID === 0) {
         getIssues();
-      } else {
+      } else if(collapseID === 0) {
         setCollapseID(filteredIssue[0]._id);
       }     
     }, [issues]);
