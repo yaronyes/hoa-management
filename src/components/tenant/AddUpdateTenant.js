@@ -38,7 +38,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
         }
         
         const errors = validateInput();
-        const numberOfErrors = Object.keys(errors).filter(key => validationErrors[key] === false);
+        const numberOfErrors = Object.keys(errors).filter(key => errors[key] === true);
               
         if(numberOfErrors.length === 0) {
             if(tenantToUpdate) {
@@ -60,7 +60,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
         return {
             name: name === "",
             email: !emailPattern.test(email),
-            password: !passwordPattern.test(password),
+            password: tenantToUpdate ? false : (!passwordPattern.test(password)),
             apartment: apartment === ""
         }
     }

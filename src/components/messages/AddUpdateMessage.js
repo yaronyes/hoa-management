@@ -38,8 +38,9 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
         }
         
         const errors = validateInput();
-        const numberOfErrors = Object.keys(errors).filter(key => validationErrors[key] === false);
-            
+        console.log(errors)
+        const numberOfErrors = Object.keys(errors).filter(key => errors[key] === true);
+        console.log(numberOfErrors)
         if(numberOfErrors.length === 0) {
             if(messageToUpdate) {
                 updMessage();

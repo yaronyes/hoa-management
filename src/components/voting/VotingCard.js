@@ -22,8 +22,8 @@ import VoteModel from '../../models/VoteModel';
 
 const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdateVoting, auth, addVote }) => {    
     const [vote, setVote] = useState("");
-    const isActiveVoting = voting.isActiveVoting()
-
+    const isActiveVoting = voting.isActiveVoting();
+    
     const voteFor = () => {
         addVote(new VoteModel({ vote }), voting._id);
     };
@@ -86,13 +86,15 @@ const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdate
                     </MDBRow>
                     { showVoteCol
                     ?<MDBRow>
-                        <MDBCol className="vote-col">
+                        <MDBCol className="vote-col">                            
                             <DropDownSelect onChange={(userVote) => setVote(userVote)} label="Your vote:" icon="person-booth" dropDownItems={voting.voteOptions.map(option => ({ 
                                 name: option,
                                 value: option
-                            }))} />
-                            <RoundedBtn color="info" onClick={voteFor} icon="vote-yea" caption="Vote" size="sm"/>
+                            }))} />                            
                         </MDBCol>                        
+                        <MDBCol className="mt-auto" style={{textAlign: "left"}}>
+                            <RoundedBtn color="info" onClick={voteFor} icon="vote-yea" caption="Vote" size="sm"/>
+                        </MDBCol>
                     </MDBRow>
                     : null} 
                 </MDBCardBody>

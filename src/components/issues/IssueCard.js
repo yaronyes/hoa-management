@@ -92,9 +92,11 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                 </MDBCol>
                                 : null}
                                 { !auth.user.isCommitteeMember && issue.createdBy === auth.user._id
-                                ? <MDBCol className="btn-col h-100" lg="6">                                
-                                        <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)}
+                                ? <MDBCol className="btn-col h-100" /*lg="6"*/>                                
+                                        { issue.status === 'open'
+                                        ? <RoundedBtn color="info" onClick={() => onUpdateIssue(issue)}
                                          icon="pen" caption="Update" size="sm"/>
+                                        : null}
                                          <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>                                        
                                 </MDBCol>
                              : null}    

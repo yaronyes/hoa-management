@@ -38,7 +38,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
         }
         
         const errors = validateInput();
-        const numberOfErrors = Object.keys(errors).filter(key => validationErrors[key] === false);
+        const numberOfErrors = Object.keys(errors).filter(key => errors[key] === true);
               
         if(numberOfErrors.length === 0) {
             if(issueToUpdate) {
