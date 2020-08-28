@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { MDBCol } from 'mdbreact';
 import FilterBox from '../filter/FilterBox';
 import RadioButtonsGroup from '../radio-buttons/RadioButtonsGroup';
@@ -9,7 +9,7 @@ import './IssueFilters.css';
 
 const IssueFilters = ({ setTextFilter, sortByDate, sortByPriority, auth, filters }) => {
     
-    useState(() => {
+    useEffect(() => {
         sortByDate();
         setTextFilter('');
 
