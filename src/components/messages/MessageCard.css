@@ -2,21 +2,11 @@
     text-align: left;    
 }
 
-.message-card .text-col { 
-    margin-top: 10px;
-}
-
 .message-card .btn-col {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: flex-end;
-    /* padding: 0; */
-}
-
-.message-card .btn-group-message {
-    display: flex;
-    justify-content: center;  
+    flex-wrap: wrap;
 }
 
 .message-card .main-comments-col {

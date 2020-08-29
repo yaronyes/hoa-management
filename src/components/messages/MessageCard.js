@@ -72,7 +72,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                 <MDBCollapse id={message._id} isOpen={openID === message._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
-                        <MDBCol lg="6">
+                        <MDBCol lg="5">
                             <MDBRow>
                                 <MDBCol md='4' className='img-col'>
                                 {/* <MDBView className='z-depth-1'> */}
@@ -89,13 +89,13 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
-                        <MDBCol lg="6">
+                        <MDBCol lg="7">
                             <MDBRow className="h-100">
-                                <MDBCol /*lg='6'*/ className="main-comments-col">
+                                <MDBCol lg='7' className="main-comments-col">
                                     <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
                                 </MDBCol>
                                 { auth.user.isCommitteeMember
-                                ? <MDBCol lg='6' className="btn-col h-100">
+                                ? <MDBCol lg='5' className="btn-col">
                                     <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
                                     <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
                                 </MDBCol>                                
