@@ -20,7 +20,7 @@ import DropDownSelect from '../select/DropDownSelect';
 import { addVote } from '../../actions/votingActions';
 import VoteModel from '../../models/VoteModel';
 
-const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdateVoting, auth, addVote }) => {    
+const VotingCard = ({ toggleCollapse, voting, openID,/* tenantMode=false,*/ onUpdateVoting, auth, addVote }) => {    
     const [vote, setVote] = useState("");
     const isActiveVoting = voting.isActiveVoting();
     
@@ -41,10 +41,10 @@ const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdate
     //         color: 'red'});                    
     // }
     
-    const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember)  ? "8" : (isActiveVoting & !tenantMode) ? "12" : "4";
-    const showDataCol = (isActiveVoting & auth.user.isCommitteeMember) || (!isActiveVoting) || (!tenantMode);
+    const detailsColumnSize =  (isActiveVoting & auth.user.isCommitteeMember)  ? "8" : /*(isActiveVoting & !tenantMode) ? "12" :*/ "4";
+    //const showDataCol = (isActiveVoting && auth.user.isCommitteeMember) || (!isActiveVoting) || (!tenantMode);
     const showDateCol = isActiveVoting && auth.user.isCommitteeMember;
-    const showVoteCol = isActiveVoting && !auth.user.isCommitteeMember;
+    const showVoteCol = (isActiveVoting && !auth.user.isCommitteeMember && !voting.isVotedByTenant(auth.user._id));
         
     return (
         <div className="voting-card">
@@ -54,8 +54,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdate
                 <MDBCollapse id={voting._id} isOpen={openID === voting._id ? true :  false}>
                 <MDBCardBody className="voting-card-body">
                     <MDBRow className="main-row">
-                        { showDataCol
-                         ? <MDBCol md={detailsColumnSize} className="data-col">
+                        <MDBCol md={detailsColumnSize} className="data-col">
                             <MDBRow>
                                 <MDBCol>
                                     <p className="p-details"><span className="l-title">Details: </span>{voting.details}</p>
@@ -69,18 +68,17 @@ const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdate
                                 </MDBCol>
                                : null }                                        
                             </MDBRow>
-                        </MDBCol>
-                        : null }
+                        </MDBCol>                        
                         { !isActiveVoting
                           ? <MDBCol md="4" className="voting-result">
                             {/* Results     */}
-                            <ToolTipPieChart data={votingResultForDisplay} header="Results" isPercentage={false}/>
+                            <ToolTipPieChart chartData={votingResultForDisplay} header="Results" isPercentage={false}/>
                          </MDBCol> 
                          : null}
                         { auth.user.isCommitteeMember || !isActiveVoting
                           ? <MDBCol md="4" className="voting-percentage">
                             {/* Voting Percentage */}
-                            <ToolTipPieChart data={votingPercentageForDisplay} header="Voting Percentage" isPercentage={true}/>                            
+                            <ToolTipPieChart chartData={votingPercentageForDisplay} header="Voting Percentage" isPercentage={true}/>                            
                         </MDBCol>                        
                         : null } 
                     </MDBRow>

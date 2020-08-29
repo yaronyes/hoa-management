@@ -9,30 +9,28 @@ import './MessageView.css';
 
 const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
     const [collapseID, setCollapseID] = useState(0);  
+    const [filter, setFilter] = useState([]);
+    
+    useEffect(() => {        
+        if(filter.length > 0 && collapseID === 0) {
+            setCollapseID(filter[0]._id);
+        }        
+    }, [filter]);
     
     useEffect(() => {
         if(messages.length === 0) {
             getMessages();
         } else if(collapseID === 0) {            
-            const notSeenMessages = filteredMessages.filter(message => !message.seenBy.includes(auth.user._id));
-            if(notSeenMessages.length > 0) {
-                setCollapseID(notSeenMessages[0]._id);
-            }            
+            setFilter(filteredMessages.filter(message => !message.seenBy.includes(auth.user._id)));              
         }     
     }, [messages]);
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
-
-    const filter = filteredMessages.filter(message => !message.seenBy.includes(auth.user._id));
+    
     const displayMessages =  filter.map(message => <MessageCard key={message._id} toggleCollapse={toggleCollapse} message={message} openID={collapseID} viewOnlyMode={true} />);    
     
     return (
         <div className="message-view">
-            {/* <MDBRow className="message-view-header">
-                <MDBCol style={{ textAlign: "left" }}>
-                    <h2>New Messages</h2>
-                </MDBCol>                            
-            </MDBRow> */}
             <MDBRow className="message-row">                            
                 <MDBCol>                        
                     {displayMessages}
@@ -41,7 +39,6 @@ const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
         </div>
     );
 };
-
 
 MessageView.propTypes = {
     auth: PropTypes.object.isRequired,

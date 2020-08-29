@@ -13,14 +13,19 @@ const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=fals
     const [modal, setModel] = useState(false);
     const [collapseID, setCollapseID] = useState(0);    
     const [selectedVoting, setSelectedVoting] = useState(null);
+    const [filter, setFilter] = useState([]);
+
+    useEffect(() => {        
+        if(filter.length > 0 && collapseID === 0) {
+            setCollapseID(filter[0]._id);
+        }        
+    }, [filter]);
 
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();
         } else {
-            if(collapseID === 0 && filteredVoting.length > 0) {
-                setCollapseID(filteredVoting[0]._id);
-            }            
+            setFilter(!viewOnlyMode ? filteredVoting : filteredVoting.filter(voting => !voting.isVotedByTenant(auth.user._id)));                         
         }
       }, [votes]);
     
@@ -35,7 +40,7 @@ const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=fals
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
         
-    const displayActiveVotes = filteredVoting.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateVoting={openAddUpdateModal} isActiveVoting={item.isActiveVoting()}/>);    
+    const displayActiveVotes = filter.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateVoting={openAddUpdateModal} isActiveVoting={item.isActiveVoting()}/>);    
       
     return (
         <div className="active-votes">         

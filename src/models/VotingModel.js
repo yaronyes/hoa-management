@@ -41,4 +41,6 @@ export default class VotingModel {
         const now = new Date();    
         return now < this.dueDate;
     }
+
+    isVotedByTenant = tenantId => this.votes.find(vote => vote.votedBy === tenantId);
 }
