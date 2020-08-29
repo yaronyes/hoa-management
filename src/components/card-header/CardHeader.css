@@ -6,6 +6,8 @@
     text-align: left;
     display: flex;
     justify-content: space-between;
+    background: rgb(19,6,237);
+    background: linear-gradient(90deg, rgba(19,6,237,1) 0%, rgba(22,123,193,1) 0%, rgba(22,53,184,1) 100%);
 }
 
 .card-header .intro-icon {

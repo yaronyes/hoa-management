@@ -4,7 +4,7 @@ import { MDBIcon } from 'mdbreact';
 
 
 const CardHeader = ({ id, toggleCollapse, color, headerText, icon="none", iconColor, introIcon="none", introIconColor, onIntroIconClicked, secondText="", onMainIconClicked}) => {
-    const colorId = color ? color : 'rgba(96, 125, 139, 0.3) rgba-blue-grey-light';
+    const colorId = color ? color : "";//"blue darken-3";//"info-color-dark";//'rgba(96, 125, 139, 0.3) rgba-blue-grey-light';
 
     const clicked = event => {        
         if(event.target.className.includes("intro-icon") && onIntroIconClicked) {

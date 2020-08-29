@@ -28,13 +28,18 @@ const VotingPage = ({ getVoting, votes, filteredVoting }) => {
         <div className="voting-page">
             <MDBContainer>
                 <MDBRow>
-                    <MDBCol lg="6">                        
+                    <MDBCol lg="6">
+                        <MDBRow className="row-active-voting d-flex justify-content-center">
+                            <MDBCol className="blue-gradient p-3 white-text mx-3">
+                                <h2 className="h2-responsive mb-2 font-weight-bold">Active Voting</h2>                                
+                            </MDBCol>                            
+                        </MDBRow>                        
                         <ActiveVotes />
                     </MDBCol>
                     <MDBCol lg="6">
-                        <MDBRow className="row-voting-results">
-                            <MDBCol style={{ textAlign: "left" }}>
-                                <h1>Voting Results</h1>
+                        <MDBRow className="row-voting-results d-flex justify-content-center">
+                            <MDBCol className="blue-gradient p-3 white-text mx-3">
+                                <h2 className="h2-responsive mb-2 font-weight-bold">Voting Results</h2>
                             </MDBCol>                            
                         </MDBRow>
                         <MDBRow>                                                
