@@ -11,7 +11,7 @@ const CMDashboard = () => {
 
   return (
     <div>
-      <MDBContainer>
+      <MDBContainer fluid>
         <MDBRow>
           <MDBCol>
             <MDBRow className="issue-view-header">

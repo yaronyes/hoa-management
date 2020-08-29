@@ -1,43 +1,33 @@
+.voting-card {
+    text-align: left;
+}
+
 .voting-card .data-col {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+} 
+
+.voting-card .date-col {
+    display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .voting-card .p-date {
     margin-bottom: 0;
 }
 
-.voting-card p {
-    text-align: left;
-}
-
 .voting-card span {
     font-weight: bold;
 }
 
-.voting-card .voting-result, .voting-card .voting-percentage {
-    padding: 0 10px;
-    /* margin-top: auto;     */
-    margin-bottom: 10px;
-}
-
-.voting-card .vote-select-col {    
+.voting-card .vote-select-col .drop-down-select {
     padding-right: 0;
 }
 
-.voting-card .vote-btn-col {
-    padding-left: 0;
-}
-
-.voting-card .voting-card-body {
+.voting-card .vote-select-col {    
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.voting-card .main-row {
-    align-content: flex-start;
-    /* align-items: flex-start; */
+    align-items: flex-end;
+    flex-wrap: wrap;
 }

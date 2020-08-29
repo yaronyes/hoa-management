@@ -91,8 +91,8 @@ const VotingCard = ({ toggleCollapse, voting, openID, tenantMode=false, onUpdate
                                 name: option,
                                 value: option
                             }))} />                            
-                        </MDBCol>                        
-                        <MDBCol className="vote-btn-col mt-auto" style={{textAlign: "left"}}>
+                        {/* </MDBCol>                         */}
+                        {/* <MDBCol className="vote-btn-col mt-auto" style={{textAlign: "left"}}> */}
                             <RoundedBtn color="info" onClick={voteFor} icon="vote-yea" caption="Vote" size="sm"/>
                         </MDBCol>
                     </MDBRow>
