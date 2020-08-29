@@ -14,7 +14,7 @@ const CommentsContainer = ({ comments }) => {
 
     return (       
         <div style={style}>
-            <ScrollToBottom className="scroll-to-bottom">
+            <ScrollToBottom className="scroll-to-bottom " scrollViewClassName="scrollbar scrollbar-primary">
                 {displayComments}                 
             </ScrollToBottom>
         </div>
