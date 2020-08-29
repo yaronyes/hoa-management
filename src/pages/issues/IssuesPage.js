@@ -18,8 +18,8 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
     useEffect(() => {
       if(issues.length === 0 && collapseID === 0) {
         getIssues();
-      } else if(collapseID === 0) {
-        setCollapseID(filteredIssue[0]._id);
+      } else if(collapseID === 0 && filteredIssue.length > 0) {
+        setCollapseID(filteredIssue[0]._id);    
       }     
     }, [issues]);
    

@@ -18,7 +18,7 @@ const TenantsPage = ({ getTenantUsers, tenants, filteredTenants }) => {
     useEffect(() => {
       if(tenants.length === 0) {
         getTenantUsers();
-      } else if(collapseID === 0) {
+      } else if(collapseID === 0 && filteredTenants.length > 0) {
         setCollapseID(filteredTenants[0]._id);
       }
     }, [tenants]);

@@ -15,7 +15,7 @@ const VotingPage = ({ getVoting, votes, filteredVoting }) => {
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();
-        } else if(collapseID === 0) {
+        } else if(collapseID === 0 && filteredVoting.length > 0) {
                 setCollapseID(filteredVoting[0]._id);
             }              
       }, [votes]);

@@ -18,7 +18,7 @@ const MessagesPage = ({ getMessages, messages, auth, filteredMessages }) => {
     useEffect(() => {
         if(messages.length === 0) {
             getMessages();
-        } else if(collapseID === 0) {
+        } else if(collapseID === 0 && filteredMessages.length > 0) {
           setCollapseID(filteredMessages[0]._id);
         }     
       }, [messages]);
