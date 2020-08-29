@@ -103,7 +103,7 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
         <div className="add-voting">
            <MDBContainer>      
                 <MDBModal isOpen={modal} toggle={toggle}>
-                    <MDBModalHeader toggle={toggle}>{votingToUpdate ? "Update Voting" : "Create Voting"}</MDBModalHeader>
+                    <MDBModalHeader className='blue-gradient white-text' toggle={toggle}>{votingToUpdate ? "Update Voting" : "Create Voting"}</MDBModalHeader>
                     <MDBModalBody>
                     <MDBRow>
                         <MDBCol md="11">

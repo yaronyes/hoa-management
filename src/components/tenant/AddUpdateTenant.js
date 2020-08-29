@@ -97,7 +97,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
       <div className="add-upd-tenant">
         <MDBContainer>      
             <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>{tenantToUpdate ? "Update Tenant" : "Create Tenant"}</MDBModalHeader>
+                <MDBModalHeader className='blue-gradient white-text' toggle={toggle}>{tenantToUpdate ? "Update Tenant" : "Create Tenant"}</MDBModalHeader>
                 <MDBModalBody>
                 <MDBRow>
                     <MDBCol md="10">

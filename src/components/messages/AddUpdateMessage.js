@@ -94,7 +94,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
         <div className="add-upd-message">
             <MDBContainer>      
                 <MDBModal isOpen={modal} toggle={toggle} size="md">
-                    <MDBModalHeader toggle={toggle}>{messageToUpdate ? "Update Message" : "Create Message"}</MDBModalHeader>
+                    <MDBModalHeader className='blue-gradient white-text' toggle={toggle}>{messageToUpdate ? "Update Message" : "Create Message"}</MDBModalHeader>
                     <MDBModalBody>
                     <MDBRow>                                                
                         <MDBCol md="10">

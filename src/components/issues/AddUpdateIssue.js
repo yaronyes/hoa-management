@@ -104,7 +104,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
       <div className="add-upd-issue">
         <MDBContainer>      
             <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>{issueToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
+                <MDBModalHeader className='blue-gradient white-text' toggle={toggle}>{issueToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
                 <MDBModalBody>
                 <MDBRow>
                     <MDBCol md="10">
