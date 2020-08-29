@@ -41,6 +41,7 @@ const TenantDashboard = () => {
                   </MDBRow>
                 </MDBCol>           
               </MDBRow>
+              <hr/>
               <MDBRow>                
                 <MDBCol md="3">
                   <MDBRow className="voting-results-header">

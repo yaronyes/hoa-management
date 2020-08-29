@@ -4,7 +4,7 @@
 
 .message-card .btn-col {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: flex-end;
     flex-wrap: wrap;
 }
@@ -12,5 +12,5 @@
 .message-card .main-comments-col {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between;    
 }

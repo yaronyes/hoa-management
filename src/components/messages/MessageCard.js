@@ -70,40 +70,48 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                 onIntroIconClicked={introIconClicked}
                 />
                 <MDBCollapse id={message._id} isOpen={openID === message._id ? true :  false}>
-                <MDBCardBody>
-                    <MDBRow className='my-3'>
-                        <MDBCol lg="5">
-                            <MDBRow>
-                                <MDBCol md='4' className='img-col'>
-                                {/* <MDBView className='z-depth-1'> */}
-                                <MDBCardImage
-                                    className='img-fluid z-depth-1'
-                                    src={img}
-                                    alt=''                                
-                                />
-                                {/* </MDBView> */}
-                                </MDBCol>
-                                <MDBCol /*md='3'*/ className="data-col">                            
-                                    <p><span className="l-title">Details: </span>{message.details}</p>
-                                    <p><span className="l-title">Priority: </span>{message.priority}</p>
-                                </MDBCol>
-                            </MDBRow>
-                        </MDBCol>
-                        <MDBCol lg="7">
-                            <MDBRow className="h-100">
-                                <MDBCol lg='7' className="main-comments-col">
-                                    <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
-                                </MDBCol>
-                                { auth.user.isCommitteeMember
-                                ? <MDBCol lg='5' className="btn-col">
-                                    <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
-                                    <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
-                                </MDBCol>                                
-                                : null}
-                            </MDBRow>
-                        </MDBCol> 
-                    </MDBRow>
-                </MDBCardBody>
+                    <MDBCardBody>
+                        <MDBRow className='my-3'>
+                            <MDBCol lg="5">
+                                <MDBRow>
+                                    <MDBCol md='4' className='img-col'>
+                                    {/* <MDBView className='z-depth-1'> */}
+                                    <MDBCardImage
+                                        className='img-fluid z-depth-1'
+                                        src={img}
+                                        alt=''                                
+                                    />
+                                    {/* </MDBView> */}
+                                    </MDBCol>
+                                    <MDBCol /*md='3'*/ className="data-col">                            
+                                        <p><span className="l-title">Details: </span>{message.details}</p>
+                                        <p><span className="l-title">Priority: </span>{message.priority}</p>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBCol>
+                            <MDBCol lg="7">
+                                <MDBRow className="h-100">
+                                    <MDBCol lg={auth.user.isCommitteeMember ? "7" : "12"} className="main-comments-col">
+                                        <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
+                                    </MDBCol>
+                                    {/* { auth.user.isCommitteeMember
+                                    ? <MDBCol lg='5' className="btn-col">
+                                        <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
+                                        <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
+                                    </MDBCol>                                
+                                    : null} */}
+                                </MDBRow>
+                            </MDBCol> 
+                        </MDBRow>
+                        <MDBRow>
+                            { auth.user.isCommitteeMember
+                            ? <MDBCol className="btn-col">
+                                <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
+                                <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
+                            </MDBCol>                                
+                            : null}
+                        </MDBRow>
+                    </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
         </div>

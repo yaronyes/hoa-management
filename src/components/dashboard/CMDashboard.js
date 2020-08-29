@@ -42,6 +42,7 @@ const CMDashboard = () => {
             </MDBRow>           
           </MDBCol>
         </MDBRow>
+        <hr/>
         <MDBRow>
           <MDBCol>
             <MDBRow>
