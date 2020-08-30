@@ -31,7 +31,7 @@ const TenantDashboard = () => {
                 </MDBCol>   
                 <MDBCol md="5">
                   <CardContainer headerText="New Issues">
-                    <IssueView selectedFilters={{ isOpen: true, isNew: false }}/>           
+                    <IssueView selectedFilters={{ isOpen: true, isNew: true }}/>           
                   </CardContainer>
                   {/* <MDBRow className="new-issues-header">
                     <MDBCol style={{ textAlign: "left" }}>
