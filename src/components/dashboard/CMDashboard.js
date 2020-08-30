@@ -5,9 +5,9 @@ import CardContainer from "../container/CardContainer";
 import VotingChartView from "../voting/VotingChartView";
 
 const CMDashboard = () => {
-  const [collapseID, setCollapseID] = useState(0);
+  //const [collapseID, setCollapseID] = useState(0);
 
-  const toggleCollapse = (newCollapseID) => setCollapseID(collapseID !== newCollapseID ? newCollapseID : "");
+  //const toggleCollapse = (newCollapseID) => setCollapseID(collapseID !== newCollapseID ? newCollapseID : "");
     
 
   return (
@@ -16,12 +16,12 @@ const CMDashboard = () => {
         <MDBRow>
           <MDBCol className="new-issue-view-header">
             <CardContainer headerText="New Reported Issues">
-              <IssueView isNewIssues={true} />
+              <IssueView selectedFilters={{ isOpen: true, isNew: true }} />
             </CardContainer>
           </MDBCol>          
           <MDBCol className="issue-view-header">
             <CardContainer headerText="Overdue Issues">
-              <IssueView isNewIssues={false} />
+              <IssueView selectedFilters={{ isOpen: true, isNew: false }} />
             </CardContainer>               
           </MDBCol>
         </MDBRow>

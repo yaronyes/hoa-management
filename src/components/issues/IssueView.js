@@ -6,7 +6,7 @@ import { MDBRow, MDBCol } from 'mdbreact';
 import IssueCard from './IssueCard';
 import { getIssues } from '../../actions/issueActions';
 
-const IssueView = ({ issues, getIssues, newReportedIssues, overdueIssues, isNewIssues }) => {
+const IssueView = ({ issues, getIssues, openedNewIssues, overdueIssues, closedNewIssues, selectedFilters }) => {
     const [collapseID, setCollapseID] = useState(0);
     const [filter, setFilter] = useState([]);
 
@@ -20,7 +20,15 @@ const IssueView = ({ issues, getIssues, newReportedIssues, overdueIssues, isNewI
         if(issues.length === 0) {
           getIssues();
         } else {            
-            setFilter(isNewIssues ? newReportedIssues : overdueIssues);            
+            console.log(selectedFilters)
+            if(selectedFilters.isOpen && selectedFilters.isNew) {
+                setFilter(openedNewIssues);
+            } else if (selectedFilters.isOpen && !selectedFilters.isNew) {
+                setFilter(overdueIssues);
+            } else {
+                setFilter(closedNewIssues);
+            }
+            //setFilter(isNewIssues ? newReportedIssues : overdueIssues);            
         }     
     }, [issues]);
     
@@ -49,8 +57,9 @@ IssueView.propTypes = {
     // auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     issues: PropTypes.array.isRequired,
-    newReportedIssues: PropTypes.array.isRequired,
+    openedNewIssues: PropTypes.array.isRequired,
     overdueIssues: PropTypes.array.isRequired,
+    closedNewIssues: PropTypes.array.isRequired,
     getIssues: PropTypes.func.isRequired
 }
 
@@ -58,8 +67,9 @@ const mapStateToProps = state => ({
     // auth: state.auth,
     errors: state.errors,
     issues: state.issue,
-    newReportedIssues: selectIssues(state.issue, state.issueFilters, 'open'),
-    overdueIssues: selectIssues(state.issue, state.issueFilters, 'close'),
+    openedNewIssues: selectIssues(state.issue, state.issueFilters, 'open', 'new'),
+    overdueIssues: selectIssues(state.issue, state.issueFilters, 'open', 'old'),
+    closedNewIssues: selectIssues(state.issue, state.issueFilters, 'close', "new"),
 });
 
 export default connect(mapStateToProps, { getIssues })(IssueView);

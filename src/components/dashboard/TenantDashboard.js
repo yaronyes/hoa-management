@@ -31,7 +31,7 @@ const TenantDashboard = () => {
                 </MDBCol>   
                 <MDBCol md="5">
                   <CardContainer headerText="New Issues">
-                    <IssueView isNewIssues={true}/>           
+                    <IssueView selectedFilters={{ isOpen: true, isNew: false }}/>           
                   </CardContainer>
                   {/* <MDBRow className="new-issues-header">
                     <MDBCol style={{ textAlign: "left" }}>
@@ -48,7 +48,7 @@ const TenantDashboard = () => {
                 </MDBCol>   
                 <MDBCol md="4">
                   <CardContainer headerText="New Resolved Issue">
-                    <IssueView isNewIssues={false} /> 
+                    <IssueView selectedFilters={{ isOpen: false, isNew: true }} /> 
                   </CardContainer>
                   {/* <MDBRow className="new-resolved-issues-header">
                     <MDBCol style={{ textAlign: "left" }}>
