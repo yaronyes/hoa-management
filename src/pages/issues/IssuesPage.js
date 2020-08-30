@@ -42,12 +42,12 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
                 <MDBRow>                 
                   <IssueFilters />
                 </MDBRow>   
-                <MDBRow className="add-isssue">
+                <MDBRow className="add-issue">
                   <MDBCol className={auth.user.isCommitteeMember ? "add-issue-hide" : "ml-auto"} md="6" lg="4">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New Issue"/>
                   </MDBCol>                  
                 </MDBRow>     
-                <MDBRow>
+                <MDBRow className="issue-row">
                   <MDBContainer className='accordion md-accordion accordion-1'>
                     {displayIssues}                 
                   </MDBContainer>

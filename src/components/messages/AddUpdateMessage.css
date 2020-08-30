@@ -4,5 +4,9 @@
 
 .add-upd-message .row {
     text-align: left;
-    justify-content: center;
+    justify-content: center;   
+}
+
+.add-upd-message .grey-text .row {
+    margin-top: 20px;
 }
