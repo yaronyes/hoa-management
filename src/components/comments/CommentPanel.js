@@ -13,7 +13,7 @@ const CommentPanel = ({ text, name, icon, iconColor }) => {
             <MDBCol md='1' className="icon-col">
               <MDBIcon icon={icon ? icon : 'user-circle'} size="2x" className={iconColor}/>
             </MDBCol>
-            <MDBCol className="ml-2 mt-1">
+            <MDBCol className="name-col mt-1">
               <p className="mb-0 red-text">{`${name}:`}</p>
             </MDBCol>            
           </MDBRow>  

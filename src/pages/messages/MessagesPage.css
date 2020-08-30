@@ -1,3 +1,3 @@
-.message-page .row:not(:first-child) {
+.message-page .add-message, .message-page .accordion {
     margin-top: 20px;
 }

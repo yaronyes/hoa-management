@@ -5,11 +5,15 @@
 }
 
 .comment-panel .card-body {
-
     padding: 5px;
 }
 
 .comment-panel .text-col {
     margin: 0;
     padding: 0 1.2rem;
+}
+
+.comment-panel .name-col {
+    margin: 0;
+    padding: 0 1.5rem;
 }

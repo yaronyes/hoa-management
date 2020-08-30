@@ -1,8 +1,7 @@
-.issues-page .row:not(:first-child) {
+.issues-page .add-issue, .message-page .accordion {
     margin-top: 20px;
 }
 
 .issues-page .add-issue-hide {
-    /* visibility: hidden; */
     display: none;
 }
