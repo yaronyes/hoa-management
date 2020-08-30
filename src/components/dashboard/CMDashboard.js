@@ -32,13 +32,13 @@ const CMDashboard = () => {
                 <CardContainer headerText="Active Voting Percentage">
                   <MDBRow>
                     <MDBCol lg="4" md="6">
-                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={0} />
+                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={0} isPercentage={true} />
                     </MDBCol>
                     <MDBCol lg="4" md="6">
-                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={1} />
+                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={1} isPercentage={true} />
                     </MDBCol>
                     <MDBCol lg="4" md="6">
-                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={2} />
+                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={2} isPercentage={true} />
                     </MDBCol>
                   </MDBRow>
                 </CardContainer>               

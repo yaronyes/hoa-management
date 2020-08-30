@@ -24,7 +24,7 @@ const ToolTipPieChart = ({ chartData, isPercentage=false, header, useSmallChart=
     else {
       const total = data.reduce( ( sum, { value } ) => sum + value , 0);
       return {        
-        labels: data.map(dataEntry => dataEntry.title),
+        labels: data.map(dataEntry => isPercentage ? `${dataEntry.title} in %`: dataEntry.title),
         datasets: [
           {
             data: data.map(dataEntry => isPercentage ? Math.round(dataEntry.value * 100 / total)  : dataEntry.value),
