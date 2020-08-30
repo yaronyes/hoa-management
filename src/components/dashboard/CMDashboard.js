@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBCard } from "mdbreact";
 import IssueView from "../issues/IssueView";
 import CardContainer from "../container/CardContainer";
+import VotingChartView from "../voting/VotingChartView";
 
 const CMDashboard = () => {
   const [collapseID, setCollapseID] = useState(0);
@@ -29,7 +30,17 @@ const CMDashboard = () => {
             <MDBRow>
               <MDBCol className="active-voting-pr-header">
                 <CardContainer headerText="Active Voting Percentage">
-                  
+                  <MDBRow>
+                    <MDBCol lg="4" md="6">
+                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={0} />
+                    </MDBCol>
+                    <MDBCol lg="4" md="6">
+                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={1} />
+                    </MDBCol>
+                    <MDBCol lg="4" md="6">
+                      <VotingChartView isActiveVoting={true} itemPositionInTheArray={2} />
+                    </MDBCol>
+                  </MDBRow>
                 </CardContainer>               
               </MDBCol>              
             </MDBRow>

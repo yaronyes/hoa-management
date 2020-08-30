@@ -26,7 +26,7 @@ const TenantDashboard = () => {
               <MDBRow>                
                 <MDBCol md="3">
                   <CardContainer headerText="Voting Results">
-                    <VotingChartView isActiveVoting={false} />
+                    <VotingChartView isActiveVoting={false} itemPositionInTheArray={0} />
                   </CardContainer>                  
                 </MDBCol>   
                 <MDBCol md="5">

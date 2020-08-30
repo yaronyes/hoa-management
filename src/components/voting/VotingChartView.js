@@ -6,22 +6,29 @@ import { getVoting } from '../../actions/votingActions';
 import ToolTipPieChart from '../charts/ToolTipPieChart';
 import { MDBRow, MDBCol, MDBCardBody, MDBCardTitle, MDBCard } from 'mdbreact';
 
-const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting/*, headerText*/ }) => {
+const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting, itemPositionInTheArray }) => {
     const [currentVoting, setCurrentVoting] = useState(voting);
 
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();
         } else if(!currentVoting) {
-            setCurrentVoting(isActiveVoting ? filteredActiveVoting[0] : filteredDoneVoting[0]);
+            if(isActiveVoting) {
+                if(filteredActiveVoting.length > itemPositionInTheArray) {
+                    setCurrentVoting(filteredActiveVoting[itemPositionInTheArray]);
+                }
+            } else {
+                if(filteredDoneVoting.length > itemPositionInTheArray) {
+                    setCurrentVoting(filteredDoneVoting[itemPositionInTheArray]);
+                }
+            }
+            //setCurrentVoting(isActiveVoting ? filteredActiveVoting[itemPositionInTheArray] : filteredDoneVoting[itemPositionInTheArray]);
         }                
     }, [votes]);
 
 
     if(!currentVoting) {
-        return <div style={{width: '100%'}}>
-                  <img src="dont_know.png" className="img-fluid" alt=""/>
-              </div>
+        return null;
     }
 
     const getVotingToDisplay = () => {
@@ -49,7 +56,7 @@ const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filtere
                     </MDBRow> */}
             <MDBCard>
                 <MDBCardBody>
-                      <ToolTipPieChart data={getVotingToDisplay()} header={currentVoting.title} isPercentage={false}/>                 
+                      <ToolTipPieChart chartData={getVotingToDisplay()} header={currentVoting ? currentVoting.title : ""} isPercentage={false} useSmallChart={false}/>                 
                 </MDBCardBody>    
             </MDBCard>
         </div>
