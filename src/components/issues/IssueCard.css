@@ -24,3 +24,8 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+/* set background color for all cards */
+.card-body {
+    background-color: #ffffff;
+}
