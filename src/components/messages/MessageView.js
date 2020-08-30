@@ -20,7 +20,7 @@ const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
     useEffect(() => {
         if(messages.length === 0) {
             getMessages();
-        } else if(collapseID === 0) {            
+        } else {            
             setFilter(filteredMessages.filter(message => !message.seenBy.includes(auth.user._id)));              
         }     
     }, [messages]);
