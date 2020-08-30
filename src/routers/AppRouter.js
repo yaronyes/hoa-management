@@ -14,6 +14,7 @@ import IssuesPage from '../pages/issues/IssuesPage';
 import SignUpPage from '../pages/signup/SignUpPage';
 import LoginPage from  '../pages/login/LoginPage';
 import RouteIfLoggedIn from './RouteIfLoggedIn';
+import NotFoundPage from '../pages/not-found/NotFoundPage';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -36,38 +37,18 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
             <HeaderNavbar userConnected={isUserConnected}/>
                 <Switch>
                     <PrivateRoute exact path="/" redirectTo="/dashboard" component={HomePage} />  
-                    {/* <Route exact path="/">
-                        <HomePage/>
-                    </Route> */}
                     <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" component={DashboardPage} />                        
-                    {/* <Route exact path="/dashboard">
-                        <DashboardPage/>
-                    </Route> */}
                     <RouteIfLoggedIn exact path="/messages" redirectTo="/" component={MessagesPage} />                        
-                    {/* <Route exact path='/messages'>
-                        <MessagesPage/>
-                    </Route> */}
                     <RouteIfLoggedIn exact path="/tenants" redirectTo="/" component={TenantsPage} /> 
-                    {/* <Route exact path='/tenants'>
-                        <TenantsPage/>
-                    </Route> */}
                     <RouteIfLoggedIn exact path="/voting" redirectTo="/" component={VotingPage} /> 
-                    {/* <Route exact path='/voting'>
-                        <VotingPage/>
-                    </Route> */}
                     <RouteIfLoggedIn exact path="/issues" redirectTo="/" component={IssuesPage} /> 
-                    {/* <Route exact path='/issues'>
-                        <IssuesPage/>
-                    </Route> */}
                     <Route exact path='/signup'>
                         <SignUpPage/>
                     </Route>
                     <Route exact path='/login'>
                         <LoginPage/>
                     </Route>
-                    {/* <Route exact path="/dashboard/:id">
-                        <TenantDashboardPage/>
-                    </Route>                                    */}
+                    <Route component={NotFoundPage} />
                 </Switch>
         </BrowserRouter>
     );
