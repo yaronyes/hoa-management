@@ -67,7 +67,7 @@ VotingChartView.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
-    filteredVoting: PropTypes.array.isRequired,
+    //filteredVoting: PropTypes.array.isRequired,
     getVoting: PropTypes.func.isRequired
 }
 
