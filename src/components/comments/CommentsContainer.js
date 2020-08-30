@@ -5,7 +5,7 @@ import './CommentsContainer.css';
 
 const CommentsContainer = ({ comments }) => {
 
-    const displayComments = comments.map(comment => <CommentPanel key={comment._id} text={comment.text}/>)
+    const displayComments = comments.map(comment => <CommentPanel key={comment._id} text={comment.text} name={comment.createdBy.name}/>)
    
     const style = { 
         width: '100%', 

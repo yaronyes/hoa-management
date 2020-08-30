@@ -5,16 +5,11 @@
 }
 
 .comment-panel .card-body {
-    display: flex;
+
     padding: 5px;
 }
 
 .comment-panel .text-col {
     margin: 0;
-    padding: 0 0 0 1rem;
-}
-
-
-.comment-panel .icon-col {
-    padding: 0;
+    padding: 0 1.2rem;
 }
