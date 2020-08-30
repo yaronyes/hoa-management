@@ -28,7 +28,7 @@ const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
 
     return (
     <div className="header-navbar">
-      <MDBNavbar color="rgba-black-strong" dark expand="md">
+      <MDBNavbar color="cyan darken-4" dark expand="md">
         <MDBNavbarBrand>
           <strong className="white-text">HOA Systems</strong>
         </MDBNavbarBrand>
