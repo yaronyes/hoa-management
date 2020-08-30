@@ -19,8 +19,7 @@ const IssueView = ({ issues, getIssues, openedNewIssues, overdueIssues, closedNe
     useEffect(() => {
         if(issues.length === 0) {
           getIssues();
-        } else {            
-            console.log(selectedFilters)
+        } else {                        
             if(selectedFilters.isOpen && selectedFilters.isNew) {
                 setFilter(openedNewIssues);
             } else if (selectedFilters.isOpen && !selectedFilters.isNew) {
