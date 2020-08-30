@@ -15,6 +15,7 @@ import SignUpPage from '../pages/signup/SignUpPage';
 import LoginPage from  '../pages/login/LoginPage';
 import RouteIfLoggedIn from './RouteIfLoggedIn';
 import NotFoundPage from '../pages/not-found/NotFoundPage';
+import WebSocketClient from '../components/websocket/WebSocketClient';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [isUserConnected, setIsUserConnected] = useState(false);
@@ -50,6 +51,7 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     </Route>
                     <Route component={NotFoundPage} />
                 </Switch>
+            <WebSocketClient />
         </BrowserRouter>
     );
 }
