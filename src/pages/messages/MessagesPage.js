@@ -9,8 +9,9 @@ import AddUpdateMessage from '../../components/messages/AddUpdateMessage';
 import './MessagesPage.css';
 import MessageFilters from '../../components/messages/MessageFilters';
 import selectMessages from '../../selectors/messageSelector';
+import Spinner from '../../components/spinner/Spinner';
 
-const MessagesPage = ({ getMessages, messages, auth, filteredMessages, onPageSelected }) => {
+const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedMessage, setSelectedMessage] = useState(null);
@@ -37,6 +38,10 @@ const MessagesPage = ({ getMessages, messages, auth, filteredMessages, onPageSel
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
    
     const displayMessages = filteredMessages.map(message => <MessageCard key={message._id} toggleCollapse={toggleCollapse} message={message} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
+
+    if(loader.loadingIssues) {
+      return <Spinner />
+    }
 
     return (
         <div className="message-page">
@@ -69,6 +74,7 @@ const MessagesPage = ({ getMessages, messages, auth, filteredMessages, onPageSel
 
 MessagesPage.propTypes = {
   auth: PropTypes.object.isRequired,
+  loader: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
   getMessages: PropTypes.func.isRequired,
@@ -77,6 +83,7 @@ MessagesPage.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,   
+  loader: state.loader,
   errors: state.errors,
   messages: state.message,
   filteredMessages: selectMessages(state.message, state.messageFilters)

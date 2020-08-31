@@ -5,8 +5,9 @@ import selectVoting from '../../selectors/votingSelector';
 import { getVoting } from '../../actions/votingActions';
 import ToolTipPieChart from '../charts/ToolTipPieChart';
 import { MDBRow, MDBCol, MDBCardBody, MDBCardTitle, MDBCard } from 'mdbreact';
+import Spinner from '../spinner/Spinner';
 
-const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting, itemPositionInTheArray, isPercentage=false }) => {
+const VotingChartView = ({ loader, votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting, itemPositionInTheArray, isPercentage=false }) => {
     const [currentVoting, setCurrentVoting] = useState(voting);
 
     useEffect(() => {
@@ -48,23 +49,21 @@ const VotingChartView = ({ votes, auth, getVoting, filteredActiveVoting, filtere
     }
   
     return (
-        <div>            
-            {/* <MDBRow className="voting-results-header">
-                        <MDBCol style={{ textAlign: "left" }}>
-                            <h2>{headerText}</h2>
-                        </MDBCol>                            
-                    </MDBRow> */}
-            <MDBCard>
+        <div>
+            { loader.loadVoting         
+            ?  <Spinner />
+            : <MDBCard>
                 <MDBCardBody>
                       <ToolTipPieChart chartData={getVotingToDisplay()} header={currentVoting ? currentVoting.title : ""} isPercentage={isPercentage} useSmallChart={false}/>                 
                 </MDBCardBody>    
-            </MDBCard>
+            </MDBCard> }
         </div>
     );
 };
 
 VotingChartView.propTypes = {
     auth: PropTypes.object.isRequired,
+    loader: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
     //filteredVoting: PropTypes.array.isRequired,
@@ -73,6 +72,7 @@ VotingChartView.propTypes = {
 
 const mapStateToProps = state => ({
     auth: state.auth,
+    loader: state.loader,
     errors: state.errors,
     votes: state.voting,
     filteredActiveVoting: selectVoting(state.voting, state.votingFilters, true),

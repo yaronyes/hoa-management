@@ -8,8 +8,9 @@ import { connect } from 'react-redux';
 import './ActiveVotes.css';
 import selectVoting from '../../selectors/votingSelector';
 import { getVoting } from '../../actions/votingActions';
+import Spinner from '../spinner/Spinner';
 
-const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=false }) => {
+const ActiveVotes = ({ loader, votes, auth, getVoting, filteredVoting, viewOnlyMode=false }) => {
     const [modal, setModel] = useState(false);
     const [collapseID, setCollapseID] = useState(0);    
     const [selectedVoting, setSelectedVoting] = useState(null);
@@ -42,13 +43,12 @@ const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=fals
         
     const displayActiveVotes = filter.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} onUpdateVoting={openAddUpdateModal} isActiveVoting={item.isActiveVoting()}/>);    
       
+    if(loader.loadingVotes) {
+        return <Spinner />
+    }
+    
     return (
-        <div className="active-votes">         
-            {/* <MDBRow className="active-votes-header">
-                <MDBCol style={{ textAlign: "left" }}>
-                    {(!viewOnlyMode) ?  <h2>Active Votes</h2> : <h2>Pending Votes</h2>}
-                </MDBCol>                            
-            </MDBRow> */}
+        <div className="active-votes">                     
             <MDBRow className={!viewOnlyMode ? "new-voting-row" : " new-voting-row-hide"}>
                 <MDBCol className={!auth.user.isCommitteeMember ? "new-voting-btn-hide" : "ml-auto"} md="5">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="person-booth" caption="New Voting" />
@@ -66,6 +66,7 @@ const ActiveVotes = ({ votes, auth, getVoting, filteredVoting, viewOnlyMode=fals
 
 ActiveVotes.propTypes = {
     auth: PropTypes.object.isRequired,
+    loader: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
     filteredVoting: PropTypes.array.isRequired,
@@ -74,6 +75,7 @@ ActiveVotes.propTypes = {
 
 const mapStateToProps = state => ({
     auth: state.auth,
+    loader: state.loader,
     errors: state.errors,
     votes: state.voting,
     filteredVoting: selectVoting(state.voting, state.votingFilters, true)

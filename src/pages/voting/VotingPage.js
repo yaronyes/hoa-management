@@ -8,8 +8,9 @@ import ActiveVotes from '../../components/voting/ActiveVotes';
 import './VotingPage.css';
 import selectVoting from '../../selectors/votingSelector';
 import VotingFilter from '../../components/voting/VotingFilter';
+import Spinner from '../../components/spinner/Spinner';
 
-const VotingPage = ({ getVoting, votes, filteredVoting, onPageSelected }) => {
+const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);
     
     useEffect(() => onPageSelected('voting'), []);
@@ -25,7 +26,11 @@ const VotingPage = ({ getVoting, votes, filteredVoting, onPageSelected }) => {
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
     
     const displayDoneVotes = filteredVoting.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} /*onUpdateMessage={openAddUpdateModal}*/ /*isActiveVoting={item.isActiveVoting()}*//>);
-      
+
+    if(loader.loadingVotes) {
+        return <Spinner />
+    }
+    
     return (
         <div className="voting-page">
             <MDBContainer>
@@ -61,6 +66,7 @@ const VotingPage = ({ getVoting, votes, filteredVoting, onPageSelected }) => {
 
 VotingPage.propTypes = {
     auth: PropTypes.object.isRequired,
+    loader: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
     getVoting: PropTypes.func.isRequired,
@@ -69,6 +75,7 @@ VotingPage.propTypes = {
 
 const mapStateToProps = state => ({
     auth: state.auth,
+    loader: state.loader,
     errors: state.errors,
     votes: state.voting,
     filteredVoting: selectVoting(state.voting, state.votingFilters, false)

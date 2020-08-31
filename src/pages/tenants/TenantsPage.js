@@ -9,8 +9,9 @@ import AddUpdateTenant  from '../../components/tenant/AddUpdateTenant';
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import TenantFilters from '../../components/tenant/TenantFilters';
 import selectTenants from '../../selectors/tenantSelector';
+import Spinner from '../../components/spinner/Spinner';
 
-const TenantsPage = ({ auth, getTenantUsers, tenants, filteredTenants, onPageSelected }) => {
+const TenantsPage = ({ loader, auth, getTenantUsers, tenants, filteredTenants, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState();
@@ -40,6 +41,10 @@ const TenantsPage = ({ auth, getTenantUsers, tenants, filteredTenants, onPageSel
     if(!auth.user.isCommitteeMember) {
       return null;
     }
+    
+    if(loader.loadingTenants) {
+      return <Spinner />
+    }
 
     return (
         <div className="tenants-page">
@@ -65,6 +70,7 @@ const TenantsPage = ({ auth, getTenantUsers, tenants, filteredTenants, onPageSel
 
 TenantsPage.propTypes = {
   auth: PropTypes.object.isRequired,
+  loader: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   tenants: PropTypes.array.isRequired,
   getTenantUsers: PropTypes.func.isRequired,
@@ -73,6 +79,7 @@ TenantsPage.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  loader: state.loader,
   errors: state.errors,
   tenants: state.tenant,
   filteredTenants: selectTenants(state.tenant, state.tenantFilters)

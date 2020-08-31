@@ -6,8 +6,9 @@ import { MDBRow, MDBCol } from 'mdbreact';
 import MessageCard from './MessageCard';
 import { getMessages } from '../../actions/messageActions';
 import './MessageView.css';
+import Spinner from '../spinner/Spinner';
 
-const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
+const MessageView = ({ loader, auth, messages, getMessages, filteredMessages }) => {
     const [collapseID, setCollapseID] = useState(0);  
     const [filter, setFilter] = useState([]);
     
@@ -31,17 +32,20 @@ const MessageView = ({ auth, messages, getMessages, filteredMessages }) => {
     
     return (
         <div className="message-view">
-            <MDBRow className="message-row">                            
+            { loader.loadingMessages
+           ? <Spinner />
+           : <MDBRow className="message-row">                            
                 <MDBCol>                        
                     {displayMessages}
                 </MDBCol>                            
-            </MDBRow>      
+            </MDBRow>  }
         </div>
     );
 };
 
 MessageView.propTypes = {
     auth: PropTypes.object.isRequired,
+    loader: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     messages: PropTypes.array.isRequired,
     getMessages: PropTypes.func.isRequired,
@@ -49,7 +53,8 @@ MessageView.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth,   
+    auth: state.auth,
+    loader: state.loader,   
     errors: state.errors,
     messages: state.message,
     filteredMessages: selectMessages(state.message, state.messageFilters)

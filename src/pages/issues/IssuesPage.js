@@ -9,8 +9,9 @@ import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
 import './IssuesPage.css';
 import selectIssues from '../../selectors/issueSelector';
 import IssueFilters from '../../components/issues/IssueFilters';
+import Spinner from '../../components/spinner/Spinner';
 
-const IssuesPage = ({ getIssues, issues, auth, filteredIssue, onPageSelected }) => {
+const IssuesPage = ({ loader, getIssues, issues, auth, filteredIssue, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [modal, setModel] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState(null);
@@ -36,7 +37,11 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue, onPageSelected }) 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
     const displayIssues = filteredIssue.map(issue => <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>);    
-     
+    
+    if(loader.loadingIssues) {
+      return <Spinner />
+    }
+
     return (
         <div className="issues-page">
             <MDBContainer>
@@ -63,6 +68,7 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue, onPageSelected }) 
 
 IssuesPage.propTypes = {
     errors: PropTypes.object.isRequired,
+    loader: PropTypes.object.isRequired,
     issues: PropTypes.array.isRequired,
     getIssues: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
@@ -71,6 +77,7 @@ IssuesPage.propTypes = {
 
 const mapStateToProps = state => ({
     auth: state.auth,
+    loader: state.loader,
     errors: state.errors,
     issues: state.issue,
     filteredIssue: selectIssues(state.issue, state.issueFilters)
