@@ -3,14 +3,14 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const RouteIfLoggedIn = ({ auth, redirectTo, component: Component, ...rest }) => {
+const RouteIfLoggedIn = ({ auth, redirectTo, children,/* component: Component,*/ ...rest }) => {
     // useEffect(() => {
 
     //  }, [auth])
     return (
         <Route {...rest} render={(props) => (            
             (auth.isAuthenticated)
-            ? <Component {...props} />            
+            ? children//<Component {...props} />            
             : <Redirect to={redirectTo} />            
         )} />
       )

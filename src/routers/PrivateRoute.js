@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const PrivateRoute = ({ auth, redirectTo, component: Component, ...rest }) => {
+const PrivateRoute = ({ auth, redirectTo, children,/* component: Component,*/ ...rest }) => {
     // useEffect(() => {
 
     //  }, [auth])
@@ -11,7 +11,7 @@ const PrivateRoute = ({ auth, redirectTo, component: Component, ...rest }) => {
     return (
         <Route {...rest} render={(props) => (            
             (!auth.isAuthenticated)
-            ? <Component {...props} />            
+            ? children//<Component {...props} />            
             : <Redirect to={redirectTo} />            
         )} />
       )

@@ -18,15 +18,15 @@ import NotFoundPage from '../pages/not-found/NotFoundPage';
 import WebSocketClient from '../components/websocket/WebSocketClient';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
-    const [isUserConnected, setIsUserConnected] = useState(false);
+    //const [isUserConnected, setIsUserConnected] = useState(false);
 
     useEffect(() => {
         checkForConnectedUser();
     }, [])
 
-    useEffect(() => {
-        setIsUserConnected(auth.isAuthenticated);
-    }, [auth]);
+    // useEffect(() => {
+    //     setIsUserConnected(auth.isAuthenticated);
+    // }, [auth]);
 
     useEffect(() => {
         console.log("Error:", errors);
@@ -35,14 +35,26 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
 
     return (
         <BrowserRouter>
-            <HeaderNavbar userConnected={isUserConnected}/>
+            <HeaderNavbar/>
                 <Switch>
-                    <PrivateRoute exact path="/" redirectTo="/dashboard" component={HomePage} />  
-                    <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" component={DashboardPage} />                        
-                    <RouteIfLoggedIn exact path="/messages" redirectTo="/" component={MessagesPage} />                        
-                    <RouteIfLoggedIn exact path="/tenants" redirectTo="/" component={TenantsPage} /> 
-                    <RouteIfLoggedIn exact path="/voting" redirectTo="/" component={VotingPage} /> 
-                    <RouteIfLoggedIn exact path="/issues" redirectTo="/" component={IssuesPage} /> 
+                    <PrivateRoute exact path="/" redirectTo="/dashboard" /*component={HomePage}*/ >
+                        <HomePage />
+                    </PrivateRoute>  
+                    <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" /*component={DashboardPage}*/ >
+                        <DashboardPage/>
+                    </RouteIfLoggedIn>                        
+                    <RouteIfLoggedIn exact path="/messages" redirectTo="/" /*component={MessagesPage}*/>
+                        <MessagesPage />
+                    </RouteIfLoggedIn>                        
+                    <RouteIfLoggedIn exact path="/tenants" redirectTo="/" /*component={TenantsPage}*/ >
+                        <TenantsPage />
+                    </RouteIfLoggedIn> 
+                    <RouteIfLoggedIn exact path="/voting" redirectTo="/" /*component={VotingPage}*/ >
+                        <VotingPage />
+                    </RouteIfLoggedIn>
+                    <RouteIfLoggedIn exact path="/issues" redirectTo="/" /*component={IssuesPage}*/ >
+                        <IssuesPage />
+                    </RouteIfLoggedIn>
                     <Route exact path='/signup'>
                         <SignUpPage/>
                     </Route>

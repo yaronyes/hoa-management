@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 
-const HeaderNavbar = ({ userConnected, logoutUser, auth }) => {
+const HeaderNavbar = ({ logoutUser, auth }) => {
     const [isUserConnected, setIsUserConnected] = useState(false);  
     const [isOpen, setIsOpen] = useState(false);
     const history = useHistory();
