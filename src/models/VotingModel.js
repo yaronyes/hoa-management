@@ -30,8 +30,8 @@ export default class VotingModel {
                     numberOfVotes
                  });
             });
-
-            results.sort((a, b) => a.numberOfVotes - b.numberOfVotes);
+            
+            results.sort((a, b) => b.numberOfVotes - a.numberOfVotes);            
         }
 
         return results;
