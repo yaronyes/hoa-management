@@ -39,8 +39,10 @@ const MessagesPage = ({ getMessages, messages, auth, filteredMessages }) => {
     return (
         <div className="message-page">
         <MDBContainer>
-            <MDBRow>              
-              <MessageFilters />
+            <MDBRow> 
+              <MDBCol>
+                <MessageFilters />
+              </MDBCol>                           
             </MDBRow>   
             <MDBRow>
               { auth.user.isCommitteeMember

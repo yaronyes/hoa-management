@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react';
-import { MDBCol } from 'mdbreact';
+import { MDBCol, MDBRow } from 'mdbreact';
 import FilterBox from '../filter/FilterBox';
 import RadioButtonsGroup from '../radio-buttons/RadioButtonsGroup';
 import PropTypes from 'prop-types';
@@ -26,11 +26,12 @@ const MessageFilters = ({ setTextFilter, sortByDate, sortByPriority, setPriority
     
     return (
         <div className="filter-message">
-            <MDBCol md="5">
-                <FilterBox onFilterChanged={(text) => setTextFilter(text)} />
-              </MDBCol>                 
-              <MDBCol md="3">
-              <DropDownSelect onChange={(priority) => setPriorityFilter(priority)} icon="exclamation" label="Filter by Priority"
+            <MDBRow>
+                <MDBCol lg="5">
+                    <FilterBox onFilterChanged={(text) => setTextFilter(text)} />
+                </MDBCol>                 
+                <MDBCol lg="3">
+                    <DropDownSelect onChange={(priority) => setPriorityFilter(priority)} icon="exclamation" label="Filter by Priority"
                             dropDownItems={[
                                 {
                                     value: "important",
@@ -41,23 +42,24 @@ const MessageFilters = ({ setTextFilter, sortByDate, sortByPriority, setPriority
                                     name: "info"
                                 }
                             ]}/>  
-              </MDBCol>
-              <MDBCol md="4">
-                  <RadioButtonsGroup 
-                  label="Sort by:" radioBtnInfo={[
+                </MDBCol>
+                <MDBCol lg="4">
+                    <RadioButtonsGroup 
+                    label="Sort by:" radioBtnInfo={[
                     {
-                      value: "createdAt",
-                      label: "Date"
+                        value: "createdAt",
+                        label: "Date"
                     },
                     {
-                      value: "priority",
-                      label: "Priority"
+                        value: "priority",
+                        label: "Priority"
                     }
-                  ]} 
-                  defaultSelect={filters.sortBy}
-                  onChange={(selected) => setSortBy(selected)}
-                  />                 
-              </MDBCol>
+                    ]} 
+                    defaultSelect={filters.sortBy}
+                    onChange={(selected) => setSortBy(selected)}
+                    />                 
+                </MDBCol>
+            </MDBRow>
         </div>
     );
 };
