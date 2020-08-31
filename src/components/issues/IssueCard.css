@@ -30,6 +30,6 @@
     background-color: #ffffff;
 }
 
-/* .col {
-    margin-bottom: ;
-} */
+.issue-card .img-col/*, .issue-card .data-col*/ {
+    margin-bottom: 15px;
+}

@@ -66,7 +66,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                 <MDBCollapse id={issue._id} isOpen={openID === issue._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
-                        <MDBCol>
+                        <MDBCol md="6">
                             <MDBRow>
                                 <MDBCol md='4' className='img-col'>
                                     {/* <MDBView className='z-depth-1'> */}
@@ -84,8 +84,8 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
-                        { issue.comments.length > 0
-                        ? <MDBCol>
+                        {/* { issue.comments.length > 0 */}
+                         <MDBCol md="6">
                             <MDBRow className="h-100">
                                 {/* { issue.status === 'open' */}
                                  <MDBCol className="main-comments-col">
@@ -94,7 +94,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                 {/* : null}                                */}
                             </MDBRow>
                         </MDBCol>
-                        : null}                                              
+                        {/* : null}                                               */}
                     </MDBRow>
                     <MDBRow>                        
                         { !auth.user.isCommitteeMember && issue.createdBy === auth.user._id

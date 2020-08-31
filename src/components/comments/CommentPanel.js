@@ -10,12 +10,16 @@ const CommentPanel = ({ text, name, icon, iconColor }) => {
         <MDBCard>
           <MDBCardBody>
           <MDBRow>
-            <MDBCol md='1' className="icon-col">
+            <MDBCol className="user-col">
+              <MDBIcon icon={icon ? icon : 'user-circle'} size="2x" className={iconColor}/>
+              <p className="mb-0 red-text">{`${name}:`}</p>
+            </MDBCol>
+            {/* <MDBCol md='1' className="icon-col">
               <MDBIcon icon={icon ? icon : 'user-circle'} size="2x" className={iconColor}/>
             </MDBCol>
             <MDBCol className="name-col mt-1">
               <p className="mb-0 red-text">{`${name}:`}</p>
-            </MDBCol>            
+            </MDBCol>             */}
           </MDBRow>  
           <MDBRow>
             <MDBCol className="text-col">

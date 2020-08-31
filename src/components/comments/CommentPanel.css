@@ -13,7 +13,15 @@
     padding: 0 1.2rem;
 }
 
-.comment-panel .name-col {
+/* .comment-panel .name-col {
     margin: 0;
     padding: 0 1.5rem;
+} */
+
+.comment-panel .user-col {
+    display: flex;
+}
+
+.comment-panel .user-col > p {
+    padding: 0 0.5rem;
 }
