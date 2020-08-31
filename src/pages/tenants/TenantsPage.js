@@ -10,7 +10,7 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import TenantFilters from '../../components/tenant/TenantFilters';
 import selectTenants from '../../selectors/tenantSelector';
 
-const TenantsPage = ({ getTenantUsers, tenants, filteredTenants, onPageSelected }) => {
+const TenantsPage = ({ auth, getTenantUsers, tenants, filteredTenants, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState();
@@ -37,6 +37,10 @@ const TenantsPage = ({ getTenantUsers, tenants, filteredTenants, onPageSelected 
 
     const displayTenants = filteredTenants.map(item => <TenantCard key={item._id} toggleCollapse={toggleCollapse} tenant={item} openID={collapseID} onUpdateTenant={openAddUpdateModal}/>);
 
+    if(!auth.user.isCommitteeMember) {
+      return null;
+    }
+
     return (
         <div className="tenants-page">
             <MDBContainer>
@@ -60,6 +64,7 @@ const TenantsPage = ({ getTenantUsers, tenants, filteredTenants, onPageSelected 
 }
 
 TenantsPage.propTypes = {
+  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   tenants: PropTypes.array.isRequired,
   getTenantUsers: PropTypes.func.isRequired,
@@ -67,6 +72,7 @@ TenantsPage.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   errors: state.errors,
   tenants: state.tenant,
   filteredTenants: selectTenants(state.tenant, state.tenantFilters)

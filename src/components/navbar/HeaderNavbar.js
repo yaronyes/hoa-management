@@ -39,7 +39,7 @@ const HeaderNavbar = ({ logoutUser, auth, selectedPage }) => {
               <MDBNavLink to="/dashboard">Dashboard</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem active={selectedPage === 'tenants' ? true :  false}>
-              <MDBNavLink to="/tenants">Tenants</MDBNavLink>
+              <MDBNavLink to="/tenants" disabled={auth.user.isCommitteeMember ? false : true}>Tenants</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem active={selectedPage === 'messages' ? true :  false}>
               <MDBNavLink to="/messages">Messages</MDBNavLink>
