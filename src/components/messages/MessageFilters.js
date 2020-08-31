@@ -27,10 +27,10 @@ const MessageFilters = ({ setTextFilter, sortByDate, sortByPriority, setPriority
     return (
         <div className="filter-message">
             <MDBRow>
-                <MDBCol lg="5">
+                <MDBCol xl="5">
                     <FilterBox onFilterChanged={(text) => setTextFilter(text)} />
                 </MDBCol>                 
-                <MDBCol lg="3">
+                <MDBCol xl="3" lg="6">
                     <DropDownSelect onChange={(priority) => setPriorityFilter(priority)} icon="exclamation" label="Filter by Priority"
                             dropDownItems={[
                                 {
@@ -43,7 +43,7 @@ const MessageFilters = ({ setTextFilter, sortByDate, sortByPriority, setPriority
                                 }
                             ]}/>  
                 </MDBCol>
-                <MDBCol lg="4">
+                <MDBCol xl="4" lg="6">
                     <RadioButtonsGroup 
                     label="Sort by:" radioBtnInfo={[
                     {
