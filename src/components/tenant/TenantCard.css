@@ -1,6 +1,7 @@
 .tenant-card .img-col {
     min-width: auto;
     max-width: fit-content;
+    margin-bottom: 15px;
 }
 
 .tenant-card .data-col {
