@@ -8,16 +8,21 @@
 
 .issue-card .btn-col {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: flex-end;
-    /* padding: 0; */
+
 }
 
-/* .issue-card .btn-group-issue {
-    display: flex;
-    justify-content: center;     
+/* .issue-card .img-data-row {
+    height: 100%;
 } */
+
+.issue-card .img-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
 
 .issue-card .main-comments-col {
     display: flex;
@@ -30,6 +35,6 @@
     background-color: #ffffff;
 }
 
-.issue-card .img-col/*, .issue-card .data-col*/ {
-    margin-bottom: 15px;
+.issue-card .img-col, .issue-card .data-col {
+    margin-bottom: 25px;
 }

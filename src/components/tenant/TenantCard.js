@@ -56,9 +56,9 @@ const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTena
                             </MDBView>
                         </MDBCol>
                         <MDBCol md='5' className="data-col">
-                            <p><span className="l-title">Name: </span>{tenant.name}</p>
-                            <p><span className="l-title">Email: </span>{tenant.email}</p>
-                            <p><span className="l-title">Apt: </span>#{tenant.apartment}</p>    
+                            <h5><strong>Name: </strong><strong class="text-muted">{tenant.name}</strong></h5>  
+                            <h5><strong>Email: </strong><strong class="text-muted">{tenant.email}</strong></h5>  
+                            <h5><strong>Apt: </strong><strong class="text-muted">{tenant.apartment}</strong></h5>      
                         </MDBCol>                             
                         <MDBCol  md="4" className="btn-col h-100 mt-auto">                            
                                 <RoundedBtn color="info" onClick={() => onUpdateTenant(tenant)} icon="user-edit" caption="Update" size="sm"/>

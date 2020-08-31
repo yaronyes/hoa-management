@@ -66,9 +66,9 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                 <MDBCollapse id={issue._id} isOpen={openID === issue._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
-                        <MDBCol md="6">
-                            <MDBRow>
-                                <MDBCol md='4' className='img-col'>
+                        <MDBCol md="7">
+                            <MDBRow className="img-data-row">
+                                <MDBCol md='5' className='img-col'>
                                     {/* <MDBView className='z-depth-1'> */}
                                         <MDBCardImage
                                         className='img-fluid z-depth-1'
@@ -78,14 +78,14 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                     {/* </MDBView> */}
                                 </MDBCol>
                                 <MDBCol /*md='3'*/ className="data-col">                           
-                                    <p><span className="l-title">Details: </span>{issue.details}</p>
-                                    <p><span className="l-title">Priority: </span>{issue.priority}</p>
-                                    <p><span className="l-title">Status: </span>{issue.status}</p>    
+                                    <h5><strong>Details: </strong><strong class="text-muted">{issue.details}</strong></h5>
+                                    <h5><strong>Priority: </strong><strong class="text-muted">{issue.priority}</strong></h5>  
+                                    <h5><strong>Status: </strong><strong class="text-muted">{issue.status}</strong></h5>  
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
                         {/* { issue.comments.length > 0 */}
-                         <MDBCol md="6">
+                         <MDBCol md="5">
                             <MDBRow className="h-100">
                                 {/* { issue.status === 'open' */}
                                  <MDBCol className="main-comments-col">

@@ -15,6 +15,6 @@
     justify-content: space-between;    
 }
 
-.message-card .img-col/*, .message-card .data-col*/ {
-    margin-bottom: 15px;
+/*.message-card .img-col,*/ .message-card .data-col {
+    margin-bottom: 25px;
 }

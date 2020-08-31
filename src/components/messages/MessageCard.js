@@ -72,26 +72,26 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                 <MDBCollapse id={message._id} isOpen={openID === message._id ? true :  false}>
                     <MDBCardBody>
                         <MDBRow className='my-3'>
-                            <MDBCol lg="5">
+                            <MDBCol lg="7">
                                 <MDBRow>
                                     <MDBCol md='4' className='img-col'>
-                                    {/* <MDBView className='z-depth-1'> */}
+                                    <MDBView>
                                     <MDBCardImage
-                                        className='img-fluid z-depth-1'
+                                        className='img-fluid'
                                         src={img}
                                         alt=''                                
                                     />
-                                    {/* </MDBView> */}
+                                    </MDBView>
                                     </MDBCol>
                                     <MDBCol /*md='3'*/ className="data-col">                            
-                                        <p><span className="l-title">Details: </span>{message.details}</p>
-                                        <p><span className="l-title">Priority: </span>{message.priority}</p>
+                                        <h5><strong>Details: </strong><strong class="text-muted">{message.details}</strong></h5>
+                                        <h5><strong>Priority: </strong><strong class="text-muted">{message.priority}</strong></h5>                                        
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
-                            <MDBCol lg="7">
+                            <MDBCol lg="5">
                                 <MDBRow className="h-100">
-                                    <MDBCol lg={auth.user.isCommitteeMember ? "7" : "12"} className="main-comments-col">
+                                    <MDBCol className="main-comments-col">
                                         <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
                                     </MDBCol>
                                     {/* { auth.user.isCommitteeMember
