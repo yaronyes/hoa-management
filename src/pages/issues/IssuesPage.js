@@ -39,8 +39,10 @@ const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
     return (
         <div className="issues-page">
             <MDBContainer>
-                <MDBRow>                 
-                  <IssueFilters />
+                <MDBRow>
+                  <MDBCol>
+                    <IssueFilters />
+                  </MDBCol>                 
                 </MDBRow>   
                 <MDBRow className="add-issue">
                   <MDBCol className={auth.user.isCommitteeMember ? "add-issue-hide" : "ml-auto"} md="6" lg="4">

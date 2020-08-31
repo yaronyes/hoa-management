@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { MDBCol } from 'mdbreact';
+import { MDBCol, MDBRow } from 'mdbreact';
 import FilterBox from '../filter/FilterBox';
 import RadioButtonsGroup from '../radio-buttons/RadioButtonsGroup';
 import PropTypes from 'prop-types';
@@ -23,27 +23,29 @@ const IssueFilters = ({ setTextFilter, sortByDate, sortByPriority, auth, filters
     
     return (
         <div className="filter-issue">
-            <MDBCol >
-                <FilterBox onFilterChanged={(text) => setTextFilter(text)} label="Filter by Title" />
-            </MDBCol>
-            { auth.user.isCommitteeMember
-            ? <MDBCol md="4">
-            <RadioButtonsGroup
-            label="Sort by:" radioBtnInfo={[
-                {
-                value: "createdAt",
-                label: "Date"
-                },
-                {
-                value: "priority",
-                label: "Priority"
-                }
-            ]} 
-            defaultSelect={filters.sortBy}
-            onChange={(selected) => setSortBy(selected)}
-            />                 
-        </MDBCol>         
-        : null }
+            <MDBRow>
+                <MDBCol >
+                    <FilterBox onFilterChanged={(text) => setTextFilter(text)} label="Filter by Title" />
+                </MDBCol>
+                { auth.user.isCommitteeMember
+                ? <MDBCol md="4">
+                <RadioButtonsGroup
+                label="Sort by:" radioBtnInfo={[
+                    {
+                    value: "createdAt",
+                    label: "Date"
+                    },
+                    {
+                    value: "priority",
+                    label: "Priority"
+                    }
+                ]} 
+                defaultSelect={filters.sortBy}
+                onChange={(selected) => setSortBy(selected)}
+                />                 
+            </MDBCol>         
+            : null }
+        </MDBRow>
         </div>
     );
 };
