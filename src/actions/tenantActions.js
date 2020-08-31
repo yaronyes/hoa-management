@@ -1,4 +1,4 @@
-import { SET_TENANTS, ADD_TENANT, REMOVE_TENANT, EDIT_TENANT, GET_ERRORS } from './types';
+import { SET_TENANTS, ADD_TENANT, REMOVE_TENANT, EDIT_TENANT, GET_ERRORS, LOADING_TENANTS, TENANTS_LOADED } from './types';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
 import UserModel from '../models/UserModel';
@@ -21,6 +21,14 @@ export const removeTenant = ({ id }) => ({
 export const editTenant = (tenant) => ({
     type: EDIT_TENANT,
     tenant
+});
+
+export const loadingTenants = () => ({
+    type: LOADING_TENANTS    
+});
+
+export const tenantsLoaded = () => ({
+    type: TENANTS_LOADED    
 });
 
 export const addTenantUser = (tenant) => async dispatch => {
@@ -51,7 +59,9 @@ export const removeTenantUser = ({ _id }) => async dispatch => {
 
 export const getTenantUsers = () => async dispatch => {
     try{
+        dispatch(loadingTenants());
         const response = await axios.get('/users/tenants', getOptions());
+        dispatch(tenantsLoaded());
         if(response.data.length !== 0) {
             const tenants = response.data.map(user => new UserModel(user));
             dispatch(setTenants(tenants));

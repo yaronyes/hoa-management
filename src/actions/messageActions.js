@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, SET_MESSAGES, EDIT_MESSAGE, REMOVE_MESSAGE, GET_ERRORS } from './types';
+import { ADD_MESSAGE, SET_MESSAGES, EDIT_MESSAGE, REMOVE_MESSAGE, GET_ERRORS, LOADING_MESSAGES, MESSAGES_LOADED } from './types';
 import MessageModel from '../models/MessageModel';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
@@ -23,6 +23,13 @@ export const removeMessage = ({ id }) => ({
     id
 });
 
+export const loadingMessages = () => ({
+    type: LOADING_MESSAGES    
+});
+
+export const messagesLoaded = () => ({
+    type: MESSAGES_LOADED    
+});
 
 export const createMessage = (message) => async dispatch => {
     try{
@@ -52,7 +59,9 @@ export const deleteMessage = ({ _id }) => async dispatch => {
 
 export const getMessages = () => async dispatch => {
     try{
+        dispatch(loadingMessages());
         const response = await axios.get('/messages', getOptions());
+        dispatch(messagesLoaded());
         if(response.data.length !== 0) {
             const messages = response.data.map(message => new MessageModel(message));
             dispatch(setMessages(messages));

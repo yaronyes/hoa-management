@@ -1,4 +1,4 @@
-import { ADD_VOTING, SET_VOTING, EDIT_VOTING, GET_ERRORS } from './types';
+import { ADD_VOTING, SET_VOTING, EDIT_VOTING, GET_ERRORS, LOADING_VOTES, VOTES_LOADED } from './types';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
 import VotingModel from '../models/VotingModel';
@@ -18,6 +18,14 @@ export const editVoting = (voting) => ({
     voting
 });
 
+export const loadingVotes = () => ({
+    type: LOADING_VOTES    
+});
+
+export const votesLoaded = () => ({
+    type: VOTES_LOADED    
+});
+
 export const createVoting = (voting) => async dispatch => {
     try{
         const response = await axios.post('/voting', voting, getOptions());
@@ -33,7 +41,9 @@ export const createVoting = (voting) => async dispatch => {
 
 export const getVoting = () => async dispatch => {
     try{
+        dispatch(loadingVotes());
         const response = await axios.get('/voting', getOptions());
+        dispatch(votesLoaded());
         if(response.data.length !== 0) {
             const voting = response.data.map(item => new VotingModel(item));
             dispatch(setVoting(voting));

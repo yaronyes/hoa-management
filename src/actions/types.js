@@ -6,23 +6,32 @@ export const SET_TENANTS = 'SET_TENANTS';
 export const ADD_TENANT = 'ADD_TENANT';
 export const REMOVE_TENANT = 'REMOVE_TENANT';
 export const EDIT_TENANT = 'EDIT_TENANT';
+export const LOADING_TENANTS = 'LOADING_TENANTS';
+export const TENANTS_LOADED = 'TENANTS_LOADED';
+
 
  // voting
 export const ADD_VOTING = 'ADD_VOTING';
 export const SET_VOTING = 'SET_VOTING';
 export const EDIT_VOTING = 'EDIT_VOTING';
+export const LOADING_VOTES = 'LOADING_VOTES';
+export const VOTES_LOADED = 'VOTES_LOADED';
 
 // message
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const SET_MESSAGES = 'SET_MESSAGES';
 export const EDIT_MESSAGE = 'EDIT_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
+export const LOADING_MESSAGES = 'LOADING_MESSAGES';
+export const MESSAGES_LOADED = 'MESSAGES_LOADED';
 
 // issue
 export const ADD_ISSUE = 'ADD_ISSUE';
 export const SET_ISSUES = 'SET_ISSUES';
 export const EDIT_ISSUE = 'EDIT_ISSUE';
 export const DELETE_ISSUE = 'DELETE_ISSUE'
+export const LOADING_ISSUES = 'LOADING_ISSUES';
+export const ISSUES_LOADED = 'ISSUES_LOADED';
 
 // errors
 export const GET_ERRORS = 'GET_ERRORS';

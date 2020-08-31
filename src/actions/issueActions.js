@@ -1,4 +1,4 @@
-import { ADD_ISSUE, SET_ISSUES, EDIT_ISSUE, DELETE_ISSUE, GET_ERRORS } from './types';
+import { ADD_ISSUE, SET_ISSUES, EDIT_ISSUE, DELETE_ISSUE, LOADING_ISSUES, ISSUES_LOADED, GET_ERRORS } from './types';
 import IssueModel from '../models/IssueModel';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
@@ -24,8 +24,16 @@ export const removeIssue = ({ id }) => ({
     id
 });
 
+export const loadingIssues = () => ({
+    type: LOADING_ISSUES    
+});
+
+export const issuesLoaded = () => ({
+    type: ISSUES_LOADED    
+});
+
 export const createIssue = (issue, image) => async dispatch => {
-    try{
+    try{        
         const response = await axios.post('/issues', issue, getOptions());
         dispatch(addIssue(new IssueModel(response.data)));
         if (image) {
@@ -46,7 +54,9 @@ export const createIssue = (issue, image) => async dispatch => {
 
 export const getIssues = () => async dispatch => {
     try{
+        dispatch(loadingIssues());
         const response = await axios.get('/issues', getOptions());
+        dispatch(issuesLoaded());
         if(response.data.length !== 0) {
             const issues = response.data.map(issue => new IssueModel(issue));
             dispatch(setIssues(issues));
