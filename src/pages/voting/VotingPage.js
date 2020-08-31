@@ -9,9 +9,11 @@ import './VotingPage.css';
 import selectVoting from '../../selectors/votingSelector';
 import VotingFilter from '../../components/voting/VotingFilter';
 
-const VotingPage = ({ getVoting, votes, filteredVoting }) => {
+const VotingPage = ({ getVoting, votes, filteredVoting, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);
     
+    useEffect(() => onPageSelected('voting'), []);
+
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();

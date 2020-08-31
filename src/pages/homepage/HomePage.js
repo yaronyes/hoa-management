@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MDBView, MDBMask } from 'mdbreact';
 
-const HomePage = () => {
+const HomePage = ({ onPageSelected }) => {
+    useEffect(() => onPageSelected('homepage'), []);
 
     return (
         <div className="home-page">

@@ -10,11 +10,12 @@ import './IssuesPage.css';
 import selectIssues from '../../selectors/issueSelector';
 import IssueFilters from '../../components/issues/IssueFilters';
 
-const IssuesPage = ({ getIssues, issues, auth, filteredIssue }) => {
+const IssuesPage = ({ getIssues, issues, auth, filteredIssue, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [modal, setModel] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState(null);
 
+    useEffect(() => onPageSelected('issues'), []);
     useEffect(() => {
       if(issues.length === 0 && collapseID === 0) {
         getIssues();

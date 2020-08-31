@@ -7,11 +7,13 @@ import { loginUser, clearErrors } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 
-const LoginPage = ({loginUser, auth, errors, clearErrors}) => {
+const LoginPage = ({ loginUser, auth, errors, clearErrors, onPageSelected }) => {
     const [showError, setShowError] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
+
+    useEffect(() => onPageSelected('login'), []);
 
     useEffect(() => {
         if(auth.isAuthenticated) {

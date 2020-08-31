@@ -10,10 +10,12 @@ import './MessagesPage.css';
 import MessageFilters from '../../components/messages/MessageFilters';
 import selectMessages from '../../selectors/messageSelector';
 
-const MessagesPage = ({ getMessages, messages, auth, filteredMessages }) => {
+const MessagesPage = ({ getMessages, messages, auth, filteredMessages, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedMessage, setSelectedMessage] = useState(null);
+
+    useEffect(() => onPageSelected('messages'), []);
 
     useEffect(() => {
         if(messages.length === 0) {

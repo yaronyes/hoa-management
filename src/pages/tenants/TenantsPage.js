@@ -10,11 +10,12 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import TenantFilters from '../../components/tenant/TenantFilters';
 import selectTenants from '../../selectors/tenantSelector';
 
-const TenantsPage = ({ getTenantUsers, tenants, filteredTenants }) => {
+const TenantsPage = ({ getTenantUsers, tenants, filteredTenants, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState();
 
+    useEffect(() => onPageSelected('tenants'), []);
     useEffect(() => {
       if(tenants.length === 0) {
         getTenantUsers();

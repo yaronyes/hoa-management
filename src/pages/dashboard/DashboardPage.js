@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CMDashboard from '../../components/dashboard/CMDashboard';
 import TenantDashboard from '../../components/dashboard/TenantDashboard';
 import { MDBContainer } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const DashboardPage = ({ auth }) => {
+const DashboardPage = ({ auth, onPageSelected }) => {
+    useEffect(() => onPageSelected('dashboard'), []);
+
     return (
         <div>
             <MDBContainer fluid>

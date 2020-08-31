@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import ValidationError from "../../components/validation-errors/ValidationError";
 
-const SignUpPage = ({ createUser, auth }) => {
+const SignUpPage = ({ createUser, auth, onPageSelected }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -34,7 +34,10 @@ const SignUpPage = ({ createUser, auth }) => {
             buildingCommunityName: false,
             address: false,
             city: false
-        });          
+        });
+        
+        onPageSelected('signup');
+        
     }, []);
 
     const addUser = () => {

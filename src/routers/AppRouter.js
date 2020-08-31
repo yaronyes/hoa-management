@@ -18,7 +18,7 @@ import NotFoundPage from '../pages/not-found/NotFoundPage';
 import WebSocketClient from '../components/websocket/WebSocketClient';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
-    //const [isUserConnected, setIsUserConnected] = useState(false);
+    const [selectedPage, setSelectedPage] = useState('');
 
     useEffect(() => {
         checkForConnectedUser();
@@ -32,34 +32,35 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
         console.log("Error:", errors);
     }, [errors]);
 
+    const updateSelectedPage = (page) => setSelectedPage(page);
 
     return (
         <BrowserRouter>
-            <HeaderNavbar/>
+            <HeaderNavbar selectedPage={selectedPage}/>
                 <Switch>
                     <PrivateRoute exact path="/" redirectTo="/dashboard" /*component={HomePage}*/ >
-                        <HomePage />
+                        <HomePage onPageSelected={updateSelectedPage} />
                     </PrivateRoute>  
                     <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" /*component={DashboardPage}*/ >
-                        <DashboardPage/>
+                        <DashboardPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn>                        
                     <RouteIfLoggedIn exact path="/messages" redirectTo="/" /*component={MessagesPage}*/>
-                        <MessagesPage />
+                        <MessagesPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn>                        
                     <RouteIfLoggedIn exact path="/tenants" redirectTo="/" /*component={TenantsPage}*/ >
-                        <TenantsPage />
+                        <TenantsPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn> 
                     <RouteIfLoggedIn exact path="/voting" redirectTo="/" /*component={VotingPage}*/ >
-                        <VotingPage />
+                        <VotingPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn>
                     <RouteIfLoggedIn exact path="/issues" redirectTo="/" /*component={IssuesPage}*/ >
-                        <IssuesPage />
+                        <IssuesPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn>
                     <Route exact path='/signup'>
-                        <SignUpPage/>
+                        <SignUpPage onPageSelected={updateSelectedPage} />
                     </Route>
                     <Route exact path='/login'>
-                        <LoginPage/>
+                        <LoginPage onPageSelected={updateSelectedPage}/>
                     </Route>
                     <Route component={NotFoundPage} />
                 </Switch>
