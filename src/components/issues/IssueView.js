@@ -34,7 +34,7 @@ const IssueView = ({ loader, issues, getIssues, openedNewIssues, overdueIssues, 
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const displayIssues =  filter.map(issue => <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} />);    
+    const displayIssues =  filter.map(issue => <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} viewOnly={true} />);    
         
     return (
          <div className="issue-view">           

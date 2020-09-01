@@ -29,6 +29,7 @@ const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateT
             setName(tenantToUpdate ? tenantToUpdate.name : "");
             setEmail(tenantToUpdate ? tenantToUpdate.email : "");
             setApartment(tenantToUpdate ? tenantToUpdate.apartment : "");
+            setPassword("");
         }        
     }, [modal]);
        
