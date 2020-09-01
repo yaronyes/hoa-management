@@ -27,7 +27,7 @@ export const votesLoaded = () => ({
 });
 
 export const createVoting = (voting) => async dispatch => {
-    try{
+    try {
         const response = await axios.post('/voting', voting, getOptions());
         dispatch(addVoting(new VotingModel(response.data)));
     } catch (e) {
@@ -40,7 +40,7 @@ export const createVoting = (voting) => async dispatch => {
 };
 
 export const getVoting = () => async dispatch => {
-    try{
+    try {
         dispatch(loadingVotes());
         const response = await axios.get('/voting', getOptions());
         dispatch(votesLoaded());
@@ -58,7 +58,7 @@ export const getVoting = () => async dispatch => {
 };
 
 export const updateVoting = (updates, id) => async dispatch =>  {
-    try{
+    try {
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/voting/${id}`, updates, getOptions());
             dispatch(editVoting(new VotingModel(response.data)));                            
@@ -73,7 +73,7 @@ export const updateVoting = (updates, id) => async dispatch =>  {
 };
 
 export const addVote = (vote, id) => async dispatch => {
-    try{
+    try {
         const response = await axios.post(`/vote/${id}`, vote, getOptions());
         dispatch(editVoting(new VotingModel(response.data)));
     } catch (e) {

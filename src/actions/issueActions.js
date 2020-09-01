@@ -39,16 +39,17 @@ export const issueImageUpdated = (id) => ({
 
 
 export const createIssue = (issue, image) => async dispatch => {
-    try{        
+    try {        
         const response = await axios.post('/issues', issue, getOptions());        
+        dispatch(addIssue(new IssueModel(response.data)));
         if (image) {
             try {
                 await uploadImage(`/issues/${response.data._id}/image`, image, 'image');
+                dispatch(issueImageUpdated(response.data._id));
             } catch (e) {
                 console.log(e);
             }
-        }
-        dispatch(addIssue(new IssueModel(response.data)));
+        }        
     } catch (e) {
         console.log(e);
         dispatch({
@@ -59,7 +60,7 @@ export const createIssue = (issue, image) => async dispatch => {
 };
 
 export const getIssues = () => async dispatch => {
-    try{
+    try {
         dispatch(loadingIssues());
         const response = await axios.get('/issues', getOptions());
         dispatch(issuesLoaded());
@@ -77,20 +78,19 @@ export const getIssues = () => async dispatch => {
 };
 
 export const updateIssue = (updates, id, image) => async dispatch =>  {
-    try{
-        if (image) {
-            try {
-                await uploadImage(`/issues/${id}/image`, image, 'image');
-            } catch (e) {
-                console.log(e);
-            }
-        }
-
+    try {        
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/issues/${id}`, updates, getOptions());
             dispatch(editIssue(new IssueModel(response.data)))                            
-        } else if(image) {
-            dispatch(issueImageUpdated(id));
+        } 
+
+        if (image) {
+            try {
+                await uploadImage(`/issues/${id}/image`, image, 'image');
+                dispatch(issueImageUpdated(id));
+            } catch (e) {
+                console.log(e);
+            }
         }
     } catch (e) {
         console.log(e);

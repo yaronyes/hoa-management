@@ -32,7 +32,7 @@ export const tenantsLoaded = () => ({
 });
 
 export const addTenantUser = (tenant) => async dispatch => {
-    try{
+    try {
         const response = await axios.post('/users/tenant', tenant, getOptions());
         dispatch(addTenant(new UserModel(response.data)));
     } catch (e) {
@@ -45,7 +45,7 @@ export const addTenantUser = (tenant) => async dispatch => {
 };
 
 export const removeTenantUser = ({ _id }) => async dispatch => {
-    try{
+    try {
         const response = await axios.delete(`/users/tenant/${_id}`, getOptions());
         dispatch(removeTenant({ id: response.data._id }));
     } catch (e) {
@@ -58,7 +58,7 @@ export const removeTenantUser = ({ _id }) => async dispatch => {
 };
 
 export const getTenantUsers = () => async dispatch => {
-    try{
+    try {
         dispatch(loadingTenants());
         const response = await axios.get('/users/tenants', getOptions());
         dispatch(tenantsLoaded());
@@ -76,7 +76,7 @@ export const getTenantUsers = () => async dispatch => {
 };
 
 export const updateTenantUser = (updates, id) => async dispatch =>  {
-    try{
+    try {
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/users/tenant/${id}`, updates, getOptions());           
             console.log(response)

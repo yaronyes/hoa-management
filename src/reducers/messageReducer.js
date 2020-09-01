@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
                 if(message._id === action.id) {
                     return {
                         ...message,
-                        imageUpdateTime: new Date().getTime()
+                        haveImage: true
                     };
                 } else {
                     return message;       

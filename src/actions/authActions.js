@@ -12,7 +12,7 @@ export const setCurrentUser = user => {
 };
 
 export const createUser = (user, image) => async dispatch => {
-    try{
+    try {
         const response = await axios.post('/users/committee', user);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -34,7 +34,7 @@ export const createUser = (user, image) => async dispatch => {
 };
 
 export const loginUser = (userData) => async dispatch => {
-    try{
+    try {
         const response = await axios.post('/users/login', userData)
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -50,7 +50,7 @@ export const loginUser = (userData) => async dispatch => {
 };
 
 export const logoutUser = () => async dispatch => {
-    try{        
+    try {        
         await axios.post('/users/logout', {}, getOptions());        
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -65,7 +65,7 @@ export const logoutUser = () => async dispatch => {
 }
 
 export const checkForConnectedUser = () => async dispatch => {
-    try{
+    try {
         const user = localStorage.getItem('user');
         if(localStorage.getItem('token') && user) {
             console.log('connected', JSON.parse(user))

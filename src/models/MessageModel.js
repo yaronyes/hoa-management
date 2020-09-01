@@ -18,6 +18,5 @@ export default class MessageModel {
         this.haveImage = haveImage;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.imageUpdateTime = new Date().getTime();
     }
 }

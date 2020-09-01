@@ -38,16 +38,17 @@ export const messageImageUpdated = (id) => ({
 });
 
 export const createMessage = (message, image) => async dispatch => {
-    try{
+    try {
         const response = await axios.post('/messages', message, getOptions());
+        dispatch(addMessage(new MessageModel(response.data)));
         if (image) {
             try {
                 await uploadImage(`/messages/${response.data._id}/image`, image, 'image');
+                dispatch(messageImageUpdated(response.data._id));
             } catch (e) {
                 console.log(e);
             }
-        }
-        dispatch(addMessage(new MessageModel(response.data)));
+        }        
     } catch (e) {
         console.log(e);
         dispatch({
@@ -58,7 +59,7 @@ export const createMessage = (message, image) => async dispatch => {
 };
 
 export const deleteMessage = ({ _id }) => async dispatch => {
-    try{
+    try {
         const response = await axios.delete(`/messages/${_id}`, getOptions());
         dispatch(removeMessage({ id: response.data._id }));
     } catch (e) {
@@ -71,7 +72,7 @@ export const deleteMessage = ({ _id }) => async dispatch => {
 };
 
 export const getMessages = () => async dispatch => {
-    try{
+    try {
         dispatch(loadingMessages());
         const response = await axios.get('/messages', getOptions());
         dispatch(messagesLoaded());
@@ -89,20 +90,19 @@ export const getMessages = () => async dispatch => {
 };
 
 export const updateMessage = (updates, id, image) => async dispatch =>  {
-    try{      
-        if (image) {
-            try {
-                await uploadImage(`/messages/${id}/image`, image, 'image');
-            } catch (e) {
-                console.log(e);
-            }
-        }
-        
+    try {                      
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/messages/${id}`, updates, getOptions());
             dispatch(editMessage(new MessageModel(response.data)));
-        } else if(image) {
-            dispatch(messageImageUpdated(id));
+        } 
+
+        if (image) {
+            try {
+                await uploadImage(`/messages/${id}/image`, image, 'image');
+                dispatch(messageImageUpdated(id));
+            } catch (e) {
+                console.log(e);
+            }
         }
     } catch (e) {
         console.log(e);

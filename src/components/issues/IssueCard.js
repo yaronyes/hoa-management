@@ -78,9 +78,9 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                     {/* </MDBView> */}
                                 </MDBCol>
                                 <MDBCol /*md='3'*/ className="data-col">                           
-                                    <h5><strong>Details: </strong><strong class="text-muted">{issue.details}</strong></h5>
-                                    <h5><strong>Priority: </strong><strong class="text-muted">{issue.priority}</strong></h5>  
-                                    <h5><strong>Status: </strong><strong class="text-muted">{issue.status}</strong></h5>  
+                                    <h5><strong>Details: </strong><strong className="text-muted">{issue.details}</strong></h5>
+                                    <h5><strong>Priority: </strong><strong className="text-muted">{issue.priority}</strong></h5>  
+                                    <h5><strong>Status: </strong><strong className="text-muted">{issue.status}</strong></h5>  
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
