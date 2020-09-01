@@ -34,6 +34,8 @@ class WebSocketClient {
                     this.onRefreshCallback(data);
                 }
             });
+
+            this.socket.on('ping', () => this.socket.emit('pong'));
         }
     }
 
