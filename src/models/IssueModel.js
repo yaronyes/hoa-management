@@ -1,4 +1,5 @@
 import CommentModel from './CommentModel';
+import config from '../config/config.json';
 
 export const priority = {
     URGENT: 'urgent',
@@ -25,4 +26,7 @@ export default class IssueModel {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    getImageUrl = (fullSize = false) => fullSize ? `${config.server_url}/issues/${this._id}/imageOrigSize?${new Date().getTime()}`
+                                                 : `${config.server_url}/issues/${this._id}/image?${new Date().getTime()}`
 }

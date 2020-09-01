@@ -17,13 +17,16 @@ import { connect } from 'react-redux';
 import config from '../../config/config.json';   
 import CommentModel from '../../models/CommentModel';
 import AddAndShowComment from '../comments/AddAndShowComment';
+import ImageCard from '../image/ImageCard';
 
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue }) => {
-    const [img, setImg] = useState("issue.png");  
+    const [img, setImg] = useState("issue.png"); 
+    const [modal, setModel] = useState(false);
     
     useEffect(() => {
         if(issue.haveImage) {
-            setImg(`${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`);
+            //setImg(`${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`);
+            setImg(issue.getImageUrl());
         }
     }, [issue]);
 
@@ -43,6 +46,8 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
             alert(e.message)
         }      
     };
+
+    const toggle = () => setModel(!modal);
 
     const allowedToUpdateIssue = !auth.user.isCommitteeMember && issue.createdBy === auth.user._id;
 
@@ -68,7 +73,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                     <MDBRow className='my-3'>
                         <MDBCol md="7">
                             <MDBRow className="img-data-row">
-                                <MDBCol md='5' className='img-col'>
+                                <MDBCol md='5' className='img-col' onDoubleClick={() => toggle()}>
                                     {/* <MDBView className='z-depth-1'> */}
                                         <MDBCardImage
                                         className='img-fluid z-depth-1'
@@ -112,7 +117,8 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>
-            </MDBCard>            
+            </MDBCard>
+            <ImageCard imageUrl={issue.getImageUrl(true)} modal={modal} toggle={toggle} />            
         </div>
     );
 

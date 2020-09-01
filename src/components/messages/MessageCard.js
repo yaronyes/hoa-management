@@ -17,15 +17,18 @@ import { connect } from 'react-redux';
 import config from '../../config/config.json';   
 import CommentModel from '../../models/CommentModel'
 import AddAndShowComment from '../comments/AddAndShowComment';
+import ImageCard from '../image/ImageCard';
 
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
     const [open, setOpen] = useState(false);
     const [introIcon, setIntroIcon] = useState("none");
-    const [img, setImg] = useState("message.png");    
+    const [img, setImg] = useState("message.png");
+    const [modal, setModel] = useState(false);    
 
     useEffect(() => {        
         if(message.haveImage) {
-            setImg(`${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`);
+            //setImg(`${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`);
+            setImg(message.getImageUrl());
         }
     }, [message]);
 
@@ -58,6 +61,8 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
             setOpen(true);
         }      
     }
+
+    const toggle = () => setModel(!modal);
     
     return (
         <div className="message-card">
@@ -114,6 +119,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                     </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
+            <ImageCard imageUrl={message.getImageUrl(true)} modal={modal} toggle={toggle} />
         </div>
     );
 };
