@@ -34,8 +34,7 @@ export const issuesLoaded = () => ({
 
 export const createIssue = (issue, image) => async dispatch => {
     try{        
-        const response = await axios.post('/issues', issue, getOptions());
-        dispatch(addIssue(new IssueModel(response.data)));
+        const response = await axios.post('/issues', issue, getOptions());        
         if (image) {
             try {
                 await uploadImage(`/issues/${response.data._id}/image`, image, 'image');
@@ -43,6 +42,7 @@ export const createIssue = (issue, image) => async dispatch => {
                 console.log(e);
             }
         }
+        dispatch(addIssue(new IssueModel(response.data)));
     } catch (e) {
         console.log(e);
         dispatch({
@@ -70,8 +70,16 @@ export const getIssues = () => async dispatch => {
     }
 };
 
-export const updateIssue = (updates, id) => async dispatch =>  {
+export const updateIssue = (updates, id, image) => async dispatch =>  {
     try{
+        if (image) {
+            try {
+                await uploadImage(`/issues/${id}/image`, image, 'image');
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/issues/${id}`, updates, getOptions());
             dispatch(editIssue(new IssueModel(response.data)))                            

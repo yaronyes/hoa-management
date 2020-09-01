@@ -90,7 +90,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
                 }
             })
                     
-            updateIssue(updatedIssue, issueToUpdate._id);              
+            updateIssue(updatedIssue, issueToUpdate._id, image);              
         } catch (e) {
             console.log(e)
             alert(e.message)

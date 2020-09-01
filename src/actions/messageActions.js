@@ -2,6 +2,7 @@ import { ADD_MESSAGE, SET_MESSAGES, EDIT_MESSAGE, REMOVE_MESSAGE, GET_ERRORS, LO
 import MessageModel from '../models/MessageModel';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
+import { uploadImage } from '../utils/utils';
 
 export const setMessages = (messages) => ({
     type: SET_MESSAGES,
@@ -31,9 +32,16 @@ export const messagesLoaded = () => ({
     type: MESSAGES_LOADED    
 });
 
-export const createMessage = (message) => async dispatch => {
+export const createMessage = (message, image) => async dispatch => {
     try{
         const response = await axios.post('/messages', message, getOptions());
+        if (image) {
+            try {
+                await uploadImage(`/messages/${response.data._id}/image`, image, 'image');
+            } catch (e) {
+                console.log(e);
+            }
+        }
         dispatch(addMessage(new MessageModel(response.data)));
     } catch (e) {
         console.log(e);
@@ -75,8 +83,16 @@ export const getMessages = () => async dispatch => {
     }
 };
 
-export const updateMessage = (updates, id) => async dispatch =>  {
-    try{        
+export const updateMessage = (updates, id, image) => async dispatch =>  {
+    try{      
+        if (image) {
+            try {
+                await uploadImage(`/messages/${id}/image`, image, 'image');
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/messages/${id}`, updates, getOptions());
             dispatch(editMessage(new MessageModel(response.data)));

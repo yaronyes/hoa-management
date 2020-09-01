@@ -85,7 +85,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
             }
         })
                 
-        updateMessage(updatedMessage, messageToUpdate._id); 
+        updateMessage(updatedMessage, messageToUpdate._id, image); 
     };
 
     const fileCallback = img => setImage(img);
