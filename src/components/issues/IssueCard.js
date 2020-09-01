@@ -19,7 +19,7 @@ import CommentModel from '../../models/CommentModel';
 import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
 
-const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue }) => {
+const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue, viewOnly = false }) => {
     const [img, setImg] = useState("issue.png"); 
     const [modal, setModel] = useState(false);
     
@@ -49,7 +49,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
 
     const toggle = () => setModel(!modal);
 
-    const allowedToUpdateIssue = !auth.user.isCommitteeMember && issue.createdBy === auth.user._id;
+    const allowedToUpdateIssue = !auth.user.isCommitteeMember && issue.createdBy._id === auth.user._id && !viewOnly;
 
     const cardHeader = allowedToUpdateIssue ? <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} 
                                                             icon={issue.status === 'open' ? 'exclamation-circle' : 'check-circle'}
@@ -60,9 +60,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                                             icon={issue.status === 'open' ? 'exclamation-circle' : 'check-circle'}
                                                             secondText={issue.status === 'open' ? 'Open Issue' : 'Issue Closed'}
                                                             iconColor={issue.status === 'open' ? 'red-text' : 'green-text'} />                                                                                                                                                                    
-                                             //: <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} icon='none'/> 
-                                                    
-            
+                                             //: <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} icon='none'/>                                                     
     
     return (
         <div className="issue-card">
@@ -102,7 +100,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                         {/* : null}                                               */}
                     </MDBRow>
                     <MDBRow>                        
-                        { !auth.user.isCommitteeMember && issue.createdBy === auth.user._id
+                        { allowedToUpdateIssue
                         ? <MDBCol className="btn-col">                                                                
                             <div className="ml-auto">
                                 { issue.status === 'open'
