@@ -41,7 +41,6 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
         }
         
         const errors = validateInput();
-        console.log(errors)
         const numberOfErrors = Object.keys(errors).filter(key => errors[key] === true);
               
         if(numberOfErrors.length === 0) {
