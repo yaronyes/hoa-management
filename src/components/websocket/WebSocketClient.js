@@ -10,29 +10,32 @@ import { getMessages } from '../../actions/messageActions';
 
 const socket = io(config.server_url);
 
-const WebSocketClient = ({ getVoting, getIssues, getTenantUsers, getMessages }) => {
+const WebSocketClient = ({ auth, getVoting, getIssues, getTenantUsers, getMessages }) => {
     const [connected, setConnected] = useState(false);
 
     useEffect(() => {
         if(connected) {
             console.log('connected')
-            socket.on('refresh', data => {
-                switch(data) {
-                    case 'messages':
-                        getMessages();
-                        break;
-                    case 'tenants':
-                        getTenantUsers();
-                        break;
-                    case 'voting':
-                        getVoting();
-                        break;  
-                    case 'issues':
-                        getIssues();
-                        break;                                            
-                    default:
-                        break;
+            socket.on('refresh', data => {                
+                if(data.userId !== auth.user._id) {
+                    switch(data.model) {
+                        case 'messages':
+                            getMessages();
+                            break;
+                        case 'tenants':
+                            getTenantUsers();
+                            break;
+                        case 'voting':
+                            getVoting();
+                            break;  
+                        case 'issues':
+                            getIssues();
+                            break;                                            
+                        default:
+                            break;
+                    }    
                 }
+                
             });
         }
     }, [connected]);
@@ -51,7 +54,7 @@ const WebSocketClient = ({ getVoting, getIssues, getTenantUsers, getMessages }) 
 };
 
 WebSocketClient.propTypes = {
-    //auth: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     issues: PropTypes.array.isRequired,
     messages: PropTypes.array.isRequired,
@@ -64,7 +67,7 @@ WebSocketClient.propTypes = {
  }
   
 const mapStateToProps = state => ({
-    //auth: state.auth,
+    auth: state.auth,
     errors: state.errors,
     issues: state.issue,
     messages: state.message,
