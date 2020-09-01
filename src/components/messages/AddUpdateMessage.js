@@ -9,6 +9,7 @@ import RoundedBtn from '../rounded-button/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
 import LoadImage from '../load-image/LoadImage';
 import ValidationError from "../validation-errors/ValidationError";
+import config from '../../config/config.json';
 
 const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updateMessage }) => {    
     const [title, setTitle] = useState("");
@@ -90,6 +91,8 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
 
     const fileCallback = img => setImage(img);
 
+    const imageUrl = messageToUpdate && messageToUpdate.haveImage ? `${config.server_url}/messages/${messageToUpdate._id}/image?${new Date().getTime()}` : "";
+
     return (
         <div className="add-upd-message">
             <MDBContainer>      
@@ -156,7 +159,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
                                 </MDBRow>
                                 <MDBRow>
                                     <MDBCol>
-                                        <LoadImage fileCallback={fileCallback}/>                                     
+                                        <LoadImage fileCallback={fileCallback} imageUrl={imageUrl} />                                     
                                     </MDBCol>
                                 </MDBRow>                                                                                                                                                                                                                                        
                                 </div> 

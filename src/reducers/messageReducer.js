@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, SET_MESSAGES, EDIT_MESSAGE, REMOVE_MESSAGE } from '../actions/types';
+import { ADD_MESSAGE, SET_MESSAGES, EDIT_MESSAGE, REMOVE_MESSAGE, MESSAGE_IMAGE_UPDATED } from '../actions/types';
 
 const initialState =  [];
 
@@ -19,6 +19,17 @@ export default (state = initialState, action) => {
             return state.map(message => {
                 if(message._id === action.message._id) {
                     return action.message;
+                } else {
+                    return message;       
+                }
+            });
+        case MESSAGE_IMAGE_UPDATED:
+            return state.map(message => {
+                if(message._id === action.id) {
+                    return {
+                        ...message,
+                        imageUpdateTime: new Date().getTime()
+                    };
                 } else {
                     return message;       
                 }

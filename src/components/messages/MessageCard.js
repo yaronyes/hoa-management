@@ -23,7 +23,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
     const [introIcon, setIntroIcon] = useState("none");
     const [img, setImg] = useState("message.png");    
 
-    useEffect(() => {
+    useEffect(() => {        
         if(message.haveImage) {
             setImg(`${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`);
         }

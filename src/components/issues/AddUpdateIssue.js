@@ -9,6 +9,7 @@ import RoundedBtn from '../rounded-button/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
 import LoadImage from '../load-image/LoadImage';
 import ValidationError from "../validation-errors/ValidationError";
+import config from '../../config/config.json';
 
 const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue }) => {    
     const [title, setTitle] = useState("");
@@ -28,7 +29,7 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
             
         setTitle(issueToUpdate ? issueToUpdate.title : "");
         setDetails(issueToUpdate ? issueToUpdate.details : "");
-        setPriority(issueToUpdate ? issueToUpdate.priority : "");
+        setPriority(issueToUpdate ? issueToUpdate.priority : "");        
         }        
     }, [modal]);
 
@@ -99,91 +100,92 @@ const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue
 
     const fileCallback = img => setImage(img);
             
+    const imageUrl = issueToUpdate && issueToUpdate.haveImage ? `${config.server_url}/issues/${issueToUpdate._id}/image?${new Date().getTime()}` : "";
 
-  return (
-      <div className="add-upd-issue">
-        <MDBContainer>      
-            <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader className='blue-gradient white-text' toggle={toggle}>{issueToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
-                <MDBModalBody>
-                <MDBRow>
-                    <MDBCol md="10">
-                        <form ref={formRef}
-                            className="needs-validation"                       
-                            > 
-                            <div className="grey-text">
-                                <MDBRow>
-                                    <MDBCol>
-                                        <MDBInput
-                                        label="Title"
-                                        icon="text-height"                            
-                                        type="text"
-                                        required
-                                        value={title}
-                                        onChange={e => setTitle(e.target.value)}
-                                        />
-                                        { validationErrors.title
-                                        ? <ValidationError errorText="Please provide a valid Title."/>                                        
-                                        : null}
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                                    <MDBCol>
-                                        <MDBInput
-                                        type="textarea"
-                                        label="Details"
-                                        rows="2"
-                                        icon="pencil-alt"
-                                        required
-                                        value={details}
-                                        onChange={e => setDetails(e.target.value)}
-                                        />
-                                        { validationErrors.details
-                                        ? <ValidationError errorText="Please provide a valid Details."/>                                        
-                                        : null}
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                                    <MDBCol>
-                                        <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="Priority" required
-                                        dropDownItems={[
-                                            {
-                                                value: "urgent",
-                                                name: "urgent"
-                                            },
-                                            {
-                                                value: "important",
-                                                name: "important"
-                                            },
-                                            {
-                                                value: "normal",
-                                                name: "normal"
-                                            }
-                                        ]}
-                                        defaultValue={priority}/>
-                                        { validationErrors.priority
-                                        ? <ValidationError errorText="Please select a valid Priority."/>                                        
-                                        : null}  
-                                    </MDBCol>
-                                </MDBRow>                           
-                                <MDBRow>
-                                    <MDBCol>
-                                        <LoadImage fileCallback={fileCallback}/>
-                                    </MDBCol>
-                                </MDBRow>                                                        
-                            </div>                
-                        </form>
-                    </MDBCol>
-                    </MDBRow>
-                </MDBModalBody>
-                <MDBModalFooter>
-                <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
-                <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={issueToUpdate ? "Save changes" : "Create Issue"}/>
-                </MDBModalFooter>
-            </MDBModal>
-        </MDBContainer>
-      </div>    
-  );
+    return (
+        <div className="add-upd-issue">
+            <MDBContainer>      
+                <MDBModal isOpen={modal} toggle={toggle}>
+                    <MDBModalHeader className='blue-gradient white-text' toggle={toggle}>{issueToUpdate ? "Update Issue" : "Create Issue"}</MDBModalHeader>
+                    <MDBModalBody>
+                    <MDBRow>
+                        <MDBCol md="10">
+                            <form ref={formRef}
+                                className="needs-validation"                       
+                                > 
+                                <div className="grey-text">
+                                    <MDBRow>
+                                        <MDBCol>
+                                            <MDBInput
+                                            label="Title"
+                                            icon="text-height"                            
+                                            type="text"
+                                            required
+                                            value={title}
+                                            onChange={e => setTitle(e.target.value)}
+                                            />
+                                            { validationErrors.title
+                                            ? <ValidationError errorText="Please provide a valid Title."/>                                        
+                                            : null}
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol>
+                                            <MDBInput
+                                            type="textarea"
+                                            label="Details"
+                                            rows="2"
+                                            icon="pencil-alt"
+                                            required
+                                            value={details}
+                                            onChange={e => setDetails(e.target.value)}
+                                            />
+                                            { validationErrors.details
+                                            ? <ValidationError errorText="Please provide a valid Details."/>                                        
+                                            : null}
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol>
+                                            <DropDownSelect onChange={(priority) => setPriority(priority)} icon="exclamation" label="Priority" required
+                                            dropDownItems={[
+                                                {
+                                                    value: "urgent",
+                                                    name: "urgent"
+                                                },
+                                                {
+                                                    value: "important",
+                                                    name: "important"
+                                                },
+                                                {
+                                                    value: "normal",
+                                                    name: "normal"
+                                                }
+                                            ]}
+                                            defaultValue={priority}/>
+                                            { validationErrors.priority
+                                            ? <ValidationError errorText="Please select a valid Priority."/>                                        
+                                            : null}  
+                                        </MDBCol>
+                                    </MDBRow>                           
+                                    <MDBRow>
+                                        <MDBCol>
+                                            <LoadImage fileCallback={fileCallback} imageUrl={imageUrl}/>
+                                        </MDBCol>
+                                    </MDBRow>                                                        
+                                </div>                
+                            </form>
+                        </MDBCol>
+                        </MDBRow>
+                    </MDBModalBody>
+                    <MDBModalFooter>
+                    <RoundedBtn color="secondary" onClick={toggle} icon="window-close" caption="Close"/>
+                    <RoundedBtn color="primary" onClick={addUpdate} icon="save" caption={issueToUpdate ? "Save changes" : "Create Issue"}/>
+                    </MDBModalFooter>
+                </MDBModal>
+            </MDBContainer>
+        </div>    
+    );
 };
 
 

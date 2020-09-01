@@ -24,5 +24,6 @@ export default class IssueModel {
         this.comments = comments.map(comment => new CommentModel({ ...comment }));
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.imageUpdateTime = new Date().getTime();
     }
 }

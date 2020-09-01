@@ -3,10 +3,10 @@ import { MDBIcon, MDBBadge, MDBCol, MDBInput, MDBAlert, MDBRow } from 'mdbreact'
 import { Grid, TextField } from '@material-ui/core';
 import './LoadImage.css';
 
-const LoadImage = ({ fileCallback }) => {
+const LoadImage = ({ fileCallback, imageUrl }) => {
     //const [value, setValue] = useState("");
     const [showError, setShowError] = useState(false);
-    const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+    const [imagePreviewUrl, setImagePreviewUrl] = useState(imageUrl);
 
     const handleFile = (e) => {    
         //e.preventDefault(); 

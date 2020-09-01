@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, SET_MESSAGES, EDIT_MESSAGE, REMOVE_MESSAGE, GET_ERRORS, LOADING_MESSAGES, MESSAGES_LOADED } from './types';
+import { ADD_MESSAGE, SET_MESSAGES, EDIT_MESSAGE, REMOVE_MESSAGE, GET_ERRORS, LOADING_MESSAGES, MESSAGES_LOADED, MESSAGE_IMAGE_UPDATED } from './types';
 import MessageModel from '../models/MessageModel';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
@@ -30,6 +30,11 @@ export const loadingMessages = () => ({
 
 export const messagesLoaded = () => ({
     type: MESSAGES_LOADED    
+});
+
+export const messageImageUpdated = (id) => ({
+    type: MESSAGE_IMAGE_UPDATED,
+    id    
 });
 
 export const createMessage = (message, image) => async dispatch => {
@@ -96,6 +101,8 @@ export const updateMessage = (updates, id, image) => async dispatch =>  {
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/messages/${id}`, updates, getOptions());
             dispatch(editMessage(new MessageModel(response.data)));
+        } else if(image) {
+            dispatch(messageImageUpdated(id));
         }
     } catch (e) {
         console.log(e);

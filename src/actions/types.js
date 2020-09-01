@@ -24,6 +24,7 @@ export const EDIT_MESSAGE = 'EDIT_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 export const LOADING_MESSAGES = 'LOADING_MESSAGES';
 export const MESSAGES_LOADED = 'MESSAGES_LOADED';
+export const MESSAGE_IMAGE_UPDATED = 'MESSAGE_IMAGE_UPDATED';
 
 // issue
 export const ADD_ISSUE = 'ADD_ISSUE';
@@ -32,6 +33,7 @@ export const EDIT_ISSUE = 'EDIT_ISSUE';
 export const DELETE_ISSUE = 'DELETE_ISSUE'
 export const LOADING_ISSUES = 'LOADING_ISSUES';
 export const ISSUES_LOADED = 'ISSUES_LOADED';
+export const ISSUE_IMAGE_UPDATED = 'ISSUE_IMAGE_UPDATED';
 
 // errors
 export const GET_ERRORS = 'GET_ERRORS';

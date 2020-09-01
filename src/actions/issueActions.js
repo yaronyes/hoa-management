@@ -1,4 +1,4 @@
-import { ADD_ISSUE, SET_ISSUES, EDIT_ISSUE, DELETE_ISSUE, LOADING_ISSUES, ISSUES_LOADED, GET_ERRORS } from './types';
+import { ADD_ISSUE, SET_ISSUES, EDIT_ISSUE, DELETE_ISSUE, LOADING_ISSUES, ISSUES_LOADED, GET_ERRORS, ISSUE_IMAGE_UPDATED } from './types';
 import IssueModel from '../models/IssueModel';
 import axios from 'axios';
 import { getOptions } from '../utils/getAuthToken';
@@ -31,6 +31,12 @@ export const loadingIssues = () => ({
 export const issuesLoaded = () => ({
     type: ISSUES_LOADED    
 });
+
+export const issueImageUpdated = (id) => ({
+    type: ISSUE_IMAGE_UPDATED,
+    id    
+});
+
 
 export const createIssue = (issue, image) => async dispatch => {
     try{        
@@ -83,7 +89,9 @@ export const updateIssue = (updates, id, image) => async dispatch =>  {
         if(Object.keys(updates).length !== 0) {
             const response = await axios.patch(`/issues/${id}`, updates, getOptions());
             dispatch(editIssue(new IssueModel(response.data)))                            
-        }       
+        } else if(image) {
+            dispatch(issueImageUpdated(id));
+        }
     } catch (e) {
         console.log(e);
         dispatch({
