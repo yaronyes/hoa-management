@@ -10,7 +10,7 @@ import { getMessages } from '../../actions/messageActions';
 
 const socket = io(config.server_url);
 
-const WebSocketClient = ({ auth, getVoting, getIssues, getTenantUsers, getMessages }) => {
+const MessagingClient = ({ auth, getVoting, getIssues, getTenantUsers, getMessages }) => {
     const [connected, setConnected] = useState(false);
 
     useEffect(() => {
@@ -34,8 +34,7 @@ const WebSocketClient = ({ auth, getVoting, getIssues, getTenantUsers, getMessag
                         default:
                             break;
                     }    
-                }
-                
+                }                
             });
         }
     }, [connected]);
@@ -53,7 +52,7 @@ const WebSocketClient = ({ auth, getVoting, getIssues, getTenantUsers, getMessag
     );
 };
 
-WebSocketClient.propTypes = {
+MessagingClient.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     issues: PropTypes.array.isRequired,
@@ -75,4 +74,4 @@ const mapStateToProps = state => ({
     votes: state.voting,   
 });
 
-export default connect(mapStateToProps, { getIssues, getVoting, getTenantUsers, getMessages })(WebSocketClient);
+export default connect(mapStateToProps, { getIssues, getVoting, getTenantUsers, getMessages })(MessagingClient);

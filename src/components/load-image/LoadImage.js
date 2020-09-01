@@ -10,8 +10,6 @@ const LoadImage = ({ fileCallback, imageUrl }) => {
 
     const handleFile = (e) => {    
         //e.preventDefault(); 
-        console.log(e.target.files, "$$$")
-        console.log(e.target.files[0], "$$$")       
         const file = e.target.files[0]
         
         //setValue(file.name);
