@@ -79,7 +79,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                         <MDBRow className='my-3'>
                             <MDBCol lg="7">
                                 <MDBRow>
-                                    <MDBCol md='4' className='img-col'>
+                                    <MDBCol md='4' className='img-col' onDoubleClick={() => toggle()}>
                                     <MDBView>
                                     <MDBCardImage
                                         className='img-fluid'
