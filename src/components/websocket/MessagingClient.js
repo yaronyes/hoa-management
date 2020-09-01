@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import config from '../../config/config.json';
+//import config from '../../config/config.json';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
 import { getIssues } from '../../actions/issueActions';
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
 import { getVoting } from '../../actions/votingActions';
 import  { getTenantUsers } from '../../actions/tenantActions';
 import { getMessages } from '../../actions/messageActions';
+import wsClient from '../../utils/WebSocketClient';
 
-const socket = io(config.server_url);
+//const socket = io(config.server_url);
 
 const MessagingClient = ({ auth, getVoting, getIssues, getTenantUsers, getMessages }) => {
     const [connected, setConnected] = useState(false);
-
     useEffect(() => {
         if(connected) {
-            console.log('connected')
-            socket.on('refresh', data => {                
+            wsClient.setOnRefreshCallback(data => {                
                 if(data.userId !== auth.user._id) {
                     switch(data.model) {
                         case 'messages':
@@ -39,10 +38,19 @@ const MessagingClient = ({ auth, getVoting, getIssues, getTenantUsers, getMessag
         }
     }, [connected]);
 
-    useEffect(() => {
-        socket.on('connect', () => setConnected(true));        
+    useEffect(() => {        
+        if(auth.isAuthenticated) {
+            wsClient.setOnConnectCallback(() => setConnected(true));
+            wsClient.connect();
+        }
+    }, [auth]);
 
-        return () => socket.disconnect();
+    useEffect(() => {
+        return () => {
+            if(wsClient.connected) {
+                wsClient.close();
+            }
+        }        
     }, []);
             
     return (
