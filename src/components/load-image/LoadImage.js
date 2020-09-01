@@ -34,7 +34,7 @@ const LoadImage = ({ fileCallback, imageUrl }) => {
     }
 
     
-        const imagePreview = imagePreviewUrl ? <img src={imagePreviewUrl} width="100" /*height="100"*/ alt=""/> :  <img src="message.png" width="100" /*height="100"*/ alt=""/>
+        const imagePreview = imagePreviewUrl ? <img src={imagePreviewUrl} width="100" /*height="100"*/ alt=""/> :  <img src="image.png" width="100" /*height="100"*/ alt=""/>
         //<div className="previewText">Please select an Image for Preview</div>
 
         const alertDialog = showError ? <MDBAlert color="danger">Image size is too large. Please use smaller image</MDBAlert > : null;
