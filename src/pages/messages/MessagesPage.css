@@ -1,3 +1,7 @@
 .message-page .add-message, .message-page .accordion {
     margin-top: 20px;
 }
+
+.message-page .unread-messages {
+    display: inline;
+}

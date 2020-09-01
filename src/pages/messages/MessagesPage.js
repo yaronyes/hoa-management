@@ -57,7 +57,7 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
                 <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New message"/>
                 </MDBCol>
                 : <MDBCol className="add-message mr-auto" md="6" lg="4">
-                  You have {messages.filter(message => !message.seenBy.includes(auth.user._id)).length} unread messages
+                    <h5><strong>You have <p className="unread-messages cyan-text">{messages.filter(message => !message.seenBy.includes(auth.user._id)).length}</p> unread messages</strong></h5>                  
                   </MDBCol>
               }
             </MDBRow>     
