@@ -58,7 +58,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                                             onMainIconClicked={closeIssue} />                                             
                                              : <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} 
                                                             icon={issue.status === 'open' ? 'exclamation-circle' : 'check-circle'}
-                                                            secondText={issue.status === 'open' ? 'Open Issue' : 'Issue Closed'}
+                                                            secondText={issue.status === 'open' ? `Open Issue (Opened by ${issue.createdBy.name})` : 'Issue Closed'}
                                                             iconColor={issue.status === 'open' ? 'red-text' : 'green-text'} />                                                                                                                                                                    
                                              //: <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} icon='none'/>                                                     
     
@@ -103,8 +103,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                         { allowedToUpdateIssue
                         ? <MDBCol className="btn-col">                                                                
                             <div className="ml-auto">
-                                { issue.status === 'open'
-                                    
+                                { issue.status === 'open'                                    
                                 ?<RoundedBtn color="info" onClick={() => onUpdateIssue(issue)}
                                     icon="pen" caption="Update" size="sm"/>                                         
                                 : null}
