@@ -20,7 +20,7 @@ import ImageCard from '../image/ImageCard';
 import issueImage from '../../assets/issue.png';
 
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue, viewOnly = false }) => {
-    const [img, setImg] = useState({issueImage}); 
+    const [img, setImg] = useState(issueImage); 
     const [modal, setModel] = useState(false);
     
     useEffect(() => {
