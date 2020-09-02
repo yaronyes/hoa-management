@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { MDBIcon, MDBBadge, MDBCol, MDBInput, MDBAlert, MDBRow } from 'mdbreact';
 import { Grid, TextField } from '@material-ui/core';
 import './LoadImage.css';
+import image from '../../assets/image.png';
 
 const LoadImage = ({ fileCallback, imageUrl }) => {
     //const [value, setValue] = useState("");
@@ -32,7 +33,7 @@ const LoadImage = ({ fileCallback, imageUrl }) => {
     }
 
     
-        const imagePreview = imagePreviewUrl ? <img src={imagePreviewUrl} width="100" /*height="100"*/ alt=""/> :  <img src="image.png" width="100" /*height="100"*/ alt=""/>
+        const imagePreview = imagePreviewUrl ? <img src={imagePreviewUrl} width="100" /*height="100"*/ alt=""/> :  <img src={image} width="100" /*height="100"*/ alt=""/>
         //<div className="previewText">Please select an Image for Preview</div>
 
         const alertDialog = showError ? <MDBAlert color="danger">Image size is too large. Please use smaller image</MDBAlert > : null;

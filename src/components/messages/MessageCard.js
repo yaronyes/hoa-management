@@ -18,11 +18,12 @@ import config from '../../config/config.json';
 import CommentModel from '../../models/CommentModel'
 import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
+import messageImage from '../../assets/message.png';
 
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
     const [open, setOpen] = useState(false);
     const [introIcon, setIntroIcon] = useState("none");
-    const [img, setImg] = useState("message.png");
+    const [img, setImg] = useState(messageImage);
     const [modal, setModel] = useState(false);    
 
     useEffect(() => {        

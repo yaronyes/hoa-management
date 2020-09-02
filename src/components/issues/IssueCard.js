@@ -14,18 +14,17 @@ import { deleteIssue, addCommentForIssue, updateIssue } from '../../actions/issu
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
-import config from '../../config/config.json';   
 import CommentModel from '../../models/CommentModel';
 import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
+import issueImage from '../../assets/issue.png';
 
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue, viewOnly = false }) => {
-    const [img, setImg] = useState("issue.png"); 
+    const [img, setImg] = useState({issueImage}); 
     const [modal, setModel] = useState(false);
     
     useEffect(() => {
         if(issue.haveImage) {
-            //setImg(`${config.server_url}/issues/${issue._id}/image?${new Date().getTime()}`);
             setImg(issue.getImageUrl());
         }
     }, [issue]);
