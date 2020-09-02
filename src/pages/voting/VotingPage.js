@@ -39,7 +39,7 @@ const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }
                 <MDBRow>
                     <MDBCol lg="6">
                         <MDBRow className="row-active-voting d-flex justify-content-center">
-                            <MDBCol className="blue-gradient p-3 white-text mx-3">
+                            <MDBCol className="blue-gradient p-2 white-text mx-3">
                                 <h2 className="h2-responsive mb-2 font-weight-bold">Active Voting</h2>                                
                             </MDBCol>                            
                         </MDBRow>                        
@@ -47,7 +47,7 @@ const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }
                     </MDBCol>
                     <MDBCol lg="6">
                         <MDBRow className="row-voting-results d-flex justify-content-center">
-                            <MDBCol className="blue-gradient p-3 white-text mx-3">
+                            <MDBCol className="blue-gradient p-2 white-text mx-3">
                                 <h2 className="h2-responsive mb-2 font-weight-bold">Voting Results</h2>
                             </MDBCol>                            
                         </MDBRow>
