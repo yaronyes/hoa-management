@@ -17,3 +17,8 @@
 .card-header .right-side {
     display: flex;
 }
+
+
+.card-header .second-text-small {
+    font-size: 70%;
+}

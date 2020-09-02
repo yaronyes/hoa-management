@@ -27,11 +27,23 @@ const VotingCard = ({ toggleCollapse, voting, openID,/* tenantMode=false,*/ onUp
     const voteFor = () => {
         addVote(new VoteModel({ vote }), voting._id);
     };
+
+    const calcVotingPercentageForDisplay = () => {
+        if(voting.votesForDisplay.filter(item => item.value !== 0).length > 0) {
+            return [...voting.votesForDisplay, { 
+                title: "None Voted",
+                value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - voting.votes.length : 1,
+                color: 'red'}].filter(item => item.value !== 0);
+        } else {
+            return [];
+        }
+    }
     
-    const votingPercentageForDisplay = [...voting.votesForDisplay, { 
-        title: "None Voted",
-        value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - voting.votes.length : 1,
-        color: 'red'}].filter(item => item.value !== 0);
+    const votingPercentageForDisplay = calcVotingPercentageForDisplay();
+    // const votingPercentageForDisplay = [...voting.votesForDisplay, { 
+    //     title: "None Voted",
+    //     value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - voting.votes.length : 1,
+    //     color: 'red'}].filter(item => item.value !== 0);
     
     const votingResultForDisplay = [...voting.votesForDisplay].filter(item => item.value !== 0);    
     // if(votingResultForDisplay.length === 0) {             

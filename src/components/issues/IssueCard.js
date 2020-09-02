@@ -55,10 +55,12 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                                             icon={issue.status === 'open' ? 'exclamation-circle' : 'check-circle'}
                                                             secondText={issue.status === 'open' ? 'Close Issue' : 'Issue Closed'}
                                                             iconColor={issue.status === 'open' ? 'red-text' : 'green-text'}
+                                                            secondTextSmallSize={true}
                                                             onMainIconClicked={closeIssue} />                                             
                                              : <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} 
                                                             icon={issue.status === 'open' ? 'exclamation-circle' : 'check-circle'}
-                                                            secondText={issue.status === 'open' ? `Open Issue (Opened by ${issue.createdBy.name})` : 'Issue Closed'}
+                                                            secondText={issue.status === 'open' ? `Opend By: ${issue.createdBy.name}` : 'Issue Closed'}
+                                                            secondTextSmallSize={true}
                                                             iconColor={issue.status === 'open' ? 'red-text' : 'green-text'} />                                                                                                                                                                    
                                              //: <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} icon='none'/>                                                     
     
