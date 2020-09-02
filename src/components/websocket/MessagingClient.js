@@ -9,6 +9,9 @@ import wsClient from '../../utils/WebSocketClient';
 import IssueModel from '../../models/IssueModel';
 import MessageModel from '../../models/MessageModel';
 import VotingModel from '../../models/VotingModel';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import NotificationToast from '../toast/NotificationToast';
 
 const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueImageUpd,
     messageAdded, messageUpdated, messageDeleted, messageImageUpd, votingAdded, votingUpdated, tenantDeleted }) => {
@@ -56,11 +59,12 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
 
     const handleMessages = data => {
         switch(data.actionType) {
-            case 'MESSAGE_ADDED':
-                messageAdded(new MessageModel(data.actionData));
+            case 'MESSAGE_ADDED':                
+                messageAdded(new MessageModel(data.actionData));                
                 break;
             case 'MESSAGE_UPDATED':                
-                messageUpdated(new MessageModel(data.actionData));
+                messageUpdated(new MessageModel(data.actionData));                
+                notify("New message was added", "/messages");
                 break;                
             case 'MESSAGE_DELETED':
                 messageDeleted(data.actionData);
@@ -78,7 +82,7 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
             case 'ISSUE_ADDED':
                 issueAdded(new IssueModel(data.actionData));
                 break;
-            case 'ISSUE_UPDATED':
+            case 'ISSUE_UPDATED':                
                 issueUpdated(new IssueModel(data.actionData));
                 break;                
             case 'ISSUE_DELETED':
@@ -116,10 +120,11 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
                 break;
         }
     }
+    const notify = (text, redirectTo) => toast.info(<NotificationToast text={text} redirectTo={redirectTo}/>);
             
     return (
-        <div>
-            
+        <div>            
+            <ToastContainer />
         </div>
     );
 };

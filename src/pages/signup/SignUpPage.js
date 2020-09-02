@@ -22,7 +22,7 @@ const SignUpPage = ({ createUser, auth, onPageSelected }) => {
   
     useEffect(() => {
         if(auth.isAuthenticated) {
-            history.push('/')
+            history.push('/');
         }                
     }, [auth]);
 
