@@ -16,6 +16,7 @@ import LoginPage from  '../pages/login/LoginPage';
 import RouteIfLoggedIn from './RouteIfLoggedIn';
 import NotFoundPage from '../pages/not-found/NotFoundPage';
 import MessagingClient from '../components/websocket/MessagingClient';
+import Footer from '../components/footer/Footer';
 
 const AppRouter = ({ checkForConnectedUser, auth, errors }) => {       
     const [selectedPage, setSelectedPage] = useState('');
@@ -74,6 +75,7 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     <Route component={NotFoundPage} />
                 </Switch>
             <MessagingClient />
+            <Footer />
         </BrowserRouter>
     );
 }
