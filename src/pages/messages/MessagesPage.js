@@ -10,11 +10,14 @@ import './MessagesPage.css';
 import MessageFilters from '../../components/messages/MessageFilters';
 import selectMessages from '../../selectors/messageSelector';
 import Spinner from '../../components/spinner/Spinner';
+import { useParams } from 'react-router-dom';
+
 
 const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedMessage, setSelectedMessage] = useState(null);
+    const { messageId } = useParams();
 
     useEffect(() => onPageSelected('messages'), []);
 
@@ -22,7 +25,12 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
         if(messages.length === 0) {
             getMessages();
         } else if(collapseID === 0 && filteredMessages.length > 0) {
-          setCollapseID(filteredMessages[0]._id);
+           if(messageId) {
+                setCollapseID(messageId);
+           } else {
+                setCollapseID(filteredMessages[0]._id);
+           }          
+           
         }     
       }, [messages]);
      

@@ -47,6 +47,9 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     <RouteIfLoggedIn exact path="/messages" redirectTo="/" /*component={MessagesPage}*/>
                         <MessagesPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn>                        
+                    <RouteIfLoggedIn exact path="/messages/:messageId" redirectTo="/" /*component={MessagesPage}*/>
+                        <MessagesPage onPageSelected={updateSelectedPage} />
+                    </RouteIfLoggedIn>
                     <RouteIfLoggedIn exact path="/tenants" redirectTo="/" /*component={TenantsPage}*/ >
                         <TenantsPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn> 

@@ -11,11 +11,12 @@ import MessageModel from '../../models/MessageModel';
 import VotingModel from '../../models/VotingModel';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import NotificationToast from '../toast/NotificationToast';
+import { useHistory } from "react-router-dom";
 
 const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueImageUpd,
     messageAdded, messageUpdated, messageDeleted, messageImageUpd, votingAdded, votingUpdated, tenantDeleted }) => {
     const [connected, setConnected] = useState(false);
+    const history = useHistory();
     
     useEffect(() => {
         if(connected) {
@@ -61,10 +62,11 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
         switch(data.actionType) {
             case 'MESSAGE_ADDED':                
                 messageAdded(new MessageModel(data.actionData));                
+                notify("New message was added", "/messages");
                 break;
             case 'MESSAGE_UPDATED':                
                 messageUpdated(new MessageModel(data.actionData));                
-                notify("New message was added", "/messages");
+                notify("Message was updated", `/messages/${data.actionData._id}`);
                 break;                
             case 'MESSAGE_DELETED':
                 messageDeleted(data.actionData);
@@ -120,7 +122,7 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
                 break;
         }
     }
-    const notify = (text, redirectTo) => toast.info(<NotificationToast text={text} redirectTo={redirectTo}/>);
+    const notify = (text, redirectTo) => toast.info(text, { onClick: () => history.push(redirectTo) });
             
     return (
         <div>            
