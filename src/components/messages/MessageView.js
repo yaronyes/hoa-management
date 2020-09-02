@@ -14,7 +14,7 @@ const MessageView = ({ loader, auth, messages, getMessages, filteredMessages }) 
     
     useEffect(() => {        
         if(filter.length > 0 && collapseID === 0) {
-            setCollapseID(filter[0]._id);
+            setCollapseID(filter[filter.length - 1]._id);
         }        
     }, [filter]);
     
