@@ -62,7 +62,7 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
         switch(data.actionType) {
             case 'MESSAGE_ADDED':                
                 messageAdded(new MessageModel(data.actionData));                
-                notify("New message was added", "/messages");
+                notify("New message was added", `/messages/${data.actionData._id}`);
                 break;
             case 'MESSAGE_UPDATED':                
                 messageUpdated(new MessageModel(data.actionData));                
@@ -72,7 +72,8 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
                 messageDeleted(data.actionData);
                 break;         
             case 'IMAGE_UPDATED':
-                messageImageUpd(data.actionData.id)
+                messageImageUpd(data.actionData.id);
+                notify("Message was updated", `/messages/${data.actionData.id}`);
                 break;
             default:
                 break;
@@ -83,15 +84,18 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
         switch(data.actionType) {
             case 'ISSUE_ADDED':
                 issueAdded(new IssueModel(data.actionData));
+                notify("New issue was added", `/issues/${data.actionData._id}`);
                 break;
             case 'ISSUE_UPDATED':                
                 issueUpdated(new IssueModel(data.actionData));
+                notify("Issue was updated", `/issues/${data.actionData._id}`);
                 break;                
             case 'ISSUE_DELETED':
                 issueDeleted(data.actionData);
                 break;         
             case 'IMAGE_UPDATED':
-                issueImageUpd(data.actionData.id)
+                issueImageUpd(data.actionData.id);
+                notify("Issue was updated", `/issues/${data.actionData.id}`);
                 break;
             default:
                 break;
@@ -102,9 +106,11 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
         switch(data.actionType) {
             case 'VOTING_ADDED':
                 votingAdded(new VotingModel(data.actionData));
+                notify("New voting was added", `/voting/${data.actionData._id}`);
                 break;
             case 'VOTING_UPDATED':
                 votingUpdated(new VotingModel(data.actionData));
+                notify("Voting was updated", `/voting/${data.actionData._id}`);
                 break;
             default:
                 break;
@@ -122,7 +128,7 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
                 break;
         }
     }
-    const notify = (text, redirectTo) => toast.info(text, { onClick: () => history.push(redirectTo) });
+    const notify = (text, redirectTo) => toast.info(text, { onClick: () => redirectTo ? history.push(redirectTo) : '' });
             
     return (
         <div>            

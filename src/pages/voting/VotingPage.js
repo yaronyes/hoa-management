@@ -9,9 +9,11 @@ import './VotingPage.css';
 import selectVoting from '../../selectors/votingSelector';
 import VotingFilter from '../../components/voting/VotingFilter';
 import Spinner from '../../components/spinner/Spinner';
+import { useParams } from 'react-router-dom';
 
 const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);
+    const { votingId } = useParams();
     
     useEffect(() => onPageSelected('voting'), []);
 
@@ -19,13 +21,13 @@ const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }
         if(votes.length === 0) {
             getVoting();
         } else if(collapseID === 0 && filteredVoting.length > 0) {
-                setCollapseID(filteredVoting[0]._id);
-            }              
+            setCollapseID(filteredVoting[0]._id);
+        }              
       }, [votes]);
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
     
-    const displayDoneVotes = filteredVoting.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} /*onUpdateMessage={openAddUpdateModal}*/ /*isActiveVoting={item.isActiveVoting()}*//>);
+    const displayDoneVotes = filteredVoting.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} />);
 
     if(loader.loadingVotes) {
         return <Spinner />
@@ -41,7 +43,7 @@ const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }
                                 <h2 className="h2-responsive mb-2 font-weight-bold">Active Voting</h2>                                
                             </MDBCol>                            
                         </MDBRow>                        
-                        <ActiveVotes />
+                        <ActiveVotes votingIdToShow={votingId} />
                     </MDBCol>
                     <MDBCol lg="6">
                         <MDBRow className="row-voting-results d-flex justify-content-center">

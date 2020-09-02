@@ -10,18 +10,24 @@ import './IssuesPage.css';
 import selectIssues from '../../selectors/issueSelector';
 import IssueFilters from '../../components/issues/IssueFilters';
 import Spinner from '../../components/spinner/Spinner';
+import { useParams } from 'react-router-dom';
 
 const IssuesPage = ({ loader, getIssues, issues, auth, filteredIssue, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [modal, setModel] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState(null);
+    const { issueId } = useParams();
 
     useEffect(() => onPageSelected('issues'), []);
     useEffect(() => {
       if(issues.length === 0 && collapseID === 0) {
         getIssues();
       } else if(collapseID === 0 && filteredIssue.length > 0) {
-        setCollapseID(filteredIssue[0]._id);    
+        if(issueId) {
+            setCollapseID(issueId);    
+        } else {
+            setCollapseID(filteredIssue[0]._id);    
+        }                
       }     
     }, [issues]);
    

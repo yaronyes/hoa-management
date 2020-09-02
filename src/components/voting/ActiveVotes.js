@@ -10,7 +10,7 @@ import selectVoting from '../../selectors/votingSelector';
 import { getVoting } from '../../actions/votingActions';
 import Spinner from '../spinner/Spinner';
 
-const ActiveVotes = ({ loader, votes, auth, getVoting, filteredVoting, viewOnlyMode=false }) => {
+const ActiveVotes = ({ loader, votes, auth, getVoting, filteredVoting, viewOnlyMode=false, votingIdToShow }) => {
     const [modal, setModel] = useState(false);
     const [collapseID, setCollapseID] = useState(0);    
     const [selectedVoting, setSelectedVoting] = useState(null);
@@ -18,7 +18,11 @@ const ActiveVotes = ({ loader, votes, auth, getVoting, filteredVoting, viewOnlyM
 
     useEffect(() => {        
         if(filter.length > 0 && collapseID === 0) {
-            setCollapseID(filter[0]._id);
+            if(votingIdToShow && filter.find(vote => vote._id === votingIdToShow)) {
+                setCollapseID(votingIdToShow);
+            } else {
+                setCollapseID(filter[0]._id);
+            }                
         }        
     }, [filter]);
 

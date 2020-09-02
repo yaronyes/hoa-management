@@ -56,7 +56,13 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     <RouteIfLoggedIn exact path="/voting" redirectTo="/" /*component={VotingPage}*/ >
                         <VotingPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn>
+                    <RouteIfLoggedIn exact path="/voting/:votingId" redirectTo="/" /*component={VotingPage}*/ >
+                        <VotingPage onPageSelected={updateSelectedPage} />
+                    </RouteIfLoggedIn>
                     <RouteIfLoggedIn exact path="/issues" redirectTo="/" /*component={IssuesPage}*/ >
+                        <IssuesPage onPageSelected={updateSelectedPage} />
+                    </RouteIfLoggedIn>
+                    <RouteIfLoggedIn exact path="/issues/:issueId" redirectTo="/" /*component={IssuesPage}*/ >
                         <IssuesPage onPageSelected={updateSelectedPage} />
                     </RouteIfLoggedIn>
                     <Route exact path='/signup'>
