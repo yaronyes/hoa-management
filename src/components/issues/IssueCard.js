@@ -8,6 +8,7 @@ import {
     MDBRow,
     MDBView,
     MDBContainer,
+    MDBTypography,
 } from 'mdbreact';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
@@ -26,7 +27,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
     
     useEffect(() => {
         if(issue.haveImage) {
-            setImg(issue.getImageUrl());
+            setImg(issue.getImageUrl(true));
         }
     }, [issue]);
 
@@ -59,7 +60,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                                             onMainIconClicked={closeIssue} />                                             
                                              : <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} 
                                                             icon={issue.status === 'open' ? 'exclamation-circle' : 'check-circle'}
-                                                            secondText={issue.status === 'open' ? `Opend By: ${issue.createdBy.name}` : 'Issue Closed'}
+                                                            secondText={issue.status === 'open' ? `Opened By: ${issue.createdBy.name}` : 'Issue Closed'}
                                                             secondTextSmallSize={true}
                                                             iconColor={issue.status === 'open' ? 'red-text' : 'green-text'} />                                                                                                                                                                    
                                              //: <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} icon='none'/>                                                     
@@ -73,17 +74,17 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                     <MDBRow className='my-3'>
                         <MDBCol md="7" className="main-col">
                             <MDBRow className="img-data-row">
-                                <MDBCol md='5' className='img-col' onDoubleClick={() => toggle()}>
+                                <MDBCol md='4' className='img-col' onDoubleClick={() => toggle()}>
                                         <MDBCardImage
                                         className='img-fluid z-depth-1'
                                         src={img}
                                         alt=''                                
                                     />
                                 </MDBCol>
-                                <MDBCol /*md='3'*/ className="data-col">                           
-                                    <h5><strong>Details: </strong><strong className="text-muted">{issue.details}</strong></h5>
-                                    <h5><strong>Priority: </strong><strong className="text-muted">{issue.priority}</strong></h5>  
-                                    <h5><strong>Status: </strong><strong className="text-muted">{issue.status}</strong></h5>  
+                                <MDBCol md='8' className="data-col">                                 
+                                    <h6><strong>Details: </strong><strong className="text-muted">{issue.details}</strong></h6>
+                                    <h6><strong>Priority: </strong><strong className="text-muted">{issue.priority}</strong></h6>  
+                                    <h6><strong>Status: </strong><strong className="text-muted">{issue.status}</strong></h6>  
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>

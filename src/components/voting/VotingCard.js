@@ -69,13 +69,13 @@ const VotingCard = ({ toggleCollapse, voting, openID,/* tenantMode=false,*/ onUp
                         <MDBCol md={detailsColumnSize} className="data-col">
                             <MDBRow>
                                 <MDBCol>                                    
-                                    <h5 className="p-details"><strong>Details: </strong><strong className="text-muted">{voting.details}</strong></h5>
+                                    <h6 className="p-details"><strong>Details: </strong><strong className="text-muted">{voting.details}</strong></h6>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
                             { showDateCol
                                ? <MDBCol className="date-col">
-                                    <h5 className="p-date"><strong className="l-title-date">End Date: </strong><strong className="text-muted">{dateFormat(voting.dueDate, "dd/mm HH:MM")}</strong></h5>                                                                         
+                                    <h6 className="p-date"><strong className="l-title-date">End Date: </strong><strong className="text-muted">{dateFormat(voting.dueDate, "dd/mm HH:MM")}</strong></h6>                                                                         
                                     <RoundedBtn color="info" onClick={() => onUpdateVoting(voting)} icon="pen" caption="Update End Date" size="sm"/>                            
                                 </MDBCol>
                                : null }                                        

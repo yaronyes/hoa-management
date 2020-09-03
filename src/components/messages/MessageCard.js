@@ -29,7 +29,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
     useEffect(() => {        
         if(message.haveImage) {
             //setImg(`${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`);
-            setImg(message.getImageUrl());
+            setImg(message.getImageUrl(true));
         }
     }, [message]);
 
@@ -89,9 +89,9 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                                     />
                                     </MDBView>
                                     </MDBCol>
-                                    <MDBCol /*md='3'*/ className="data-col">                            
-                                        <h5><strong>Details: </strong><strong className="text-muted">{message.details}</strong></h5>
-                                        <h5><strong>Priority: </strong><strong className="text-muted">{message.priority}</strong></h5>                                        
+                                    <MDBCol md='8' className="data-col">                            
+                                        <h6><strong>Details: </strong><strong className="text-muted">{message.details}</strong></h6>
+                                        <h6><strong>Priority: </strong><strong className="text-muted">{message.priority}</strong></h6>                                        
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
