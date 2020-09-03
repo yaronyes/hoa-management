@@ -5,6 +5,7 @@
 
 .scrollbar {
     overflow-y: scroll;
+    overflow-x: hidden;
   }
   
 .scrollbar::-webkit-scrollbar {

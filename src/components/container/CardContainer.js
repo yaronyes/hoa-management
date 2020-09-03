@@ -17,13 +17,14 @@ const CardContainer = ({ children, headerText }) => {
                 >
                 <h2 className="h2-responsive mb-2 font-weight-bold">{headerText}</h2>                
             </MDBCardImage>
-            <div style={style}>
+            <MDBCardBody>
+            <div style={style} className="z-depth-3">
                 <ScrollToBottom className="scroll-to-bottom " scrollViewClassName="scrollbar scrollbar-primary">
-                    <MDBCardBody>
-                        {children}
-                    </MDBCardBody>               
-                </ScrollToBottom>
+                    
+                        {children}                    
+                </ScrollToBottom>                
             </div>
+            </MDBCardBody>               
             </MDBCard>            
         </div>
     );
