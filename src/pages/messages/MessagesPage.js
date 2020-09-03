@@ -24,10 +24,10 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
     useEffect(() => {
         if(messages.length === 0) {
             getMessages();
-        } else if(collapseID === 0 && filteredMessages.length > 0) {
+        } else if(/*collapseID === 0 && */filteredMessages.length > 0) {
            if(messageId) {
                 setCollapseID(messageId);
-           } else {
+           } else if (collapseID === 0) {
                 setCollapseID(filteredMessages[0]._id);
            }          
            

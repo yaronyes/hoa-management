@@ -17,10 +17,10 @@ const ActiveVotes = ({ loader, votes, auth, getVoting, filteredVoting, viewOnlyM
     const [filter, setFilter] = useState([]);
 
     useEffect(() => {        
-        if(filter.length > 0 && collapseID === 0) {
+        if(filter.length > 0/* && collapseID === 0*/) {
             if(votingIdToShow && filter.find(vote => vote._id === votingIdToShow)) {
                 setCollapseID(votingIdToShow);
-            } else {
+            } else if(collapseID === 0) {
                 setCollapseID(filter[0]._id);
             }                
         }        

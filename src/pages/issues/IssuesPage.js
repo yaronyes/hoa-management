@@ -22,10 +22,10 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filteredIssue, onPageSele
     useEffect(() => {
       if(issues.length === 0 && collapseID === 0) {
         getIssues();
-      } else if(collapseID === 0 && filteredIssue.length > 0) {
+      } else if(/*collapseID === 0 && */filteredIssue.length > 0) {
         if(issueId) {
             setCollapseID(issueId);    
-        } else {
+        } else if(collapseID === 0) {
             setCollapseID(filteredIssue[0]._id);    
         }                
       }     
