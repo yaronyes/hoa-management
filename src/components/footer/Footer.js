@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBIcon } from "mdbreact";
 
 const Footer = ({ selectedPage }) => {
     if(selectedPage === "homepage") {
@@ -39,7 +39,7 @@ const Footer = ({ selectedPage }) => {
                 </MDBContainer>
                 <div className="footer-copyright text-center py-3">
                     <MDBContainer fluid>
-                    &copy; {new Date().getFullYear()} Copyright: <a href="#"> YaronY </a>
+                    &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/yaronyes/" target="_blank" rel="noopener noreferrer"> YaronY <MDBIcon fab icon="github" size="2x" className="black-text" inverse={true}/></a>
                     </MDBContainer>
                 </div>
             </MDBFooter>
