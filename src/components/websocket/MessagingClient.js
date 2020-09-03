@@ -20,7 +20,7 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
     
     useEffect(() => {
         if(connected) {
-            wsClient.setOnRefreshCallback(data => {                
+            wsClient.setOnRefreshCallback(data => {                   
                 if(data.userId !== auth.user._id) {
                     switch(data.model) {
                         case 'messages':
@@ -70,6 +70,7 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
                 break;                
             case 'MESSAGE_DELETED':
                 messageDeleted(data.actionData);
+                notify(`Message "${data.actionData.title}" was deleted`, "/messages");
                 break;         
             case 'IMAGE_UPDATED':
                 messageImageUpd(data.actionData.id);
@@ -90,8 +91,9 @@ const MessagingClient = ({ auth, issueAdded, issueUpdated, issueDeleted, issueIm
                 issueUpdated(new IssueModel(data.actionData));
                 notify("Issue was updated", `/issues/${data.actionData._id}`);
                 break;                
-            case 'ISSUE_DELETED':
+            case 'ISSUE_DELETED':                
                 issueDeleted(data.actionData);
+                notify(`Issue "${data.actionData.title}" was deleted`, "/issues");
                 break;         
             case 'IMAGE_UPDATED':
                 issueImageUpd(data.actionData.id);
@@ -169,11 +171,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
     issueAdded: issue => dispatch(addIssue(issue)),
     issueUpdated: issue => dispatch(editIssue(issue)),
-    issueDeleted: issue  => dispatch(removeIssue(issue)),
+    issueDeleted: issue  => dispatch(removeIssue({ id: issue._id })),
     issueImageUpd: id  => dispatch(issueImageUpdated (id)),
     messageAdded: message => dispatch(addMessage(message)),
     messageUpdated: message => dispatch(editMessage(message)),
-    messageDeleted: message  => dispatch(removeMessage(message)),
+    messageDeleted: message  => dispatch(removeMessage({ id: message._id })),
     messageImageUpd: id  => dispatch(messageImageUpdated (id)),
     tenantDeleted: () => {
         localStorage.removeItem('token');
