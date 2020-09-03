@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.view {
+    height: calc(100vh - 56px) !important;
+}
+
+.page-container {
+    padding-bottom: 191px;
+}
+
+@media screen and (max-width: 992px) {
+    .page-container {
+        padding-bottom: 236px;
+    }
+}  
+  
+@media screen and (max-width: 600px) {
+    .page-container {
+        padding-bottom: 330px;
+    }
+}

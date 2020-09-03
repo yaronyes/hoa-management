@@ -35,48 +35,63 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
 
     const updateSelectedPage = (page) => setSelectedPage(page);
 
+    const style = {
+        position: "relative",
+        minHeight: "100vh"
+    }
+
+    // const pageContainerStyle = {
+    //     paddingBottom: "21rem"
+    // }
+
     return (
-        <BrowserRouter>
-            <HeaderNavbar selectedPage={selectedPage}/>
-                <Switch>
-                    <PrivateRoute exact path="/" redirectTo="/dashboard" /*component={HomePage}*/ >
-                        <HomePage onPageSelected={updateSelectedPage} />
-                    </PrivateRoute>  
-                    <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" /*component={DashboardPage}*/ >
-                        <DashboardPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn>                        
-                    <RouteIfLoggedIn exact path="/messages" redirectTo="/" /*component={MessagesPage}*/>
-                        <MessagesPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn>                        
-                    <RouteIfLoggedIn exact path="/messages/:messageId" redirectTo="/" /*component={MessagesPage}*/>
-                        <MessagesPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn>
-                    <RouteIfLoggedIn exact path="/tenants" redirectTo="/" /*component={TenantsPage}*/ >
-                        <TenantsPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn> 
-                    <RouteIfLoggedIn exact path="/voting" redirectTo="/" /*component={VotingPage}*/ >
-                        <VotingPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn>
-                    <RouteIfLoggedIn exact path="/voting/:votingId" redirectTo="/" /*component={VotingPage}*/ >
-                        <VotingPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn>
-                    <RouteIfLoggedIn exact path="/issues" redirectTo="/" /*component={IssuesPage}*/ >
-                        <IssuesPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn>
-                    <RouteIfLoggedIn exact path="/issues/:issueId" redirectTo="/" /*component={IssuesPage}*/ >
-                        <IssuesPage onPageSelected={updateSelectedPage} />
-                    </RouteIfLoggedIn>
-                    <Route exact path='/signup'>
-                        <SignUpPage onPageSelected={updateSelectedPage} />
-                    </Route>
-                    <Route exact path='/login'>
-                        <LoginPage onPageSelected={updateSelectedPage}/>
-                    </Route>
-                    <Route component={NotFoundPage} />
-                </Switch>
-            <MessagingClient />
-            <Footer selectedPage={selectedPage} />
-        </BrowserRouter>
+        <div style={style}>
+            <div className={selectedPage !== "homepage" ? "page-container" : ""}/*style={selectedPage !== "homepage" ? pageContainerStyle : {}}*/>
+            <BrowserRouter>
+                <HeaderNavbar selectedPage={selectedPage}/>
+                    <Switch>
+                        <PrivateRoute exact path="/" redirectTo="/dashboard" /*component={HomePage}*/ >
+                            <HomePage onPageSelected={updateSelectedPage} />
+                        </PrivateRoute>  
+                        <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" /*component={DashboardPage}*/ >
+                            <DashboardPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn>                        
+                        <RouteIfLoggedIn exact path="/messages" redirectTo="/" /*component={MessagesPage}*/>
+                            <MessagesPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn>                        
+                        <RouteIfLoggedIn exact path="/messages/:messageId" redirectTo="/" /*component={MessagesPage}*/>
+                            <MessagesPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn>
+                        <RouteIfLoggedIn exact path="/tenants" redirectTo="/" /*component={TenantsPage}*/ >
+                            <TenantsPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn> 
+                        <RouteIfLoggedIn exact path="/voting" redirectTo="/" /*component={VotingPage}*/ >
+                            <VotingPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn>
+                        <RouteIfLoggedIn exact path="/voting/:votingId" redirectTo="/" /*component={VotingPage}*/ >
+                            <VotingPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn>
+                        <RouteIfLoggedIn exact path="/issues" redirectTo="/" /*component={IssuesPage}*/ >
+                            <IssuesPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn>
+                        <RouteIfLoggedIn exact path="/issues/:issueId" redirectTo="/" /*component={IssuesPage}*/ >
+                            <IssuesPage onPageSelected={updateSelectedPage} />
+                        </RouteIfLoggedIn>
+                        <Route exact path='/signup'>
+                            <SignUpPage onPageSelected={updateSelectedPage} />
+                        </Route>
+                        <Route exact path='/login'>
+                            <LoginPage onPageSelected={updateSelectedPage}/>
+                        </Route>
+                        <Route component={NotFoundPage} />
+                    </Switch>
+                <MessagingClient />                
+            </BrowserRouter>
+            </div>
+            <div>
+                <Footer selectedPage={selectedPage} />
+            </div>
+        </div>
     );
 }
 

@@ -6,15 +6,22 @@ const Footer = ({ selectedPage }) => {
         return null;
     }
 
+    const style = {
+        position: "absolute",
+        bottom: 0,
+        width: "100%",
+        marginTop: "30px"
+    }
+
     return (
-        <div className="footer-bar">
+        <div className="footer-bar" style={style}>
             <MDBFooter color="blue" className="font-small pt-4 mt-4">
                 <MDBContainer fluid className="text-center text-md-left">
                     <MDBRow>
                     <MDBCol md="6">
                         <h5 className="title">Homeowner Association Management System</h5>
                         <p>
-                            HOA software enable management companies and communities to provide faster responses and better service to their clients and owners.
+                           We enable management companies and communities to provide faster responses and better service to their clients and owners.
                         </p>
                     </MDBCol>
                     <MDBCol md="6">
@@ -25,13 +32,7 @@ const Footer = ({ selectedPage }) => {
                         </li>
                         <li className="list-unstyled">
                             <a href="#!">Link 2</a>
-                        </li>
-                        <li className="list-unstyled">
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li className="list-unstyled">
-                            <a href="#!">Link 4</a>
-                        </li>
+                        </li>                       
                         </ul>
                     </MDBCol>
                     </MDBRow>
