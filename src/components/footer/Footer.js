@@ -1,9 +1,13 @@
 import React from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 
-const Footer = () => {
+const Footer = ({ selectedPage }) => {
+    if(selectedPage === "homepage") {
+        return null;
+    }
+
     return (
-        <div>
+        <div className="footer-bar">
             <MDBFooter color="blue" className="font-small pt-4 mt-4">
                 <MDBContainer fluid className="text-center text-md-left">
                     <MDBRow>

@@ -75,7 +75,7 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
                     <Route component={NotFoundPage} />
                 </Switch>
             <MessagingClient />
-            <Footer />
+            <Footer selectedPage={selectedPage} />
         </BrowserRouter>
     );
 }
