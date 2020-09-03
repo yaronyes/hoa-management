@@ -37,7 +37,7 @@
   }
 }
 
-.view {
+.home-page .view {
     height: calc(100vh - 56px) !important;
 }
 
