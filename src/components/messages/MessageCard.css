@@ -18,3 +18,13 @@
 /*.message-card .img-col,*/ .message-card .data-col {
     margin-bottom: 25px;
 }
+
+.message-card .main-col {
+    border-right: 1px gray solid;
+}
+
+@media screen and (max-width: 600px) {
+    .message-card .main-col {
+        border-right: none;
+    }
+}

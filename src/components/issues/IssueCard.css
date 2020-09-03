@@ -38,3 +38,13 @@
 .issue-card .img-col, .issue-card .data-col {
     margin-bottom: 25px;
 }
+
+.issue-card .main-col {
+    border-right: 1px gray solid;
+}
+
+@media screen and (max-width: 600px) {
+    .issue-card .main-col {
+        border-right: none;
+    }
+}

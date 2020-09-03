@@ -7,6 +7,7 @@ import {
     MDBCardImage,
     MDBRow,
     MDBView,
+    MDBContainer,
 } from 'mdbreact';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
@@ -70,16 +71,14 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                 <MDBCollapse id={issue._id} isOpen={openID === issue._id ? true :  false}>
                 <MDBCardBody>
                     <MDBRow className='my-3'>
-                        <MDBCol md="7">
+                        <MDBCol md="7" className="main-col">
                             <MDBRow className="img-data-row">
                                 <MDBCol md='5' className='img-col' onDoubleClick={() => toggle()}>
-                                    {/* <MDBView className='z-depth-1'> */}
                                         <MDBCardImage
                                         className='img-fluid z-depth-1'
                                         src={img}
                                         alt=''                                
                                     />
-                                    {/* </MDBView> */}
                                 </MDBCol>
                                 <MDBCol /*md='3'*/ className="data-col">                           
                                     <h5><strong>Details: </strong><strong className="text-muted">{issue.details}</strong></h5>
