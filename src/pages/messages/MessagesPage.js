@@ -32,7 +32,7 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
            }          
            
         }     
-      }, [messages]);
+      }, [messages, messageId]);
      
     const toggle = () => {
       setModel(!modal);

@@ -24,7 +24,7 @@ const ActiveVotes = ({ loader, votes, auth, getVoting, filteredVoting, viewOnlyM
                 setCollapseID(filter[0]._id);
             }                
         }        
-    }, [filter]);
+    }, [filter, votingIdToShow]);
 
     useEffect(() => {
         if(votes.length === 0) {

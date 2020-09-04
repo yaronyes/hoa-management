@@ -29,7 +29,7 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filteredIssue, onPageSele
             setCollapseID(filteredIssue[0]._id);    
         }                
       }     
-    }, [issues]);
+    }, [issues, issueId]);
    
     const toggle = () => {
       setModel(!modal);
