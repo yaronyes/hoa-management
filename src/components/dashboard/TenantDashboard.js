@@ -24,44 +24,20 @@ const TenantDashboard = () => {
                 </MDBCol>           
               </MDBRow>
               <MDBRow>                
-                <MDBCol md="3">
+                <MDBCol lg="3">
                   <CardContainer headerText="Voting Results">
                     <VotingChartView isActiveVoting={false} itemPositionInTheArray={0} />
                   </CardContainer>                  
                 </MDBCol>   
-                <MDBCol md="5">
+                <MDBCol lg="5">
                   <CardContainer headerText="New Issues">
                     <IssueView selectedFilters={{ isOpen: true, isNew: true }}/>           
-                  </CardContainer>
-                  {/* <MDBRow className="new-issues-header">
-                    <MDBCol style={{ textAlign: "left" }}>
-                      <h2>New Issues</h2>
-                    </MDBCol>                            
-                  </MDBRow>
-                  <MDBRow>
-                    <MDBCol>
-                      <CardContainer headerText="New Issues">
-                        <IssueView isNewIssues={true}/>           
-                      </CardContainer>                      
-                    </MDBCol>
-                  </MDBRow> */}
+                  </CardContainer>                  
                 </MDBCol>   
-                <MDBCol md="4">
+                <MDBCol lg="4">
                   <CardContainer headerText="New Resolved Issue">
                     <IssueView selectedFilters={{ isOpen: false, isNew: true }} /> 
-                  </CardContainer>
-                  {/* <MDBRow className="new-resolved-issues-header">
-                    <MDBCol style={{ textAlign: "left" }}>
-                      <h2>New Resolved Issue</h2>
-                    </MDBCol>                            
-                  </MDBRow>
-                  <MDBRow>
-                    <MDBCol>
-                      <CardContainer>
-                        <IssueView isNewIssues={false}/> 
-                      </CardContainer>                      
-                    </MDBCol>
-                  </MDBRow> */}
+                  </CardContainer>                  
                 </MDBCol>
               </MDBRow>
         </MDBContainer>

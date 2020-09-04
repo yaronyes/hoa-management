@@ -1,0 +1,38 @@
+.accordion-container .scroll-section-small {
+    width: 100%;
+    /*height: 40vh;      */
+    flex-grow: 1;
+  
+    overflow-y: auto;
+  
+    /* for Firefox */
+    min-height: 0;
+    /* max-height: 40vh; */
+}
+
+.accordion-container .scroll-section-large {
+    height: '40vh';
+    width: 100%;
+}
+
+.accordion-container .scroll-container-small {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    max-height: 40vh;
+    /* height: 100px; */
+}
+
+.accordion-container .scroll-container-large {
+    height: 40vh;
+}
+
+/* 
+.scroll-to-bottom {
+    
+} */
