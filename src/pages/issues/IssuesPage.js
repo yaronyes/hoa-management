@@ -11,8 +11,10 @@ import selectIssues from '../../selectors/issueSelector';
 import IssueFilters from '../../components/issues/IssueFilters';
 import Spinner from '../../components/spinner/Spinner';
 import { useParams } from 'react-router-dom';
+import { updateSortDirection } from '../../actions/issueFilters';
+import AccordionNav from '../../components/navbar/AccordionNav';
 
-const IssuesPage = ({ loader, getIssues, issues, auth, filteredIssue, onPageSelected }) => {
+const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirection, filteredIssue, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);    
     const [modal, setModel] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState(null);
@@ -56,13 +58,15 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filteredIssue, onPageSele
                     <IssueFilters />
                   </MDBCol>                 
                 </MDBRow>   
-                <MDBRow className="add-issue">
+                {/* <MDBRow className="add-issue">
                   <MDBCol className={auth.user.isCommitteeMember ? "add-issue-hide" : "ml-auto"} md="6" lg="4">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New Issue"/>
                   </MDBCol>                  
-                </MDBRow>     
+                </MDBRow>      */}
                 <MDBRow className="issue-row">
                   <MDBContainer className='accordion md-accordion accordion-1'>
+                        <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
+                        showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                     {displayIssues}                 
                   </MDBContainer>
                 </MDBRow>             
@@ -78,7 +82,9 @@ IssuesPage.propTypes = {
     issues: PropTypes.array.isRequired,
     getIssues: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    filteredIssue: PropTypes.array.isRequired
+    filteredIssue: PropTypes.array.isRequired,
+    filters: PropTypes.object.isRequired,
+    updateSortDirection: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -86,7 +92,8 @@ const mapStateToProps = state => ({
     loader: state.loader,
     errors: state.errors,
     issues: state.issue,
+    filters: state.messageFilters,
     filteredIssue: selectIssues(state.issue, state.issueFilters)
 });
 
-export default connect(mapStateToProps, { getIssues })(IssuesPage);
+export default connect(mapStateToProps, { getIssues, updateSortDirection })(IssuesPage);

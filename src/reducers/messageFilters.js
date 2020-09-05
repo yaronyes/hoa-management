@@ -1,4 +1,4 @@
-import { SET_TEXT_FILTER_MESSAGE, SORT_BY_DATE_MESSAGE, SORT_BY_PRIORITY_MESSAGE, SET_PRIORITY_FILTER_MESSAGE, SET_SORT_DIRECTION } from '../actions/types';
+import { SET_TEXT_FILTER_MESSAGE, SORT_BY_DATE_MESSAGE, SORT_BY_PRIORITY_MESSAGE, SET_PRIORITY_FILTER_MESSAGE, SET_SORT_DIRECTION_MESSAGE } from '../actions/types';
 
 // Message Filters Reducer
 
@@ -31,7 +31,7 @@ const messageFiltersDefaultState = {
             ...state,
             sortBy: 'createdAt'
             };    
-        case SET_SORT_DIRECTION:            
+        case SET_SORT_DIRECTION_MESSAGE:            
             return {
                 ...state,
                 sortDirection: action.sortDirection

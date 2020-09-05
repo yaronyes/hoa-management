@@ -43,9 +43,9 @@ const ToolTipPieChart = ({ chartData, isPercentage=false, header, useSmallChart=
   };
 
   if(data.length === 0) {    
-    return <div className="text-center" style={{ marginTop: "10px" }}>  
+    return <div className="text-center" style={{ marginTop: "10px",  maxWidth: '265px' }}>  
               <h6>No Voting</h6>               
-              <img src={isPercentage ? zeroPercentImage : zeroVotingImage} alt="" className="img-fluid" style={{ maxWidth: '265px' }}/>              
+              <img src={isPercentage ? zeroPercentImage : zeroVotingImage} alt="" className="img-fluid" />              
           </div>
   };
 

@@ -13,7 +13,6 @@ import Spinner from '../../components/spinner/Spinner';
 import { useParams } from 'react-router-dom';
 import { Badge } from '@material-ui/core';
 import AccordionNav from '../../components/navbar/AccordionNav';
-import { compareByDateDesc } from '../../utils/utils';
 import { updateSortDirection } from '../../actions/messageFilters';
 // import { makeStyles } from '@material-ui/core/styles';
 // import MailIcon from '@material-ui/icons/Mail';

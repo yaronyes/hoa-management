@@ -1,4 +1,4 @@
-import { compareByDate, compareByPriority } from '../utils/utils';
+import { compareByDate, compareByPriority, compareByDateDesc } from '../utils/utils';
 import moment from 'moment';
 
 const priorities = {
@@ -7,7 +7,9 @@ const priorities = {
     normal: 3
   }
 
-export default (issues, { text, sortBy }, status, date) => 
+const sortByDate = (a, b, sortDirection) => sortDirection === 'asc' ? compareByDate(a, b) : compareByDateDesc(a, b);
+
+export default (issues, { text, sortBy, sortDirection }, status, date) => 
   issues.filter(issue => {            
     //const createdAtMoment = moment(issue.createdAt);
     const nowMoment = moment(new Date());
@@ -31,7 +33,7 @@ export default (issues, { text, sortBy }, status, date) =>
   
     return dateFilter && statusFilter && textFilter;    
 
-  }).sort((a, b) => sortBy === 'createdAt' ? compareByDate(a[sortBy], b[sortBy]) : compareByPriority(a[sortBy], b[sortBy], priorities));
+  }).sort((a, b) => sortBy === 'createdAt' ? sortByDate(a[sortBy], b[sortBy], sortDirection) : compareByPriority(a[sortBy], b[sortBy], priorities));
 
 
 

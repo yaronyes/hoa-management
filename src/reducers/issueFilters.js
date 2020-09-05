@@ -1,11 +1,12 @@
-import { SET_TEXT_FILTER_ISSUE, SORT_BY_DATE_ISSUE, SORT_BY_PRIORITY_ISSUE, SET_STATUS_FILTER_ISSUE } from '../actions/types';
+import { SET_TEXT_FILTER_ISSUE, SORT_BY_DATE_ISSUE, SORT_BY_PRIORITY_ISSUE, SET_SORT_DIRECTION_ISSUE } from '../actions/types';
 
 // Issue Filters Reducer
 
 const issueFiltersDefaultState = {
   text: '',
   sortBy: 'createdAt',
-  status: ''
+  status: '',
+  sortDirection: 'asc'
 };
 
 export default (state = issueFiltersDefaultState, action) => {
@@ -29,7 +30,12 @@ export default (state = issueFiltersDefaultState, action) => {
       return {
         ...state,
         sortBy: 'createdAt'
-      };    
+      };
+    case SET_SORT_DIRECTION_ISSUE:            
+      return {
+          ...state,
+          sortDirection: action.sortDirection
+      };            
     default:
       return state;
   }
