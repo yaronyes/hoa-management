@@ -21,7 +21,7 @@ const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingD
     }
 
     const style = {
-        "box-shadow": "none",
+        boxShadow: "none",
         margin: 0,
         padding: "0 .5rem",       
     }
