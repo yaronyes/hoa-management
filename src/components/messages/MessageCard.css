@@ -28,3 +28,7 @@
         border-right: none;
     }
 }
+
+.message-card .img-col {
+    margin-bottom: 25px;
+}

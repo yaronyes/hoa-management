@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
 import { getMessages } from '../../actions/messageActions';
@@ -11,13 +11,24 @@ import MessageFilters from '../../components/messages/MessageFilters';
 import selectMessages from '../../selectors/messageSelector';
 import Spinner from '../../components/spinner/Spinner';
 import { useParams } from 'react-router-dom';
+import { Badge } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+// import MailIcon from '@material-ui/icons/Mail';
 
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//       '& > *': {
+//         margin: theme.spacing(1),
+//       },
+//     },
+//   }));
 
 const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedMessage, setSelectedMessage] = useState(null);
     const { messageId } = useParams();
+    // const classes = useStyles();
 
     useEffect(() => onPageSelected('messages'), []);
 
@@ -65,7 +76,14 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
                 <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New message"/>
                 </MDBCol>
                 : <MDBCol className="add-message mr-auto" md="6" lg="4">
-                    <h5><strong>You have <p className="unread-messages cyan-text">{messages.filter(message => !message.seenBy.includes(auth.user._id)).length}</p> unread messages</strong></h5>                  
+                    {/* <h5><strong>You have <p className="unread-messages cyan-text">{messages.filter(message => !message.seenBy.includes(auth.user._id)).length}</p> unread messages</strong></h5>                   */}
+                    {/* <div className={classes.root}> */}
+                    <h5><strong>You have 
+                    <Badge badgeContent={messages.filter(message => !message.seenBy.includes(auth.user._id)).length} color="secondary" className="unread-messages-count">
+                        <MDBIcon icon="envelope" size="1x" className="mr-1" />                        
+                    </Badge>
+                    unread messages</strong></h5>
+                    {/* </div> */}
                   </MDBCol>
               }
             </MDBRow>     

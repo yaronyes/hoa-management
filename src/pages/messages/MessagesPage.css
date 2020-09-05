@@ -5,3 +5,7 @@
 .message-page .unread-messages {
     display: inline;
 }
+
+.message-page .unread-messages-count {
+    margin: 0 14px 0 10px;
+}

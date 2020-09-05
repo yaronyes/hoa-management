@@ -18,4 +18,6 @@ export const generateRandomColor = () => "#"+(((1+Math.random())*(1<<24)|0).toSt
 
 export const compareByDate = (a, b) => new Date(a) - new Date(b);
 
+export const compareByDateDesc = (a, b) => new Date(b) - new Date(a);
+
 export const compareByPriority = (a, b, priorities) => priorities[a] - priorities[b];
