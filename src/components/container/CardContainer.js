@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { MDBCard, MDBCardImage, MDBCardBody } from 'mdbreact';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import './CardContainer.css';
 
-const CardContainer = ({ children, headerText }) => {                
-    const ref = useRef(null)
+const CardContainer = ({ children, headerText }) => {                    
     const [containerSize, setContainerSize] = useState('small');
+    const ref = useRef(null);
     
-    const onLoadContainer = () => {
-        if(ref.current.clientHeight >= 419) {
+    const onLoadContainer = () => {        
+        if(ref.current.clientHeight >= 418) {
             setContainerSize('large');
         }
     }
@@ -22,14 +22,14 @@ const CardContainer = ({ children, headerText }) => {
                 >
                 <h4 className="h4-responsive mb-2 font-weight-bold">{headerText}</h4>                
                 </MDBCardImage>
-                <div ref={ref}>
-                <MDBCardBody>
-                <div className={"z-depth-3 " + (containerSize === "large" ? "scroll-container-large" : "scroll-container-small")} onLoad={onLoadContainer}>
-                    <ScrollToBottom className={"scroll-to-bottom " + (containerSize == "large" ? "scroll-section-large" : "scroll-section-small")} scrollViewClassName="scrollbar scrollbar-primary">                    
-                        {children}                    
-                    </ScrollToBottom>                               
-                </div>
-                </MDBCardBody> 
+                <div ref={ref} onClick={() => console.log(ref.current.clientHeight)}>
+                    <MDBCardBody>
+                        <div className={"z-depth-3 " + (containerSize === "large" ? "scroll-container-large" : "scroll-container-small")} onLoad={onLoadContainer}>
+                            <ScrollToBottom className={"scroll-to-bottom " + (containerSize === "large" ? "scroll-section-large" : "scroll-section-small")} scrollViewClassName="scrollbar scrollbar-primary">                    
+                                {children}                    
+                            </ScrollToBottom>                               
+                        </div>
+                    </MDBCardBody> 
                 </div>                
             </MDBCard>            
         </div>
