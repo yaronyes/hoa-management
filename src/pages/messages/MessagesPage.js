@@ -12,6 +12,9 @@ import selectMessages from '../../selectors/messageSelector';
 import Spinner from '../../components/spinner/Spinner';
 import { useParams } from 'react-router-dom';
 import { Badge } from '@material-ui/core';
+import AccordionNav from '../../components/navbar/AccordionNav';
+import { compareByDateDesc } from '../../utils/utils';
+import { updateSortDirection } from '../../actions/messageFilters';
 // import { makeStyles } from '@material-ui/core/styles';
 // import MailIcon from '@material-ui/icons/Mail';
 
@@ -23,10 +26,11 @@ import { Badge } from '@material-ui/core';
 //     },
 //   }));
 
-const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, onPageSelected }) => {
+const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messages, auth, filteredMessages, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
-    const [selectedMessage, setSelectedMessage] = useState(null);
+    const [selectedMessage, setSelectedMessage] = useState(null);    
+    //const [sortingDirection, setSortingDirection] = useState('asc');
     const { messageId } = useParams();
     // const classes = useStyles();
 
@@ -48,14 +52,14 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
     const toggle = () => {
       setModel(!modal);
     }
-
+    
     const openAddUpdateModal = message => {
       setSelectedMessage(message);      
       toggle();
     }
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
-   
+       
     const displayMessages = filteredMessages.map(message => <MessageCard key={message._id} toggleCollapse={toggleCollapse} message={message} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
 
     if(loader.loadingMessages) {
@@ -71,11 +75,11 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
               </MDBCol>                           
             </MDBRow>   
             <MDBRow>
-              { auth.user.isCommitteeMember
-                ? <MDBCol className="add-message ml-auto" md="6" lg="4">
-                <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New message"/>
-                </MDBCol>
-                : <MDBCol className="add-message mr-auto" md="6" lg="4">
+              { !auth.user.isCommitteeMember
+                // ? <MDBCol className="add-message ml-auto" md="6" lg="4">
+                // <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New message"/>
+                // </MDBCol>
+                ? <MDBCol className="add-message mr-auto" md="6" lg="4">
                     {/* <h5><strong>You have <p className="unread-messages cyan-text">{messages.filter(message => !message.seenBy.includes(auth.user._id)).length}</p> unread messages</strong></h5>                   */}
                     {/* <div className={classes.root}> */}
                     <h5><strong>You have 
@@ -85,10 +89,13 @@ const MessagesPage = ({ loader, getMessages, messages, auth, filteredMessages, o
                     unread messages</strong></h5>
                     {/* </div> */}
                   </MDBCol>
+                : null
               }
             </MDBRow>     
             <MDBRow>
               <MDBContainer className='accordion md-accordion accordion-1'>
+                  <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
+                   showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                 {displayMessages}                 
               </MDBContainer>
             </MDBRow>             
@@ -104,7 +111,9 @@ MessagesPage.propTypes = {
   errors: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
   getMessages: PropTypes.func.isRequired,
-  filteredMessages: PropTypes.array.isRequired
+  filteredMessages: PropTypes.array.isRequired,
+  filters: PropTypes.object.isRequired,
+  updateSortDirection: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -112,7 +121,8 @@ const mapStateToProps = state => ({
   loader: state.loader,
   errors: state.errors,
   messages: state.message,
+  filters: state.messageFilters,
   filteredMessages: selectMessages(state.message, state.messageFilters)
 });
 
-export default connect(mapStateToProps, { getMessages })(MessagesPage);
+export default connect(mapStateToProps, { getMessages, updateSortDirection })(MessagesPage);

@@ -1,4 +1,4 @@
-import { SET_TEXT_FILTER_MESSAGE, SORT_BY_DATE_MESSAGE, SORT_BY_PRIORITY_MESSAGE, SET_PRIORITY_FILTER_MESSAGE } from './types';
+import { SET_TEXT_FILTER_MESSAGE, SORT_BY_DATE_MESSAGE, SORT_BY_PRIORITY_MESSAGE, SET_PRIORITY_FILTER_MESSAGE, SET_SORT_DIRECTION } from './types';
 
 // SET_TEXT_FILTER
 export const setTextFilter = (text = '') => ({
@@ -22,3 +22,11 @@ export const setPriorityFilter = (priority = '') => ({
     type: SET_PRIORITY_FILTER_MESSAGE,
     priority
 });
+
+//SET_SORT_DIRECTION
+export const setSortDirection = (sortDirection = 'asc') => ({
+    type: SET_SORT_DIRECTION,
+    sortDirection
+});
+
+export const updateSortDirection = sortDirection => dispatch => dispatch(setSortDirection(sortDirection));
