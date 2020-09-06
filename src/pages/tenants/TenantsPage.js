@@ -18,7 +18,11 @@ const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirectio
     const [modal, setModel] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState();
 
-    useEffect(() => onPageSelected('tenants'), []);
+    useEffect(() => {
+        onPageSelected('tenants');
+
+        return () => updateSortDirection("asc");
+    }, []);
     useEffect(() => {
       if(tenants.length === 0) {
         getTenantUsers();

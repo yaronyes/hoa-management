@@ -20,7 +20,11 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
     const [selectedIssue, setSelectedIssue] = useState(null);
     const { issueId } = useParams();
 
-    useEffect(() => onPageSelected('issues'), []);
+    useEffect(() => {
+        onPageSelected('issues');
+
+        return () => updateSortDirection("asc");
+    }, []);
     useEffect(() => {
       if(issues.length === 0 && collapseID === 0) {
         getIssues();

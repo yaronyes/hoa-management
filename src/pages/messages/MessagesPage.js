@@ -33,7 +33,11 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
     const { messageId } = useParams();
     // const classes = useStyles();
 
-    useEffect(() => onPageSelected('messages'), []);
+    useEffect(() => {
+        onPageSelected('messages');
+
+        return () => updateSortDirection("asc");
+    }, []);
 
     useEffect(() => {
         if(messages.length === 0) {
