@@ -21,3 +21,5 @@ export const compareByDate = (a, b) => new Date(a) - new Date(b);
 export const compareByDateDesc = (a, b) => new Date(b) - new Date(a);
 
 export const compareByPriority = (a, b, priorities) => priorities[a] - priorities[b];
+
+export const sortByDate = (a, b, sortDirection) => sortDirection === 'asc' ? compareByDate(a, b) : compareByDateDesc(a, b);

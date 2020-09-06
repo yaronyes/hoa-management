@@ -1,9 +1,11 @@
-import { SET_TEXT_FILTER_TENANT } from '../actions/types';
+import { SET_TEXT_FILTER_TENANT, SET_SORT_DIRECTION_TENANT } from '../actions/types';
 
 // tenant Filters Reducer
 
 const tenantFiltersDefaultState = {
-  text: ''
+  text: '',
+  sortBy: 'createdAt',
+  sortDirection: 'asc'
 };
 
 export default (state = tenantFiltersDefaultState, action) => {
@@ -12,7 +14,12 @@ export default (state = tenantFiltersDefaultState, action) => {
       return {
         ...state,
         text: action.text
-      };    
+      };
+    case SET_SORT_DIRECTION_TENANT:   
+    return {
+        ...state,
+        sortDirection: action.sortDirection
+    }; 
     default:
       return state;
   }

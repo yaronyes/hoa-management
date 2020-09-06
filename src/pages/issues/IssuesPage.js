@@ -65,7 +65,7 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
                 </MDBRow>      */}
                 <MDBRow className="issue-row">
                   <MDBContainer className='accordion md-accordion accordion-1'>
-                        <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
+                        <AccordionNav showPlusIcon={!auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
                         showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                     {displayIssues}                 
                   </MDBContainer>

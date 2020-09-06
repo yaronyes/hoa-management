@@ -10,8 +10,10 @@ import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import TenantFilters from '../../components/tenant/TenantFilters';
 import selectTenants from '../../selectors/tenantSelector';
 import Spinner from '../../components/spinner/Spinner';
+import { updateSortDirection } from '../../actions/tenantFilters';
+import AccordionNav from '../../components/navbar/AccordionNav';
 
-const TenantsPage = ({ loader, auth, getTenantUsers, tenants, filteredTenants, onPageSelected }) => {
+const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirection, tenants, filteredTenants, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);        
     const [modal, setModel] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState();
@@ -52,13 +54,15 @@ const TenantsPage = ({ loader, auth, getTenantUsers, tenants, filteredTenants, o
                 <MDBRow>
                   <TenantFilters />
                 </MDBRow>   
-                <MDBRow>
+                {/* <MDBRow>
                   <MDBCol className="add-tenant ml-auto" md="6" lg="4">
                     <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New Tenant"/>
                   </MDBCol>                  
-                </MDBRow>     
+                </MDBRow>      */}
                 <MDBRow>
                   <MDBContainer className='accordion md-accordion accordion-1'>
+                    <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)} plusIcon="user-plus"
+                    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                     {displayTenants}                 
                   </MDBContainer>
                 </MDBRow>        
@@ -73,8 +77,10 @@ TenantsPage.propTypes = {
   loader: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   tenants: PropTypes.array.isRequired,
+  filters: PropTypes.object.isRequired,
   getTenantUsers: PropTypes.func.isRequired,
-  filteredTenants: PropTypes.array.isRequired
+  filteredTenants: PropTypes.array.isRequired,
+  updateSortDirection: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -82,7 +88,8 @@ const mapStateToProps = state => ({
   loader: state.loader,
   errors: state.errors,
   tenants: state.tenant,
+  filters: state.tenantFilters,
   filteredTenants: selectTenants(state.tenant, state.tenantFilters)
 });
 
-export default connect(mapStateToProps, { getTenantUsers })(TenantsPage);
+export default connect(mapStateToProps, { getTenantUsers, updateSortDirection })(TenantsPage);

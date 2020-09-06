@@ -50,7 +50,7 @@ const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingD
                         <MDBFormInline waves>
                             <div className="md-form my-0">
                                 <MDBBtn size="sm" style={style} color="transparent">
-                                    <MDBIcon icon={plusIcon} size="3x" /> 
+                                    <MDBIcon icon={plusIcon} size="2x" /> 
                                 </MDBBtn>
                             </div>
                         </MDBFormInline>
