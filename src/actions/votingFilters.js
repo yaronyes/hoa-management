@@ -1,4 +1,4 @@
-import { SET_TEXT_FILTER_VOTING/*, SET_STATUS_FILTER_VOTING*/ } from './types';
+import { SET_TEXT_FILTER_VOTING, /*SET_SORT_DIRECTION_VOTING */ } from './types';
 
 // SET_TEXT_FILTER_VOTING
 export const setTextFilter = (text = '') => ({
@@ -6,10 +6,12 @@ export const setTextFilter = (text = '') => ({
     text
 });
 
-// SET_STATUS_FILTER_VOTING
-// export const setStatusFilter = (status = '') => ({
-//     type: SET_STATUS_FILTER_VOTING,
-//     status
+// //SET_SORT_DIRECTION_VOTING
+// export const setSortDirection = (sortDirection = 'asc') => ({
+//     type: SET_SORT_DIRECTION_VOTING,
+//     sortDirection
 // });
+
+// export const updateSortDirection = sortDirection => dispatch => dispatch(setSortDirection(sortDirection));
 
 

@@ -1,6 +1,7 @@
 .active-votes .new-voting-row/*, .active-votes .voting-row*/ {
     margin-top: 16px;
     margin-bottom: 16px;
+    height: 56px;
 }
 
 /* .active-votes .active-votes-header {

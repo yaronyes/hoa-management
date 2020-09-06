@@ -10,9 +10,11 @@ import selectVoting from '../../selectors/votingSelector';
 import VotingFilter from '../../components/voting/VotingFilter';
 import Spinner from '../../components/spinner/Spinner';
 import { useParams } from 'react-router-dom';
+import AccordionNav from '../../components/navbar/AccordionNav';
 
-const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }) => {
+const VotingPage = ({ loader, getVoting, filters, votes, filteredVoting, onPageSelected }) => {
     const [collapseID, setCollapseID] = useState(0);
+    const [sortingDirection, setSortingDirection] = useState("asc");
     const { votingId } = useParams();
     
     useEffect(() => onPageSelected('voting'), []);
@@ -21,13 +23,13 @@ const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }
         if(votes.length === 0) {
             getVoting();
         } else if(collapseID === 0 && filteredVoting.length > 0) {
-            setCollapseID(filteredVoting[0]._id);
+            setCollapseID(filteredVoting(true, 'asc')[0]._id);
         }              
       }, [votes]);
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
     
-    const displayDoneVotes = filteredVoting.map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} />);
+    const displayDoneVotes = filteredVoting(false, sortingDirection).map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} />);
 
     if(loader.loadingVotes) {
         return <Spinner />
@@ -55,9 +57,14 @@ const VotingPage = ({ loader, getVoting, votes, filteredVoting, onPageSelected }
                             <VotingFilter />
                         </MDBRow>                        
                         <MDBRow>
-                            <MDBCol>                                
+                            {/* <MDBCol>                                
                                 {displayDoneVotes}
-                            </MDBCol>                                                                                    
+                            </MDBCol>                                                                                     */}
+                            <MDBContainer className='accordion md-accordion accordion-1'>
+                                <AccordionNav showPlusIcon={false} 
+                                showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => setSortingDirection(isUp ? "asc" : "desc")}/>
+                            {displayDoneVotes}                 
+                            </MDBContainer>
                         </MDBRow>
                     </MDBCol>
                 </MDBRow>
@@ -72,7 +79,8 @@ VotingPage.propTypes = {
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
     getVoting: PropTypes.func.isRequired,
-    filteredVoting: PropTypes.array.isRequired
+    filteredVoting: PropTypes.array.isRequired,
+    filters: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -80,7 +88,8 @@ const mapStateToProps = state => ({
     loader: state.loader,
     errors: state.errors,
     votes: state.voting,
-    filteredVoting: selectVoting(state.voting, state.votingFilters, false)
+    filters: state.votingFilters,
+    filteredVoting: (isActiveVoting, sortDirection) => selectVoting(state.voting, state.votingFilters, isActiveVoting, sortDirection)
 });
 
 export default connect(mapStateToProps, { getVoting })(VotingPage);
