@@ -61,7 +61,9 @@ const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirectio
                   <MDBContainer className='accordion md-accordion accordion-1'>
                     <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)} plusIcon="user-plus"
                     showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
-                    {displayTenants}                 
+                    { displayTenants.length > 0
+                    ? displayTenants
+                    : <h2 className="h2-responsive mb-2 font-weight-bold">No Tenants to show</h2> }                 
                   </MDBContainer>
                 </MDBRow>        
             </MDBContainer>           

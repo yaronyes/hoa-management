@@ -60,7 +60,9 @@ const VotingPage = ({ loader, getVoting, filters, votes, filteredVoting, onPageS
                             <MDBContainer className='accordion md-accordion accordion-1'>
                                 <AccordionNav showPlusIcon={false} 
                                 showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => setSortingDirection(isUp ? "asc" : "desc")}/>
-                            {displayDoneVotes}                 
+                            {displayDoneVotes.length > 0 
+                            ? displayDoneVotes
+                            : <h2 className="h2-responsive mb-2 font-weight-bold">No voting to show</h2> }
                             </MDBContainer>
                         </MDBRow>
                     </MDBCol>

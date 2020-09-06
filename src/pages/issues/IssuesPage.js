@@ -61,16 +61,13 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
                     <IssueFilters />
                   </MDBCol>                 
                 </MDBRow>   
-                {/* <MDBRow className="add-issue">
-                  <MDBCol className={auth.user.isCommitteeMember ? "add-issue-hide" : "ml-auto"} md="6" lg="4">
-                    <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="user-plus" caption="Create New Issue"/>
-                  </MDBCol>                  
-                </MDBRow>      */}
                 <MDBRow className="issue-row">
                   <MDBContainer className='accordion md-accordion accordion-1'>
                         <AccordionNav showPlusIcon={!auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
                         showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
-                    {displayIssues}                 
+                    { displayIssues.length > 0
+                    ? displayIssues
+                    : <h2 className="h2-responsive mb-2 font-weight-bold">No messages to show</h2> }                 
                   </MDBContainer>
                 </MDBRow>             
             </MDBContainer>

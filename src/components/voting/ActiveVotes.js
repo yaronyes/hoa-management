@@ -68,7 +68,9 @@ const ActiveVotes = ({ loader, votes, auth, filters, getVoting, filteredVoting, 
                 <MDBContainer className='accordion md-accordion accordion-1'>
                   <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)} plusIcon="person-booth"
                    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => setSortingDirection(isUp ? "asc" : "desc")}/>
-                    {displayActiveVotes}                 
+                    { displayActiveVotes.length > 0
+                    ? displayActiveVotes
+                    : <h2 className="h2-responsive mb-2 font-weight-bold">No voting to show</h2> }                 
                 </MDBContainer>
             </MDBRow>                
             <AddUpdateVoting modal={modal} toggle={toggle} votingToUpdate={selectedVoting}/>   

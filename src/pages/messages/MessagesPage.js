@@ -79,7 +79,9 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
               <MDBContainer className='accordion md-accordion accordion-1'>
                   <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
                    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
-                {displayMessages}                 
+                { displayMessages.length > 0
+                ? displayMessages
+                : <h2 className="h2-responsive mb-2 font-weight-bold">No messages to show</h2> }                 
               </MDBContainer>
             </MDBRow>             
         </MDBContainer>
