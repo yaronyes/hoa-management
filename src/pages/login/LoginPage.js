@@ -68,7 +68,7 @@ LoginPage.propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-    clearError: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

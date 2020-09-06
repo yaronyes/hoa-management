@@ -5,21 +5,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
+import { clearIssues } from '../../actions/issueActions';
+import { clearVoting } from '../../actions/votingActions';
+import { clearMessages } from '../../actions/messageActions';
+import { clearTenants } from '../../actions/tenantActions';
 
-const HeaderNavbar = ({ logoutUser, auth, selectedPage }) => {
+const HeaderNavbar = ({ logoutUser, clearIssues, clearVoting, clearMessages, clearTenants, auth, selectedPage }) => {
     const [isUserConnected, setIsUserConnected] = useState(false);  
     const [isOpen, setIsOpen] = useState(false);
     const history = useHistory();
-    
-    // useEffect(() => {
-    //   if(!userConnected) {
-    //     history.push('/')
-    //   }
-    // });    
-
+       
     useEffect(() => {      
       if(!auth.isAuthenticated) {
-         history.push('/')
+        clearIssues();
+        clearVoting();
+        clearMessages();
+        clearTenants();
+        
+        history.push('/');
       }
       
         setIsUserConnected(auth.isAuthenticated);
@@ -72,18 +75,15 @@ const HeaderNavbar = ({ logoutUser, auth, selectedPage }) => {
 
 HeaderNavbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
-    // loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-    // errors: PropTypes.object.isRequired,
-    // tenant: PropTypes.array.isRequired,
-    // addTenantUser: PropTypes.func.isRequired,
-    // getTenantUsers: PropTypes.func.isRequired
+    auth: PropTypes.object.isRequired,
+    clearIssues: PropTypes.object.isRequired,
+    clearVoting: PropTypes.object.isRequired,
+    clearMessages: PropTypes.object.isRequired,
+    clearTenants: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    // errors: state.errors,
-    // tenant: state.tenant
 });
   
-export default connect(mapStateToProps, { logoutUser })(HeaderNavbar);
+export default connect(mapStateToProps, { logoutUser, clearIssues, clearVoting, clearMessages, clearTenants })(HeaderNavbar);

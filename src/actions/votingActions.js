@@ -84,3 +84,5 @@ export const addVote = (vote, id) => async dispatch => {
         })
     }
 };
+
+export const clearVoting = () => async dispatch => dispatch(setVoting([]));

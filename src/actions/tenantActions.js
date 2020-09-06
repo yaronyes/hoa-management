@@ -90,3 +90,5 @@ export const updateTenantUser = (updates, id) => async dispatch =>  {
         })
     }
 };
+
+export const clearTenants = () => async dispatch => dispatch(setTenants([]));

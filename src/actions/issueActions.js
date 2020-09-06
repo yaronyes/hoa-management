@@ -127,3 +127,5 @@ export const addCommentForIssue = (comment, id) => async dispatch =>  {
         })
     }
 };
+
+export const clearIssues = () => async dispatch => dispatch(setIssues([]));

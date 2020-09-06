@@ -138,3 +138,5 @@ export const setSeenBy = (id) => async dispatch =>  {
         })
     }
 };
+
+export const clearMessages = () =>  async dispatch => dispatch(setMessages([]));
