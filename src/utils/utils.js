@@ -6,12 +6,20 @@ export const uploadImage = async (url, file, name) => {
         let data = new FormData();
         data.append(name, file, file.fileName);
         
-        const response = await axios.post(url, data, getOptions());       
+        const response = await axios.post(url, data, getOptions());               
         return response;
     } catch (e) {
         console.log(e);
         throw e;
     }
+}
+
+export const sendContactUs = async data => {
+    try {
+        return await axios.post('/contact', data, getOptions());      
+    } catch (e) {
+        console.log(e);
+    }    
 }
 
 export const generateRandomColor = () => "#"+(((1+Math.random())*(1<<24)|0).toString(16)).substr(-6);

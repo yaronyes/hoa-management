@@ -42,17 +42,17 @@
 }
 
 .page-container {
-    padding-bottom: 199px;
+    padding-bottom: 208px;
 }
 
 @media screen and (max-width: 992px) {
     .page-container {
-        padding-bottom: 244px;
+        padding-bottom: 274px;
     }
 }  
   
 @media screen and (max-width: 600px) {
     .page-container {
-        padding-bottom: 338px;
+        padding-bottom: 306px;
     }
 }
