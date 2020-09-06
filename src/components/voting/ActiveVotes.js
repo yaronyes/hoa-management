@@ -10,7 +10,7 @@ import { getVoting } from '../../actions/votingActions';
 import Spinner from '../spinner/Spinner';
 import AccordionNav from '../../components/navbar/AccordionNav';
 
-const ActiveVotes = ({ loader, votes, auth, filters, updateSortDirection, getVoting, filteredVoting, viewOnlyMode=false, votingIdToShow }) => {
+const ActiveVotes = ({ loader, votes, auth, filters, getVoting, filteredVoting, viewOnlyMode=false, votingIdToShow }) => {
     const [modal, setModel] = useState(false);
     const [collapseID, setCollapseID] = useState(0);    
     const [selectedVoting, setSelectedVoting] = useState(null);
@@ -28,9 +28,9 @@ const ActiveVotes = ({ loader, votes, auth, filters, updateSortDirection, getVot
     }, [filter, votingIdToShow]);
 
     useEffect(() => {
-        if(votes.length === 0) {
+        if(votes.length === 0 && viewOnlyMode) {
             getVoting();
-        } else {
+        } else if(votes.length > 0) {
             updateFilter();
         }
       }, [votes]);

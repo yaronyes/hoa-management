@@ -186,8 +186,7 @@ const SignUpPage = ({ createUser, auth, onPageSelected }) => {
                                 </MDBCol>
                         </MDBRow>
                     <p className="h5 text-center mb-4">Sign up</p>               
-                    <div className="text-center">
-                        {/* <MDBBtn color="primary" onClick={addUser}>Register</MDBBtn> */}
+                    <div className="text-center">                        
                         <RoundedBtn color="primary" onClick={addUser} icon="user-plus" caption="Register"/>
                     </div>
                 </div>
