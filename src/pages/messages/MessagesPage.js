@@ -52,7 +52,7 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
     const displayMessages = filteredMessages.map(message => <MessageCard key={message._id} toggleCollapse={toggleCollapse} message={message} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
 
     if(loader.loadingMessages) {
-      return <Spinner />
+      return <Spinner fullPage={true} />
     }
 
     return (

@@ -32,7 +32,7 @@ const VotingPage = ({ loader, getVoting, filters, votes, filteredVoting, onPageS
     const displayDoneVotes = filteredVoting(false, sortingDirection).map(item => <VotingCard key={item._id} toggleCollapse={toggleCollapse} voting={item} openID={collapseID} />);
 
     if(loader.loadingVotes) {
-        return <Spinner />
+        return <Spinner fullPage={true} />
     }
     
     return (

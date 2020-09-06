@@ -50,7 +50,7 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
     const displayIssues = filteredIssue.map(issue => <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>);    
     
     if(loader.loadingIssues) {
-      return <Spinner />
+      return <Spinner fullPage={true} />
     }
 
     return (

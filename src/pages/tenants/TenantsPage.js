@@ -48,7 +48,7 @@ const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirectio
     }
     
     if(loader.loadingTenants) {
-      return <Spinner />
+      return <Spinner fullPage={true} />
     }
 
     return (
