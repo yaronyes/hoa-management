@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol, MDBBtn  } from "mdbreact";
+import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol } from "mdbreact";
 import './AddUpdateMessage.css';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

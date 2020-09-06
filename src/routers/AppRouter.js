@@ -26,10 +26,6 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
         checkForConnectedUser();
     }, [])
 
-    // useEffect(() => {
-    //     setIsUserConnected(auth.isAuthenticated);
-    // }, [auth]);
-
     useEffect(() => {
         console.log("Error:", errors);
     }, [errors]);
@@ -41,43 +37,37 @@ const AppRouter = ({ checkForConnectedUser, auth, errors }) => {
         minHeight: "100vh"
     }
 
-    // const pageContainerStyle = {
-    //     paddingBottom: "21rem"
-    // }
-
     return (
-        // <div style={style}>
-        //     <div className={selectedPage !== "homepage" ? "page-container" : ""}/*style={selectedPage !== "homepage" ? pageContainerStyle : {}}*/>
         <BrowserRouter>
             <div style={style}>
-                <div className={selectedPage !== "homepage" ? "page-container" : ""}/*style={selectedPage !== "homepage" ? pageContainerStyle : {}}*/>
+                <div className={selectedPage !== "homepage" ? "page-container" : ""}>
                     <HeaderNavbar selectedPage={selectedPage}/>
                         <Switch>
-                            <PrivateRoute exact path="/" redirectTo="/dashboard" /*component={HomePage}*/ >
+                            <PrivateRoute exact path="/" redirectTo="/dashboard">
                                 <HomePage onPageSelected={updateSelectedPage} />
                             </PrivateRoute>  
-                            <RouteIfLoggedIn exact path="/dashboard" redirectTo="/" /*component={DashboardPage}*/ >
+                            <RouteIfLoggedIn exact path="/dashboard" redirectTo="/">
                                 <DashboardPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn>                        
-                            <RouteIfLoggedIn exact path="/messages" redirectTo="/" /*component={MessagesPage}*/>
+                            <RouteIfLoggedIn exact path="/messages" redirectTo="/">
                                 <MessagesPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn>                        
-                            <RouteIfLoggedIn exact path="/messages/:messageId" redirectTo="/" /*component={MessagesPage}*/>
+                            <RouteIfLoggedIn exact path="/messages/:messageId" redirectTo="/">
                                 <MessagesPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn>
-                            <RouteIfLoggedIn exact path="/tenants" redirectTo="/" /*component={TenantsPage}*/ >
+                            <RouteIfLoggedIn exact path="/tenants" redirectTo="/">
                                 <TenantsPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn> 
-                            <RouteIfLoggedIn exact path="/voting" redirectTo="/" /*component={VotingPage}*/ >
+                            <RouteIfLoggedIn exact path="/voting" redirectTo="/">
                                 <VotingPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn>
-                            <RouteIfLoggedIn exact path="/voting/:votingId" redirectTo="/" /*component={VotingPage}*/ >
+                            <RouteIfLoggedIn exact path="/voting/:votingId" redirectTo="/">
                                 <VotingPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn>
-                            <RouteIfLoggedIn exact path="/issues" redirectTo="/" /*component={IssuesPage}*/ >
+                            <RouteIfLoggedIn exact path="/issues" redirectTo="/">
                                 <IssuesPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn>
-                            <RouteIfLoggedIn exact path="/issues/:issueId" redirectTo="/" /*component={IssuesPage}*/ >
+                            <RouteIfLoggedIn exact path="/issues/:issueId" redirectTo="/">
                                 <IssuesPage onPageSelected={updateSelectedPage} />
                             </RouteIfLoggedIn>
                             <Route exact path='/signup'>

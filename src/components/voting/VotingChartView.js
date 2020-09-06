@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect, useStore } from 'react-redux';
+import { connect } from 'react-redux';
 import selectVoting from '../../selectors/votingSelector';
 import { getVoting } from '../../actions/votingActions';
 import ToolTipPieChart from '../charts/ToolTipPieChart';
-import { MDBRow, MDBCol, MDBCardBody, MDBCardTitle, MDBCard } from 'mdbreact';
+import { MDBCardBody, MDBCard } from 'mdbreact';
 import Spinner from '../spinner/Spinner';
 
 const VotingChartView = ({ loader, votes, auth, getVoting, filteredActiveVoting, filteredDoneVoting, voting, isActiveVoting, itemPositionInTheArray, isPercentage=false }) => {
@@ -23,7 +23,6 @@ const VotingChartView = ({ loader, votes, auth, getVoting, filteredActiveVoting,
                     setCurrentVoting(filteredDoneVoting[itemPositionInTheArray]);
                 }
             }
-            //setCurrentVoting(isActiveVoting ? filteredActiveVoting[itemPositionInTheArray] : filteredDoneVoting[itemPositionInTheArray]);
         }                
     }, [votes]);
 
@@ -66,7 +65,6 @@ VotingChartView.propTypes = {
     loader: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
-    //filteredVoting: PropTypes.array.isRequired,
     getVoting: PropTypes.func.isRequired
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {    
     MDBCol,
     MDBCollapse,
@@ -7,11 +7,8 @@ import {
     MDBCardImage,
     MDBRow,
     MDBView,
-    MDBBtn,
-    MDBIcon
 } from 'mdbreact';
 import './TenantCard.css';
-import AddUpdateTenant  from './AddUpdateTenant';
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import { removeTenantUser } from "../../actions/tenantActions";
 import PropTypes from "prop-types";
@@ -21,27 +18,10 @@ import config from '../../config/config.json';
 
 const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTenantUser }) => {
     const avatar = `${config.server_url}/users/${tenant._id}/avatar?${new Date().getTime()}`;
-    //const [modal, setModel] = useState(false);
-
-    // const toggle = () => {
-    //     setModel(!modal);
-    // }
-
-    //console.log("tenant", tenant)
-    //console.log("isopen", isOpen)
-
+    
     return (
         <div className="tenant-card">
             <MDBCard style={{ backgroundColor: 'transparent' }}>
-                {/* <div 
-                onClick={() => toggleCollapse(tenant._id)}
-                className='card-header text-uppercase blue lighten-3 z-depth-1'
-                role="tab"
-                >
-                    <span className='white-text font-weight-bold'>
-                        {tenant.name}
-                    </span>
-                </div> */}
                 <CardHeader id={tenant._id} toggleCollapse={toggleCollapse} headerText={tenant.name}/>
                 <MDBCollapse id={tenant._id} isOpen={openID === tenant._id ? true : false}>
                 <MDBCardBody>
@@ -75,13 +55,11 @@ const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTena
 
 TenantCard.propTypes = {
     errors: PropTypes.object.isRequired,
-    //tenant: PropTypes.array.isRequired,
     removeTenantUser: PropTypes.func.isRequired,
 };
   
 const mapStateToProps = (state) => ({
     errors: state.errors,
-    //tenant: state.tenant,
 });
   
 export default connect(mapStateToProps, { removeTenantUser })(TenantCard);

@@ -5,10 +5,7 @@ import {
     MDBCard,
     MDBCardBody,
     MDBCardImage,
-    MDBRow,
-    MDBView,
-    MDBContainer,
-    MDBTypography,
+    MDBRow
 } from 'mdbreact';
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';

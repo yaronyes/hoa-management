@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import {    
     MDBCol,
-    MDBCollapse,
-    MDBCard,
-    MDBCardBody,
-    MDBCardImage,
     MDBRow,
-    MDBView,
     MDBInput
 } from 'mdbreact';
 import RoundedBtn from '../rounded-button/RoundedBtn';
-import CommentPanel from './CommentPanel';
 import './AddAndShowComment.css';
 import CommentsContainer from './CommentsContainer';
 

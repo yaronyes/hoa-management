@@ -2,7 +2,6 @@ import { SET_CURRENT_USER, GET_ERRORS, CLEAR_ERRORS } from './types';
 import { getOptions } from '../utils/getAuthToken';
 import axios from 'axios';
 import UserModel from '../models/UserModel';
-import { uploadImage } from '../utils/utils';
 
 export const setCurrentUser = user => {
     return {
@@ -15,14 +14,7 @@ export const createUser = (user, image) => async dispatch => {
     try {
         const response = await axios.post('/users/committee', user);
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        // if (image) {
-        //     try {
-        //         await uploadAvatar(image);
-        //     } catch (e) {
-        //         console.log(e);
-        //     }
-        // }
+        localStorage.setItem('user', JSON.stringify(response.data.user));        
         dispatch(setCurrentUser(new UserModel(response.data.user)));
     } catch (e) {
         console.log(e);

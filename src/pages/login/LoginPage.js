@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBAlert } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBAlert } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './LoginPage.css';
@@ -53,8 +53,7 @@ const LoginPage = ({ loginUser, auth, errors, clearErrors, onPageSelected }) => 
                     <div>
                         {alertDialog}
                     </div>    
-                    <div className="text-center">
-                    {/* <MDBBtn>Login</MDBBtn> */}
+                    <div className="text-center">                    
                     <RoundedBtn color="primary" onClick={() => loginUser({ email, password })} icon="sign-in-alt" caption="Login"/>
                     </div>
                 </form>                

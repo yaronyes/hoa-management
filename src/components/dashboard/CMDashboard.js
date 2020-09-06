@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBCard } from "mdbreact";
+import React from "react";
+import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import IssueView from "../issues/IssueView";
 import CardContainer from "../container/CardContainer";
 import VotingChartView from "../voting/VotingChartView";
 
-const CMDashboard = () => {
-  //const [collapseID, setCollapseID] = useState(0);
-
-  //const toggleCollapse = (newCollapseID) => setCollapseID(collapseID !== newCollapseID ? newCollapseID : "");
-    
+const CMDashboard = () => { 
 
   return (
     <div>

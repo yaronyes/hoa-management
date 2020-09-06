@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
+import { MDBContainer, MDBRow } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';                  
 import TenantCard from '../../components/tenant/TenantCard';
 import  { getTenantUsers } from '../../actions/tenantActions';
 import './TenantsPage.css';
 import AddUpdateTenant  from '../../components/tenant/AddUpdateTenant';
-import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import TenantFilters from '../../components/tenant/TenantFilters';
 import selectTenants from '../../selectors/tenantSelector';
 import Spinner from '../../components/spinner/Spinner';
@@ -57,12 +56,7 @@ const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirectio
             <MDBContainer>
                 <MDBRow>
                   <TenantFilters />
-                </MDBRow>   
-                {/* <MDBRow>
-                  <MDBCol className="add-tenant ml-auto" md="6" lg="4">
-                    <RoundedBtn color="primary" onClick={() => openAddUpdateModal(undefined)} icon="user-plus" caption="Create New Tenant"/>
-                  </MDBCol>                  
-                </MDBRow>      */}
+                </MDBRow>                   
                 <MDBRow>
                   <MDBContainer className='accordion md-accordion accordion-1'>
                     <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)} plusIcon="user-plus"

@@ -5,7 +5,6 @@ import { PieChart } from "react-minimal-pie-chart";
 import ReactTooltip from "react-tooltip";
 import zeroPercentImage from '../../assets/zero-percent.jpg';
 import zeroVotingImage from '../../assets/zero-voting.jpg';
-import { findByLabelText } from "@testing-library/react";
 
 const defaultLabelStyle = {
   fontSize: "10px",

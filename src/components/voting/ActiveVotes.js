@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
+import { MDBContainer, MDBRow } from 'mdbreact';
 import AddUpdateVoting from '../../components/voting/AddUpdateVoting';
 import VotingCard from '../../components/voting/VotingCard';
-//import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ActiveVotes.css';
@@ -64,14 +63,8 @@ const ActiveVotes = ({ loader, votes, auth, filters, updateSortDirection, getVot
     return (
         <div className="active-votes">                     
             <MDBRow className={!viewOnlyMode ? "new-voting-row" : " new-voting-row-hide"}>
-                {/* <MDBCol className={!auth.user.isCommitteeMember ? "new-voting-btn-hide" : "ml-auto"} md="5">
-                    <RoundedBtn color="primary" onClick={() => openAddUpdateModal(null)} icon="person-booth" caption="New Voting" />
-                </MDBCol>                             */}
             </MDBRow>
             <MDBRow className="voting-row">                            
-                {/* <MDBCol>                        
-                    {displayActiveVotes}
-                </MDBCol> */}
                 <MDBContainer className='accordion md-accordion accordion-1'>
                   <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)} plusIcon="person-booth"
                    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => setSortingDirection(isUp ? "asc" : "desc")}/>

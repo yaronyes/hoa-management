@@ -3,7 +3,6 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';     
 import { getIssues } from '../../actions/issueActions';
-import RoundedBtn from '../../components/rounded-button/RoundedBtn';
 import IssueCard from '../../components/issues/IssueCard';
 import AddUpdateIssue from '../../components/issues/AddUpdateIssue';
 import './IssuesPage.css';

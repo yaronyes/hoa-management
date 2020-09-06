@@ -4,10 +4,7 @@ import {
     MDBCollapse,
     MDBCard,
     MDBCardBody,
-    MDBCardImage,
-    MDBRow,
-    MDBView,
-    MDBInput
+    MDBRow
 } from 'mdbreact';
 import './VotingCard.css';
 import CardHeader from '../card-header/CardHeader';

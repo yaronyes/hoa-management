@@ -14,7 +14,6 @@ import { deleteMessage, addCommentForMessage, setSeenBy } from '../../actions/me
 import RoundedBtn from '../rounded-button/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
-import config from '../../config/config.json';   
 import CommentModel from '../../models/CommentModel'
 import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
@@ -28,7 +27,6 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
 
     useEffect(() => {        
         if(message.haveImage) {
-            //setImg(`${config.server_url}/messages/${message._id}/image?${new Date().getTime()}`);
             setImg(message.getImageUrl(true));
         }
     }, [message]);
@@ -72,7 +70,6 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                 icon={message.priority === "info" ? 'info-circle' : 'exclamation-circle'}
                 iconColor={message.priority === "info" ? 'blue-text' : 'red-text'}
                 introIcon={introIcon}
-                // introIconColor={introIconColor}
                 onIntroIconClicked={introIconClicked}
                 />
                 <MDBCollapse id={message._id} isOpen={openID === message._id ? true :  false}>
@@ -99,13 +96,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                                 <MDBRow className="h-100">
                                     <MDBCol className="main-comments-col">
                                         <AddAndShowComment addComment={addComment} showAddComment={!auth.user.isCommitteeMember} comments={message.comments} />                           
-                                    </MDBCol>
-                                    {/* { auth.user.isCommitteeMember
-                                    ? <MDBCol lg='5' className="btn-col">
-                                        <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
-                                        <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
-                                    </MDBCol>                                
-                                    : null} */}
+                                    </MDBCol>                                    
                                 </MDBRow>
                             </MDBCol> 
                         </MDBRow>

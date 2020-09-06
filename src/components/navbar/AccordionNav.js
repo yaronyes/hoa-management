@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBBtn, MDBFormInline } from "mdbreact";
+import { MDBNavbar, MDBNavbarNav, MDBNavItem, MDBIcon, MDBBtn, MDBFormInline } from "mdbreact";
 
 const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingDirectionIcon, sortingDirectionClicked }) => {
     //const [isOpen, setIsOpen] = useState(false);

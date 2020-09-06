@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import CommentPanel from './CommentPanel';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import './CommentsContainer.css';

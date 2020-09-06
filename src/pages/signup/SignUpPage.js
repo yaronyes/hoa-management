@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBInput } from "mdbreact";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import "./SignUpPage.css";
