@@ -1,4 +1,4 @@
 {
-    "remote_server_url": "https://yyes-hoa-management-server.herokuapp.com",
-    "server_url": "http://localhost:5000"
+    "server_url": "https://yyes-hoa-management-server.herokuapp.com",
+    "local_server_url": "http://localhost:5000"
 }
