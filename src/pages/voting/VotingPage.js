@@ -57,9 +57,6 @@ const VotingPage = ({ loader, getVoting, filters, votes, filteredVoting, onPageS
                             <VotingFilter />
                         </MDBRow>                        
                         <MDBRow>
-                            {/* <MDBCol>                                
-                                {displayDoneVotes}
-                            </MDBCol>                                                                                     */}
                             <MDBContainer className='accordion md-accordion accordion-1'>
                                 <AccordionNav showPlusIcon={false} 
                                 showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => setSortingDirection(isUp ? "asc" : "desc")}/>
@@ -79,7 +76,7 @@ VotingPage.propTypes = {
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
     getVoting: PropTypes.func.isRequired,
-    filteredVoting: PropTypes.array.isRequired,
+    filteredVoting: PropTypes.func.isRequired,
     filters: PropTypes.object.isRequired,
 }
 

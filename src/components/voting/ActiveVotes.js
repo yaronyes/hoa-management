@@ -81,7 +81,7 @@ ActiveVotes.propTypes = {
     loader: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     votes: PropTypes.array.isRequired,
-    filteredVoting: PropTypes.array.isRequired,
+    filteredVoting: PropTypes.func.isRequired,
     getVoting: PropTypes.func.isRequired,
     filters: PropTypes.object.isRequired,    
 }
