@@ -13,7 +13,7 @@ const FilterBox = ({ onFilterChanged, label }) => {
 
     return (
         <div className="filter-box">
-            <MDBInput label={label ? label : "Filter"} icon="search" value={filter} onChange={filterChanged}/>
+            <MDBInput type="search" label={label ? label : "Filter"} icon="search" value={filter} onChange={filterChanged}/>
         </div>
         
     );
