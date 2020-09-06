@@ -5,6 +5,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import ReactTooltip from "react-tooltip";
 import zeroPercentImage from '../../assets/zero-percent.jpg';
 import zeroVotingImage from '../../assets/zero-voting.jpg';
+import { findByLabelText } from "@testing-library/react";
 
 const defaultLabelStyle = {
   fontSize: "10px",
@@ -42,10 +43,18 @@ const ToolTipPieChart = ({ chartData, isPercentage=false, header, useSmallChart=
     return `${entry.title}`;
   };
 
+  const noVotingStyle = {
+      marginTop: "10px",    
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center"
+  }
+
   if(data.length === 0) {    
-    return <div className="text-center" style={{ marginTop: "10px",  maxWidth: '265px' }}>  
+    return <div className="no-voting text-center" style={noVotingStyle}>  
               <h6>No Voting</h6>               
-              <img src={isPercentage ? zeroPercentImage : zeroVotingImage} alt="" className="img-fluid" />              
+              <img src={isPercentage ? zeroPercentImage : zeroVotingImage} alt="" className="img-fluid mx-auto" />              
           </div>
   };
 
