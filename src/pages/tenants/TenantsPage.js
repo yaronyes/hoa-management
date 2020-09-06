@@ -63,7 +63,7 @@ const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirectio
                     showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                     { displayTenants.length > 0
                     ? displayTenants
-                    : <h2 className="h2-responsive mb-2 font-weight-bold">No Tenants to show</h2> }                 
+                    : <h3 className="h3-responsive mb-2 font-weight-bold">No tenants to show</h3> }                 
                   </MDBContainer>
                 </MDBRow>        
             </MDBContainer>           

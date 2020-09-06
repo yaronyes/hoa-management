@@ -67,7 +67,7 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
                         showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                     { displayIssues.length > 0
                     ? displayIssues
-                    : <h2 className="h2-responsive mb-2 font-weight-bold">No messages to show</h2> }                 
+                    : <h3 className="h3-responsive mb-2 font-weight-bold">No issues to show</h3> }                 
                   </MDBContainer>
                 </MDBRow>             
             </MDBContainer>

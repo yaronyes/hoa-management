@@ -59,14 +59,10 @@ export const logoutUser = () => async dispatch => {
 export const checkForConnectedUser = () => async dispatch => {
     try {
         const user = localStorage.getItem('user');
-        if(localStorage.getItem('token') && user) {
-            console.log('connected', JSON.parse(user))
+        if(localStorage.getItem('token') && user) {            
             dispatch(setCurrentUser(new UserModel(JSON.parse(user))));
         } else {
             console.log('not connected')
-            //localStorage.removeItem('token');
-            //localStorage.removeItem('user');            
-        
             dispatch(setCurrentUser({}));
         }                
     } catch (e) {

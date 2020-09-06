@@ -81,7 +81,7 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
                    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                 { displayMessages.length > 0
                 ? displayMessages
-                : <h2 className="h2-responsive mb-2 font-weight-bold">No messages to show</h2> }                 
+                : <h3 className="h3-responsive mb-2 font-weight-bold">No messages to show</h3> }                 
               </MDBContainer>
             </MDBRow>             
         </MDBContainer>

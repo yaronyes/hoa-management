@@ -62,7 +62,7 @@ const VotingPage = ({ loader, getVoting, filters, votes, filteredVoting, onPageS
                                 showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => setSortingDirection(isUp ? "asc" : "desc")}/>
                             {displayDoneVotes.length > 0 
                             ? displayDoneVotes
-                            : <h2 className="h2-responsive mb-2 font-weight-bold">No voting to show</h2> }
+                            : <h3 className="h3-responsive mb-2 font-weight-bold">No voting to show</h3> }
                             </MDBContainer>
                         </MDBRow>
                     </MDBCol>

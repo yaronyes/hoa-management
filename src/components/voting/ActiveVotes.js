@@ -70,7 +70,7 @@ const ActiveVotes = ({ loader, votes, auth, filters, getVoting, filteredVoting, 
                    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => setSortingDirection(isUp ? "asc" : "desc")}/>
                     { displayActiveVotes.length > 0
                     ? displayActiveVotes
-                    : <h2 className="h2-responsive mb-2 font-weight-bold">No voting to show</h2> }                 
+                    : <h3 className="h3-responsive mb-2 font-weight-bold">No voting to show</h3> }                 
                 </MDBContainer>
             </MDBRow>                
             <AddUpdateVoting modal={modal} toggle={toggle} votingToUpdate={selectedVoting}/>   

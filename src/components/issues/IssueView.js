@@ -27,8 +27,7 @@ const IssueView = ({ loader, issues, getIssues, openedNewIssues, overdueIssues, 
                 setFilter(overdueIssues);
             } else {
                 setFilter(closedNewIssues);
-            }
-            //setFilter(isNewIssues ? newReportedIssues : overdueIssues);            
+            }                      
         }     
     }, [issues]);
     
@@ -42,7 +41,9 @@ const IssueView = ({ loader, issues, getIssues, openedNewIssues, overdueIssues, 
            ? <Spinner />
            : <MDBRow className="issues-row">                            
                 <MDBCol>                        
-                    {displayIssues}
+                    { displayIssues.length > 0
+                    ? displayIssues
+                    : <h3 className="h3-responsive mb-2 font-weight-bold">No issues to show</h3> }
                 </MDBCol>                            
             </MDBRow> }                
         </div>        
