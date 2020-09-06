@@ -25,9 +25,9 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
         return () => updateSortDirection("asc");
     }, []);
     useEffect(() => {
-      if(issues.length === 0 && collapseID === 0) {
+      if(issues.length === 0) {
         getIssues();
-      } else if(/*collapseID === 0 && */filteredIssue.length > 0) {
+      } else if(filteredIssue.length > 0) {
         if(issueId) {
             setCollapseID(issueId);    
         } else if(collapseID === 0) {

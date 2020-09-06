@@ -36,7 +36,9 @@ const MessageView = ({ loader, auth, messages, getMessages, filteredMessages }) 
            ? <Spinner />
            : <MDBRow className="message-row">                            
                 <MDBCol>                        
-                    {displayMessages}
+                    { displayMessages.length > 0
+                    ? displayMessages
+                    : <h3 className="h3-responsive mb-2 font-weight-bold">No messages to show</h3> }
                 </MDBCol>                            
             </MDBRow>  }
         </div>
