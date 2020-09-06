@@ -10,12 +10,12 @@ const CMDashboard = () => {
     <div>
       <MDBContainer fluid>
         <MDBRow>
-          <MDBCol className="new-issue-view-header">
+          <MDBCol className="new-issue-view-header" lg="6">
             <CardContainer headerText="New Reported Issues">
               <IssueView selectedFilters={{ isOpen: true, isNew: true }} />
             </CardContainer>
           </MDBCol>          
-          <MDBCol className="issue-view-header">
+          <MDBCol className="issue-view-header" lg="6">
             <CardContainer headerText="Overdue Issues">
               <IssueView selectedFilters={{ isOpen: true, isNew: false }} />
             </CardContainer>               
@@ -27,13 +27,13 @@ const CMDashboard = () => {
               <MDBCol className="active-voting-pr-header">
                 <CardContainer headerText="Active Voting Percentage">
                   <MDBRow>
-                    <MDBCol lg="4" md="6">
+                    <MDBCol lg="4" md="6" className="mb-3">
                       <VotingChartView isActiveVoting={true} itemPositionInTheArray={0} isPercentage={true} />
                     </MDBCol>
-                    <MDBCol lg="4" md="6">
+                    <MDBCol lg="4" md="6" className="mb-3">
                       <VotingChartView isActiveVoting={true} itemPositionInTheArray={1} isPercentage={true} />
                     </MDBCol>
-                    <MDBCol lg="4" md="6">
+                    <MDBCol lg="4" md="6" className="mb-3">
                       <VotingChartView isActiveVoting={true} itemPositionInTheArray={2} isPercentage={true} />
                     </MDBCol>
                   </MDBRow>
