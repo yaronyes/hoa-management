@@ -60,7 +60,6 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                                             secondText={issue.status === 'open' ? `Opened By: ${issue.createdBy.name}` : 'Issue Closed'}
                                                             secondTextSmallSize={true}
                                                             iconColor={issue.status === 'open' ? 'red-text' : 'green-text'} />                                                                                                                                                                    
-                                             //: <CardHeader id={issue._id} toggleCollapse={toggleCollapse} headerText={issue.title} icon='none'/>                                                     
     
     return (
         <div className="issue-card">
@@ -85,17 +84,13 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
-                        {/* { issue.comments.length > 0 */}
                          <MDBCol md="5">
                             <MDBRow className="h-100">
-                                {/* { issue.status === 'open' */}
                                  <MDBCol className="main-comments-col">
                                     <AddAndShowComment addComment={addComment} showAddComment={auth.user.isCommitteeMember && issue.status === 'open'} comments={issue.comments} />                            
                                 </MDBCol>
-                                {/* : null}                                */}
                             </MDBRow>
                         </MDBCol>
-                        {/* : null}                                               */}
                     </MDBRow>
                     <MDBRow>                        
                         { allowedToUpdateIssue
