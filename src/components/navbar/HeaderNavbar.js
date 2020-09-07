@@ -31,7 +31,7 @@ const HeaderNavbar = ({ logoutUser, clearIssues, clearVoting, clearMessages, cle
 
     return (
     <div className="header-navbar">
-      <MDBNavbar color="info-color-dark" dark expand="md">
+      <MDBNavbar color="info-color-dark header-navbar-nav" dark expand="md">
         <MDBNavbarBrand className="brand">
           <MDBNavLink to="/">
             <strong className="white-text">HOA Systems</strong>
