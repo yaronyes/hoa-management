@@ -21,7 +21,7 @@ const CardHeader = ({ id, toggleCollapse, color, headerText, icon="none", iconCo
     return (
         <div 
         onClick={clicked}
-        className={'card-header z-depth-1 ' + colorId} //text-uppercase
+        className={'card-header z-depth-1 ' + colorId}
         role="tab"
         >   <div>
                 { introIcon !== "none"
@@ -33,13 +33,13 @@ const CardHeader = ({ id, toggleCollapse, color, headerText, icon="none", iconCo
             </div>            
             <div className="right-side">
             { secondText
-             ? <span className={'white-text font-weight-bold' + (icon !== 'none' ? ' mr-2' : '') + (secondTextSmallSize ? ' second-text-small' : '')}>
+             ? <span className={'white-text font-weight-bold ml-auto mt-1' + (icon !== 'none' ? ' mr-2' : '') + (secondTextSmallSize ? ' second-text-small' : '')}>
                     {secondText}
             </span>
             : null }
             { icon !== 'none'
               ? <div>
-                <MDBIcon icon={icon} className={"main-icon " + iconColor} onClick={clicked} size="2x" />                   
+                <MDBIcon icon={icon} className={"main-icon " + iconColor} onClick={clicked} size="lg" />                   
                 </div>
              : null }
             </div> 
