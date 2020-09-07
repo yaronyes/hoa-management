@@ -32,8 +32,10 @@ const HeaderNavbar = ({ logoutUser, clearIssues, clearVoting, clearMessages, cle
     return (
     <div className="header-navbar">
       <MDBNavbar color="info-color-dark" dark expand="md">
-        <MDBNavbarBrand>
-          <strong className="white-text">HOA Systems</strong>
+        <MDBNavbarBrand className="brand">
+          <MDBNavLink to="/">
+            <strong className="white-text">HOA Systems</strong>
+          </MDBNavLink>          
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={() => {setIsOpen(!isOpen)}} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
@@ -76,10 +78,10 @@ const HeaderNavbar = ({ logoutUser, clearIssues, clearVoting, clearMessages, cle
 HeaderNavbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    clearIssues: PropTypes.object.isRequired,
-    clearVoting: PropTypes.object.isRequired,
-    clearMessages: PropTypes.object.isRequired,
-    clearTenants: PropTypes.object.isRequired
+    clearIssues: PropTypes.func.isRequired,
+    clearVoting: PropTypes.func.isRequired,
+    clearMessages: PropTypes.func.isRequired,
+    clearTenants: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
