@@ -47,7 +47,14 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const displayIssues = filteredIssue.map(issue => <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>);    
+    const cardMode = true;
+    const displayIssues = filteredIssue.map(issue => !cardMode
+    ? <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>
+    : <MDBCol lg="4" md="6" className="mt-4">
+        <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal} cardMode={true} />
+      </MDBCol>);     
+      
+    const toDisplay = displayIssues.length > 0 ? displayIssues : <h3 className="h3-responsive mb-2 font-weight-bold">No issues to show</h3>;
     
     if(loader.loadingIssues) {
       return <Spinner fullPage={true} />
@@ -61,14 +68,18 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
                     <IssueFilters />
                   </MDBCol>                 
                 </MDBRow>   
+                { cardMode    
+                ? <AccordionNav showPlusIcon={!auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
+                showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
+                : null } 
                 <MDBRow className="issue-row">
-                  <MDBContainer className='accordion md-accordion accordion-1'>
+                {!cardMode  
+                   ?<MDBContainer className='accordion md-accordion accordion-1'>
                         <AccordionNav showPlusIcon={!auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
                         showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
-                    { displayIssues.length > 0
-                    ? displayIssues
-                    : <h3 className="h3-responsive mb-2 font-weight-bold">No issues to show</h3> }                 
+                    {toDisplay}
                   </MDBContainer>
+                  : toDisplay}
                 </MDBRow>             
             </MDBContainer>
             <AddUpdateIssue modal={modal} toggle={toggle} issueToUpdate={selectedIssue}/>                       

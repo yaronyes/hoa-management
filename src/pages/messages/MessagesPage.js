@@ -48,8 +48,14 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
     }
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
-       
-    const displayMessages = filteredMessages.map(message => <MessageCard key={message._id} toggleCollapse={toggleCollapse} message={message} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>);    
+    const cardMode = true;
+    const displayMessages = filteredMessages.map(message => !cardMode
+                                                    ? <MessageCard key={message._id} toggleCollapse={toggleCollapse} message={message} openID={collapseID} onUpdateMessage={openAddUpdateModal}/>    
+                                                    :  <MDBCol key={message._id} lg="4" md="6" className="mt-4">
+                                                        <MessageCard toggleCollapse={toggleCollapse} message={message} openID={collapseID} onUpdateMessage={openAddUpdateModal} cardMode={true} />
+                                                      </MDBCol>);    
+
+    const toDisplay = displayMessages.length > 0 ? displayMessages : <h3 className="h3-responsive mb-2 font-weight-bold">No messages to show</h3>;
 
     if(loader.loadingMessages) {
       return <Spinner fullPage={true} />
@@ -74,15 +80,19 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
                   </MDBCol>
                 : null
               }
-            </MDBRow>     
+            </MDBRow> 
+            { cardMode    
+            ? <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}            
+            showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
+            : null }
             <MDBRow>
-              <MDBContainer className='accordion md-accordion accordion-1'>
+               {!cardMode  
+              ? <MDBContainer className='accordion md-accordion accordion-1'>
                   <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
                    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
-                { displayMessages.length > 0
-                ? displayMessages
-                : <h3 className="h3-responsive mb-2 font-weight-bold">No messages to show</h3> }                 
-              </MDBContainer>
+                    {toDisplay}
+              </MDBContainer> 
+             : toDisplay }
             </MDBRow>             
         </MDBContainer>
         <AddUpdateMessage modal={modal} toggle={toggle} messageToUpdate={selectedMessage}/>                       

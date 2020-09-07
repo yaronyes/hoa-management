@@ -17,8 +17,9 @@ import CommentModel from '../../models/CommentModel';
 import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
 import issueImage from '../../assets/issue.png';
+import IssueCardEx from './IssueCardEx';
 
-const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue, viewOnly = false }) => {
+const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue, viewOnly = false, cardMode = false }) => {
     const [img, setImg] = useState(issueImage); 
     const [modal, setModel] = useState(false);
     
@@ -63,7 +64,8 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
     
     return (
         <div className="issue-card">
-            <MDBCard style={{ backgroundColor: 'transparent' }}>                
+            { !cardMode
+            ?<MDBCard style={{ backgroundColor: 'transparent' }}>                
                 {cardHeader}
                 <MDBCollapse id={issue._id} isOpen={openID === issue._id ? true :  false}>
                 <MDBCardBody>
@@ -108,6 +110,8 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
+            : <IssueCardEx issue={issue} image={img} onImageDBClicked={toggle} onUpdateIssue={onUpdateIssue} deleteIssue={deleteIssue} addComment={addComment}
+                        closeIssue={closeIssue} isCommitteeMember={auth.user.isCommitteeMember} allowedToUpdateIssue={allowedToUpdateIssue}/> }
             <ImageCard imageUrl={issue.getImageUrl(true)} modal={modal} toggle={toggle} />            
         </div>
     );

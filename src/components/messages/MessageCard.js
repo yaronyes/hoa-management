@@ -18,8 +18,9 @@ import CommentModel from '../../models/CommentModel'
 import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
 import messageImage from '../../assets/message.png';
+import MessageCardEx from './MessageCardEx';
 
-const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth }) => {
+const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth, cardMode = false }) => {
     const [open, setOpen] = useState(false);
     const [introIcon, setIntroIcon] = useState("none");
     const [img, setImg] = useState(messageImage);
@@ -65,7 +66,8 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
     
     return (
         <div className="message-card">
-            <MDBCard style={{ backgroundColor: 'transparent' }}>                
+            {!cardMode
+            ?<MDBCard style={{ backgroundColor: 'transparent' }}>                
                 <CardHeader id={message._id} toggleCollapse={onToggleCollapse} headerText={message.title} 
                 icon={message.priority === "info" ? 'info-circle' : 'exclamation-circle'}
                 iconColor={message.priority === "info" ? 'blue-text' : 'red-text'}
@@ -111,6 +113,8 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                     </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
+            : <MessageCardEx message={message} image={img} onImageDBClicked={toggle} onUpdateMessage={onUpdateMessage} deleteMessage={deleteMessage} addComment={addComment}
+             isCommitteeMember={auth.user.isCommitteeMember} introIcon={introIcon} onIntroIconClicked={introIconClicked} /> }             
             <ImageCard imageUrl={message.getImageUrl(true)} modal={modal} toggle={toggle} />
         </div>
     );
