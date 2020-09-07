@@ -1,5 +1,5 @@
 export default class UserModel {
-    constructor({ _id, name, email, password, isCommitteeMember, apartment, committee, tenants = [], createdAt, updatedAt }) {
+    constructor({ _id, name, email, password, isCommitteeMember, apartment, committee, tenants = [], createdAt, updatedAt, cardMode = false }) {
         this._id = _id;
         this.name = name;
         this.email = email;
@@ -10,5 +10,6 @@ export default class UserModel {
         this.tenants = tenants;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.cardMode = cardMode;
     }
 }

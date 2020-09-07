@@ -46,9 +46,8 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
     }
     
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
-
-    const cardMode = true;
-    const displayIssues = filteredIssue.map(issue => !cardMode
+    
+    const displayIssues = filteredIssue.map(issue => !auth.user.cardMode
     ? <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>
     : <MDBCol lg="4" md="6" className="mt-4">
         <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal} cardMode={true} />
@@ -68,12 +67,12 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
                     <IssueFilters />
                   </MDBCol>                 
                 </MDBRow>   
-                { cardMode    
+                { auth.user.cardMode    
                 ? <AccordionNav showPlusIcon={!auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
                 showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
                 : null } 
                 <MDBRow className="issue-row">
-                {!cardMode  
+                { !auth.user.cardMode  
                    ?<MDBContainer className='accordion md-accordion accordion-1'>
                         <AccordionNav showPlusIcon={!auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
                         showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
