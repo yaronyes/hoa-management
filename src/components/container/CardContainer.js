@@ -22,7 +22,7 @@ const CardContainer = ({ children, headerText }) => {
                 >
                 <h4 className="h4-responsive mb-2 font-weight-bold">{headerText}</h4>                
                 </MDBCardImage>
-                <div ref={ref} onClick={() => console.log(ref.current.clientHeight)}>
+                <div ref={ref}>
                     <MDBCardBody>
                         <div className={"z-depth-3 " + (containerSize === "large" ? "scroll-container-large" : "scroll-container-small")} onLoad={onLoadContainer}>
                             <ScrollToBottom className={"scroll-to-bottom " + (containerSize === "large" ? "scroll-section-large" : "scroll-section-small")} scrollViewClassName="scrollbar scrollbar-primary">                    
