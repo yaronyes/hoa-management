@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBIcon, MDBCollapse } from 'mdbreact';
 import './MessageCardEx.css'
 import AddAndShowComment from '../comments/AddAndShowComment';
+import FloatingBtn from '../buttons/FloatingBtn';
 
 const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessage, addComment, isCommitteeMember, introIcon, onIntroIconClicked }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -21,16 +22,18 @@ const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessa
                 tag='div'
             >
                 <MDBIcon className={"priority-icon " + (message.priority === "info" ? 'blue-text' : 'red-text')} icon={message.priority === "info" ? 'info-circle' : 'exclamation-circle'} size="2x" />
-                <h2 className='h2-responsive'>{message.title}</h2>
+                <h3 className='h3-responsive'>{message.title}</h3>
                 <p>{new Date(message.createdAt).toLocaleString()}</p>
                 { isCommitteeMember
-                ?<div className='text-center'>                
-                    <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => onUpdateMessage(message)}>
+                ?<div className='text-center'>
+                    <FloatingBtn color='blue' icon="edit" onBtnClicked={() => onUpdateMessage(message)}/>                
+                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => onUpdateMessage(message)}>
                         <MDBIcon icon="edit" />
-                    </MDBBtn>
-                    <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => deleteMessage(message)}>
+                    </MDBBtn> */}
+                    <FloatingBtn color='blue' icon='trash-alt' onBtnClicked={() => deleteMessage(message)}/>
+                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => deleteMessage(message)}>
                         <MDBIcon icon='trash-alt' size="lg"/>
-                    </MDBBtn>                
+                    </MDBBtn>  */}
                 </div>
                 : null }
                 { introIcon !== "none"
@@ -42,13 +45,15 @@ const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessa
                 <h6><strong>Priority: </strong><strong className="text-muted">{message.priority}</strong></h6>  
                 <div className={'d-flex ' + (message.haveImage ? 'justify-content-between' : 'justify-content-end')}>
                 { message.haveImage
-                    ?<MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
-                        <MDBIcon icon="image" />
-                    </MDBBtn>    
+                    ? <FloatingBtn color='blue' icon='image' onBtnClicked={onImageDBClicked}/>
+                    // <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
+                    //     <MDBIcon icon="image" />
+                    // </MDBBtn>    
                     : null }
-                    <MDBBtn color='blue' size='sm' className="floating-btn-ex ml-auto" onClick={() => setIsOpen(!isOpen)}>
+                    <FloatingBtn color='blue' icon='comment' onBtnClicked={() => setIsOpen(!isOpen)}/>
+                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex ml-auto" onClick={() => setIsOpen(!isOpen)}>
                         <MDBIcon icon='comment' size="lg"/>
-                    </MDBBtn>                
+                    </MDBBtn>                 */}
                 </div>
                 <MDBCollapse id="commentCollapse" isOpen={isOpen}>
                     <div className="mt-2">

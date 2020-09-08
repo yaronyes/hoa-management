@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBIcon, MDBCollapse } from 'mdbreact';
-import '../messages/MessageCardEx.css'
+import { MDBCard, MDBCardBody, MDBCardImage, MDBIcon, MDBCollapse } from 'mdbreact';
+import './IssueCardEx.css'
 import AddAndShowComment from '../comments/AddAndShowComment';
+import FloatingBtn from '../buttons/FloatingBtn';
 
 
 const IssueCardEx = ({ issue, onImageDBClicked, onUpdateIssue, deleteIssue, addComment, closeIssue, isCommitteeMember, allowedToUpdateIssue }) => {
@@ -22,17 +23,20 @@ const IssueCardEx = ({ issue, onImageDBClicked, onUpdateIssue, deleteIssue, addC
                     ? <div style={{ display: "inline-block" }}> 
                        { issue.status === 'open'    
                         ? <div style={{ display: "inline-block" }}> 
-                            <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => onUpdateIssue(issue)}>
+                            <FloatingBtn color='blue' icon='edit' onBtnClicked={() => onUpdateIssue(issue)}/>
+                            {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => onUpdateIssue(issue)}>
                                 <MDBIcon icon="edit" />
-                            </MDBBtn>                    
-                            <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={closeIssue}>
+                            </MDBBtn>                     */}
+                            <FloatingBtn color='blue' icon='times-circle' onBtnClicked={closeIssue}/>
+                            {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={closeIssue}>
                                 <MDBIcon icon="times-circle" />
-                            </MDBBtn>
+                            </MDBBtn> */}
                         </div>
                         : null}
-                    <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => deleteIssue(issue)}>
+                    <FloatingBtn color='blue' icon='trash-alt' onBtnClicked={() => deleteIssue(issue)}/>
+                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => deleteIssue(issue)}>
                         <MDBIcon icon='trash-alt' size="lg"/>
-                    </MDBBtn>                
+                    </MDBBtn>                 */}
                     </div>
                     : null }
                 </div>
@@ -43,13 +47,15 @@ const IssueCardEx = ({ issue, onImageDBClicked, onUpdateIssue, deleteIssue, addC
             <h6><strong>Status: </strong><strong className="text-muted">{issue.status}</strong></h6>  
             <div className={'d-flex ' + (issue.haveImage ? 'justify-content-between' : 'justify-content-end')}>
                 { issue.haveImage
-                ? <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
-                        <MDBIcon icon="image" />
-                </MDBBtn>
+                ? <FloatingBtn color='blue' icon='image' onBtnClicked={onImageDBClicked}/>
+                // <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
+                //         <MDBIcon icon="image" />
+                // </MDBBtn>
                 : null }
-                <MDBBtn color='blue' size='sm' className="floating-btn-ex ml-auto" onClick={() => setIsOpen(!isOpen)}>
+                <FloatingBtn color='blue' icon='comment' onBtnClicked={() => setIsOpen(!isOpen)} className="ml-auto" />
+                {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex ml-auto" onClick={() => setIsOpen(!isOpen)}>
                     <MDBIcon icon='comment' size="lg"/>
-                </MDBBtn>                
+                </MDBBtn>                 */}
             </div>
             <MDBCollapse id="commentCollapse" isOpen={isOpen}>
                 <div className="mt-2">
