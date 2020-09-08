@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {    
     MDBCol,
     MDBCollapse,
@@ -15,13 +15,23 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import CardHeader from '../card-header/CardHeader';
 import config from '../../config/config.json';
+import TenantCardEx from './TenantCardEx';
+import ConfirmDeleteModal from '../delete-modal/ConfirmDeleteModal';
 
-const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTenantUser }) => {
+const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTenantUser, cardMode }) => {
+    const [confirmModal, setConfirmModal] = useState(false); 
     const avatar = `${config.server_url}/users/${tenant._id}/avatar?${new Date().getTime()}`;
+
+    const toggleConfirmModal = () => setConfirmModal(!confirmModal);
+
+    const onDeleteTenant = () => {        
+        toggleConfirmModal();
+    }
     
     return (
         <div className="tenant-card">
-            <MDBCard style={{ backgroundColor: 'transparent' }}>
+            { !cardMode
+            ? <MDBCard style={{ backgroundColor: 'transparent' }}>
                 <CardHeader id={tenant._id} toggleCollapse={toggleCollapse} headerText={tenant.name}/>
                 <MDBCollapse id={tenant._id} isOpen={openID === tenant._id ? true : false}>
                 <MDBCardBody>
@@ -42,12 +52,14 @@ const TenantCard = ({ toggleCollapse, tenant, openID, onUpdateTenant, removeTena
                         </MDBCol>                             
                         <MDBCol  md="4" className="btn-col h-100 mt-auto">                            
                                 <RoundedBtn color="info" onClick={() => onUpdateTenant(tenant)} icon="user-edit" caption="Update" size="sm"/>
-                                <RoundedBtn color="danger" onClick={() => removeTenantUser(tenant)} icon="trash" caption="Delete" size="sm"/>
+                                <RoundedBtn color="danger" onClick={onDeleteTenant} icon="trash" caption="Delete" size="sm"/>
                         </MDBCol>                                                                                    
                     </MDBRow>
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
+            : <TenantCardEx tenant={tenant} deleteTenant={onDeleteTenant} updateTenant={onUpdateTenant} /> }
+            <ConfirmDeleteModal toggle={toggleConfirmModal} modal={confirmModal} title={tenant.name} onDeleteConfirm={() => removeTenantUser(tenant)}/>
         </div>
     );
 

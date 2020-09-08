@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MDBContainer, MDBRow } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';                  
 import TenantCard from '../../components/tenant/TenantCard';
@@ -41,7 +41,13 @@ const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirectio
 
     const toggleCollapse = newCollapseID => setCollapseID(collapseID !== newCollapseID ? newCollapseID : '');
 
-    const displayTenants = filteredTenants.map(item => <TenantCard key={item._id} toggleCollapse={toggleCollapse} tenant={item} openID={collapseID} onUpdateTenant={openAddUpdateModal}/>);
+    const displayTenants = filteredTenants.map(tenant => !auth.user.cardMode
+    ? <TenantCard key={tenant._id} toggleCollapse={toggleCollapse} tenant={tenant} openID={collapseID} onUpdateTenant={openAddUpdateModal}/> 
+    : <MDBCol key={tenant._id} lg="4" md="6" className="mt-4">
+        <TenantCard key={tenant._id} toggleCollapse={toggleCollapse} tenant={tenant} openID={collapseID} onUpdateTenant={openAddUpdateModal} cardMode={true}/> 
+      </MDBCol>); 
+
+    const toDisplay = displayTenants.length > 0 ? displayTenants : <h3 className="h3-responsive mb-2 font-weight-bold">No tenants to show</h3>;
 
     if(!auth.user.isCommitteeMember) {
       return null;
@@ -56,15 +62,19 @@ const TenantsPage = ({ loader, auth, getTenantUsers, filters, updateSortDirectio
             <MDBContainer>
                 <MDBRow>
                   <TenantFilters />
-                </MDBRow>                   
+                </MDBRow>
+                { auth.user.cardMode 
+                ? <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)} plusIcon="user-plus"
+                showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
+                : null }                  
                 <MDBRow>
-                  <MDBContainer className='accordion md-accordion accordion-1'>
+                {!auth.user.cardMode 
+                 ? <MDBContainer className='accordion md-accordion accordion-1'>
                     <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)} plusIcon="user-plus"
                     showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
-                    { displayTenants.length > 0
-                    ? displayTenants
-                    : <h3 className="h3-responsive mb-2 font-weight-bold">No tenants to show</h3> }                 
+                    {toDisplay}          
                   </MDBContainer>
+                 :  toDisplay }
                 </MDBRow>        
             </MDBContainer>           
             <AddUpdateTenant modal={modal} toggle={toggle} tenantToUpdate={selectedTenant}/>

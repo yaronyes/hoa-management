@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBIcon, MDBCollapse } from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardImage, MDBIcon, MDBCollapse } from 'mdbreact';
 import './MessageCardEx.css'
 import AddAndShowComment from '../comments/AddAndShowComment';
 import FloatingBtn from '../buttons/FloatingBtn';
