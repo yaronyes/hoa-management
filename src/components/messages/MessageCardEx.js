@@ -3,7 +3,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBIcon, MDBCollapse } from
 import './MessageCardEx.css'
 import AddAndShowComment from '../comments/AddAndShowComment';
 
-const MessageCardEx = ({ message, image, onImageDBClicked, onUpdateMessage, deleteMessage, addComment, isCommitteeMember, introIcon, onIntroIconClicked }) => {
+const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessage, addComment, isCommitteeMember, introIcon, onIntroIconClicked }) => {
     const [isOpen, setIsOpen] = useState(false);
     
     const clicked = event => {        
@@ -40,10 +40,12 @@ const MessageCardEx = ({ message, image, onImageDBClicked, onUpdateMessage, dele
             <MDBCardBody>            
                 <h6><strong>Details: </strong><strong className="text-muted">{message.details}</strong></h6>                    
                 <h6><strong>Priority: </strong><strong className="text-muted">{message.priority}</strong></h6>  
-                <div className='d-flex justify-content-between'>
-                    <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
+                <div className={'d-flex ' + (message.haveImage ? 'justify-content-between' : 'justify-content-end')}>
+                { message.haveImage
+                    ?<MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
                         <MDBIcon icon="image" />
                     </MDBBtn>    
+                    : null }
                     <MDBBtn color='blue' size='sm' className="floating-btn-ex ml-auto" onClick={() => setIsOpen(!isOpen)}>
                         <MDBIcon icon='comment' size="lg"/>
                     </MDBBtn>                

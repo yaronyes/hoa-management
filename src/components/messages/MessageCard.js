@@ -113,7 +113,7 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                     </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            : <MessageCardEx message={message} image={img} onImageDBClicked={toggle} onUpdateMessage={onUpdateMessage} deleteMessage={deleteMessage} addComment={addComment}
+            : <MessageCardEx message={message} onImageDBClicked={toggle} onUpdateMessage={onUpdateMessage} deleteMessage={deleteMessage} addComment={addComment}
              isCommitteeMember={auth.user.isCommitteeMember} introIcon={introIcon} onIntroIconClicked={introIconClicked} /> }             
             <ImageCard imageUrl={message.getImageUrl(true)} modal={modal} toggle={toggle} />
         </div>

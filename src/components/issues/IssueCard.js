@@ -110,7 +110,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            : <IssueCardEx issue={issue} image={img} onImageDBClicked={toggle} onUpdateIssue={onUpdateIssue} deleteIssue={deleteIssue} addComment={addComment}
+            : <IssueCardEx issue={issue} onImageDBClicked={toggle} onUpdateIssue={onUpdateIssue} deleteIssue={deleteIssue} addComment={addComment}
                         closeIssue={closeIssue} isCommitteeMember={auth.user.isCommitteeMember} allowedToUpdateIssue={allowedToUpdateIssue}/> }
             <ImageCard imageUrl={issue.getImageUrl(true)} modal={modal} toggle={toggle} />            
         </div>
