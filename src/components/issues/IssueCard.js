@@ -18,10 +18,12 @@ import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
 import issueImage from '../../assets/issue.png';
 import IssueCardEx from './IssueCardEx';
+import ConfirmDeleteModal from '../delete-modal/ConfirmDeleteModal';
 
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue, viewOnly = false, cardMode = false }) => {
     const [img, setImg] = useState(issueImage); 
     const [modal, setModel] = useState(false);
+    const [confirmModal, setConfirmModal] = useState(false);
     
     useEffect(() => {
         if(issue.haveImage) {
@@ -47,6 +49,12 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
     };
 
     const toggle = () => setModel(!modal);
+
+    const toggleConfirmModal = () => setConfirmModal(!confirmModal);
+
+    const onDeleteIssue = () => {        
+        toggleConfirmModal();
+    }
 
     const allowedToUpdateIssue = !auth.user.isCommitteeMember && issue.createdBy._id === auth.user._id && !viewOnly;
 
@@ -102,7 +110,7 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                                 ?<RoundedBtn color="info" onClick={() => onUpdateIssue(issue)}
                                     icon="pen" caption="Update" size="sm"/>                                         
                                 : null}
-                                    <RoundedBtn color="danger" onClick={() => deleteIssue(issue)} icon="trash" caption="Delete" size="sm"/>                                        
+                                    <RoundedBtn color="danger" onClick={onDeleteIssue} icon="trash" caption="Delete" size="sm"/>                                        
                             </div>
                         </MDBCol>
                         : null}                            
@@ -110,9 +118,10 @@ const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, 
                 </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            : <IssueCardEx issue={issue} onImageDBClicked={toggle} onUpdateIssue={onUpdateIssue} deleteIssue={deleteIssue} addComment={addComment}
+            : <IssueCardEx issue={issue} onImageDBClicked={toggle} onUpdateIssue={onUpdateIssue} deleteIssue={onDeleteIssue} addComment={addComment}
                         closeIssue={closeIssue} isCommitteeMember={auth.user.isCommitteeMember} allowedToUpdateIssue={allowedToUpdateIssue}/> }
-            <ImageCard imageUrl={issue.getImageUrl(true)} modal={modal} toggle={toggle} />            
+            <ImageCard imageUrl={issue.getImageUrl(true)} modal={modal} toggle={toggle} />   
+            <ConfirmDeleteModal toggle={toggleConfirmModal} modal={confirmModal} title={issue.title} onDeleteConfirm={() => deleteIssue(issue)}/>         
         </div>
     );
 
