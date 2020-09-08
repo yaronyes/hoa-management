@@ -57,6 +57,9 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
 
     const toDisplay = displayMessages.length > 0 ? displayMessages : <h3 className="h3-responsive mb-2 font-weight-bold">No messages to show</h3>;
 
+    const sortingNav = <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}            
+    showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")} floatingMode={auth.user.cardMode}/>
+
     if(loader.loadingMessages) {
       return <Spinner fullPage={true} />
     }
@@ -82,14 +85,12 @@ const MessagesPage = ({ loader, getMessages, filters, updateSortDirection, messa
               }
             </MDBRow> 
             { auth.user.cardMode    
-            ? <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}            
-            showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
+            ? sortingNav
             : null }
             <MDBRow>
                {!auth.user.cardMode  
               ? <MDBContainer className='accordion md-accordion accordion-1'>
-                  <AccordionNav showPlusIcon={auth.user.isCommitteeMember} plusClicked={() => openAddUpdateModal(null)}
-                   showSortingDirectionIcon={filters.sortBy === 'createdAt'} sortingDirectionClicked={(isUp) => updateSortDirection(isUp ? "asc" : "desc")}/>
+                   {sortingNav}
                     {toDisplay}
               </MDBContainer> 
              : toDisplay }

@@ -22,8 +22,8 @@ const VotingPage = ({ loader, getVoting, filters, votes, filteredVoting, onPageS
     useEffect(() => {
         if(votes.length === 0) {
             getVoting();
-        } else if(collapseID === 0 && filteredVoting.length > 0) {
-            setCollapseID(filteredVoting(true, 'asc')[0]._id);
+        } else if(collapseID === 0 && filteredVoting.length > 0) {            
+            setCollapseID(filteredVoting(false, 'asc')[0]._id);
         }              
       }, [votes]);
     

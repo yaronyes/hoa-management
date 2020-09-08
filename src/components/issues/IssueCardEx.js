@@ -24,19 +24,10 @@ const IssueCardEx = ({ issue, onImageDBClicked, onUpdateIssue, deleteIssue, addC
                        { issue.status === 'open'    
                         ? <div style={{ display: "inline-block" }}> 
                             <FloatingBtn color='blue' icon='edit' onBtnClicked={() => onUpdateIssue(issue)}/>
-                            {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => onUpdateIssue(issue)}>
-                                <MDBIcon icon="edit" />
-                            </MDBBtn>                     */}
                             <FloatingBtn color='blue' icon='times-circle' onBtnClicked={closeIssue}/>
-                            {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={closeIssue}>
-                                <MDBIcon icon="times-circle" />
-                            </MDBBtn> */}
                         </div>
                         : null}
                     <FloatingBtn color='blue' icon='trash-alt' onBtnClicked={() => deleteIssue(issue)}/>
-                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => deleteIssue(issue)}>
-                        <MDBIcon icon='trash-alt' size="lg"/>
-                    </MDBBtn>                 */}
                     </div>
                     : null }
                 </div>
@@ -48,14 +39,8 @@ const IssueCardEx = ({ issue, onImageDBClicked, onUpdateIssue, deleteIssue, addC
             <div className={'d-flex ' + (issue.haveImage ? 'justify-content-between' : 'justify-content-end')}>
                 { issue.haveImage
                 ? <FloatingBtn color='blue' icon='image' onBtnClicked={onImageDBClicked}/>
-                // <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
-                //         <MDBIcon icon="image" />
-                // </MDBBtn>
                 : null }
                 <FloatingBtn color='blue' icon='comment' onBtnClicked={() => setIsOpen(!isOpen)} className="ml-auto" />
-                {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex ml-auto" onClick={() => setIsOpen(!isOpen)}>
-                    <MDBIcon icon='comment' size="lg"/>
-                </MDBBtn>                 */}
             </div>
             <MDBCollapse id="commentCollapse" isOpen={isOpen}>
                 <div className="mt-2">

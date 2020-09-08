@@ -27,13 +27,7 @@ const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessa
                 { isCommitteeMember
                 ?<div className='text-center'>
                     <FloatingBtn color='blue' icon="edit" onBtnClicked={() => onUpdateMessage(message)}/>                
-                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => onUpdateMessage(message)}>
-                        <MDBIcon icon="edit" />
-                    </MDBBtn> */}
                     <FloatingBtn color='blue' icon='trash-alt' onBtnClicked={() => deleteMessage(message)}/>
-                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => deleteMessage(message)}>
-                        <MDBIcon icon='trash-alt' size="lg"/>
-                    </MDBBtn>  */}
                 </div>
                 : null }
                 { introIcon !== "none"
@@ -46,14 +40,8 @@ const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessa
                 <div className={'d-flex ' + (message.haveImage ? 'justify-content-between' : 'justify-content-end')}>
                 { message.haveImage
                     ? <FloatingBtn color='blue' icon='image' onBtnClicked={onImageDBClicked}/>
-                    // <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={onImageDBClicked}>
-                    //     <MDBIcon icon="image" />
-                    // </MDBBtn>    
                     : null }
                     <FloatingBtn color='blue' icon='comment' onBtnClicked={() => setIsOpen(!isOpen)}/>
-                    {/* <MDBBtn color='blue' size='sm' className="floating-btn-ex ml-auto" onClick={() => setIsOpen(!isOpen)}>
-                        <MDBIcon icon='comment' size="lg"/>
-                    </MDBBtn>                 */}
                 </div>
                 <MDBCollapse id="commentCollapse" isOpen={isOpen}>
                     <div className="mt-2">

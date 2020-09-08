@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MDBNavbar, MDBNavbarNav, MDBNavItem, MDBIcon, MDBBtn, MDBFormInline } from "mdbreact";
+import FloatingBtn from '../buttons/FloatingBtn';
 
-const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingDirectionIcon, sortingDirectionClicked }) => {
-    //const [isOpen, setIsOpen] = useState(false);
+const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingDirectionIcon, sortingDirectionClicked, floatingMode = false }) => {    
     const [isUp, setIsUp] = useState(true);
 
     const onSortingDirectionClicked = () => {
@@ -27,9 +27,8 @@ const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingD
 
     return (
         <div>
-            <MDBNavbar color="blue-gradient" dark expand="md" className="white-text" style={{ height: "46px" }}>
-                {/* <MDBNavbarToggler onClick={() => {setIsOpen(!isOpen)}} /> */}
-                {/* <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar> */}
+            { !floatingMode
+            ? <MDBNavbar color="blue-gradient" dark expand="md" className="white-text" style={{ height: "46px" }}>
                 <MDBNavbarNav left>
                     { showSortingDirectionIcon
                      ? <MDBNavItem onClick={onSortingDirectionClicked}>                        
@@ -55,9 +54,17 @@ const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingD
                         </MDBFormInline>
                     </MDBNavItem>   
                     : null }              
-                </MDBNavbarNav>
-                {/* </MDBCollapse> */}
-            </MDBNavbar>   
+                </MDBNavbarNav>                
+            </MDBNavbar>  
+            // <div className={'d-flex ' + (showSortingDirectionIcon && showPlusIcon? 'justify-content-between' : 'justify-content-end')}>
+            : <div className={'d-flex justify-content-end'}>
+                 { showSortingDirectionIcon 
+                ? <FloatingBtn color='blue' icon={isUp ? "angle-up" : "angle-down"} onBtnClicked={onSortingDirectionClicked}/>
+                : null }
+                { showPlusIcon
+                ? <FloatingBtn color='blue' icon={plusIcon} onBtnClicked={onPlusClicked}/>
+                : null }
+            </div> }
         </div>
     );
 };
