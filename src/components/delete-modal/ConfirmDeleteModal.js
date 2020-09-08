@@ -10,9 +10,9 @@ const ConfirmDeleteModal = ({ toggle, modal, title, onDeleteConfirm }) => {
                 <MDBModalBody>
                     Are you sure you want to delete {title} ?
                 </MDBModalBody>
-                <MDBModalFooter>
-                    <RoundedBtn color="info" onClick={toggle} icon="pen" caption="No" size="sm"/> 
-                    <RoundedBtn color="danger" onClick={onDeleteConfirm} icon="trash" caption="Yes" size="sm"/>   
+                <MDBModalFooter>                    
+                    <RoundedBtn color="danger" onClick={onDeleteConfirm} icon="trash" caption="Yes" size="sm"/>
+                    <RoundedBtn color="info" onClick={toggle} icon="window-close" caption="No" size="sm"/>   
                 </MDBModalFooter>
             </MDBModal>
         </div>

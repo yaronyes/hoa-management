@@ -19,12 +19,14 @@ import AddAndShowComment from '../comments/AddAndShowComment';
 import ImageCard from '../image/ImageCard';
 import messageImage from '../../assets/message.png';
 import MessageCardEx from './MessageCardEx';
+import ConfirmDeleteModal from '../delete-modal/ConfirmDeleteModal';
 
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth, cardMode = false }) => {
     const [open, setOpen] = useState(false);
     const [introIcon, setIntroIcon] = useState("none");
     const [img, setImg] = useState(messageImage);
-    const [modal, setModel] = useState(false);    
+    const [modal, setModel] = useState(false); 
+    const [confirmModal, setConfirmModal] = useState(false);   
 
     useEffect(() => {        
         if(message.haveImage) {
@@ -63,6 +65,12 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
     }
 
     const toggle = () => setModel(!modal);
+
+    const toggleConfirmModal = () => setConfirmModal(!confirmModal);
+
+    const onDeleteMessage = () => {        
+        toggleConfirmModal();
+    }
     
     return (
         <div className="message-card">
@@ -106,16 +114,17 @@ const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnl
                             { auth.user.isCommitteeMember
                             ? <MDBCol className="btn-col">
                                 <RoundedBtn color="info" onClick={() => onUpdateMessage(message)} icon="pen" caption="Update" size="sm"/>
-                                <RoundedBtn color="danger" onClick={() => deleteMessage(message)} icon="trash" caption="Delete" size="sm"/>
+                                <RoundedBtn color="danger" onClick={onDeleteMessage} icon="trash" caption="Delete" size="sm"/>
                             </MDBCol>                                
                             : null}
                         </MDBRow>
                     </MDBCardBody>
                 </MDBCollapse>
             </MDBCard>
-            : <MessageCardEx message={message} onImageDBClicked={toggle} onUpdateMessage={onUpdateMessage} deleteMessage={deleteMessage} addComment={addComment}
+            : <MessageCardEx message={message} onImageDBClicked={toggle} onUpdateMessage={onUpdateMessage} deleteMessage={onDeleteMessage} addComment={addComment}
              isCommitteeMember={auth.user.isCommitteeMember} introIcon={introIcon} onIntroIconClicked={introIconClicked} /> }             
             <ImageCard imageUrl={message.getImageUrl(true)} modal={modal} toggle={toggle} />
+            <ConfirmDeleteModal toggle={toggleConfirmModal} modal={confirmModal} title={message.title} onDeleteConfirm={() => deleteMessage(message)}/>
         </div>
     );
 };
