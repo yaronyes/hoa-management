@@ -74,4 +74,21 @@ export const checkForConnectedUser = () => async dispatch => {
     }
 }
 
+
+export const updateUser = (updates) => async dispatch =>  {
+    try {
+        if(Object.keys(updates).length !== 0) {
+            const response = await axios.patch('/users/current', updates, getOptions());                                   
+            localStorage.setItem('user', JSON.stringify(response.data));        
+            dispatch(setCurrentUser(new UserModel(response.data)));
+        }       
+    } catch (e) {
+        console.log(e);
+        dispatch({
+            type: GET_ERRORS,
+            payload: e
+        })
+    }
+};
+
 export const clearErrors = () => dispatch => dispatch({ type: CLEAR_ERRORS });
