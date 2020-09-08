@@ -17,7 +17,7 @@ const IssueCardEx = ({ issue, onImageDBClicked, onUpdateIssue, deleteIssue, addC
                 tag='div'
             >
                 <MDBIcon className={"priority-icon " + (issue.status === 'open' ? 'red-text' : 'green-text')} icon={issue.status === 'open' ? 'exclamation-circle' : 'check-circle'} size="2x" />
-                <h2 className='h2-responsive mr-3'>{issue.title}</h2>
+                <h2 className='h2-responsive ml-2 mr-3'>{issue.title}</h2>
                 <p>{new Date(issue.createdAt).toLocaleString('he-IL')}</p>
                 <div className='text-center'>                    
                     { allowedToUpdateIssue

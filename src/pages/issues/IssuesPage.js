@@ -49,8 +49,8 @@ const IssuesPage = ({ loader, getIssues, issues, auth, filters, updateSortDirect
     
     const displayIssues = filteredIssue.map(issue => !auth.user.cardMode
     ? <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal}/>
-    : <MDBCol lg="4" md="6" className="mt-4">
-        <IssueCard key={issue._id} toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal} cardMode={true} />
+    : <MDBCol key={issue._id} lg="4" md="6" className="mt-4">
+        <IssueCard toggleCollapse={toggleCollapse} issue={issue} openID={collapseID} onUpdateIssue={openAddUpdateModal} cardMode={true} />
       </MDBCol>);     
       
     const toDisplay = displayIssues.length > 0 ? displayIssues : <h3 className="h3-responsive mb-2 font-weight-bold">No issues to show</h3>;
