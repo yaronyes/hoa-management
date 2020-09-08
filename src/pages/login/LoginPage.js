@@ -44,9 +44,9 @@ const LoginPage = ({ loginUser, auth, errors, clearErrors, onPageSelected }) => 
                 <form>
                     <p className="h5 text-center mb-4">Sign in</p>
                     <div className="grey-text">
-                    <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong"
+                    <MDBInput label="Type your email" icon="envelope" group type="email" error="wrong"
                         success="right" value={email} onChange={e => {setEmail(e.target.value); setShowError(false)}}/>
-                    <MDBInput label="Type your password" icon="lock" group type="password" validate value={password}
+                    <MDBInput label="Type your password" icon="lock" group type="password" value={password}
                      onChange={e => {setPassword(e.target.value); setShowError(false)}}
                      onKeyUp={keyUp}/>
                     </div>
