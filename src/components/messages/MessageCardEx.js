@@ -22,7 +22,7 @@ const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessa
             >
                 <MDBIcon className={"priority-icon " + (message.priority === "info" ? 'blue-text' : 'red-text')} icon={message.priority === "info" ? 'info-circle' : 'exclamation-circle'} size="2x" />
                 <h2 className='h2-responsive'>{message.title}</h2>
-                <p>{message.createdAt}</p>
+                <p>{new Date(message.createdAt).toLocaleString()}</p>
                 { isCommitteeMember
                 ?<div className='text-center'>                
                     <MDBBtn color='blue' size='sm' className="floating-btn-ex" onClick={() => onUpdateMessage(message)}>
