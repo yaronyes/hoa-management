@@ -30,3 +30,7 @@
 .header-navbar .dropdown-user:focus {
     outline: 0;
 }
+
+.show.dropdown-menu {
+    left: -10px !important;
+} 

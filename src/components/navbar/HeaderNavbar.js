@@ -65,7 +65,7 @@ const HeaderNavbar = ({ logoutUser, updateUser, clearIssues, clearVoting, clearM
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right className={!isUserConnected ? "hide-nav" : ""}>
-          <MDBNavItem className="mr-4">
+          <MDBNavItem className="mr-2">
               <MDBDropdown className="user-menu">
                 <MDBDropdownToggle nav caret>
                   <MDBIcon icon="user" />
