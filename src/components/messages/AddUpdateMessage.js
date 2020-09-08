@@ -38,10 +38,8 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
             formRef.current.className += " was-validated";
         }
         
-        const errors = validateInput();
-        console.log(errors)
+        const errors = validateInput();        
         const numberOfErrors = Object.keys(errors).filter(key => errors[key] === true);
-        console.log(numberOfErrors)
         if(numberOfErrors.length === 0) {
             if(messageToUpdate) {
                 updMessage();

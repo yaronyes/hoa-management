@@ -17,7 +17,7 @@ const ToolTipPieChart = ({ chartData, isPercentage=false, header, useSmallChart=
 
   useEffect(() => {
     setData(useSmallChart ? chartData : createDataForLargeChart(chartData));
-  }, []);
+  }, [chartData]);
   
   const createDataForLargeChart = (data) => {
     if(data.length === 0) {
