@@ -94,7 +94,7 @@ const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVo
     };
 
     const endVoting = () => {
-        updateVoting({ dueDate: dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM") }, votingToUpdate._id); 
+        updateVoting({ dueDate: dateFormat(new Date(), "UTC:yyyy-mm-dd'T'HH:MM") }, votingToUpdate._id); 
         toggle();    
     }
 

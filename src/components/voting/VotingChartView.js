@@ -40,7 +40,7 @@ const VotingChartView = ({ loader, votes, auth, getVoting, filteredActiveVoting,
                     value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - currentVoting.votes.length : 1,
                     color: 'red'}].filter(item => item.value !== 0);
             } else {
-                [...currentVoting.votesForDisplay].filter(item => item.value !== 0);
+                votingForDisplay = [...currentVoting.votesForDisplay].filter(item => item.value !== 0);
             }
         }
 
@@ -73,8 +73,8 @@ const mapStateToProps = state => ({
     loader: state.loader,
     errors: state.errors,
     votes: state.voting,
-    filteredActiveVoting: selectVoting(state.voting, state.votingFilters, true),
-    filteredDoneVoting: selectVoting(state.voting, state.votingFilters, false)
+    filteredActiveVoting: selectVoting(state.voting, state.votingFilters, true, 'desc'),
+    filteredDoneVoting: selectVoting(state.voting, state.votingFilters, false, 'desc')
 });
 
 export default connect(mapStateToProps, { getVoting })(VotingChartView);
