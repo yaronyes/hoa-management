@@ -102,7 +102,7 @@ const mapStateToProps = state => ({
     loader: state.loader,
     errors: state.errors,
     issues: state.issue,
-    filters: state.messageFilters,
+    filters: state.issueFilters,
     filteredIssue: selectIssues(state.issue, state.issueFilters)
 });
 

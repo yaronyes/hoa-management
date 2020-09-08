@@ -27,7 +27,7 @@ const AccordionNav = ({ showPlusIcon, plusIcon="plus", plusClicked, showSortingD
 
     return (
         <div>
-            <MDBNavbar color="blue-gradient" dark expand="md" className="white-text">
+            <MDBNavbar color="blue-gradient" dark expand="md" className="white-text" style={{ height: "46px" }}>
                 {/* <MDBNavbarToggler onClick={() => {setIsOpen(!isOpen)}} /> */}
                 {/* <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar> */}
                 <MDBNavbarNav left>
