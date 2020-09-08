@@ -6,7 +6,7 @@ const ConfirmDeleteModal = ({ toggle, modal, title, onDeleteConfirm }) => {
     return (
         <div>                
             <MDBModal isOpen={modal} toggle={toggle}>
-                <MDBModalHeader toggle={toggle}>Deleting {title}</MDBModalHeader>
+                <MDBModalHeader className='blue-gradient white-text' toggle={toggle}>Deleting '{title}'</MDBModalHeader>
                 <MDBModalBody>
                     Are you sure you want to delete {title} ?
                 </MDBModalBody>
