@@ -3,6 +3,7 @@ import { MDBCard, MDBCardBody, MDBCardImage, MDBIcon, MDBCollapse } from 'mdbrea
 import './MessageCardEx.css'
 import AddAndShowComment from '../comments/AddAndShowComment';
 import FloatingBtn from '../buttons/FloatingBtn';
+import { Badge } from '@material-ui/core';
 
 const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessage, addComment, isCommitteeMember, introIcon, onIntroIconClicked }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -41,10 +42,13 @@ const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessa
                 { message.haveImage
                     ? <FloatingBtn color='blue' icon='image' onBtnClicked={onImageDBClicked}/>
                     : null }
-                    <FloatingBtn color='blue' icon='comment' onBtnClicked={() => setIsOpen(!isOpen)}/>
+                    <div style={{ position: "relative" }}>                
+                        <FloatingBtn color='blue' icon='comment' onBtnClicked={() => setIsOpen(!isOpen)} className="ml-auto" />
+                        <Badge badgeContent={message.comments.length > 0 ? message.comments.length : '0'} color="secondary" style={{ position: "absolute", top: "10px", right: "15px" }} />                    
+                </div>
                 </div>
                 <MDBCollapse id="commentCollapse" isOpen={isOpen}>
-                    <div className="mt-2">
+                    <div className={message.comments.length > 0 ? "mt-2" : ""}>
                         <AddAndShowComment addComment={addComment} showAddComment={!isCommitteeMember} comments={message.comments} /> 
                     </div>
                 </MDBCollapse>
