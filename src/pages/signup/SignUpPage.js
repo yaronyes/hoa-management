@@ -6,7 +6,7 @@ import "./SignUpPage.css";
 import UserModel from '../../models/UserModel';
 import { createUser } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
-import RoundedBtn from '../../components/rounded-button/RoundedBtn';
+import RoundedBtn from '../../components/buttons/RoundedBtn';
 import ValidationError from "../../components/validation-errors/ValidationError";
 
 const SignUpPage = ({ createUser, auth, onPageSelected }) => {

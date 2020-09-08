@@ -8,7 +8,7 @@ import {
 } from 'mdbreact';
 import './VotingCard.css';
 import CardHeader from '../card-header/CardHeader';
-import RoundedBtn from '../rounded-button/RoundedBtn';
+import RoundedBtn from '../buttons/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ToolTipPieChart from '../charts/ToolTipPieChart';

@@ -9,7 +9,7 @@ import {
     MDBView,
 } from 'mdbreact';
 import './TenantCard.css';
-import RoundedBtn from '../rounded-button/RoundedBtn';
+import RoundedBtn from '../buttons/RoundedBtn';
 import { removeTenantUser } from "../../actions/tenantActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

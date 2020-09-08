@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createIssue, updateIssue } from "../../actions/issueActions";
 import IssueModel from '../../models/IssueModel';
-import RoundedBtn from '../rounded-button/RoundedBtn';
+import RoundedBtn from '../buttons/RoundedBtn';
 import DropDownSelect from '../select/DropDownSelect';
 import LoadImage from '../load-image/LoadImage';
 import ValidationError from "../validation-errors/ValidationError";

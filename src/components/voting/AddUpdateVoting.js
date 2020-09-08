@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput, MDBCol  } from "mdbreact";
-import RoundedBtn from '../rounded-button/RoundedBtn';
+import RoundedBtn from '../buttons/RoundedBtn';
 import Options from '../option/Options';
 import DateTimePicker from '../date-time/DateTimePicker';
 import './AddUpdateVoting.css';

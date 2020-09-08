@@ -10,7 +10,7 @@ import {
 import './IssueCard.css';
 import CardHeader from '../card-header/CardHeader';
 import { deleteIssue, addCommentForIssue, updateIssue } from '../../actions/issueActions';
-import RoundedBtn from '../rounded-button/RoundedBtn';
+import RoundedBtn from '../buttons/RoundedBtn';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  
 import CommentModel from '../../models/CommentModel';

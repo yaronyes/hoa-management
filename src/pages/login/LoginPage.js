@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './LoginPage.css';
 import { loginUser, clearErrors } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
-import RoundedBtn from '../../components/rounded-button/RoundedBtn';
+import RoundedBtn from '../../components/buttons/RoundedBtn';
 
 const LoginPage = ({ loginUser, auth, errors, clearErrors, onPageSelected }) => {
     const [showError, setShowError] = useState(false);

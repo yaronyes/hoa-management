@@ -4,7 +4,7 @@ import {
     MDBRow,
     MDBInput
 } from 'mdbreact';
-import RoundedBtn from '../rounded-button/RoundedBtn';
+import RoundedBtn from '../buttons/RoundedBtn';
 import './AddAndShowComment.css';
 import CommentsContainer from './CommentsContainer';
 

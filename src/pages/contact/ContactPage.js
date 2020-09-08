@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MDBContainer, MDBInput, MDBCol, MDBRow, MDBAlert } from 'mdbreact';
-import RoundedBtn from '../../components/rounded-button/RoundedBtn';
+import RoundedBtn from '../../components/buttons/RoundedBtn';
 import { useHistory } from "react-router-dom";
 import { sendContactUs } from '../../utils/utils';
 
