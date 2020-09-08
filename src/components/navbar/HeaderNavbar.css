@@ -21,3 +21,12 @@
     font-family: 'Righteous', cursive;
     letter-spacing: 0.01rem;
 }
+
+.header-navbar .dropdown-user:hover {
+    background-color: #09c !important;
+    color: white;
+}
+
+.header-navbar .dropdown-user:focus {
+    outline: 0;
+}

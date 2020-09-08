@@ -71,7 +71,7 @@ const HeaderNavbar = ({ logoutUser, updateUser, clearIssues, clearVoting, clearM
                   <MDBIcon icon="user" />
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
-                  <MDBDropdownItem toggle={false} onClick={() => updateUser({ cardMode: !auth.user.cardMode })}>
+                  <MDBDropdownItem toggle={false} onClick={() => updateUser({ cardMode: !auth.user.cardMode })} className="dropdown-user">
                       <MDBIcon icon={auth.user.cardMode ? "check-square" : "square"} className="mr-2" />
                       Card Mode</MDBDropdownItem>                  
                 </MDBDropdownMenu>
