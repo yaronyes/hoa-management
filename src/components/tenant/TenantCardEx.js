@@ -12,7 +12,7 @@ const TenantCardEx = ({ tenant, deleteTenant, updateTenant }) => {
                 tag='div'
             >
                 <h2 className='h2-responsive'>{tenant.name}</h2>
-                <p>{new Date(tenant.createdAt).toLocaleString()}</p>
+                <p>{new Date(tenant.createdAt).toLocaleString('he-IL')}</p>
                 <div className='text-center'>  
                     <FloatingBtn color='blue' icon='edit' onBtnClicked={() => updateTenant(tenant)}/>    
                     <FloatingBtn color='blue' icon='trash-alt' onBtnClicked={() => deleteTenant(tenant)}/>                                 

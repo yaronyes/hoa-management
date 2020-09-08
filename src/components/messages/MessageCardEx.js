@@ -24,7 +24,7 @@ const MessageCardEx = ({ message, onImageDBClicked, onUpdateMessage, deleteMessa
             >
                 <MDBIcon className={"priority-icon " + (message.priority === "info" ? 'blue-text' : 'red-text')} icon={message.priority === "info" ? 'info-circle' : 'exclamation-circle'} size="2x" />
                 <h3 className='h3-responsive'>{message.title}</h3>
-                <p>{new Date(message.createdAt).toLocaleString()}</p>
+                <p>{new Date(message.createdAt).toLocaleString('he-IL')}</p>
                 { isCommitteeMember
                 ?<div className='text-center'>
                     <FloatingBtn color='blue' icon="edit" onBtnClicked={() => onUpdateMessage(message)}/>                
