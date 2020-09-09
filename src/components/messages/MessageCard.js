@@ -21,6 +21,17 @@ import messageImage from '../../assets/message.png';
 import MessageCardEx from './MessageCardEx';
 import ConfirmDeleteModal from '../delete-modal/ConfirmDeleteModal';
 
+// component for rendering message card for accordion
+// Props:
+// toggleCollapse -function - for toggle the card
+// message: object - MessageModel class.the message that the card represents
+// openID: string - indicate the card id to toggle. if the openID === message._id, the card is open
+// onUpdateMessage - function - callback function for updating message in the parent
+// viewOnly - boolean - indicate if the parent of tha card is viewing only component like the dashboard
+// cardMode - boolean - indicate if to render the card shape component instead of the accordion
+// redux connect props:
+// deleteMessage, addCommentForMessage, setSeenBy: redux functions for delete/update seen-by and add comments for an message
+// auth - redux object represent the logged-in user
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth, cardMode = false }) => {
     const [open, setOpen] = useState(false);
     const [introIcon, setIntroIcon] = useState("none");

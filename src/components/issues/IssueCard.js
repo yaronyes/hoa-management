@@ -20,6 +20,17 @@ import issueImage from '../../assets/issue.png';
 import IssueCardEx from './IssueCardEx';
 import ConfirmDeleteModal from '../delete-modal/ConfirmDeleteModal';
 
+// component for rendering issue card for accordion
+// Props: 
+// toggleCollapse -function - for toggle the card
+// issue: object - IssueModel class.the issue that the card represents
+// openID: string - indicate the card id to toggle. if the openID === issue._id, the card is open
+// onUpdateIssue - function - callback function for updating issue in the parent
+// viewOnly - boolean - indicate if the parent of tha card is viewing only component like the dashboard
+// cardMode - boolean - indicate if to render the card shape component instead of the accordion
+// redux connect props:
+// deleteIssue, addCommentForIssue, updateIssue: redux functions for delete/update and add comments for an issue
+// auth - redux object represent the logged-in user
 const IssueCard = ({ toggleCollapse, issue, openID, onUpdateIssue, deleteIssue, addCommentForIssue, auth, updateIssue, viewOnly = false, cardMode = false }) => {
     const [img, setImg] = useState(issueImage); 
     const [modal, setModel] = useState(false);

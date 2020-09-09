@@ -17,6 +17,15 @@ import DropDownSelect from '../select/DropDownSelect';
 import { addVote } from '../../actions/votingActions';
 import VoteModel from '../../models/VoteModel';
 
+// component for rendering voting card for accordion
+// Props:
+// toggleCollapse -function - for toggle the card
+// voting: object - VotingModel class.the voting that the card represents
+// openID: string - indicate the card id to toggle. if the openID === voting._id, the card is open
+// onUpdateVoting - function - callback function for updating voting in the parent
+// redux connect props:
+// addVote: redux function for adding vote to voting
+// auth - redux object represent the logged-in user
 const VotingCard = ({ toggleCollapse, voting, openID, onUpdateVoting, auth, addVote }) => {    
     const [vote, setVote] = useState("");
     const isActiveVoting = voting.isActiveVoting();
@@ -27,6 +36,7 @@ const VotingCard = ({ toggleCollapse, voting, openID, onUpdateVoting, auth, addV
 
     const calcVotingPercentageForDisplay = () => {
         if(voting.votesForDisplay.filter(item => item.value !== 0).length > 0) {
+            // adding the number of tenants that not voted yet
             return [...voting.votesForDisplay, { 
                 title: "None Voted",
                 value: (auth.user.tenants.length !== 0) ? auth.user.tenants.length - voting.votes.length : 1,
