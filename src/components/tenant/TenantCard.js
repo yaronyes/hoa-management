@@ -21,7 +21,7 @@ import ConfirmDeleteModal from '../delete-modal/ConfirmDeleteModal';
 // component for rendering tenant card for accordion
 // Props:
 // toggleCollapse -function - for toggle the card
-// tenant: object - TenantModel class.the tenant that the card represents
+// tenant: object - UserModel class.the tenant that the card represents
 // openID: string - indicate the card id to toggle. if the openID === tenant._id, the card is open
 // onUpdateTenant - function - callback function for updating tenant in the parent
 // cardMode - boolean - indicate if to render the card shape component instead of the accordion

@@ -11,6 +11,13 @@ import LoadImage from '../load-image/LoadImage';
 import ValidationError from "../validation-errors/ValidationError";
 import config from '../../config/config.json';
 
+// component for adding/updating issue
+// Props:
+// modal - boolean - indicate if the modal dialog is open
+// toggle - function - function for opening/closing modal
+// issueToUpdate - object - IssueModel. if it undefined, we are adding new issue. otherwise, updating
+// redux connect props:
+// createIssue, updateIssue: redux functions for add/update issue
 const AddUpdateIssue = ({ modal, issueToUpdate, toggle, createIssue, updateIssue }) => {    
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");

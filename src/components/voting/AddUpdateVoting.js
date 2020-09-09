@@ -11,6 +11,13 @@ import { connect } from 'react-redux';
 import dateFormat from 'dateformat';
 import ValidationError from '../validation-errors/ValidationError';
 
+// component for adding/updating voting
+// Props:
+// modal - boolean - indicate if the modal dialog is open
+// toggle - function - function for opening/closing modal
+// votingToUpdate - object - VotingModel. if it undefined, we are adding new voting. otherwise, updating
+// redux connect props:
+// createVoting, updateVoting: redux functions for add/update voting
 const AddUpdateVoting = ({ modal, toggle, votingToUpdate, createVoting, updateVoting }) => {
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");

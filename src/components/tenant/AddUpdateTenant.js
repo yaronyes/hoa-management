@@ -8,7 +8,14 @@ import UserModel from '../../models/UserModel';
 import RoundedBtn from '../buttons/RoundedBtn';
 import ValidationError from "../validation-errors/ValidationError";
 
-const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateTenantUser, tenant }) => {
+// component for adding/updating tenant
+// Props:
+// modal - boolean - indicate if the modal dialog is open
+// toggle - function - function for opening/closing modal
+// tenantToUpdate - object - UserModel. if it undefined, we are adding new tenant. otherwise, updating
+// redux connect props:
+// addTenantUser, updateTenantUser: redux functions for add/update tenant
+const AddUpdateTenant = ({ modal, tenantToUpdate, toggle, addTenantUser, updateTenantUser }) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");

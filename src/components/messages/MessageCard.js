@@ -30,7 +30,7 @@ import ConfirmDeleteModal from '../delete-modal/ConfirmDeleteModal';
 // viewOnly - boolean - indicate if the parent of tha card is viewing only component like the dashboard
 // cardMode - boolean - indicate if to render the card shape component instead of the accordion
 // redux connect props:
-// deleteMessage, addCommentForMessage, setSeenBy: redux functions for delete/update seen-by and add comments for an message
+// deleteMessage, addCommentForMessage, setSeenBy: redux functions for delete/update seen-by and add comments for message
 // auth - redux object represent the logged-in user
 const MessageCard = ({ toggleCollapse, message, openID, onUpdateMessage, viewOnlyMode=false, deleteMessage, addCommentForMessage, setSeenBy, auth, cardMode = false }) => {
     const [open, setOpen] = useState(false);

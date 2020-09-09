@@ -11,6 +11,13 @@ import LoadImage from '../load-image/LoadImage';
 import ValidationError from "../validation-errors/ValidationError";
 import config from '../../config/config.json';
 
+// component for adding/updating message
+// Props:
+// modal - boolean - indicate if the modal dialog is open
+// toggle - function - function for opening/closing modal
+// messageToUpdate - object - MessageModel. if it undefined, we are adding new message. otherwise, updating
+// redux connect props:
+// createMessage, updateMessage: redux functions for add/update message
 const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updateMessage }) => {    
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
@@ -38,6 +45,7 @@ const AddUpdateMessage = ({ modal, messageToUpdate, toggle, createMessage, updat
             formRef.current.className += " was-validated";
         }
         
+        // run input validation
         const errors = validateInput();        
         const numberOfErrors = Object.keys(errors).filter(key => errors[key] === true);
         if(numberOfErrors.length === 0) {
