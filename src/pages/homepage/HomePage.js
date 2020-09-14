@@ -10,6 +10,7 @@ import tenantPageImage from '../../assets/tenant-page.PNG';
 import tenantsDashboardImage from '../../assets/tenants-dashboard.PNG';
 import votingPageImage from '../../assets/voting-page.PNG';
 import CarouselComp from '../../components/carousel/CarouselComp';
+import './HomePage.css';
 
 const HomePage = ({ onPageSelected }) => {
     useEffect(() => onPageSelected('homepage'), []);
@@ -63,9 +64,8 @@ const HomePage = ({ onPageSelected }) => {
                 <MDBMask overlay="black-light" className="flex-center flex-column text-white text-center">
                 <h2>Homeowner Association Management System</h2>
                 <h5>We enable management companies and communities to provide faster responses and better service to their clients and owners.</h5>
-                <CarouselComp itemsToShow={carouselItems} style={{height:  "600px"}}/>
-                </MDBMask>
-                
+                <CarouselComp itemsToShow={carouselItems} style={{height:  "600px"}} />
+                </MDBMask>                
           </MDBView>          
         </div>
     );    
